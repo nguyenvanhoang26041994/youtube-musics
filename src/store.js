@@ -5,9 +5,9 @@ import sagaMode from './constants/saga-mode';
 import rootReducer, { createReducer } from './reducers';
 import rootSaga from './sagas';
 
-const SAGA_MODE = Object({
-  [sagaMode.TASK_CANCEL_WHEN_COMPONENT_UNMOUT]: [sagaMode.TASK_CANCEL_WHEN_COMPONENT_UNMOUT],
-  [sagaMode.NO_TASK_CANCEL_WHEN_COMPONENT_UNMOUT]: [sagaMode.NO_TASK_CANCEL_WHEN_COMPONENT_UNMOUT]
+const SAGA_MODE = Object.freeze({
+  [sagaMode.TASK_CANCEL_WHEN_COMPONENT_UNMOUT]: sagaMode.TASK_CANCEL_WHEN_COMPONENT_UNMOUT,
+  [sagaMode.NO_TASK_CANCEL_WHEN_COMPONENT_UNMOUT]: sagaMode.NO_TASK_CANCEL_WHEN_COMPONENT_UNMOUT,
 });
 
 const sagaMiddleware = createSagaMiddleware();
@@ -22,7 +22,6 @@ store._injectedSagas = {};
 
 store._runSaga = sagaMiddleware.run;
 store._getNextReducer = () => createReducer(store._injectedReducers);
-store._getNextSaga = () => createSaga(store._injectedSagas);
 
 
 store._injectReducer = ({ key, reducer }) => {
@@ -67,6 +66,7 @@ store._ejectSaga = key => {
 
 export default store;
 
+// DEVELOPMENT
 if (process.env.NODE_ENV === 'development') {
   try { window.store = store; } catch(e) {};
 }
