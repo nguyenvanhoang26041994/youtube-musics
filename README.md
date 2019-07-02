@@ -1,0 +1,3 @@
+- redux
+- redux saga
+- scss + tailwind.css
