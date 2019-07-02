@@ -1,14 +1,14 @@
 import store from '../store';
 
-const withInjectReducer = ({ key, reducer }) => WrappedComponent => {
+const withInjectSaga = ({ key, saga, mode, args }) => WrappedComponent => {
   class ReturnComponent extends React.Component {
     constructor(props) {
       super(props);
-      store._injectReducer({ key, reducer });
+      store._injectSaga({ key, saga, mode, args });
     }
 
     componentWillUnmount() {
-      store._ejectReducer(key);
+      store._ejectSaga(key);
     }
 
     render() {
@@ -18,11 +18,11 @@ const withInjectReducer = ({ key, reducer }) => WrappedComponent => {
     }
   }
 
-  ReturnComponent.displayName = `withInjectReducer(${WrappedComponent.displayName ||
+  ReturnComponent.displayName = `withInjectSaga(${WrappedComponent.displayName ||
     WrappedComponent.name ||
     'Component'})`;
 
   return ReturnComponent;
 };
 
-export default withInjectReducer;
+export default withInjectSaga;
