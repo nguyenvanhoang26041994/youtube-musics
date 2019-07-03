@@ -4,15 +4,16 @@
   "description": "NextJS Boilerplate",
   "main": "index.js",
   "scripts": {
-    "dev": "next",
+    "dev": "cross-env NODE_ENV=development node server",
     "build": "next build",
-    "start": "next start",
+    "start": "cross-env NODE_ENV=production node server",
     "now-build": "next build"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "classnames": "^2.2.6",
+    "express": "^4.17.1",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.11",
     "next": "^8.1.0",
@@ -27,6 +28,7 @@
   },
   "devDependencies": {
     "@zeit/next-sass": "^1.0.1",
+    "cross-env": "^5.2.0",
     "node-sass": "^4.12.0",
     "postcss": "^7.0.17",
     "postcss-preset-env": "^6.6.0",

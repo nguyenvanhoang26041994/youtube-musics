@@ -1,8 +1,10 @@
 import '../../assets/css/tailwind.scss';
+import './App.scss';
 import App, { Container } from 'next/app';
 import { Provider } from 'react-redux';
 
 import Layout from '../layouts/Layout';
+import BottomPlayer from '../components/BottomPlayer';
 import store from '../store';
 
 class RootApp extends App {
@@ -20,6 +22,7 @@ class RootApp extends App {
           <Layout>
             <Component {...pageProps} />
           </Layout>
+          <BottomPlayer className="fixed bottom-0 w-screen" />
         </Provider>
       </Container>
     );

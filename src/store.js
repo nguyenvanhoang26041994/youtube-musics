@@ -44,24 +44,34 @@ store._ejectReducer = key => {
 
 store._injectSaga = ({ key, saga, mode, args }) => {
   if (!key || typeof saga !== 'function') { return false; }
+  if (store._injectedSagas[key]) { return store._injectedSagas[key]; }
 
   store._injectedSagas[key] = {
     mode: SAGA_MODE[mode] || sagaMode.TASK_CANCEL_WHEN_COMPONENT_UNMOUT,
     task: store._runSaga(saga, args),
   };
+
+  return store._injectedSagas[key];
 };
 
 store._ejectSaga = key => {
   const injectedSaga = store._injectedSagas[key];
 
+  if (injectedSaga && injectedSaga.mode === sagaMode.NO_TASK_CANCEL_WHEN_COMPONENT_UNMOUT) {
+    return sagaMode.NO_TASK_CANCEL_WHEN_COMPONENT_UNMOUT;
+  }
+
   if (injectedSaga &&
-    injectedSaga.mode === TASK_CANCEL_WHEN_COMPONENT_UNMOUT &&
+    injectedSaga.mode === sagaMode.TASK_CANCEL_WHEN_COMPONENT_UNMOUT &&
     injectedSaga.task &&
     injectedSaga.task.cancel
   ) {
     injectedSaga.task.cancel();
     delete store._injectedSagas[key];
+    return sagaMode.TASK_CANCEL_WHEN_COMPONENT_UNMOUT;
   }
+
+  return false;
 };
 
 export default store;

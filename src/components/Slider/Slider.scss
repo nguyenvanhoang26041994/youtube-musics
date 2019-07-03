@@ -1,0 +1,13 @@
+.ui-slider__handler {
+  &.--position {
+    transform: translate(-50%, 0.25rem); // 0.25rem is height of ui-slider
+  }
+}
+
+.ui-slider__track,
+.ui-slider__handler {
+  &.--transition {
+    transition: all 0.1s;
+    transition-timing-function: ease-in-out;
+  }
+}

@@ -1,16 +1,15 @@
 const defaultState = {
-  pageID: 'home-page',
-  userName: null,
+  say: 'Nothing',
 };
 
 export default (state = defaultState, action) => {
   switch (action.type) {
-    case 'CHANGE_USER_NAME':
+    case 'HELLO':
       return {
         ...state,
-        userName: action.payload,
+        say: 'Hello',
       };
     default:
       return state;
   }
-};
+}
