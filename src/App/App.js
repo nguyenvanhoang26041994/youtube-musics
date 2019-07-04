@@ -5,7 +5,18 @@ import { Provider } from 'react-redux';
 
 import Layout from '../layouts/Layout';
 import BottomPlayer from '../components/BottomPlayer';
+import withPlayingMusic from '../HOC/withPlayingMusic';
 import store from '../store';
+
+const BottomPlayerFilter = ({ playingMusic, ...otherProps }) => {
+  if (playingMusic.id) {
+    return <BottomPlayer {...otherProps} />;
+  }
+
+  return null;
+}
+
+const BottomPlayerFilterEnhancer = withPlayingMusic(BottomPlayerFilter);
 
 class RootApp extends App {
   static getInitialProps = async ({ Component, ctx }) =>
@@ -22,7 +33,7 @@ class RootApp extends App {
           <Layout>
             <Component {...pageProps} />
           </Layout>
-          <BottomPlayer className="fixed bottom-0 w-screen" />
+          <BottomPlayerFilterEnhancer className="fixed bottom-0 w-screen" />
         </Provider>
       </Container>
     );

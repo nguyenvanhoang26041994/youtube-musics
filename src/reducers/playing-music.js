@@ -1,8 +1,8 @@
 import { music, mode } from '../constants/playing-music';
 
 const defaultState = {
-  id: 'hay-trao-cho-anh',
-  src: '/static/musics/HayTraoChoAnh-SonTungMTPSnoopDogg-6010660.mp3',
+  id: '',
+  src: '',
   name: 'Hãy trao cho anh',
   singer: {
     name: 'Sơn Tùng M-TP',

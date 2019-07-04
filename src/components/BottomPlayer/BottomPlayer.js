@@ -14,11 +14,12 @@ class BottomPlayer extends React.Component {
   };
 
   componentDidMount() {
+    this.audioRef.current.play();
     this.setStateWhenAudioLoaded();
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.playingMusic.src !== prevProps.playingMusic.src && this.audioRef && this.audioRef.current) {
+    if (this.props.playingMusic.id !== prevProps.playingMusic.id && this.audioRef && this.audioRef.current) {
       this.audioRef.current.load();
       this.audioRef.current.play();
     }
@@ -56,14 +57,16 @@ class BottomPlayer extends React.Component {
     }
   };
 
+  handleChangeMusicVolume = (e, { value }) => this.changeVolume(value);
+  handleChangeMusicCurrentTime = (e, { value }) => this.changeCurrentTime(value * this.state.musicTime);
+
   onTimeUpdate = e => this.setCurrentTime(e.target.currentTime);
-  onChangeCurrentTime = (e, { value }) => this.changeCurrentTime(value * this.state.musicTime);
-  onChangeVolume = (e, { value }) => this.changeVolume(value);
-  onEnded = () => this.props.playingMusicActions.changeIsPlaying(false);
-  onPlay = () => this.props.playingMusicActions.changeIsPlaying(true);
-  onPause = () => this.props.playingMusicActions.changeIsPlaying(false);
-  onWaiting = () => this.props.playingMusicActions.changeIsPlaying(false);
-  onPlaying = () => this.props.playingMusicActions.changeIsPlaying(true);
+  onVolumeChange = e => this.setMusicVolume(e.target.volume);
+  onEnded = e => this.props.playingMusicActions.changeIsPlaying(!e.target.paused);
+  onPlay = e => this.props.playingMusicActions.changeIsPlaying(!e.target.paused);
+  onPause = e => this.props.playingMusicActions.changeIsPlaying(!e.target.paused);
+  onWaiting = e => this.props.playingMusicActions.changeIsPlaying(!e.target.paused);
+  onPlaying = e => this.props.playingMusicActions.changeIsPlaying(!e.target.paused);
   onLoadedData = () => this.setStateWhenAudioLoaded();
 
   setStateWhenAudioLoaded = () => {
@@ -95,6 +98,7 @@ class BottomPlayer extends React.Component {
           onPause={this.onPause}
           onWaiting={this.onWaiting}
           onPlaying={this.onPlaying}
+          onVolumeChange={this.onVolumeChange}
         >
           <source src={playingMusic.src} type="audio/mpeg" onChange={e => console.log(e)} />
         </audio>
@@ -117,10 +121,10 @@ class BottomPlayer extends React.Component {
               : <Icon iName="play" className="text-xl text-white" onClick={this.playMusic} />
             }
             <Icon iName="step-forward" className="text-xl text-white ml-4" />
-            <Slider className="ml-10" style={{ width: '20rem' }} percent={currentMusicTime/musicTime} onChange={this.onChangeCurrentTime} />
+            <Slider className="ml-10" style={{ width: '20rem' }} percent={currentMusicTime/musicTime} onChange={this.handleChangeMusicCurrentTime} />
             <div className="ml-2 text-white flex items-center font-serif w-10"><span>{calcTime(musicTime - currentMusicTime)}</span></div>
             <Icon iName="volume-up" className="text-xl text-white ml-10" />
-            <Slider className="ml-3" style={{ width: '5rem' }} percent={musicVolume} onChange={this.onChangeVolume}/>
+            <Slider className="ml-3" style={{ width: '5rem' }} percent={musicVolume} onChange={this.handleChangeMusicVolume}/>
           </div>
         </section>
       </div>
