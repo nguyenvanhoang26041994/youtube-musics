@@ -3,10 +3,9 @@ import { music, mode } from '../constants/playing-music';
 const defaultState = {
   id: '',
   src: '',
-  name: 'Hãy trao cho anh',
-  singer: {
-    name: 'Sơn Tùng M-TP',
-  },
+  name: '',
+  singer: {},
+  img: '',
   mode: mode.LOOP,
   isPlaying: false,
 };
@@ -24,6 +23,7 @@ export default (state = defaultState, action) => {
         id: action.payload.id,
         src: action.payload.src,
         name: action.payload.name,
+        img: action.payload.img,
         singer: action.payload.singer || {},
       };
     default:

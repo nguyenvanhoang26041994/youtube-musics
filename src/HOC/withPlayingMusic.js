@@ -7,7 +7,10 @@ const withPlayingMusic = WrappedComponent => {
   );
 
   const mapStateToProps = state => ({
-    playingMusic: state.playingMusic,
+    playingMusic: {
+      ...state.playingMusic,
+      isShowPlayer: state.playingMusic.id,
+    },
   });
 
   const mapDispatchToProps = dispatch => ({
@@ -15,8 +18,8 @@ const withPlayingMusic = WrappedComponent => {
       changeIsPlaying(isPlaying) {
         return dispatch(changeIsPlaying(isPlaying))
       },
-      changeMusic({ id, src, name, singer }) {
-        return dispatch(changeMusic({ id, src, name, singer }));
+      changeMusic(payload) {
+        return dispatch(changeMusic(payload));
       },
     },
   });

@@ -1,6 +1,7 @@
 import './BottomPlayer.scss';
 import cn from 'classnames';
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
+import Link from 'next/link';
 import { Icon, Slider } from '../../components/core';
 import withPlayingMusic from '../../HOC/withPlayingMusic';
 import { mode } from '../../constants/playing-music';
@@ -84,7 +85,7 @@ class BottomPlayer extends React.Component {
     const { currentMusicTime, musicTime, musicVolume } = this.state;
   
     return (
-      <div id="bottom-player" className={cn('ui-bottom-player bg-primary-gradient flex justify-center w-full h-32', className)}>
+      <div id="bottom-player" className={cn('ui-bottom-player bg-primary-gradient flex justify-center w-full h-20', className)}>
         <audio
           id="playing-music-audio"
           controls
@@ -100,31 +101,49 @@ class BottomPlayer extends React.Component {
           onPlaying={this.onPlaying}
           onVolumeChange={this.onVolumeChange}
         >
-          <source src={playingMusic.src} type="audio/mpeg" onChange={e => console.log(e)} />
+          <source src={playingMusic.src} type="audio/mpeg" />
         </audio>
         <section className="container flex items-center h-full w-full">
           <div className="flex cursor-pointer overflow-hidden mr-10">
-            <div className="w-20 h-20 rounded-lg overflow-hidden">
-              <img className="w-full h-full" src="https://ss-images.catscdn.vn/2017/07/06/1394391/spider-man-homecoming-iron-man-fanart-234207.jpg" alt="cureent-playing-music" />
+            <div className="w-12 h-12 rounded-full overflow-hidden">
+              <img
+                className={cn('ui-bottom-player__avatar-img w-full h-full', { 'spin --animated': playingMusic.isPlaying })}
+                src={playingMusic.img}
+                alt="cureent-playing-music"
+              />
             </div>
-            <div className="flex flex-col justify-center ml-3">
-              <div className="flex flex-col justify-center">
-                <span className="text-teal-500 text-base font-bold hover:underline">{playingMusic.name}</span>
-                <span className="text-white text-xs">{playingMusic.singer.name}</span>
+            <Link href="/song">
+              <div className="flex flex-col justify-center ml-3">
+                <div className="flex flex-col justify-center">
+                  <span className="text-teal-500 text-base font-bold hover:underline">{playingMusic.name}</span>
+                  <span className="text-white text-xs">{playingMusic.singer.name}</span>
+                </div>
               </div>
-            </div>
+            </Link>
           </div>
           <div className="flex items-center">
-            <Icon iName="step-backward" className="text-xl text-white mr-4" />
+            <Icon iName="step-backward" className="text-base text-white mr-4" />
             {playingMusic.isPlaying
-              ? <Icon iName="pause" className="text-xl text-blue-500" onClick={this.pauseMusic} />
-              : <Icon iName="play" className="text-xl text-white" onClick={this.playMusic} />
+              ? <Icon iName="pause" className="text-base text-blue-500" onClick={this.pauseMusic} />
+              : <Icon iName="play" className="text-base text-white" onClick={this.playMusic} />
             }
-            <Icon iName="step-forward" className="text-xl text-white ml-4" />
-            <Slider className="ml-10" style={{ width: '20rem' }} percent={currentMusicTime/musicTime} onChange={this.handleChangeMusicCurrentTime} />
-            <div className="ml-2 text-white flex items-center font-serif w-10"><span>{calcTime(musicTime - currentMusicTime)}</span></div>
-            <Icon iName="volume-up" className="text-xl text-white ml-10" />
-            <Slider className="ml-3" style={{ width: '5rem' }} percent={musicVolume} onChange={this.handleChangeMusicVolume}/>
+            <Icon iName="step-forward" className="text-base text-white ml-4" />
+            <Slider
+              className="ml-10"
+              style={{ width: '20rem' }}
+              percent={currentMusicTime/musicTime}
+              onChange={this.handleChangeMusicCurrentTime}
+            />
+            <div className="ml-2 text-white text-xs flex items-center font-serif w-10">
+              <span>{calcTime(musicTime - currentMusicTime)}</span>
+            </div>
+            <Icon iName="volume-up" className="text-base text-white ml-10" />
+            <Slider
+              className="ml-3"
+              style={{ width: '5rem' }}
+              percent={musicVolume}
+              onChange={this.handleChangeMusicVolume}
+            />
           </div>
         </section>
       </div>

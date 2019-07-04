@@ -1,15 +1,16 @@
 import '../../assets/css/tailwind.scss';
+import '../../assets/css/user.scss';
 import './App.scss';
 import App, { Container } from 'next/app';
 import { Provider } from 'react-redux';
 
 import Layout from '../layouts/Layout';
-import BottomPlayer from '../components/BottomPlayer';
+import BottomPlayer from '../containers/BottomPlayer';
 import withPlayingMusic from '../HOC/withPlayingMusic';
 import store from '../store';
 
 const BottomPlayerFilter = ({ playingMusic, ...otherProps }) => {
-  if (playingMusic.id) {
+  if (playingMusic.isShowPlayer) {
     return <BottomPlayer {...otherProps} />;
   }
 

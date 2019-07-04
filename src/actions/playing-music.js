@@ -5,12 +5,7 @@ export const changeIsPlaying = isPlaying => ({
   payload: isPlaying,
 });
 
-export const changeMusic = ({ id, src, name, singer = {} }) => ({
+export const changeMusic = payload => ({
   type: music.CHANGE_MUSIC,
-  payload: {
-    id,
-    src,
-    name,
-    singer,
-  },
+  payload,
 });
