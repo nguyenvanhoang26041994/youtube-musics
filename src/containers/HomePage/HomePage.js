@@ -17,7 +17,7 @@ const musics = [
 
 const HomePage = () => (
   <div id="home-page" className="container mx-auto">
-    <TrendingMusics musics={musics} className="my-4" />
+    {/* <TrendingMusics musics={musics} className="my-4" /> */}
   </div>
 );
 

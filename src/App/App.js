@@ -34,7 +34,9 @@ class RootApp extends App {
           <Layout>
             <Component {...pageProps} />
           </Layout>
-          <BottomPlayerFilterEnhancer className="fixed bottom-0 w-screen" />
+          <div className="fixed bottom-0 w-screen">
+            <BottomPlayerFilterEnhancer className="bg-primary-blur" />
+          </div>
         </Provider>
       </Container>
     );

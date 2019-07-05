@@ -1,9 +1,10 @@
 import './Navbar.scss';
+import cn from 'classnames';
 import Link from 'next/link';
-import { Logo } from '../../components/core';
+import { Logo, Icon } from '../../components/core';
 
 const menus = [
-  { href: '/hot', text: 'Hot' },
+  { href: '/hot', text: 'Hot', icon: 'fire' },
   { href: '/edm', text: 'EDM' },
   { href: '/violin', text: 'Violin' },
   { href: '/trending', text: 'Trending' },
@@ -11,19 +12,21 @@ const menus = [
   { href: '/vietnam', text: 'Vietnam' },
 ];
 
-const Navbar = () => (
-  <nav className="ui-navbar bg-primary-gradient flex justify-center text-white">
-    <div className="container flex items-center px-2 py-4">
-      <div className="flex items-center">
-        <div className="mr-5">
+const Navbar = ({ className }) => (
+  <nav className={cn('ui-navbar overflow-hidden flex justify-center text-white w-full h-16', className)}>
+    <div className="container flex items-center px-3">
+      <div className="flex items-center flex-1">
+        <div className="w-72">
           <Link href="/">
-            <a><Logo className="w-12 h-12" /></a>
+            <a><Logo className="w-8 h-8" /></a>
           </Link>
         </div>
-        <ul className="flex">
+        <ul className="flex text-xs">
           {menus.map((menu, idx) => (
             <li key={idx} className="px-3 font-bold hover:underline">
-              <Link href={menu.href}><a>{menu.text}</a></Link>
+              <Link href={menu.href}>
+                <a>{menu.icon && <Icon iName={menu.icon} className="mr-1" />}{menu.text}</a>
+              </Link>
             </li>
           ))}
         </ul>

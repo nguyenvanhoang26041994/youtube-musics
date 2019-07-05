@@ -1,3 +1,36 @@
+.bg-primary-blur {
+  background-image: url('/static/img/bg-blur.jpg');
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+  // filter: opacity(100%);
+}
+
+.bg-primary {
+  background-image: url('https://media.laodong.vn/storage/newsportal/2019/7/1/741910/Stg02291-15619849253.jpg');
+  filter: grayscale(65%) brightness(45%) opacity(100%);
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+.bg-darker {
+  filter: brightness(40%);
+}
+
+.animated.linear {
+  animation-timing-function: linear;
+}
+
+.top-haft {
+  top: 50%;
+}
+
+.translate-y-mhaft {
+  transform: translateY(-50%);
+}
+
 @keyframes spin {
   from {
       transform:rotate(0deg);
@@ -9,4 +42,20 @@
 
 .spin {
   animation-name: spin;
+}
+
+@keyframes rainbow {
+  0%, 100% {
+    background-image: linear-gradient(115deg,#4fcf70,#fad648,#a767e5,#12bcfe);
+  }
+  
+  25% {
+    background-image: linear-gradient(115deg,#fad648,#a767e5,#12bcfe,#4fcf70);
+  }
+  50% {
+    background-image: linear-gradient(115deg,#a767e5,#12bcfe,#4fcf70,#fad648);
+  }
+  75% {
+    background-image: linear-gradient(115deg,#12bcfe,#4fcf70,#fad648,#a767e5);
+  }
 }

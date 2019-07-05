@@ -2,7 +2,8 @@ import './BottomPlayer.scss';
 import cn from 'classnames';
 import React from 'react';
 import Link from 'next/link';
-import { Icon, Slider } from '../../components/core';
+import { Icon, Slider, BlurBackground } from '../../components/core';
+import PlayListBox from './PlayListBox';
 import withPlayingMusic from '../../HOC/withPlayingMusic';
 import { mode } from '../../constants/playing-music';
 import { calcTime } from '../../utils/time';
@@ -12,6 +13,7 @@ class BottomPlayer extends React.Component {
     musicTime: 0,
     currentMusicTime: 0,
     musicVolume: 0,
+    isFlipInX: true,
   };
 
   componentDidMount() {
@@ -70,6 +72,8 @@ class BottomPlayer extends React.Component {
   onPlaying = e => this.props.playingMusicActions.changeIsPlaying(!e.target.paused);
   onLoadedData = () => this.setStateWhenAudioLoaded();
 
+  onClose = () => this.props.playingMusicActions.changeMusic({ id: null });
+
   setStateWhenAudioLoaded = () => {
     if (this.audioRef && this.audioRef.current) {
       this.setState({
@@ -85,7 +89,12 @@ class BottomPlayer extends React.Component {
     const { currentMusicTime, musicTime, musicVolume } = this.state;
   
     return (
-      <div id="bottom-player" className={cn('ui-bottom-player bg-primary-gradient flex justify-center w-full h-20', className)}>
+      <div id="bottom-player" className={cn('ui-bottom-player relative overflow-hidden flex justify-center w-full h-16 animated fadeInDown fast', className)}>
+        <Icon
+          iName="times"
+          className="text-xs text-white absolute right-0 mx-3 top-haft translate-y-mhaft"
+          onClick={this.onClose}
+        />
         <audio
           id="playing-music-audio"
           controls
@@ -103,25 +112,25 @@ class BottomPlayer extends React.Component {
         >
           <source src={playingMusic.src} type="audio/mpeg" />
         </audio>
-        <section className="container flex items-center h-full w-full">
-          <div className="flex cursor-pointer overflow-hidden mr-10">
+        <section className="container flex items-center h-full w-full relative px-3">
+          <div className="flex cursor-pointer overflow-hidden w-72">
             <div className="w-12 h-12 rounded-full overflow-hidden">
               <img
-                className={cn('ui-bottom-player__avatar-img w-full h-full', { 'spin --animated': playingMusic.isPlaying })}
+                className={cn('ui-bottom-player__avatar-img w-full h-full', { 'animated spin linear infinite slow': playingMusic.isPlaying })}
                 src={playingMusic.img}
-                alt="cureent-playing-music"
+                alt="current-playing-music"
               />
             </div>
             <Link href="/song">
               <div className="flex flex-col justify-center ml-3">
                 <div className="flex flex-col justify-center">
-                  <span className="text-teal-500 text-base font-bold hover:underline">{playingMusic.name}</span>
+                  <span className="text-teal-500 text-base hover:underline">{playingMusic.name}</span>
                   <span className="text-white text-xs">{playingMusic.singer.name}</span>
                 </div>
               </div>
             </Link>
           </div>
-          <div className="flex items-center">
+          <div className="flex items-center flex-1">
             <Icon iName="step-backward" className="text-base text-white mr-4" />
             {playingMusic.isPlaying
               ? <Icon iName="pause" className="text-base text-blue-500" onClick={this.pauseMusic} />
@@ -129,15 +138,14 @@ class BottomPlayer extends React.Component {
             }
             <Icon iName="step-forward" className="text-base text-white ml-4" />
             <Slider
-              className="ml-10"
-              style={{ width: '20rem' }}
+              className="ml-4 flex-1 --custom-track"
               percent={currentMusicTime/musicTime}
               onChange={this.handleChangeMusicCurrentTime}
             />
-            <div className="ml-2 text-white text-xs flex items-center font-serif w-10">
+            <div className="ml-4 text-white text-xs flex items-center font-serif w-10">
               <span>{calcTime(musicTime - currentMusicTime)}</span>
             </div>
-            <Icon iName="volume-up" className="text-base text-white ml-10" />
+            <Icon iName="volume-up" className="text-base text-white ml-4" />
             <Slider
               className="ml-3"
               style={{ width: '5rem' }}

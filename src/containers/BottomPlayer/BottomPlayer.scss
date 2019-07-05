@@ -1,7 +1,23 @@
-.ui-bottom-player__avatar-img {
-  &.--animated {
-    animation-duration: 3s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
+// .ui-bottom-player__avatar-img {
+//   &.--animated {
+//     animation-duration: 3s;
+//     animation-timing-function: linear;
+//     animation-iteration-count: infinite;
+//   }
+// }
+
+.ui-bottom-player {
+  .--tranform-top {
+    transform: translate(0, -100%);
+  }
+
+  .--custom-track {
+    // .ui-slider__track {
+    //   animation-name: rainbow;
+    //   animation-duration: 0.2s;
+    //   animation-iteration-count: infinite;
+    //   transition: 0.2s ease-in-out;
+    //   animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+    // }
   }
 }
