@@ -1,6 +1,19 @@
 import { playlist } from '../constants/playing-list';
 
 const musics = {
+  'id_edm': {
+    id: 'id_edm',
+    name: 'EDM Bất hủ',
+    singer: {
+      id: 'uid_edm-001',
+      name: 'EDM',
+    },
+    src: '/static/musics/edm-lol.mp3',
+    img: '/static/img/bg-blur.jpg',
+    listenNumber: 1241562,
+    time: 3.6 * 60,
+    imgBlur: '/static/img/bg-blur.jpg',
+  },
   'id_001': {
     id: 'id_001',
     name: 'Sao em vô tình',

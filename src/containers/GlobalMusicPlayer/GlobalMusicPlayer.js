@@ -29,39 +29,41 @@ class GlobalMusicPlayer extends React.Component {
     this.setStateWhenAudioLoaded();
 
     this.canvas = this.analyserRef.current;
+    this.canvas.width = this.canvas.offsetWidth;
+    this.canvas.height = this.canvas.offsetHeight;
+    this.ctx = this.canvas.getContext('2d');
   }
 
   loopFrame = (fbcArray) => {
-
-    const canvasWidth = this.canvas.offsetWidth;
-    const canvasHeight = this.canvas.offsetHeight;
-    this.ctx = this.canvas.getContext('2d');
-    this.ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     
-    const _R_ = 60;
-    const _A_ = 400;
-    const _B_ = 250;
+    const _R_ = 80 + fbcArray[0] / 4;
+    const _A_ = this.canvas.width / 2;
+    const _B_ = this.canvas.height / 2;
 
     this.ctx.beginPath();
     this.ctx.arc(_A_, _B_, _R_, 0, 2 * Math.PI);
     // this.ctx.stroke();
     this.ctx.closePath();
 
-  for (let i = 0; i < 60; i++) {
-      const t = ((i * 6) / 360) * 2 * Math.PI;
+  for (let i = 0; i < 100; i++) {
+      const t = ((i * 3) / 360) * 2 * Math.PI;
 
       let x = _A_ + (_R_ * Math.cos(t));
       let y = _B_ + (_R_ * Math.sin(t));
 
-      let x1 = _A_ + ((fbcArray[i]/4 + _R_) * Math.cos(t));
-      let y1 = _B_ + ((fbcArray[i]/4 + _R_) * Math.sin(t));
+      let x1 = _A_ + ((fbcArray[i]/3 + _R_ + 3) * Math.cos(t));
+      let y1 = _B_ + ((fbcArray[i]/3 + _R_ + 3) * Math.sin(t));
 
       this.ctx.beginPath();
 
       this.ctx.moveTo(x, y);
       this.ctx.lineTo(x1, y1);
-      this.ctx.strokeStyle = `rgb(111, ${66 + (i * 2)}, 245)`;
-      this.ctx.lineWidth = 4;
+      const _red = 111 + fbcArray[i] / 3;
+      const _green = 66 + (i * 2);
+      const _blue = 245 + fbcArray[i] / 15;
+      this.ctx.strokeStyle = `rgb(${_red <= 255 ? _red : 255}, ${_green <= 255 ? _green : 255 }, ${_blue <= 255 ? _blue : 255})`;
+      this.ctx.lineWidth = 3;
       this.ctx.stroke();
       this.ctx.closePath();
     }
@@ -143,9 +145,8 @@ class GlobalMusicPlayer extends React.Component {
           <div className="container flex mx-auto h-full relative">
             <div className="bg-primary w-full h-full absolute top-0 left-0" />
             <div className="h-full w-3/4 relative flex justify-center items-center">
-              {/* <div class="h-72 w-72 rounded-full" style={{ background: `linear-gradient(to right, rgba(${number}, 30, 30), rgba(30, ${number}, 30))`, transition: 'all 0.1s', transform: `scale(${((255 + number)/255)})` }}></div> */}
               <div className="absolute top-0 left-0 h-full w-full">
-                <canvas height="742px" width="768px" ref={this.analyserRef}></canvas>
+                <canvas className="w-full h-full" ref={this.analyserRef}></canvas>
               </div>
             </div>
             <div className="h-full w-1/4 bg-primary-blur">
