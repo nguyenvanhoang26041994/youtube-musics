@@ -26,9 +26,81 @@ class GlobalMusicPlayer extends React.Component {
   componentDidMount() {
     this.musicRef.current.play();
     this.setState({ rendered: true });
-    // this.ctx = this.analyserRef.current.getContext('2d');
     this.setStateWhenAudioLoaded();
+
+    this.canvas = this.analyserRef.current;
   }
+
+  loopFrame = (fbcArray) => {
+
+    const canvasWidth = this.canvas.offsetWidth;
+    const canvasHeight = this.canvas.offsetHeight;
+    this.ctx = this.canvas.getContext('2d');
+    this.ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+    
+    const _R_ = 120;
+    const _A_ = 400;
+    const _B_ = 250;
+  
+    window.ctx = this.ctx;
+    window._R_ = _R_;
+    window._A_ = _A_;
+    window._B_ = _B_;
+
+    // (x - a)^2 + (y - b)^2 = r^2
+    // (x - _A_)^2 + (y - _B_)^2 = _R_^2 
+
+  
+    this.ctx.beginPath();
+    this.ctx.arc(_A_, _B_, _R_, 0, 2 * Math.PI);
+    this.ctx.stroke();
+
+    this.ctx.beginPath();
+    this.ctx.arc(_A_, _B_, 3, 0, 2 * Math.PI);
+    this.ctx.fillStyle = '#000000';
+    this.ctx.fill();
+
+    for (let i = 0; i < 180; i++) {
+      const t = (i * 4.5);
+      let x = _A_ + (_R_ * Math.cos(t));
+      let y = _B_ + (_R_ * Math.sin(t));
+
+      // console.log(`rgb(111, ${66 + (i * 2)}, 245)`, [Math.cos(t), Math.sin(t)]);
+      // this.ctx.beginPath();
+      // this.ctx.arc(x, y, 3, 0, 2 * Math.PI);
+      // this.ctx.fillStyle = `rgb(111, ${66 + (i * 2)}, 245)`;
+      // this.ctx.fill();
+
+      this.ctx.beginPath();
+      this.ctx.rect((i * 4) + 30, 720, 3, - fbcArray[i] / 2.5);
+      this.ctx.fillStyle = `rgb(111, ${66 + (i * 2)}, 245)`;
+      this.ctx.fill();
+    }
+    // this.ctx.beginPath();
+    // this.ctx.arc(_A_, _B_ - _R_, 3, 0, 2 * Math.PI);
+    // this.ctx.fillStyle = 'rgb(111, 66, 245)';
+    // this.ctx.fill();
+
+    // this.ctx.beginPath();
+    // this.ctx.arc(_A_ + _R_, _B_, 3, 0, 2 * Math.PI);
+    // this.ctx.fillStyle = 'rgb(111, 66, 245)';
+    // this.ctx.fill();
+
+    // this.ctx.beginPath();
+    // this.ctx.arc(_A_ + _R_/2, _B_, 3, 0, 2 * Math.PI);
+    // this.ctx.fillStyle = 'rgb(111, 66, 245)';
+    // this.ctx.fill();
+
+    // this.ctx.beginPath();
+    // this.ctx.arc(_A_, _B_ + _R_, 3, 0, 2 * Math.PI);
+    // this.ctx.fillStyle = 'rgb(111, 66, 245)';
+    // this.ctx.fill();
+
+    // this.ctx.beginPath();
+    // this.ctx.arc(_A_ -_R_, _B_, 3, 0, 2 * Math.PI);
+    // this.ctx.fillStyle = 'rgb(111, 66, 245)';
+    // this.ctx.fill();
+  };
 
   componentDidUpdate(prevProps) {
     if (this.props.playingMusic.id !== prevProps.playingMusic.id && this.musicRef && this.musicRef.current) {
@@ -37,7 +109,12 @@ class GlobalMusicPlayer extends React.Component {
     }
   }
 
-  onAnalyzer = (fbcArray) => this.setState({ number: fbcArray[0] });
+  onAnalyzer = (fbcArray) => {
+    if (!this.canvas) {
+      return;
+    }
+    this.loopFrame(fbcArray);
+  };
 
   setStateWhenAudioLoaded = () => {
     if (this.musicRef && this.musicRef.current) {
@@ -101,10 +178,10 @@ class GlobalMusicPlayer extends React.Component {
           <div className="container flex mx-auto h-full relative">
             <div className="bg-primary w-full h-full absolute top-0 left-0" />
             <div className="h-full w-3/4 relative flex justify-center items-center">
-              <div class="h-72 w-72 rounded-full" style={{ background: `linear-gradient(to right, rgba(${number}, 30, 30), rgba(30, ${number}, 30))`, transition: 'all 0.1s', transform: `scale(${((255 + number)/255)})` }}></div>
-              {/* <div className="absolute top-0 left-0 h-full w-full">
-                <canvas className="h-full w-full" ref={this.analyserRef}></canvas>
-              </div> */}
+              {/* <div class="h-72 w-72 rounded-full" style={{ background: `linear-gradient(to right, rgba(${number}, 30, 30), rgba(30, ${number}, 30))`, transition: 'all 0.1s', transform: `scale(${((255 + number)/255)})` }}></div> */}
+              <div className="absolute top-0 left-0 h-full w-full">
+                <canvas height="800px" width="800px" ref={this.analyserRef}></canvas>
+              </div>
             </div>
             <div className="h-full w-1/4 bg-primary-blur">
               <ul>
