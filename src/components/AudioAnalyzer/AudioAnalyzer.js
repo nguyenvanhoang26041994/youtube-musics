@@ -21,7 +21,7 @@ export default class AudioAnalyzer extends React.Component {
   }
 
   frameLooper = () => {
-    webkitRequestAnimationFrame(this.frameLooper);
+    window.requestAnimationFrame(this.frameLooper);
     this.fbcArray = new Uint8Array(this.analyser.frequencyBinCount);
     this.analyser.getByteFrequencyData(this.fbcArray);
 
