@@ -1,9 +1,22 @@
 import { playlist } from '../constants/playing-list';
 
 const musics = {
+  'id_violin': {
+    id: 'id_violin',
+    name: 'Perfect cover by violin',
+    singer: {
+      id: 'uid_edm-001',
+      name: 'EDM',
+    },
+    src: '/static/musics/perfect-violin.mp3',
+    img: '/static/img/bg-blur.jpg',
+    listenNumber: 1241562,
+    time: 3.6 * 60,
+    imgBlur: '/static/img/bg-blur.jpg',
+  },
   'id_edm': {
     id: 'id_edm',
-    name: 'EDM Bất hủ',
+    name: 'EDM Bất hủ cho dân cày liên minh',
     singer: {
       id: 'uid_edm-001',
       name: 'EDM',

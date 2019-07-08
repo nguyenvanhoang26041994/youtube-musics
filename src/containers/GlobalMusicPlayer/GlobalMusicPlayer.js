@@ -35,35 +35,52 @@ class GlobalMusicPlayer extends React.Component {
   }
 
   loopFrame = (fbcArray) => {
+    const size = 2.5;
+
+    const { name } = this.props.playingMusic;
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     
-    const _R_ = 80 + fbcArray[0] / 4;
+    const rootRadius = 80;
+    const _R_ = rootRadius + fbcArray[0] / 10;
     const _A_ = this.canvas.width / 2;
     const _B_ = this.canvas.height / 2;
+    
+    const xSongName = _A_ - rootRadius + 30;
+    const ySongName = _B_ - rootRadius / 2;
 
-    this.ctx.beginPath();
-    this.ctx.arc(_A_, _B_, _R_, 0, 2 * Math.PI);
+    const grd = this.ctx.createLinearGradient(xSongName, ySongName, xSongName + 300, ySongName);
+    this.ctx.fillStyle = grd;
+    grd.addColorStop(0, '#009fff');
+    grd.addColorStop(1, '#ec2f4b');
+
+    this.ctx.font = 'bold 1.3rem fantasy';
+    this.ctx.fill();
+    this.ctx.fillText(name, xSongName, ySongName);
+
+    // this.ctx.beginPath();
+    // this.ctx.arc(_A_, _B_, _R_, 0, 2 * Math.PI);
     // this.ctx.stroke();
-    this.ctx.closePath();
+    // this.ctx.closePath();
 
-  for (let i = 0; i < 100; i++) {
-      const t = ((i * 3) / 360) * 2 * Math.PI;
+    const _length = (360 / size) * 0.85;
+    for (let i = 0; i < _length; i++) {
+      const t = ((i * size) / 360) * 2 * Math.PI;
 
-      let x = _A_ + (_R_ * Math.cos(t));
-      let y = _B_ + (_R_ * Math.sin(t));
+      let x = _A_ + _R_ * Math.cos(t);
+      let y = _B_ + _R_ * Math.sin(t);
 
-      let x1 = _A_ + ((fbcArray[i]/3 + _R_ + 3) * Math.cos(t));
-      let y1 = _B_ + ((fbcArray[i]/3 + _R_ + 3) * Math.sin(t));
+      let x1 = _A_ + (fbcArray[i]/6 + _R_ + size) * Math.cos(t);
+      let y1 = _B_ + (fbcArray[i]/6 + _R_ + size) * Math.sin(t);
 
       this.ctx.beginPath();
 
       this.ctx.moveTo(x, y);
       this.ctx.lineTo(x1, y1);
-      const _red = 111 + fbcArray[i] / 3;
-      const _green = 66 + (i * 2);
+      const _red = 111 + fbcArray[i] / 4;
+      const _green = 66 + i;
       const _blue = 245 + fbcArray[i] / 15;
       this.ctx.strokeStyle = `rgb(${_red <= 255 ? _red : 255}, ${_green <= 255 ? _green : 255 }, ${_blue <= 255 ? _blue : 255})`;
-      this.ctx.lineWidth = 3;
+      this.ctx.lineWidth = size;
       this.ctx.stroke();
       this.ctx.closePath();
     }

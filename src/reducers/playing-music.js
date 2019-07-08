@@ -1,12 +1,12 @@
 import { music, mode } from '../constants/playing-music';
 
 const defaultState = {
-  id: 'id_001',
-  src: '/static/musics/sao-em-vo-tinh.mp3',
-  name: 'Sao em vô tình',
+  id: 'id_edm',
+  src: '/static/musics/edm-lol.mp3',
+  name: 'EDM Bất hủ cho dân cày liên minh',
   singer: {
-    id: 'uid_jack-001',
-    name: 'Jack',
+    id: 'uid_edm-001',
+    name: 'EDM God',
   },
   img: '/static/img/bg-blur.jpg',
   mode: mode.LOOP,
