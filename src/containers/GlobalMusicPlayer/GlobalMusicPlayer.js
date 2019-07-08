@@ -12,27 +12,6 @@ const Audio = ({ className, src, musicRef, ...otherProps }) => (
     <source src={src} />
   </audio>
 );
-// this.ctx.beginPath();
-// this.ctx.moveTo(200, 500 - 5);
-// this.ctx.lineTo(350, 500 - 10);
-// this.ctx.lineTo(350, 500 + 10);
-// this.ctx.lineTo(200, 500 + 5);
-// this.ctx.lineTo(200, 500 - 5);
-// this.ctx.fillStyle = 'red';
-// this.ctx.fill();
-// this.ctx.closePath();
-function hinhThangDeu({ x, y, deg, long }, ctx) {
-  // const startX = x - 3;
-  // const startY = y - 3;
-  // const length = start + long / 7;
-  
-  // ctx.beginPath();
-  // ctx.moveTo(startX, length - 6);
-  // ctx.lineTo(x - 20, y);
-  // ctx.strokeStyle = 'red';
-  // ctx.stroke();
-  // ctx.closePath();
-}
 
 class GlobalMusicPlayer extends React.Component {
   state = {
@@ -59,7 +38,7 @@ class GlobalMusicPlayer extends React.Component {
     this.ctx = this.canvas.getContext('2d');
     this.ctx.clearRect(0, 0, canvasWidth, canvasHeight);
     
-    const _R_ = 80;
+    const _R_ = 60;
     const _A_ = 400;
     const _B_ = 250;
 
@@ -74,24 +53,18 @@ class GlobalMusicPlayer extends React.Component {
       let x = _A_ + (_R_ * Math.cos(t));
       let y = _B_ + (_R_ * Math.sin(t));
 
+      let x1 = _A_ + ((fbcArray[i]/4 + _R_) * Math.cos(t));
+      let y1 = _B_ + ((fbcArray[i]/4 + _R_) * Math.sin(t));
+
       this.ctx.beginPath();
-      this.ctx.fillRect(x, y, 6, -fbcArray[i]/3 + 6);
-      this.ctx.fillStyle = `rgb(111, ${66 + (i * 2)}, 245)`;
-      this.ctx.fill();
+
+      this.ctx.moveTo(x, y);
+      this.ctx.lineTo(x1, y1);
+      this.ctx.strokeStyle = `rgb(111, ${66 + (i * 2)}, 245)`;
+      this.ctx.lineWidth = 4;
+      this.ctx.stroke();
       this.ctx.closePath();
-
-      // hinhThangDeu({ x: x + 300, y: y + 300, deg: t, long: fbcArray[i] }, this.ctx);
     }
-
-    // this.ctx.beginPath();
-    // this.ctx.moveTo(200, 500 - 5);
-    // this.ctx.lineTo(350, 500 - 10);
-    // this.ctx.lineTo(350, 500 + 10);
-    // this.ctx.lineTo(200, 500 + 5);
-    // this.ctx.lineTo(200, 500 - 5);
-    // this.ctx.fillStyle = 'red';
-    // this.ctx.fill();
-    // this.ctx.closePath();
   };
 
   componentDidUpdate(prevProps) {
