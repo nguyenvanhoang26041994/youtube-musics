@@ -89,7 +89,7 @@ class BottomPlayer extends React.Component {
     const { currentMusicTime, musicTime, musicVolume } = this.state;
   
     return (
-      <div id="bottom-player" className={cn('ui-bottom-player relative overflow-hidden flex justify-center w-full h-16 animated fadeInDown fast', className)}>
+      <div id="bottom-player" className={cn('ui-bottom-player relative flex justify-center w-full h-16 animated fadeInDown fast', className)}>
         <Icon
           iName="times"
           className="text-xs text-white absolute right-0 mx-3 top-haft translate-y-mhaft"
@@ -113,6 +113,9 @@ class BottomPlayer extends React.Component {
           <source src={playingMusic.src} type="audio/mpeg" />
         </audio>
         <section className="container flex items-center h-full w-full relative px-3">
+          <div className="absolute top-0 left-0 translate-y-haft translate-x-mfull w-full z-10" style={{ height: 'calc(100vh - 8rem)' }}>
+            <PlayListBox className="h-72 w-full" />
+          </div>
           <div className="flex cursor-pointer overflow-hidden w-72">
             <div className="w-12 h-12 rounded-full overflow-hidden">
               <img
@@ -133,7 +136,7 @@ class BottomPlayer extends React.Component {
           <div className="flex items-center flex-1">
             <Icon iName="step-backward" className="text-base text-white mr-4" />
             {playingMusic.isPlaying
-              ? <Icon iName="pause" className="text-base text-blue-500" onClick={this.pauseMusic} />
+              ? <Icon iName="pause" className="text-base text-teal-500" onClick={this.pauseMusic} />
               : <Icon iName="play" className="text-base text-white" onClick={this.playMusic} />
             }
             <Icon iName="step-forward" className="text-base text-white ml-4" />

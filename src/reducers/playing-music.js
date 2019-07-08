@@ -1,11 +1,14 @@
 import { music, mode } from '../constants/playing-music';
 
 const defaultState = {
-  id: '',
-  src: '',
-  name: '',
-  singer: {},
-  img: '',
+  id: 'id_001',
+  src: '/static/musics/sao-em-vo-tinh.mp3',
+  name: 'Sao em vô tình',
+  singer: {
+    id: 'uid_jack-001',
+    name: 'Jack',
+  },
+  img: '/static/img/bg-blur.jpg',
   mode: mode.LOOP,
   isPlaying: false,
 };

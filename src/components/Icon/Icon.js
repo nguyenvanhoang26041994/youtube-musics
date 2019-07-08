@@ -13,7 +13,7 @@ const colors = Object.freeze({
 const Icon = ({ className, iName, size, color, ...otherProps }) => (
   <span
     className={cn(
-      `ui-icon cursor-pointer fa fa-${iName}`,
+      `ui-icon cursor-pointer text-center fa fa-${iName}`,
       sizes[size],
       colors[color],
       className)

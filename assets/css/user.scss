@@ -3,11 +3,12 @@
   background-attachment: fixed;
   background-size: cover;
   background-repeat: no-repeat;
-  // filter: opacity(100%);
+  // filter: brightness(20%) opacity(100%);
 }
 
 .bg-primary {
-  background-image: url('https://media.laodong.vn/storage/newsportal/2019/7/1/741910/Stg02291-15619849253.jpg');
+  // background-image: url('https://media.laodong.vn/storage/newsportal/2019/7/1/741910/Stg02291-15619849253.jpg');
+  background-image: url('/static/img/bg-blur.jpg');
   filter: grayscale(65%) brightness(45%) opacity(100%);
   background-attachment: fixed;
   background-size: cover;
@@ -29,6 +30,18 @@
 
 .translate-y-mhaft {
   transform: translateY(-50%);
+}
+
+.translate-y-haft {
+  transform: translateY(50%);
+}
+
+.translate-x-mfull {
+  transform: translateY(-100%);
+}
+
+.transition-fast {
+  transition: all 0.3s;
 }
 
 @keyframes spin {
