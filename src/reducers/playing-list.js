@@ -62,7 +62,7 @@ const musics = {
     },
     listenNumber: 1241562,
     time: 3.6 * 60,
-    src: '/static/musics/lost-control.mp3',
+    src: '/static/musics/hay-trao-cho-anh.mp3',
     img: '/static/img/bg-blur.jpg',
     imgBlur: '/static/img/bg-blur.jpg',
   },

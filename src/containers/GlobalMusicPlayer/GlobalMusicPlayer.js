@@ -12,6 +12,27 @@ const Audio = ({ className, src, musicRef, ...otherProps }) => (
     <source src={src} />
   </audio>
 );
+// this.ctx.beginPath();
+// this.ctx.moveTo(200, 500 - 5);
+// this.ctx.lineTo(350, 500 - 10);
+// this.ctx.lineTo(350, 500 + 10);
+// this.ctx.lineTo(200, 500 + 5);
+// this.ctx.lineTo(200, 500 - 5);
+// this.ctx.fillStyle = 'red';
+// this.ctx.fill();
+// this.ctx.closePath();
+function hinhThangDeu({ x, y, deg, long }, ctx) {
+  // const startX = x - 3;
+  // const startY = y - 3;
+  // const length = start + long / 7;
+  
+  // ctx.beginPath();
+  // ctx.moveTo(startX, length - 6);
+  // ctx.lineTo(x - 20, y);
+  // ctx.strokeStyle = 'red';
+  // ctx.stroke();
+  // ctx.closePath();
+}
 
 class GlobalMusicPlayer extends React.Component {
   state = {
@@ -38,43 +59,39 @@ class GlobalMusicPlayer extends React.Component {
     this.ctx = this.canvas.getContext('2d');
     this.ctx.clearRect(0, 0, canvasWidth, canvasHeight);
     
-    const _R_ = 80 + fbcArray[0]/10;
+    const _R_ = 80;
     const _A_ = 400;
     const _B_ = 250;
-  
-    window.ctx = this.ctx;
-    window._R_ = _R_;
-    window._A_ = _A_;
-    window._B_ = _B_;
 
-    // (x - a)^2 + (y - b)^2 = r^2
-    // (x - _A_)^2 + (y - _B_)^2 = _R_^2 
-
-  
     this.ctx.beginPath();
     this.ctx.arc(_A_, _B_, _R_, 0, 2 * Math.PI);
     // this.ctx.stroke();
+    this.ctx.closePath();
 
-    for (let i = 0; i < 60; i++) {
+  for (let i = 0; i < 60; i++) {
       const t = ((i * 6) / 360) * 2 * Math.PI;
 
       let x = _A_ + (_R_ * Math.cos(t));
       let y = _B_ + (_R_ * Math.sin(t));
 
-      // console.log(`rgb(111, ${66 + (i * 2)}, 245)`, [Math.cos(t), Math.sin(t)]);
       this.ctx.beginPath();
-      this.ctx.rect(x, y, 6, - (fbcArray[i]/3) + 6);
+      this.ctx.fillRect(x, y, 6, -fbcArray[i]/3 + 6);
       this.ctx.fillStyle = `rgb(111, ${66 + (i * 2)}, 245)`;
       this.ctx.fill();
+      this.ctx.closePath();
 
-
-
-      // test
-      // this.ctx.beginPath();
-      // this.ctx.rect((i * 8) + 70, canvasHeight - 30, 6, - (fbcArray[i]/(7)));
-      // this.ctx.fillStyle = `rgb(111, ${55 + i * 2}, 245)`;
-      // this.ctx.fill();
+      // hinhThangDeu({ x: x + 300, y: y + 300, deg: t, long: fbcArray[i] }, this.ctx);
     }
+
+    // this.ctx.beginPath();
+    // this.ctx.moveTo(200, 500 - 5);
+    // this.ctx.lineTo(350, 500 - 10);
+    // this.ctx.lineTo(350, 500 + 10);
+    // this.ctx.lineTo(200, 500 + 5);
+    // this.ctx.lineTo(200, 500 - 5);
+    // this.ctx.fillStyle = 'red';
+    // this.ctx.fill();
+    // this.ctx.closePath();
   };
 
   componentDidUpdate(prevProps) {
@@ -204,3 +221,8 @@ export default fp.compose(
   withPlayingList,
   withPlayingMusic
 )(GlobalMusicPlayer);
+// test
+// this.ctx.beginPath();
+// this.ctx.rect((i * 8) + 70, canvasHeight - 30, 6, - (fbcArray[i]/(7)));
+// this.ctx.fillStyle = `rgb(111, ${55 + i * 2}, 245)`;
+// this.ctx.fill();
