@@ -38,7 +38,7 @@ class GlobalMusicPlayer extends React.Component {
     this.ctx = this.canvas.getContext('2d');
     this.ctx.clearRect(0, 0, canvasWidth, canvasHeight);
     
-    const _R_ = 120;
+    const _R_ = 80;
     const _A_ = 400;
     const _B_ = 250;
   
@@ -53,53 +53,24 @@ class GlobalMusicPlayer extends React.Component {
   
     this.ctx.beginPath();
     this.ctx.arc(_A_, _B_, _R_, 0, 2 * Math.PI);
-    this.ctx.stroke();
+    // this.ctx.stroke();
 
-    this.ctx.beginPath();
-    this.ctx.arc(_A_, _B_, 3, 0, 2 * Math.PI);
-    this.ctx.fillStyle = '#000000';
-    this.ctx.fill();
-
-    for (let i = 0; i < 180; i++) {
+    for (let i = 0; i < 80; i++) {
       const t = (i * 4.5);
       let x = _A_ + (_R_ * Math.cos(t));
       let y = _B_ + (_R_ * Math.sin(t));
 
       // console.log(`rgb(111, ${66 + (i * 2)}, 245)`, [Math.cos(t), Math.sin(t)]);
-      // this.ctx.beginPath();
-      // this.ctx.arc(x, y, 3, 0, 2 * Math.PI);
-      // this.ctx.fillStyle = `rgb(111, ${66 + (i * 2)}, 245)`;
-      // this.ctx.fill();
-
       this.ctx.beginPath();
-      this.ctx.rect((i * 4) + 30, 720, 3, - fbcArray[i] / 2.5);
+      this.ctx.rect(x, y, 6, - (fbcArray[i]/(7)));
       this.ctx.fillStyle = `rgb(111, ${66 + (i * 2)}, 245)`;
       this.ctx.fill();
+
+      this.ctx.beginPath();
+      this.ctx.rect((i * 8) + 70, canvasHeight - 30, 6, - (fbcArray[i]/(7)));
+      this.ctx.fillStyle = `rgb(111, ${55 + i * 2}, 245)`;
+      this.ctx.fill();
     }
-    // this.ctx.beginPath();
-    // this.ctx.arc(_A_, _B_ - _R_, 3, 0, 2 * Math.PI);
-    // this.ctx.fillStyle = 'rgb(111, 66, 245)';
-    // this.ctx.fill();
-
-    // this.ctx.beginPath();
-    // this.ctx.arc(_A_ + _R_, _B_, 3, 0, 2 * Math.PI);
-    // this.ctx.fillStyle = 'rgb(111, 66, 245)';
-    // this.ctx.fill();
-
-    // this.ctx.beginPath();
-    // this.ctx.arc(_A_ + _R_/2, _B_, 3, 0, 2 * Math.PI);
-    // this.ctx.fillStyle = 'rgb(111, 66, 245)';
-    // this.ctx.fill();
-
-    // this.ctx.beginPath();
-    // this.ctx.arc(_A_, _B_ + _R_, 3, 0, 2 * Math.PI);
-    // this.ctx.fillStyle = 'rgb(111, 66, 245)';
-    // this.ctx.fill();
-
-    // this.ctx.beginPath();
-    // this.ctx.arc(_A_ -_R_, _B_, 3, 0, 2 * Math.PI);
-    // this.ctx.fillStyle = 'rgb(111, 66, 245)';
-    // this.ctx.fill();
   };
 
   componentDidUpdate(prevProps) {
@@ -180,7 +151,7 @@ class GlobalMusicPlayer extends React.Component {
             <div className="h-full w-3/4 relative flex justify-center items-center">
               {/* <div class="h-72 w-72 rounded-full" style={{ background: `linear-gradient(to right, rgba(${number}, 30, 30), rgba(30, ${number}, 30))`, transition: 'all 0.1s', transform: `scale(${((255 + number)/255)})` }}></div> */}
               <div className="absolute top-0 left-0 h-full w-full">
-                <canvas height="800px" width="800px" ref={this.analyserRef}></canvas>
+                <canvas height="742px" width="768px" ref={this.analyserRef}></canvas>
               </div>
             </div>
             <div className="h-full w-1/4 bg-primary-blur">
