@@ -51,8 +51,8 @@ class GlobalMusicPlayer extends React.Component {
       let x = A + R * Math.cos(t);
       let y = B + R * Math.sin(t);
 
-      let x1 = A + (fbcArray[i]/(3 + i / 30) + R + size) * Math.cos(t);
-      let y1 = B + (fbcArray[i]/(3 + i / 30) + R + size) * Math.sin(t);
+      let x1 = A + (fbcArray[i]/(3 + i / 10) + R + size) * Math.cos(t);
+      let y1 = B + (fbcArray[i]/(3 + i / 10) + R + size) * Math.sin(t);
 
       this.ctx.beginPath();
 
