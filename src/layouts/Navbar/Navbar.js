@@ -13,7 +13,7 @@ const menus = [
 ];
 
 const Navbar = ({ className }) => (
-  <nav className={cn('ui-navbar overflow-hidden flex justify-center text-white w-full h-16', className)}>
+  <nav className={cn('ui-navbar overflow-hidden flex justify-center text-white w-full h-16 --gradient-bg', className)}>
     <div className="container flex items-center px-3">
       <div className="flex items-center flex-1">
         <div className="w-72">
