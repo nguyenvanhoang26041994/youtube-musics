@@ -1,0 +1,7 @@
+.ui-blur-background--custom {
+  z-index: -1;
+  > img {
+    filter: blur(50px) grayscale(35%) brightness(35%);
+    transform: scale(1.2, 1.2);
+  }
+}

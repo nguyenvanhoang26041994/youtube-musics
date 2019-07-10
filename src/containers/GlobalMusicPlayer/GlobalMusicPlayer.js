@@ -1,7 +1,7 @@
 import './GlobalMusicPlayer.scss';
 import cn from 'classnames';
 import fp from 'lodash/fp';
-import { Icon, Slider } from '../../components/core';
+import { Icon, Slider, BlurBackground } from '../../components/core';
 import { mode } from '../../constants/playing-music';
 import AudioAnalyzer from '../../components/AudioAnalyzer';
 import withPlayingList from '../../HOC/withPlayingList';
@@ -39,8 +39,8 @@ class GlobalMusicPlayer extends React.Component {
 
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     
-    const rootRadius = 100;
-    const R = rootRadius + fbcArray[0] / 10;
+    const rootRadius = 60;
+    const R = rootRadius + fbcArray[0] / 30;
     const A = this.canvas.width / 2;
     const B = this.canvas.height / 2;
 
@@ -51,17 +51,17 @@ class GlobalMusicPlayer extends React.Component {
       let x = A + R * Math.cos(t);
       let y = B + R * Math.sin(t);
 
-      let x1 = A + (fbcArray[i]/(3 + i / 10) + R + size) * Math.cos(t);
-      let y1 = B + (fbcArray[i]/(3 + i / 10) + R + size) * Math.sin(t);
+      let x1 = A + (fbcArray[i]/6 + R) * Math.cos(t);
+      let y1 = B + (fbcArray[i]/6 + R) * Math.sin(t);
 
       this.ctx.beginPath();
 
       this.ctx.moveTo(x, y);
       this.ctx.lineTo(x1, y1);
-      const _red = 111 + fbcArray[i] / 4;
-      const _green = 66 + i;
-      const _blue = 245 + fbcArray[i] / 15;
-      this.ctx.strokeStyle = `rgb(${_red <= 255 ? _red : 255}, ${_green <= 255 ? _green : 255 }, ${_blue <= 255 ? _blue : 255})`;
+      const red = (56 - 17) * (i / _length) + 17;
+      const green = (239 - 153) * (i / _length) + 153;
+      const blue = (125 - 142) * (i / _length) + 142;
+      this.ctx.strokeStyle = `rgb(${red}, ${green}, ${blue})`;
       this.ctx.lineWidth = size;
       this.ctx.lineCap = 'round';
       this.ctx.stroke();
@@ -141,42 +141,44 @@ class GlobalMusicPlayer extends React.Component {
           onPlaying={this.onPlaying}
           onVolumeChange={this.onVolumeChange}
         />
-        <div className="w-full z-10" style={{ height: 'calc(100vh - 8rem)' }}>
+        <div className="w-full z-10" style={{ height: 'calc(100vh - 6.5em)' }}>
           <div className="container flex mx-auto h-full relative">
-            <div className="bg-primary w-full h-full absolute top-0 left-0" />
-            <div className="h-full w-3/4 relative flex justify-center items-center">
-              <div className="absolute top-0 left-0 h-full w-full">
-                <canvas className="w-full h-full" ref={this.analyserRef}></canvas>
+            <BlurBackground />
+            <div className="w-full h-full absolute top-0 left-0" />
+            <div className="h-full w-8/12 relative flex justify-center items-center z-0">
+              <div className="absolute top-0 left-0">
+                <canvas className="w-64 h-64" ref={this.analyserRef}></canvas>
               </div>
             </div>
-            <div className="h-full w-1/4 bg-primary-blur">
+            <div className="h-full w-4/12 p-1 z-0">
               <ul>
                 {playingList.musics.map(music => (
                   <li key={music.id} className="mb-1">
-                    <div className="flex items-center h-10 px-2 cursor-pointer" onClick={() => this.props.playingMusicActions.changeMusic(music)}>
+                    <div className="flex items-center relative h-10 px-2 cursor-pointer">
                       <div className="flex flex-col leading-tight">
-                        <span className="text-sm text-gray-800">{music.name}</span>
-                        <span className="text-xs text-gray-600">{music.singer.name}</span>
+                        <span className="text-sm text-teal-400" onClick={() => this.props.playingMusicActions.changeMusic(music)}>{music.name}</span>
+                        <span className="text-xs text-white">{music.singer.name}</span>
                       </div>
+                      <Icon iName="ellipsis-h" className="text-sm text-white absolute right-0 mr-2" />
                     </div>
-                    <div className="bg-gray-500" style={{ height: '1px' }}/>
+                    {/* <div className="bg-gray-100" style={{ height: '1px' }}/> */}
                   </li>
                 ))}
               </ul>
             </div>
           </div>
         </div>
-        <div className="w-full relative bg-blue-300">
-          <div className="container flex items-center h-16 mx-auto z-10">
+        <div className="w-full relative --gradient-bg">
+          <div className="container flex items-center h-10 mx-auto z-10">
             <div className="flex items-center">
               <Icon iName="step-backward" className="text-base text-white mr-4" />
-              <div className={cn('flex items-center justify-center w-10 h-10 rounded-full transition-fast', { 'bg-white': playingMusic.isPlaying })}>
+              <div className={cn('flex items-center justify-center w-8 h-8 rounded-full transition-fast', { 'bg-white': playingMusic.isPlaying })}>
                 {playingMusic.isPlaying
-                  ? <Icon iName="pause" className="text-base text-teal-500" onClick={this.pauseMusic} />
-                  : <Icon iName="play" className="text-base text-teal-500" onClick={this.playMusic} />
+                  ? <Icon iName="pause" className="text-xs text-teal-500" onClick={this.pauseMusic} />
+                  : <Icon iName="play" className="text-xs text-teal-500" onClick={this.playMusic} />
                 }
               </div>
-              <Icon iName="step-forward" className="text-base text-white ml-4" />
+              <Icon iName="step-forward" className="text-xs text-white ml-4" />
             </div>
             <Slider
               className="ml-4 flex-1"

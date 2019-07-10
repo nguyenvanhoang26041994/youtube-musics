@@ -4,14 +4,8 @@ import PropTypes from 'prop-types';
 
 const BlurBackground = ({ className, img, ...otherProps }) => {
   return (
-    <div className={cn('ui-blur-background w-full h-full bg-cover bg-no-repeat bg-fixed absolute bottom-0', className)} {...otherProps}>
-      <style jsx>{`
-        .ui-blur-background {
-          background-image: url('${img}');
-          // filter: blur(3px) grayscale(80%) brightness(80%) opacity(95%);
-          z-index: -1;
-        }
-      `}</style>
+    <div className={cn('ui-blur-background ui-blur-background--custom w-full h-full object-cover overflow-hidden absolute', className)}>
+      <img src={img} className="w-full h-full object-cover" {...otherProps} />
     </div>
   );
 };
@@ -21,7 +15,7 @@ BlurBackground.propTypes = {
   img: PropTypes.string,
 };
 BlurBackground.defaultProps = {
-  img: '/static/img/bg-blur.jpg',
+  img: '/static/img/player-bg.jpg',
 };
 
 export default BlurBackground;
