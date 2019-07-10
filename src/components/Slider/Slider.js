@@ -10,9 +10,9 @@ const Slider = ({ className, percent, onChange, ...otherProps }) => {
 
   return (
     <div className={cn('ui-slider h-1 cursor-pointer relative', className)} {...otherProps} onClick={onClick} ref={sliderRef}>
-      <div className="ui-slider__rail absolute w-full h-full bg-gray-200 rounded-full" />
+      <div className="ui-slider__rail absolute w-full h-full bg-gray-100 rounded-full" />
       <div
-        className="ui-slider__track bg-teal-700 absolute h-full rounded-full --transition"
+        className="ui-slider__track bg-teal-500 absolute h-full rounded-full --transition"
         style={{ width: `${percent * 100}%` }}
       />
       <div

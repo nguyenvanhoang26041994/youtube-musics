@@ -16,6 +16,10 @@
   z-index: -1;
 }
 
+.hover\:glass:hover {
+  background-color: rgba(0,0,0,0.1)
+}
+
 .bg-darker {
   filter: brightness(40%);
 }
@@ -26,6 +30,10 @@
 
 .top-haft {
   top: 50%;
+}
+
+.left-haft {
+  left: 50%;
 }
 
 .translate-y-mhaft {
@@ -42,6 +50,10 @@
 
 .transition-fast {
   transition: all 0.3s;
+}
+
+.transition-normal {
+  transition: all 0.75s;
 }
 
 @keyframes spin {

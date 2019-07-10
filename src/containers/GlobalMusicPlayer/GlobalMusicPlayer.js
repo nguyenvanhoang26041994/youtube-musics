@@ -2,6 +2,7 @@ import './GlobalMusicPlayer.scss';
 import cn from 'classnames';
 import fp from 'lodash/fp';
 import { Icon, Slider, BlurBackground } from '../../components/core';
+import ListMusic from './ListMusic';
 import { mode } from '../../constants/playing-music';
 import AudioAnalyzer from '../../components/AudioAnalyzer';
 import withPlayingList from '../../HOC/withPlayingList';
@@ -141,8 +142,9 @@ class GlobalMusicPlayer extends React.Component {
           onPlaying={this.onPlaying}
           onVolumeChange={this.onVolumeChange}
         />
-        <div className="w-full z-10" style={{ height: 'calc(100vh - 6.5em)' }}>
-          <div className="container flex mx-auto h-full relative">
+        <div className="global-music-player__biger-player relative w-full z-10" style={{ height: 'calc(100vh - 6.5em)' }}>
+          <div className="global-music-player__biger-player-container container flex mx-auto h-full relative">
+          <Icon iName="ellipsis-h" className="text-base text-white absolute top-0 left-haft mt-2 cursor-pointer z-20 animated fast hidden global-music-player__biger-player__scroll" />
             <BlurBackground />
             <div className="w-full h-full absolute top-0 left-0" />
             <div className="h-full w-9/12 relative flex justify-center items-center z-0">
@@ -151,33 +153,22 @@ class GlobalMusicPlayer extends React.Component {
               </div>
             </div>
             <div className="h-full w-3/12 p-1 z-0">
-              <ul>
-                {playingList.musics.map(music => (
-                  <li key={music.id} className="mb-1">
-                    <div className="flex items-center relative h-10 px-2 cursor-pointer">
-                      <div className="flex flex-col leading-tight">
-                        <span className="text-sm text-white" onClick={() => this.props.playingMusicActions.changeMusic(music)}>{music.name}</span>
-                        <span className="text-xs text-gray-500">{music.singer.name}</span>
-                      </div>
-                      <Icon iName="ellipsis-h" className="text-sm text-white absolute right-0 mr-2" />
-                    </div>
-                  </li>
-                ))}
-              </ul>
+              <div className="w-full h-0"></div>
+              <ListMusic playingList={playingList} changeMusic={this.props.playingMusicActions.changeMusic} />
             </div>
           </div>
         </div>
         <div className="w-full relative --gradient-bg">
           <div className="container flex items-center h-10 mx-auto z-10">
             <div className="flex items-center">
-              <Icon iName="step-backward" className="text-base text-white mr-4" />
+              <Icon iName="step-backward" className="text-xs text-white mr-4" />
               <div className={cn('flex items-center justify-center w-8 h-8 rounded-full transition-fast', { 'bg-white': playingMusic.isPlaying })}>
                 {playingMusic.isPlaying
                   ? <Icon iName="pause" className="text-xs text-teal-500" onClick={this.pauseMusic} />
                   : <Icon iName="play" className="text-xs text-teal-500" onClick={this.playMusic} />
                 }
               </div>
-              <Icon iName="step-forward" className="text-xs text-white ml-4" />
+              <Icon iName="step-forward" className="text-xs text-white ml-4 shadow-2xl" />
             </div>
             <Slider
               className="ml-4 flex-1"
