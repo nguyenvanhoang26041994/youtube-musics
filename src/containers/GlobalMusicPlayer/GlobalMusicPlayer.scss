@@ -1,7 +1,11 @@
 .ui-global-music-player {
+  background: rgba($color: #232526, $alpha: 0.9); /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, rgba($color: #232526, $alpha: 0.9), rgba($color: #414345, $alpha: 0.9)); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, rgba($color: #232526, $alpha: 0.9), rgba($color: #414345, $alpha: 0.9)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
   .--gradient-bg {
-    background: #11998e; /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #11998e, #38ef7d); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #11998e, #38ef7d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #000000; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #000000, #434343); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #000000, #434343); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   }
 }

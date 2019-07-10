@@ -145,23 +145,22 @@ class GlobalMusicPlayer extends React.Component {
           <div className="container flex mx-auto h-full relative">
             <BlurBackground />
             <div className="w-full h-full absolute top-0 left-0" />
-            <div className="h-full w-8/12 relative flex justify-center items-center z-0">
+            <div className="h-full w-9/12 relative flex justify-center items-center z-0">
               <div className="absolute top-0 left-0">
                 <canvas className="w-64 h-64" ref={this.analyserRef}></canvas>
               </div>
             </div>
-            <div className="h-full w-4/12 p-1 z-0">
+            <div className="h-full w-3/12 p-1 z-0">
               <ul>
                 {playingList.musics.map(music => (
                   <li key={music.id} className="mb-1">
                     <div className="flex items-center relative h-10 px-2 cursor-pointer">
                       <div className="flex flex-col leading-tight">
-                        <span className="text-sm text-teal-400" onClick={() => this.props.playingMusicActions.changeMusic(music)}>{music.name}</span>
-                        <span className="text-xs text-white">{music.singer.name}</span>
+                        <span className="text-sm text-white" onClick={() => this.props.playingMusicActions.changeMusic(music)}>{music.name}</span>
+                        <span className="text-xs text-gray-500">{music.singer.name}</span>
                       </div>
                       <Icon iName="ellipsis-h" className="text-sm text-white absolute right-0 mr-2" />
                     </div>
-                    {/* <div className="bg-gray-100" style={{ height: '1px' }}/> */}
                   </li>
                 ))}
               </ul>
