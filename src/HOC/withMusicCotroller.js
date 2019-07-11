@@ -2,12 +2,18 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from '../actions/playing-music';
 
-const withPlayingMusic = WrappedComponent => {
-  const ReturnComponent = ({ playingMusic, playingMusicActions, ...otherProps }) => (
-    <WrappedComponent playingMusic={playingMusic} playingMusicActions={playingMusicActions} {...otherProps} />
-  );
+const withMusicCotroller = WrappedComponent => {
+  const ReturnComponent = ({ playingMusic, playingList, playingMusicActions, ...otherProps }) => {
+    const nextMusic = () => {
+      const { music } = playingMusic;
+    };
 
-  ReturnComponent.displayName = `withPlayingMusic(${WrappedComponent.displayName ||
+    return (
+      <WrappedComponent playingMusic={playingMusic} playingMusicActions={playingMusicActions} {...otherProps} />
+    );
+  }
+
+  ReturnComponent.displayName = `withMusicCotroller(${WrappedComponent.displayName ||
     WrappedComponent.name ||
     'Component'})`;
 
@@ -28,4 +34,4 @@ const withPlayingMusic = WrappedComponent => {
   )(ReturnComponent);
 };
 
-export default withPlayingMusic;
+export default withMusicCotroller;

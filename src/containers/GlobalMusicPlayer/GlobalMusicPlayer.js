@@ -19,6 +19,7 @@ class GlobalMusicPlayer extends React.Component {
     musicTime: 0,
     currentMusicTime: 0,
     musicVolume: 0,
+    isShowBiggerPlayer: true,
   };
 
   musicRef = React.createRef(null);
@@ -115,6 +116,8 @@ class GlobalMusicPlayer extends React.Component {
 
   handleChangeMusicVolume = (e, { value }) => this.setState({ musicVolume: value });
   handleChangeCurrentMusicTime = (e, { value }) => this.changeCurrentTime(value * this.state.musicTime);
+  handleHiddenBiggerPlayer = () => this.setState({ isShowBiggerPlayer : false });
+  handleShowBiggerPlayer = () => this.setState({ isShowBiggerPlayer : true });
 
   onTimeUpdate = e => this.setState({ currentMusicTime: e.target.currentTime });
   onVolumeChange = e => this.setState({ volume: e.target.volume });
@@ -126,7 +129,7 @@ class GlobalMusicPlayer extends React.Component {
 
   render() {
     const { className, playingMusic, playingMusicActions, playingList } = this.props;
-    const { currentMusicTime, musicTime, number } = this.state;
+    const { currentMusicTime, musicTime, number, isShowBiggerPlayer } = this.state;
 
     return (
       <div id="global-music-player" className={cn('ui-global-music-player fixed bottom-0 left-0 w-full', className)}>
@@ -142,24 +145,43 @@ class GlobalMusicPlayer extends React.Component {
           onPlaying={this.onPlaying}
           onVolumeChange={this.onVolumeChange}
         />
-        <div className="global-music-player__biger-player relative w-full z-10" style={{ height: 'calc(100vh - 6.5em)' }}>
+        <div className={cn('global-music-player__biger-player relative w-full z-10 overflow-hidden transition-fast', { 'animated fadeIn slow': isShowBiggerPlayer })} style={{ height: isShowBiggerPlayer ? 'calc(100vh - 6.5em)' : 0 }}>
           <div className="global-music-player__biger-player-container container flex mx-auto h-full relative">
-          <Icon iName="ellipsis-h" className="text-base text-white absolute top-0 left-haft mt-2 cursor-pointer z-20 animated fast hidden global-music-player__biger-player__scroll" />
+            <Icon
+              iName="sort-down"
+              className="text-base text-white absolute top-0 left-haft z-20 animated fast hidden global-music-player__biger-player__scroll"
+              onClick={this.handleHiddenBiggerPlayer}
+            />
             <BlurBackground />
             <div className="w-full h-full absolute top-0 left-0" />
-            <div className="h-full w-9/12 relative flex justify-center items-center z-0">
-              <div className="absolute top-0 left-0">
+            <div className="h-full w-9/12 z-0">
+              <div className="">
                 <canvas className="w-64 h-64" ref={this.analyserRef}></canvas>
+              </div>
+              <div className="">
+
               </div>
             </div>
             <div className="h-full w-3/12 p-1 z-0">
               <div className="w-full h-0"></div>
-              <ListMusic playingList={playingList} changeMusic={this.props.playingMusicActions.changeMusic} />
+              <ListMusic
+                playingList={playingList}
+                playingMusic={playingMusic}
+                changeMusic={this.props.playingMusicActions.changeMusic}
+              />
             </div>
           </div>
         </div>
         <div className="w-full relative --gradient-bg">
-          <div className="container flex items-center h-10 mx-auto z-10">
+          <div className="container relative flex items-center h-10 mx-auto z-10">
+            {!isShowBiggerPlayer && (
+              <Icon
+                iName="sort-up"
+                className="text-base text-white absolute top-0 left-haft z-20 animated fadeIn slow"
+                style={{ transform: 'translate(0, -100%)'}}
+                onClick={this.handleShowBiggerPlayer}
+              />
+            )}
             <div className="flex items-center">
               <Icon iName="step-backward" className="text-xs text-white mr-4" />
               <div className={cn('flex items-center justify-center w-8 h-8 rounded-full transition-fast', { 'bg-white': playingMusic.isPlaying })}>
@@ -187,8 +209,3 @@ export default fp.compose(
   withPlayingList,
   withPlayingMusic
 )(GlobalMusicPlayer);
-// test
-// this.ctx.beginPath();
-// this.ctx.rect((i * 8) + 70, canvasHeight - 30, 6, - (fbcArray[i]/(7)));
-// this.ctx.fillStyle = `rgb(111, ${55 + i * 2}, 245)`;
-// this.ctx.fill();

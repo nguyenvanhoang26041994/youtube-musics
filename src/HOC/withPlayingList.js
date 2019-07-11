@@ -6,6 +6,10 @@ const withPlayingList = WrappedComponent => {
     <WrappedComponent playingList={playingList} {...otherProps} />
   );
 
+  ReturnComponent.displayName = `withPlayingList(${WrappedComponent.displayName ||
+    WrappedComponent.name ||
+    'Component'})`;
+
   const mapStateToProps = state => ({
     playingList: {
       ...state.playingList,
