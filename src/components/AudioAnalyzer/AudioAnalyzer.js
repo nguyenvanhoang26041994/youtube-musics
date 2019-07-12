@@ -3,14 +3,6 @@ import PropTypes from 'prop-types';
 
 export default class AudioAnalyzer extends React.Component {
   componentDidMount() {
-    return this.initAnalyner();
-  }
-
-  shouldComponentUpdate() {
-    return false;
-  }
-
-  initAnalyner = () => {
     this.context = new AudioContext();
     this.analyser = this.context.createAnalyser();
     this.context

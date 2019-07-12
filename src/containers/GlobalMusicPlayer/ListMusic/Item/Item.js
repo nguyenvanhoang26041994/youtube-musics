@@ -39,8 +39,8 @@ class Item extends React.Component {
   };
 
   render() {
-    const { isShowCollapse } = this.state;
-    const { music, isActive } = this.props;
+    const { isShowCollapse, } = this.state;
+    const { music, isActive, isPlaying } = this.props;
 
     return (
       <div className="flex flex-col px-2 hover:glass" ref={this.itemRef} onClick={this.onChangeMusic}>
@@ -55,7 +55,7 @@ class Item extends React.Component {
             <Icon
               iName={isActive ? 'music' : 'ellipsis-h'}
               size="small"
-              className={cn('text-sm text-white', { 'animated heartBeat infinite fast': isActive })}
+              className={cn('text-sm text-white', { 'animated heartBeat infinite fast': isPlaying })}
               onClick={this.toggleShowCollapse} iconRef={this.menuRef}
             />
           </div>

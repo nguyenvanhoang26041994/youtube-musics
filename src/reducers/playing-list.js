@@ -1,6 +1,19 @@
 import { playlist } from '../constants/playing-list';
 
 const musics = {
+  '235fwe': {
+    id: '235fwe',
+    name: 'Please don\'t go',
+    singer: {
+      id: 'uid_edm-001',
+      name: 'EDM',
+    },
+    src: '/static/musics/please-dont-go.mp3',
+    img: '/static/img/bg-blur.jpg',
+    listenNumber: 1241562,
+    time: 3.6 * 60,
+    imgBlur: '/static/img/bg-blur.jpg',
+  },
   '12r': {
     id: '12r',
     name: 'Flay Away',

@@ -20,29 +20,31 @@ class GlobalMusicPlayer extends React.Component {
     currentMusicTime: 0,
     musicVolume: 0,
     isShowBiggerPlayer: true,
+    isMusicReady: false,
   };
 
   musicRef = React.createRef(null);
   analyserRef = React.createRef(null);
 
   componentDidMount() {
-    this.musicRef.current.play();
+    this.musicRef.current && this.musicRef.current.play();
     this.setState({ rendered: true });
     this.setStateWhenAudioLoaded();
 
     this.canvas = this.analyserRef.current;
     this.canvas.width = this.canvas.offsetWidth;
     this.canvas.height = this.canvas.offsetHeight;
+    this.canvas.classList = '';
     this.ctx = this.canvas.getContext('2d');
   }
 
   loopFrame = (fbcArray) => {
-    const size = 2;
+    const size = 1;
 
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     
-    const rootRadius = 60;
-    const R = rootRadius + fbcArray[0] / 30;
+    const rootRadius = 80;
+    const R = rootRadius + fbcArray[0] / 5;
     const A = this.canvas.width / 2;
     const B = this.canvas.height / 2;
 
@@ -53,8 +55,8 @@ class GlobalMusicPlayer extends React.Component {
       let x = A + R * Math.cos(t);
       let y = B + R * Math.sin(t);
 
-      let x1 = A + (fbcArray[i]/6 + R) * Math.cos(t);
-      let y1 = B + (fbcArray[i]/6 + R) * Math.sin(t);
+      let x1 = A + (fbcArray[i]/3 + R) * Math.cos(t);
+      let y1 = B + (fbcArray[i]/3 + R) * Math.sin(t);
 
       this.ctx.beginPath();
 
@@ -95,7 +97,7 @@ class GlobalMusicPlayer extends React.Component {
     }
   };
 
-  onLoadedData = () => this.setStateWhenAudioLoaded();
+  onLoadedData = this.setStateWhenAudioLoaded;
 
   playMusic = () => this.musicRef && this.musicRef.current && this.musicRef.current.play();
   pauseMusic = () => this.musicRef && this.musicRef.current && this.musicRef.current.pause();
@@ -129,7 +131,7 @@ class GlobalMusicPlayer extends React.Component {
 
   render() {
     const { className, playingMusic, playingMusicActions, playingList } = this.props;
-    const { currentMusicTime, musicTime, number, isShowBiggerPlayer } = this.state;
+    const { currentMusicTime, musicTime, isMusicReady, isShowBiggerPlayer } = this.state;
 
     return (
       <div id="global-music-player" className={cn('ui-global-music-player fixed bottom-0 left-0 w-full', className)}>
@@ -145,7 +147,7 @@ class GlobalMusicPlayer extends React.Component {
           onPlaying={this.onPlaying}
           onVolumeChange={this.onVolumeChange}
         />
-        <div className={cn('global-music-player__biger-player relative w-full z-10 overflow-hidden transition-fast', { 'animated fadeIn slow': isShowBiggerPlayer })} style={{ height: isShowBiggerPlayer ? 'calc(100vh - 6.5em)' : 0 }}>
+        <div className={cn('global-music-player__biger-player relative w-full z-10 overflow-hidden transition-fast', { 'animated fadeIn slower': isShowBiggerPlayer })} style={{ height: isShowBiggerPlayer ? 'calc(100vh - 6.5em)' : 0 }}>
           <div className="global-music-player__biger-player-container container flex mx-auto h-full relative">
             <Icon
               iName="sort-down"
@@ -153,22 +155,21 @@ class GlobalMusicPlayer extends React.Component {
               onClick={this.handleHiddenBiggerPlayer}
             />
             <BlurBackground />
-            <div className="w-full h-full absolute top-0 left-0" />
-            <div className="h-full w-9/12 z-0">
-              <div className="">
-                <canvas className="w-64 h-64" ref={this.analyserRef}></canvas>
-              </div>
-              <div className="">
-
-              </div>
-            </div>
-            <div className="h-full w-3/12 p-1 z-0">
+            <div className="h-full w-3/12 z-0">
               <div className="w-full h-0"></div>
               <ListMusic
                 playingList={playingList}
                 playingMusic={playingMusic}
                 changeMusic={this.props.playingMusicActions.changeMusic}
               />
+            </div>
+            <div className="h-full w-9/12 z-0 relative">
+              <div className="w-full h-full absolute top-0 left-0 overflow-hidden" style={{ filter: 'blur(5px)', zIndex: '-1' }}>
+                <canvas className="w-full h-full" ref={this.analyserRef}></canvas>
+              </div>
+              <div className="">
+
+              </div>
             </div>
           </div>
         </div>

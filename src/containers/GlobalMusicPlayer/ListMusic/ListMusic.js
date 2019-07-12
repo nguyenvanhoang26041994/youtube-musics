@@ -13,6 +13,7 @@ const ListMusic = ({ playingMusic, playingList, changeMusic, className }) => {
             changeMusic={changeMusic}
             music={music}
             isActive={playingMusic.id === music.id}
+            isPlaying={playingMusic.id === music.id && playingMusic.isPlaying}
           />
           <Divider />
         </li>
