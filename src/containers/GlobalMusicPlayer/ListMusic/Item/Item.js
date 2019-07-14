@@ -2,6 +2,7 @@ import './Item.scss';
 import cn from 'classnames';
 import React, { useState } from 'react';
 import { Icon, VolumeGif } from '../../../../components/core';
+import withClickOutside from '../../../../HOC/withClickOutside';
 
 class Item extends React.Component {
   state = { isShowCollapse: false };
@@ -9,23 +10,10 @@ class Item extends React.Component {
   menuRef = React.createRef(null);
   collapseRef = React.createRef(null);
 
-  componentDidMount() {
-    document.body.addEventListener('click', this.clickOutside);
-  }
-
-  componentWillUnmount() {
-    document.body.removeEventListener('click', this.clickOutside);
-  }
-
-  clickOutside = e => {
-    if (this.itemRef.current && this.itemRef.current.contains(e.target)) {
-      return;
-    }
-
-    return this.setState({ isShowCollapse: false });
-  };
+  _clickOutside = () => this.setState({ isShowCollapse: false });
 
   toggleShowCollapse = () => this.setState(prevState => ({ ...prevState, isShowCollapse: !prevState.isShowCollapse }));
+
   onChangeMusic = (e) => {
     if (this.menuRef.current && this.menuRef.current.contains(e.target)) {
       return;
@@ -71,4 +59,4 @@ class Item extends React.Component {
   }
 }
 
-export default Item;
+export default withClickOutside(Item);
