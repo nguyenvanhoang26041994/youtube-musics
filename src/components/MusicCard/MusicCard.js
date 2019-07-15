@@ -1,5 +1,4 @@
 import './MusicCard.scss';
-import PlayButton from '../Button/PlayButton';
 
 const MusicCard = ({ id, src, img, singer, name, isPlaying, onPlay }) => {
   const onClick = () => {

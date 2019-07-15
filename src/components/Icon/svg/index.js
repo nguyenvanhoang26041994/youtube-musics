@@ -15,5 +15,9 @@ const icons = {
   'pause': require('./pause').default,
   'repeat': require('./repeat').default,
   'list': require('./list').default,
+  'search': require('./search').default,
+  'globe': require('./globe').default,
+  'remove': require('./remove').default,
 };
+
 export default icons;
