@@ -24,9 +24,9 @@ const Navbar = ({ className }) => (
         <ul className="flex text-xs">
           {menus.map((menu, idx) => (
             <li key={idx} className="px-3 font-bold hover:underline">
-              {/* <Link href={menu.href}>
-                <a>{menu.icon && <Icon iName={menu.icon} className="mr-1" />}{menu.text}</a>
-              </Link> */}
+              <Link href={menu.href}>
+                <a>{menu.text}</a>
+              </Link>
             </li>
           ))}
         </ul>
