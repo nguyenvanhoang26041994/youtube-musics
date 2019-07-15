@@ -13,5 +13,7 @@ const icons = {
   'step-backward': require('./step-backward').default,
   'play': require('./play').default,
   'pause': require('./pause').default,
+  'repeat': require('./repeat').default,
+  'list': require('./list').default,
 };
 export default icons;

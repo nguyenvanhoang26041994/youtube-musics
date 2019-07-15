@@ -10,14 +10,14 @@ const IconCard = props => {
   );
 };
 
-const list = Object.keys(icons).map(icon => ({ name: icon, size: 'lg', color: 'red-700' }));
+const list = Object.keys(icons).map(icon => ({ name: icon, size: 'lg', color: 'white' }));
 
 export default class IconDemo extends React.Component {
   render() {
     return (
       <div className="container mx-auto flex flex-col">
         <div className="flex items-center flex-1">
-          {list.map((item, idx) => <IconCard key={idx} {...item} className="m-2" />)}
+          {list.map((item, idx) => <IconCard key={idx} {...item} className="hover:text-blue-500 m-2" />)}
         </div>
       </div>
     );

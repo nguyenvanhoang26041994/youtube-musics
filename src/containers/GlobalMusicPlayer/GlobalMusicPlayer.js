@@ -19,7 +19,7 @@ class GlobalMusicPlayer extends React.Component {
     musicTime: 0,
     currentMusicTime: 0,
     musicVolume: 0,
-    isShowBiggerPlayer: true,
+    isShowBiggerPlayer: false,
     isMusicReady: false,
   };
 
@@ -167,7 +167,7 @@ class GlobalMusicPlayer extends React.Component {
             </div>
             <div className="h-full w-9/12 z-0 relative">
               <div className="w-full h-full absolute top-0 left-0 overflow-hidden" style={{ filter: 'blur(5px)', zIndex: '-1' }}>
-                <canvas className="w-full h-full" ref={this.analyserRef}></canvas>
+                <canvas className="w-full" style={{ height: 'calc(100vh - 6.5em)' }} ref={this.analyserRef}></canvas>
               </div>
               <div className="">
 
