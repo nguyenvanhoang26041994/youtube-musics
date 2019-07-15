@@ -14,14 +14,22 @@ const sizes = Object.freeze({
   '5xl': 'h-20 w-20',
 });
 
+const specialColors = Object.freeze({
+  'black': 'text-black',
+  'white': 'text-white',
+});
+
 const Icon = ({ className, name, size, color, iconRef, ...otherProps }) => {
   const I = icons[name] || (() => null);
 
   return (
     <div
       className={cn(
-      `ui-svg-icon icon-${name} inline-block cursor-pointer text-${color}`,
+      `ui-svg-icon icon-${name} inline-block cursor-pointer`,
       sizes[size],
+      {
+        [specialColors[color] || `text-${color}-500`]: color,
+      },
       className
       )}
       ref={iconRef}
@@ -40,7 +48,6 @@ Icon.propTypes = {
 };
 Icon.defaultProps = {
   size: 'base',
-  color: 'white',
 };
 
 export default Icon;

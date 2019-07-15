@@ -4,8 +4,8 @@ import Link from 'next/link';
 import { Logo, Icon } from '../../components/core';
 
 const menus = [
-  { href: '/hot', text: 'Hot', icon: 'fire' },
-  { href: '/edm', text: 'EDM' },
+  { href: '/core/icon', text: 'Icon' },
+  { href: '/core/button', text: 'Button' },
   { href: '/violin', text: 'Violin' },
   { href: '/trending', text: 'Trending' },
   { href: '/cover', text: 'Cover' },
