@@ -150,8 +150,10 @@ class GlobalMusicPlayer extends React.Component {
         <div className={cn('global-music-player__biger-player relative w-full z-10 overflow-hidden transition-fast', { 'animated fadeIn slower': isShowBiggerPlayer })} style={{ height: isShowBiggerPlayer ? 'calc(100vh - 6.5em)' : 0 }}>
           <div className="global-music-player__biger-player-container container flex mx-auto h-full relative">
             <Icon
-              iName="sort-down"
-              className="text-base text-white absolute top-0 left-haft z-20 animated fast hidden global-music-player__biger-player__scroll"
+              name="chevron-arrow-down"
+              color="white"
+              size="xs"
+              className="absolute top-0 left-haft z-20 animated fast hidden global-music-player__biger-player__scroll"
               onClick={this.handleHiddenBiggerPlayer}
             />
             <BlurBackground />
@@ -177,21 +179,23 @@ class GlobalMusicPlayer extends React.Component {
           <div className="container relative flex items-center h-10 mx-auto z-10">
             {!isShowBiggerPlayer && (
               <Icon
-                iName="sort-up"
-                className="text-base text-white absolute top-0 left-haft z-20 animated fadeIn slow"
+                name="chevron-arrow-up"
+                color="white"
+                size="xs"
+                className="absolute top-0 left-haft z-20 animated fadeIn slow"
                 style={{ transform: 'translate(0, -100%)'}}
                 onClick={this.handleShowBiggerPlayer}
               />
             )}
             <div className="flex items-center">
-              <Icon iName="step-backward" className="text-xs text-white mr-4" />
-              <div className={cn('flex items-center justify-center w-8 h-8 rounded-full transition-fast', { 'bg-white': playingMusic.isPlaying })}>
+              <Icon name="step-backward" size="xs" color="white" className="mr-4" />
+              <div className="flex items-center justify-center rounded-full bg-white h-8 w-8">
                 {playingMusic.isPlaying
-                  ? <Icon iName="pause" className="text-xs text-teal-500" onClick={this.pauseMusic} />
-                  : <Icon iName="play" className="text-xs text-teal-500" onClick={this.playMusic} />
+                  ? <Icon name="pause" size="xs" color="blue-500" onClick={this.pauseMusic} />
+                  : <Icon name="play" size="xs" color="blue-500" onClick={this.playMusic} />
                 }
               </div>
-              <Icon iName="step-forward" className="text-xs text-white ml-4 shadow-2xl" />
+              <Icon name="step-forward" size="xs" color="white" className="ml-4" />
             </div>
             <Slider
               className="ml-4 flex-1"

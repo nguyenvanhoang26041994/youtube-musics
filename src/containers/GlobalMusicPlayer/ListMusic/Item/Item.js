@@ -41,18 +41,20 @@ class Item extends React.Component {
           </div>
           <div className="absolute right-0 mr-2">
             <Icon
-              iName={isActive ? 'music' : 'ellipsis-h'}
-              size="small"
-              className={cn('text-sm text-white', { 'animated heartBeat infinite fast': isPlaying })}
-              onClick={this.toggleShowCollapse} iconRef={this.menuRef}
+              name={isActive ? 'music-note' : 'ellipsis-h'}
+              size="xs"
+              color="white"
+              className={cn({ 'animated heartBeat infinite fast': isPlaying })}
+              onClick={this.toggleShowCollapse}
+              iconRef={this.menuRef}
             />
           </div>
         </div>
         <div className={cn('flex items-center justify-center transition-fast overflow-hidden', { 'h-10': isShowCollapse, 'h-0': !isShowCollapse })} ref={this.collapseRef}>
-          <Icon iName="download" className="text-sm text-white mx-2" />
-          <Icon iName="heart" className="text-sm text-white mx-2" />
-          <Icon iName="share" className="text-sm text-white mx-2" />
-          <Icon iName="plus" className="text-sm text-white mx-2" />
+          <Icon name="download" size="sm" color="white" className="mx-2" />
+          <Icon name="heart" size="sm" color="white" className="mx-2" />
+          <Icon name="share" size="sm" color="white" className="mx-2" />
+          <Icon name="playlist-add" size="sm" color="white" className="mx-2" />
         </div>
       </div>
     );

@@ -14,13 +14,13 @@ const MusicDetailPage = ({ playingMusic, playingList, playingMusicActions }) => 
           <div className="bg-primary w-full h-full absolute" />
           <div className="container w-full h-full mx-auto">
             <div className="flex items-center h-full px-3 animated slideInDown faster">
-              <Icon iName="headphones-alt" className="text-5xl text-white" />
+              {/* <Icon iName="headphones-alt" className="text-5xl text-white" /> */}
               <div className="flex flex-col justify-center ml-6">
                 <span className="text-lg text-teal-500 hover:underline cursor-pointer">Nhạc Việt Nam nhẹ nhàng</span>
                 <span className="flex item-center text-xs text-white cursor-pointer">
                   <span>Nguyễn Văn Hoàng</span>
                   <span className="flex items-center ml-4">
-                    <Icon iName="heart" className="animated infinite fast heartBeat text-xs text-white" />
+                    {/* <Icon iName="heart" className="animated infinite fast heartBeat text-xs text-white" /> */}
                     <span className="ml-1">1.123.123</span>
                   </span>
                 </span>
