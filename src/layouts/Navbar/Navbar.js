@@ -6,7 +6,7 @@ import { Logo, Icon } from '../../components/core';
 const menus = [
   { href: '/core/icon', text: 'Icon' },
   { href: '/core/button', text: 'Button' },
-  { href: '/violin', text: 'Violin' },
+  { href: '/core/switch', text: 'Switch' },
   { href: '/trending', text: 'Trending' },
   { href: '/cover', text: 'Cover' },
   { href: '/vietnam', text: 'Vietnam' },

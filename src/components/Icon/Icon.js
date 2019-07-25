@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import icons from './svg';
 
-const IconWrapper = styled.div`
+const IconWrapper = styled.span`
   height: 1em;
   width: 1em;
 `;

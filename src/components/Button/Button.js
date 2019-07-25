@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const ButtonWrapper = styled.button`
-  height: 1.75em;
+  height: 2em;
 
   &.outline-none {
     outline: 0;

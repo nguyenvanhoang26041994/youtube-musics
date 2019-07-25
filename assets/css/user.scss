@@ -36,6 +36,14 @@
   left: 50%;
 }
 
+.left-full {
+  left: 100%;
+}
+
+.translate-x-full {
+  transform: translateX(100%);
+}
+
 .translate-y-mhaft {
   transform: translateY(-50%);
 }
@@ -49,11 +57,11 @@
 }
 
 .transition-fast {
-  transition: all 0.3s;
+  transition: 0.3s;
 }
 
 .transition-normal {
-  transition: all 0.75s;
+  transition: 0.75s;
 }
 
 @keyframes spin {
