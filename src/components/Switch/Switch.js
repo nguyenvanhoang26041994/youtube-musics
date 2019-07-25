@@ -4,62 +4,51 @@ import PropTypes from 'prop-types';
 import fp from 'lodash/fp'
 import styled from 'styled-components';
 
-const SwitchWrapper = styled.button`
-  height: 1.5em;
-  width: 3em;
+import tailwindColors from '../../utils/tailwindColors';
 
-  &.outline-none {
+const SwitchWrapper = styled.div`
+  .outline-none {
     outline: 0;
+  }
+
+  &.ui-switch {
+    height: 1.5em;
+    width: 3em;
   }
 
   .ui-switch__inner {
     width: 1.5em;
   }
+
+  .ui-switch__checkbox {
+    &:checked {
+      + .ui-switch__wrapper {
+        background-color: ${props => tailwindColors[props.color]};
+
+        .ui-switch__inner {
+          border-color: ${props => tailwindColors[props.color]};
+          transform: translateX(100%);
+        }
+      }
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
 `;
 
-const Switch = ({ className, color, size, onChange, ...otherProps }) => {
-  const isControlled = 'checked' in otherProps;
-
-  const [checkedState, setCheckedState] = React.useState(isControlled ? otherProps.checked : otherProps.defaultChecked);
-  const switchRef = React.useRef(null);
-
-  React.useEffect(() => {
-    setCheckedState(switchRef.current.checked);
-  });
-
-  const handleChange = e => {
-    setCheckedState(e.target.checked);
-    onChange(e);
-  };
-
+const Switch = ({ className, color, size, ...otherProps }) => {
   return (
-    <SwitchWrapper
-      className={cn(
-        'ui-switch relative outline-none rounded-full cursor-pointer hover:shadow-lg transition-fast',
-        {
-          'bg-gray-300': !checkedState,
-          [`bg-${color}`] : checkedState ,
-          [`text-${size}`] : size,
-        },
-        className,
-      )}
-    >
+    <SwitchWrapper className={cn('ui-switch relative flex', { [`text-${size}`] : size }, className)} color={color}>
       <input
         type="checkbox"
-        className="w-full h-full absolute top-0 left-0 opacity-0 z-10"
-        ref={switchRef}
-        onChange={handleChange}
+        className="ui-switch__checkbox w-full h-full absolute top-0 left-0 opacity-0 z-10 cursor-pointer"
         {...otherProps}
       />
-      <div
-        className={cn(
-          'ui-switch__inner absolute rounded-full top-0 left-0 bg-white inline-block transition-fast border-2 h-full',
-          {
-            [`translate-x-full border-${color}`] : checkedState,
-            'border-gray-300': !checkedState,
-          }
-        )}
-      />
+      <button className="ui-switch__wrapper w-full h-full relative outline-none rounded-full bg-gray-300 transition-fast">
+        <div className="ui-switch__inner absolute rounded-full top-0 left-0 bg-white inline-block transition-fast border-2 border-gray-300 h-full" />
+      </button>
     </SwitchWrapper>
   );
 }
@@ -73,7 +62,7 @@ Switch.propTypes = {
 };
 Switch.defaultProps = {
   size: 'base',
-  color: 'gray-800',
+  color: 'green-400',
   onChange: f => f,
 };
 
