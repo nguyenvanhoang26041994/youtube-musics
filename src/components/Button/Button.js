@@ -1,57 +1,32 @@
-import './Button.scss';
+import React from 'react';
 import cn from 'classnames';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
-const rounds = Object.freeze({
-  rounded: 'rounded',
-  none: 'rounded-none',
-  sm: 'rounded-sm',
-  lg: 'rounded-lg',
-  full: 'rounded-full',
-});
+const ButtonWrapper = styled.button`
+  height: 1.75em;
 
-const specialColors = Object.freeze({
-  'black': true,
-  'white': true,
-});
+  &.outline-none {
+    outline: 0;
+  }
+`;
 
-const Button = ({ className, children, color, size, round, type, ...otherProps }) => {
-  return (
-    <button
-      className={cn(
-        `ui-button flex items-center justify-center border px-4 outline-none`,
-        `text-${size}`,
-        rounds[round],
-        {
-          [specialColors[color]
-            ? `border-${color} text-${color}`
-            : `border-${color}-500 hover:border-${color}-400 text-${color}-500 hover:text-${color}-400`]: type === 'ghost',
-          [specialColors[color]
-            ? `border-${color} bg-${color}`
-            : `border-${color}-500 hover:border-${color}-400 bg-${color}-500 hover:bg-${color}-400`]: type === 'default',
-        },
-        className
-      )}
-      {...otherProps}
-    >
-      {children}
-    </button>
-  );
-};
+const Button = ({ className, size, color, ...otherProps }) => (
+  <ButtonWrapper
+    className={cn(`ui-button outline-none flex px-2 hover:shadow-lg justify-center items-center text-${size} bg-${color}`, className)}
+    {...otherProps}
+  />
+);
 
+Button.displayName = 'Button';
 Button.propTypes = {
   className: PropTypes.string,
-  children: PropTypes.node,
-  color: PropTypes.string,
   size: PropTypes.string,
-  round: PropTypes.string,
-  type: PropTypes.string,
+  color: PropTypes.string,
 };
 Button.defaultProps = {
-  color: 'black',
   size: 'base',
-  round: 'rounded',
-  type: 'default',
+  color: 'blue-500',
 };
 
 export default Button;

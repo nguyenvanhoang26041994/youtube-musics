@@ -3,55 +3,31 @@ import { Button, Icon } from '../../components/core';
 
 const ButtonDemo = () => {
   return (
-    <div>
+    <div className="h-screen bg-white p-10 text-white">
       <div className="container flex items-center mx-auto mb-1">
-        <Button color="teal" type="ghost" className="mr-1">Click</Button>
-        <Button color="purple" className=" mr-1">
-          <Icon name="heart" color="red" className="mr-2" size="sm" />
+        <Button color="teal-500" className="mr-1">Click</Button>
+        <Button color="teal-500" className="mr-1"><Icon name="heart" color="red-500" /></Button>
+        <Button color="purple-500" className=" mr-1">
+          <Icon name="heart" color="red-500" className="mr-2" />
           Click
         </Button>
-        <Button color="red" round="full" className="mr-1">
-          <Icon name="heart" className="mr-2" size="sm" />
+        <Button color="red-500" className="mr-1">
+          <Icon name="heart" className="mr-2" />
           Click
         </Button>
-        <Button color="blue" round="full" className="mr-1">
+        <Button color="blue-500" className="mr-1">
           Click
-          <Icon name="repeat" className="ml-2" size="sm" />
+          <Icon name="repeat" className="ml-2" />
         </Button>
-        <Button color="blue" round="none" className="mr-1" type="ghost">
-          <Icon name="heart" size="sm" className="mr-2" />
+        <Button color="blue-600" className="mr-1">
+          <Icon name="heart" className="mr-2" />
           Click
-          <Icon name="repeat" size="sm" className="ml-2" />
+          <Icon name="repeat" className="ml-2" />
         </Button>
-        <Button color="blue" round="none" className="mr-1" className="text-white">
-          <Icon name="heart" size="sm" className="mr-2" />
+        <Button color="blue-300" className="mr-1">
+          <Icon name="heart" className="mr-2" />
           Click
-          <Icon name="repeat" size="sm" className="ml-2" />
-        </Button>
-      </div>
-      <div className="container flex items-center mx-auto">
-        <Button color="teal" className="mr-1" type="ghost" size="xs">Click</Button>
-        <Button color="purple" className="mr-1" size="xs">
-          <Icon name="heart" color="red" className="mr-2" size="xs" />
-          Click
-        </Button>
-        <Button color="red" round="full" className="mr-1" size="xs">
-          <Icon name="heart" className="mr-2" size="xs" />
-          Click
-        </Button>
-        <Button color="blue" round="full" className="mr-1" size="xs">
-          Click
-          <Icon name="repeat" className="ml-2" size="xs" />
-        </Button>
-        <Button color="blue" round="none" className="mr-1" type="ghost" size="xs">
-          <Icon name="heart" size="xs" className="mr-2" />
-          Click
-          <Icon name="repeat" size="xs" className="ml-2" />
-        </Button>
-        <Button color="blue" round="none" className="mr-1" className="text-white" size="xs">
-          <Icon name="heart" size="xs" className="mr-2" />
-          Click
-          <Icon name="repeat" size="xs" className="ml-2" />
+          <Icon name="repeat" className="ml-2" />
         </Button>
       </div>
     </div>
