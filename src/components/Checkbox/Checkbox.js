@@ -27,7 +27,7 @@ const CheckboxWrapper = styled.div`
         border-color: ${props => tailwindColors[props.color]};
 
         .ui-checkbox__checked-mark {
-          display: inline-block;
+          display: flex;
         }
       }
     }
@@ -47,7 +47,7 @@ const Checkbox = ({ className, color, size, ...otherProps }) => {
         {...otherProps}
       />
       <button className="ui-checkbox__wrapper w-full h-full relative outline-none rounded-sm bg-transparent border-2 transition-fast">
-        <Icon name="checked" color={color} className="ui-checkbox__checked-mark hidden" />
+        <Icon name="checked" color={color} className="ui-checkbox__checked-mark hidden absolute absolute-center" />
       </button>
     </CheckboxWrapper>
   );

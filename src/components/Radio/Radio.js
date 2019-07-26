@@ -3,6 +3,7 @@ import cn from 'classnames';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import Icon from '../Icon';
 import tailwindColors from '../../utils/tailwindColors';
 
 const RadioWrapper = styled.div`
@@ -19,10 +20,19 @@ const RadioWrapper = styled.div`
     width: 1.5em;
   }
 
+  .ui-radio__checked-mark {
+    height: 0.7em;
+    width: 0.7em;
+  }
+
   .ui-radio__radio {
     &:checked {
       + .ui-radio__wrapper {
         border-color: ${props => tailwindColors[props.color]};
+
+        .ui-radio__checked-mark {
+          display: flex;
+        }
       }
     }
 
@@ -41,7 +51,7 @@ const Radio = ({ className, color, size, ...otherProps }) => {
         {...otherProps}
       />
       <button className="ui-radio__wrapper w-full h-full relative outline-none rounded-full bg-transparent border-2 transition-fast">
-        
+        <Icon name="dot" color={color} className="ui-radio__checked-mark hidden absolute absolute-center" />
       </button>
     </RadioWrapper>
   );

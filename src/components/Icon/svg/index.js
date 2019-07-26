@@ -19,6 +19,7 @@ const icons = {
   'globe': require('./globe').default,
   'remove': require('./remove').default,
   'checked': require('./checked').default,
+  'dot': require('./dot').default,
 };
 
 export default icons;
