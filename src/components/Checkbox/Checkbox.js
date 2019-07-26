@@ -12,13 +12,19 @@ const CheckboxWrapper = styled.div`
     outline: 0;
   }
 
-  &.ui-checkbox {
-    height: 1.5em;
+  .ui-checkbox__inner {
     width: 1.5em;
   }
 
-  .ui-checkbox__inner {
+  &.ui-checkbox {
+    height: 1.5em;
     width: 1.5em;
+
+    &:hover {
+      .ui-checkbox__wrapper {
+        border-color: ${props => tailwindColors[props.color]};
+      }
+    }
   }
 
   .ui-checkbox__checkbox {
@@ -40,7 +46,7 @@ const CheckboxWrapper = styled.div`
 
 const Checkbox = ({ className, color, size, ...otherProps }) => {
   return (
-    <CheckboxWrapper className={cn('ui-checkbox relative flex rounded-sm hover:shadow-lg', { [`text-${size}`] : size }, className)} color={color}>
+    <CheckboxWrapper className={cn('ui-checkbox relative flex rounded-sm hover:shadow-lg hover:border-${}', { [`text-${size}`] : size }, className)} color={color}>
       <input
         type="checkbox"
         className="ui-checkbox__checkbox w-full h-full absolute top-0 left-0 opacity-0 z-10 cursor-pointer"

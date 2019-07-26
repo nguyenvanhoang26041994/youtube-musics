@@ -4,7 +4,7 @@ import { Switch, Checkbox, Radio } from '../../components/core';
 const SwitchDemo = () => {
   const [checked, setChecked] = React.useState(true);
   return (
-    <div className="h-screen bg-white p-10 text-white">
+    <div className="p-10 text-white">
       <div className="container flex flex-col mx-auto mb-1">
         <Switch className="m-2" size="xs" checked={checked} onChange={() => setChecked(false)} />
         <Switch className="m-2" size="sm" color="green-400" checked={checked} onChange={() => setChecked(prevValue => !prevValue)} />

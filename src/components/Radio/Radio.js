@@ -11,11 +11,6 @@ const RadioWrapper = styled.div`
     outline: 0;
   }
 
-  &.ui-radio {
-    height: 1.5em;
-    width: 1.5em;
-  }
-
   .ui-radio__inner {
     width: 1.5em;
   }
@@ -23,6 +18,17 @@ const RadioWrapper = styled.div`
   .ui-radio__checked-mark {
     height: 0.7em;
     width: 0.7em;
+  }
+
+  &.ui-radio {
+    height: 1.5em;
+    width: 1.5em;
+
+    &:hover {
+      .ui-radio__wrapper {
+        border-color: ${props => tailwindColors[props.color]};
+      }
+    }
   }
 
   .ui-radio__radio {

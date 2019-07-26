@@ -6,8 +6,8 @@ import styled from 'styled-components';
 import icons from './svg';
 
 const IconWrapper = styled.span`
-  height: 0.9em;
-  width: 0.9em;
+  height: 1em;
+  width: 1em;
 `;
 
 const Icon = ({ className, name, size, color, iconRef, ...otherProps }) => {
