@@ -17,6 +17,7 @@ const SwitchWrapper = styled.div`
 
   .ui-switch__inner {
     width: 1.5em;
+    border-width: 0.15em;
   }
 
   .ui-switch__checkbox {
@@ -46,7 +47,7 @@ const Switch = ({ className, color, size, ...otherProps }) => {
         {...otherProps}
       />
       <button className="ui-switch__wrapper w-full h-full relative outline-none rounded-full bg-gray-300 transition-fast">
-        <div className="ui-switch__inner absolute rounded-full top-0 left-0 bg-white inline-block transition-fast border-2 border-gray-300 h-full" />
+        <div className="ui-switch__inner absolute rounded-full top-0 left-0 bg-white inline-block transition-fast border-gray-300 h-full" />
       </button>
     </SwitchWrapper>
   );
