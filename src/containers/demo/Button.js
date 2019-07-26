@@ -3,7 +3,7 @@ import { Button, Icon } from '../../components/core';
 
 const ButtonDemo = () => {
   return (
-    <div className="h-screen bg-white p-10 text-white">
+    <div className="p-10 text-white">
       <div className="container flex items-center mx-auto mb-1">
         <Button color="teal-500" className="mr-1">Click</Button>
         <Button color="teal-500" className="mr-1"><Icon name="heart" color="red-500" /></Button>
