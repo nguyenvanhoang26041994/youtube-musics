@@ -18,6 +18,7 @@ const icons = {
   'search': require('./search').default,
   'globe': require('./globe').default,
   'remove': require('./remove').default,
+  'checked': require('./checked').default,
 };
 
 export default icons;

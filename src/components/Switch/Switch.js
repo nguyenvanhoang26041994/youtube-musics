@@ -1,7 +1,6 @@
 import React from 'react';
 import cn from 'classnames';
 import PropTypes from 'prop-types';
-import fp from 'lodash/fp'
 import styled from 'styled-components';
 
 import tailwindColors from '../../utils/tailwindColors';
@@ -40,7 +39,7 @@ const SwitchWrapper = styled.div`
 
 const Switch = ({ className, color, size, ...otherProps }) => {
   return (
-    <SwitchWrapper className={cn('ui-switch relative flex', { [`text-${size}`] : size }, className)} color={color}>
+    <SwitchWrapper className={cn('ui-switch relative flex rounded-full hover:shadow-lg', { [`text-${size}`] : size }, className)} color={color}>
       <input
         type="checkbox"
         className="ui-switch__checkbox w-full h-full absolute top-0 left-0 opacity-0 z-10 cursor-pointer"
