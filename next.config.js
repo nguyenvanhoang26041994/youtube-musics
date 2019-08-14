@@ -12,7 +12,7 @@ module.exports = fp.compose(
     runtimeCaching: [
       {
         urlPattern: /[.](png|jpg|ico|css)/,
-        handler: 'cacheFirst',
+        handler: 'CacheFirst',
         options: {
           cacheName: 'assets-cache',
           cacheableResponse: {
@@ -22,14 +22,14 @@ module.exports = fp.compose(
       },
       {
         urlPattern: /^https:\/\/code\.getmdl\.io.*/,
-        handler: 'cacheFirst',
+        handler: 'CacheFirst',
         options: {
           cacheName: 'lib-cache'
         }
       },
       {
         urlPattern: /^http.*/,
-        handler: 'networkFirst',
+        handler: 'NetworkFirst',
         options: {
           cacheName: 'http-cache'
         }
