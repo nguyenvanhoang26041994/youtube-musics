@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga'
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
+import reduxMiddleware from './middlewares/redux-middleware';
 import sagaMode from './constants/saga-mode';
 import rootReducer, { createReducer } from './reducers';
 import rootSaga from './sagas';
@@ -11,7 +12,7 @@ const SAGA_MODE = Object.freeze({
 });
 
 const sagaMiddleware = createSagaMiddleware();
-const middleWare = [sagaMiddleware];
+const middleWare = [reduxMiddleware, sagaMiddleware];
 const createStoreWithMiddleware = composeWithDevTools(applyMiddleware(...middleWare))(createStore);
 
 const store = createStoreWithMiddleware(rootReducer);

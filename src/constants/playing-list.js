@@ -3,7 +3,7 @@ export const playlist = Object.freeze({
 });
 
 export const mode = Object.freeze({
-  ONCE: '/src/constants/playing-list.mode.ONCE',
+  REPEAT: '/src/constants/playing-list.mode.REPEAT',
   LOOP: '/src/constants/playing-list.mode.LOOP',
-  RANDOM: '/src/constants/playing-list.mode.RANDOM',
+  SHUFFLE: '/src/constants/playing-list.mode.SHUFFLE',
 });

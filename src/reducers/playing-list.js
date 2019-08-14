@@ -1,7 +1,7 @@
-import { playlist } from '../constants/playing-list';
+import { playlist, mode } from '../constants/playing-list';
 
-const musics = {
-  'iQp1_GfDhwQ': {
+const musics = [
+  {
     id: 'iQp1_GfDhwQ',
     name: `I'll Be There`,
     singers: [
@@ -12,7 +12,7 @@ const musics = {
     listenNumber: 10000,
     time: 3 * 60 + 19,
   },
-  '87gWaABqGYs': {
+  {
     id: '87gWaABqGYs',
     name: `Galway Girl`,
     singers: [
@@ -23,7 +23,7 @@ const musics = {
     listenNumber: 1000,
     time: 3 * 60 + 19,
   },
-  'iKzRIweSBLA': {
+  {
     id: 'iKzRIweSBLA',
     name: `Perfect`,
     singers: [
@@ -34,7 +34,7 @@ const musics = {
     listenNumber: 7990,
     time: 4 * 60 + 23,
   },
-  'S2oxFIsENgM': {
+  {
     id: 'S2oxFIsENgM',
     name: `Please Don't Go`,
     singers: [
@@ -45,7 +45,7 @@ const musics = {
     listenNumber: 7990,
     time: 3 * 60 + 32,
   },
-  'id_edm': {
+  {
     id: 'id_edm',
     name: 'EDM Bất hủ cho dân cày liên minh',
     singers: [
@@ -58,7 +58,7 @@ const musics = {
     time: 60 * 60 + 17,
     imgBlur: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/player-bg.jpg?alt=media&token=5176e0ee-7405-4478-90a7-ac260b48aee8',
   },
-  'cHHLHGNpCSA': {
+  {
     id: 'cHHLHGNpCSA',
     name: `Waiting For Love`,
     singers: [
@@ -69,7 +69,7 @@ const musics = {
     listenNumber: 10000,
     time: 3 * 60 + 50,
   },
-  'j4zP5saRZqg': {
+  {
     id: 'j4zP5saRZqg',
     name: `Sóng Gió`,
     singers: [
@@ -80,7 +80,7 @@ const musics = {
     listenNumber: 10500,
     time: 4 * 60 + 35,
   },
-  'yaJx0Gj_LCY': {
+  {
     id: 'yaJx0Gj_LCY',
     name: `Wish You Were Gay`,
     singers: [
@@ -91,7 +91,7 @@ const musics = {
     listenNumber: 10500,
     time: 3 * 60 + 41,
   },
-};
+];
 
 const defaultState = {
   id: 'pid_001',
@@ -103,6 +103,7 @@ const defaultState = {
     name: 'Nguyễn Văn Hoàng',
     id: 'uid_001',
   },
+  mode: mode.LOOP,
 };
 
 export default (state = defaultState, action) => {

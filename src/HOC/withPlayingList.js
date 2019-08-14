@@ -20,7 +20,6 @@ const withPlayingList = WrappedComponent => {
             singersName: music.singers.map(singer => singer.name).join(', '),
           };
         }),
-        fp.toArray
       )(state.playingList.musics),
     },
   });

@@ -1,4 +1,4 @@
-import { music, mode } from '../constants/playing-music';
+import { music } from '../constants/playing-music';
 
 const defaultState = {
   id: '',
@@ -7,7 +7,6 @@ const defaultState = {
   singer: {},
   singers: [],
   img: '',
-  mode: mode.LOOP,
   isPlaying: false,
 };
 

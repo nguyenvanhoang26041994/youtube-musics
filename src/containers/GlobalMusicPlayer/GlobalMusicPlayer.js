@@ -1,12 +1,26 @@
-import './GlobalMusicPlayer.scss';
 import cn from 'classnames';
 import fp from 'lodash/fp';
+import styled from 'styled-components';
 import { Icon, Slider, BlurBackground, Image } from '../../components/core';
 import Playlist from '../../components/Playlist';
-import { mode } from '../../constants/playing-music';
+import { mode } from '../../constants/playing-list';
 import withPlayingList from '../../HOC/withPlayingList';
 import withPlayingMusic from '../../HOC/withPlayingMusic';
+import withPlayerActions from '../../HOC/withPlayerActions';
 import { calcTime } from '../../utils/time';
+
+const GlobalMusicPlayerWrapper = styled.div`
+  &.ui-global-music-player {
+    .global-music-player__biger-player-container {
+      &:hover {
+        .global-music-player__biger-player__scroll {
+          display: block;
+          animation-name: fadeIn;
+        }
+      }
+    }
+  }
+`;
 
 const Audio = ({ className, src, musicRef, ...otherProps }) => (
   <audio className={cn('hidden', className)} ref={musicRef} {...otherProps}>
@@ -21,13 +35,13 @@ class GlobalMusicPlayer extends React.Component {
     musicVolume: 0,
     isShowBiggerPlayer: true,
     isMusicReady: false,
-    isShowStickyPlaylist: false,
   };
 
   musicRef = React.createRef(null);
 
   componentDidMount() {
     this.setStateWhenAudioLoaded();
+    window.goNextSong = this.props.playerActions.goNextSong;
   }
 
   componentDidUpdate(prevProps) {
@@ -70,8 +84,6 @@ class GlobalMusicPlayer extends React.Component {
   handleChangeCurrentMusicTime = (e, { value }) => this.changeCurrentTime(value * this.state.musicTime);
   handleHiddenBiggerPlayer = () => this.setState({ isShowBiggerPlayer : false });
   handleShowBiggerPlayer = () => this.setState({ isShowBiggerPlayer : true });
-  handleHideStickyPlaylist = () => this.setState({ isShowStickyPlaylist : false });
-  handleShowStickyPlaylist = () => this.setState({ isShowStickyPlaylist : true });
 
   onTimeUpdate = e => this.setState({ currentMusicTime: e.target.currentTime });
   onVolumeChange = e => this.setState({ volume: e.target.volume });
@@ -80,17 +92,20 @@ class GlobalMusicPlayer extends React.Component {
   onPause = e => this.props.playingMusicActions.changeIsPlaying(!e.target.paused);
   onWaiting = e => this.props.playingMusicActions.changeIsPlaying(!e.target.paused);
   onPlaying = e => this.props.playingMusicActions.changeIsPlaying(!e.target.paused);
+  onEnded = () => this.props.playerActions.goNextSong();
+  onPlayNext = () => this.props.playerActions.goNextSong();
+  onPlayPrev = () => this.props.playerActions.goPrevSong();
 
   render() {
     const { className, playingMusic, playingMusicActions, playingList } = this.props;
     const { currentMusicTime, musicTime, isMusicReady, isShowBiggerPlayer, isShowStickyPlaylist } = this.state;
 
     return (
-      <div id="global-music-player" className={cn('ui-global-music-player fixed bottom-0 left-0 w-full', className)}>
+      <GlobalMusicPlayerWrapper id="global-music-player" className={cn('ui-global-music-player fixed bottom-0 left-0 w-full', className)}>
         <Audio
           src={playingMusic.src}
           musicRef={this.musicRef}
-          loop={playingMusic.mode === mode.LOOP}
+          loop={playingList.mode === mode.REPEAT}
           onTimeUpdate={this.onTimeUpdate}
           onLoadedData={this.onLoadedData}
           onPlay={this.onPlay}
@@ -98,6 +113,7 @@ class GlobalMusicPlayer extends React.Component {
           onWaiting={this.onWaiting}
           onPlaying={this.onPlaying}
           onVolumeChange={this.onVolumeChange}
+          onEnded={this.onEnded}
         />
         <div className="global-music-player__biger-player relative w-full z-10 overflow-hidden transition-fast" style={{ height: isShowBiggerPlayer ? 'calc(100vh - 8rem)' : 0 }}>
           <div className="global-music-player__biger-player-container container flex mx-auto h-full relative">
@@ -117,7 +133,6 @@ class GlobalMusicPlayer extends React.Component {
           </div>
         </div>
         <div className="w-full relative">
-          {/* <BlurBackground /> */}
           <div className="container relative flex items-center h-16 mx-auto z-10 px-1">
             {!isShowBiggerPlayer && (
               <Icon
@@ -136,14 +151,14 @@ class GlobalMusicPlayer extends React.Component {
               </div>
             </div>
             <div className="flex items-center">
-              <Icon name="step-backward" size="xs" color="white" className="mr-4" />
+              <Icon name="step-backward" size="xs" color="white" className="mr-4" onClick={this.onPlayPrev} />
               <div className="flex items-center justify-center rounded-full bg-white h-8 w-8">
                 {playingMusic.isPlaying
                   ? <Icon name="pause" size="xs" color="teal-500" onClick={this.pauseMusic} />
                   : <Icon name="play" size="xs" color="teal-500" onClick={this.playMusic} />
                 }
               </div>
-              <Icon name="step-forward" size="xs" color="white" className="ml-4" />
+              <Icon name="step-forward" size="xs" color="white" className="ml-4" onClick={this.onPlayNext} />
             </div>
             <div className="flex-1 ml-4 relative">
               <Slider
@@ -159,12 +174,13 @@ class GlobalMusicPlayer extends React.Component {
             </div>
           </div>
         </div>
-      </div>
+      </GlobalMusicPlayerWrapper>
     );
   }
 }
 
 export default fp.compose(
+  withPlayerActions,
   withPlayingList,
   withPlayingMusic
 )(GlobalMusicPlayer);
