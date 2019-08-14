@@ -5,7 +5,7 @@ import cn from 'classnames';
 const Image = ({ className, ...otherProps }) => {
   return (
     <div className={cn('ui-image', className)}>
-      <img {...otherProps} className="w-full h-full" />
+      <img {...otherProps} className="w-full h-full object-cover" />
     </div>
   );
 };
