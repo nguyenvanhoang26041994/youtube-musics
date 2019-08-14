@@ -1,5 +1,11 @@
 import { playlist, mode } from '../constants/playing-list';
 
+const nextMode = Object.freeze({
+  [mode.LOOP]: mode.SHUFFLE,
+  [mode.SHUFFLE]: mode.REPEAT,
+  [mode.REPEAT]: mode.LOOP,
+});
+
 const musics = [
   {
     id: 'iQp1_GfDhwQ',
@@ -112,6 +118,16 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         ...action.payload,
+      };
+    case playlist.CHANGE_MODE:
+      return {
+        ...state,
+        mode: payload,
+      };
+    case playlist.CHANGE_TO_NEXT_MODE:
+      return {
+        ...state,
+        mode: nextMode[state.mode] || state.mode,
       };
     default:
       return state;

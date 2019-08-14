@@ -9,6 +9,12 @@ import withPlayingMusic from '../../HOC/withPlayingMusic';
 import withPlayerActions from '../../HOC/withPlayerActions';
 import { calcTime } from '../../utils/time';
 
+const listMode = Object.freeze({
+  [mode.LOOP]: 'loop',
+  [mode.REPEAT]: 'repeat',
+  [mode.SHUFFLE]: 'shuffle',
+});
+
 const GlobalMusicPlayerWrapper = styled.div`
   &.ui-global-music-player {
     .global-music-player__biger-player-container {
@@ -41,13 +47,17 @@ class GlobalMusicPlayer extends React.Component {
 
   componentDidMount() {
     this.setStateWhenAudioLoaded();
-    window.goNextSong = this.props.playerActions.goNextSong;
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     if (this.props.playingMusic.id && this.props.playingMusic.id !== prevProps.playingMusic.id && this.musicRef && this.musicRef.current) {
       this.musicRef.current.load && this.musicRef.current.load();
       this.musicRef.current.play && this.musicRef.current.play();
+    }
+
+    if (this.musicRef.current) {
+      this.musicRef.current.volume = prevState.musicVolume;
+      this.musicRef.current.currentMusicTime = prevState.currentMusicTime;
     }
   }
 
@@ -61,29 +71,14 @@ class GlobalMusicPlayer extends React.Component {
     }
   };
 
-  onLoadedData = this.setStateWhenAudioLoaded;
-
   playMusic = () => this.musicRef && this.musicRef.current && this.musicRef.current.play && this.musicRef.current.play();
   pauseMusic = () => this.musicRef && this.musicRef.current && this.musicRef.current.pause && this.musicRef.current.pause();
 
-  changeVolume = volume => {
-    if (this.musicRef && this.musicRef.current) {
-      this.musicRef.current.volume = volume;
-      return this.musicRef.current.volume;
-    }
-  };
-
-  changeCurrentTime = time => {
-    if (this.musicRef && this.musicRef.current) {
-      this.musicRef.current.currentTime = time;
-      return this.musicRef.current.currentTime;
-    }
-  };
-
   handleChangeMusicVolume = (e, { value }) => this.setState({ musicVolume: value });
-  handleChangeCurrentMusicTime = (e, { value }) => this.changeCurrentTime(value * this.state.musicTime);
+  handleChangeCurrentMusicTime = (e, { value }) => this.setState({ currentMusicTime: value * this.state.musicTime });
   handleHiddenBiggerPlayer = () => this.setState({ isShowBiggerPlayer : false });
   handleShowBiggerPlayer = () => this.setState({ isShowBiggerPlayer : true });
+  toggleShowBiggerPlayer = () => this.setState(prevState => ({ ...prevState, isShowBiggerPlayer: !prevState.isShowBiggerPlayer }))
 
   onTimeUpdate = e => this.setState({ currentMusicTime: e.target.currentTime });
   onVolumeChange = e => this.setState({ volume: e.target.volume });
@@ -95,10 +90,11 @@ class GlobalMusicPlayer extends React.Component {
   onEnded = () => this.props.playerActions.goNextSong();
   onPlayNext = () => this.props.playerActions.goNextSong();
   onPlayPrev = () => this.props.playerActions.goPrevSong();
+  onLoadedData = this.setStateWhenAudioLoaded;
 
   render() {
-    const { className, playingMusic, playingMusicActions, playingList } = this.props;
-    const { currentMusicTime, musicTime, isMusicReady, isShowBiggerPlayer, isShowStickyPlaylist } = this.state;
+    const { className, playingMusic, playingList, playinglistActions } = this.props;
+    const { currentMusicTime, musicTime, musicVolume, isShowBiggerPlayer } = this.state;
 
     return (
       <GlobalMusicPlayerWrapper id="global-music-player" className={cn('ui-global-music-player fixed bottom-0 left-0 w-full', className)}>
@@ -134,15 +130,6 @@ class GlobalMusicPlayer extends React.Component {
         </div>
         <div className="w-full relative">
           <div className="container relative flex items-center h-16 mx-auto z-10 px-1">
-            {!isShowBiggerPlayer && (
-              <Icon
-                name="ellipsis-h"
-                color="teal-600"
-                className="absolute top-0 left-haft z-20 animated fadeIn slow"
-                style={{ transform: 'translate(0, 0)'}}
-                onClick={this.handleShowBiggerPlayer}
-              />
-            )}
             <div className="flex mr-2 items-center mr-5">
               <Image className="h-10 w-10 mr-2 cursor-pointer rounded-sm" src={playingMusic.img} />
               <div className="flex flex-col">
@@ -160,7 +147,7 @@ class GlobalMusicPlayer extends React.Component {
               </div>
               <Icon name="step-forward" size="xs" color="white" className="ml-4" onClick={this.onPlayNext} />
             </div>
-            <div className="flex-1 ml-4 relative">
+            <div className="flex-1 relative mx-10">
               <Slider
                 className="w-full"
                 percent={currentMusicTime/musicTime}
@@ -171,6 +158,23 @@ class GlobalMusicPlayer extends React.Component {
                 <span className="text-white">/</span>
                 <div className="text-white">{calcTime(musicTime)}</div>
               </div>
+            </div>
+            <div className="flex items-center">
+              <Icon
+                name={listMode[playingList.mode] || 'repeat'}
+                size="sm" color="teal-400"
+                className="mx-2"
+                onClick={playinglistActions.changeToNextMode}
+              />
+              <Icon name="list" size="sm" color={isShowBiggerPlayer ? 'teal-400': 'white'} className="mx-2" onClick={this.toggleShowBiggerPlayer} />
+            </div>
+            <div className="flex items-center w-32 ml-10">
+              <Icon name="volume" size="xl" color="white" onClick={this.pauseMusic} />
+              <Slider
+                className="w-full ml-2"
+                percent={musicVolume}
+                onChange={this.handleChangeMusicVolume}
+              />
             </div>
           </div>
         </div>

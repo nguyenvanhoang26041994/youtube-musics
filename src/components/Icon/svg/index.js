@@ -21,6 +21,8 @@ const icons = {
   'checked': require('./checked').default,
   'dot': require('./dot').default,
   'volume': require('./volume').default,
+  'shuffle': require('./shuffle').default,
+  'loop': require('./loop').default,
 };
 
 export default icons;

@@ -1,9 +1,11 @@
 import { connect } from 'react-redux';
 import fp from 'lodash/fp';
+import { bindActionCreators } from 'redux';
+import * as actionCreators from '../actions/playing-list';
 
 const withPlayingList = WrappedComponent => {
-  const ReturnComponent = ({ playingList, ...otherProps }) => (
-    <WrappedComponent playingList={playingList} {...otherProps} />
+  const ReturnComponent = ({ playingList, playinglistActions, ...otherProps }) => (
+    <WrappedComponent playingList={playingList} playinglistActions={playinglistActions} {...otherProps} />
   );
 
   ReturnComponent.displayName = `withPlayingList(${WrappedComponent.displayName ||
@@ -24,9 +26,13 @@ const withPlayingList = WrappedComponent => {
     },
   });
 
+  const mapDispatchToProps = dispatch => ({
+    playinglistActions: bindActionCreators(actionCreators, dispatch)
+  });
 
   return connect(
     mapStateToProps,
+    mapDispatchToProps,
   )(ReturnComponent);
 };
 

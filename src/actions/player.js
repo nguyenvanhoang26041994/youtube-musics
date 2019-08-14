@@ -28,9 +28,6 @@ export const goNextSong = () => ({ dispatch, getState }) => {
       break;
   }
 };
-try {
-  window.fp = fp;
-} catch(e) {}
 
 export const goPrevSong = () => ({ dispatch, getState }) => {
   const state = getState();
@@ -43,7 +40,7 @@ export const goPrevSong = () => ({ dispatch, getState }) => {
     }
 
     case mode.LOOP: {
-      if (musics.length && musics.length === 0) {
+      if (idx === 0) {
         return dispatch(changeMusic(musics[musics.length - 1]));
       }
 
