@@ -8,7 +8,9 @@
     "build": "next build",
     "start": "cross-env NODE_ENV=production node server",
     "now-build": "next build",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run build",
+    "heroku-prebuild": "export NPM_CONFIG_PRODUCTION=false; export NODE_ENV=; NPM_CONFIG_PRODUCTION=false NODE_ENV=development npm install --only=dev --dev",
+    "heroku-postbuild": "export NPM_CONFIG_PRODUCTION=true; export NODE_ENV=production;"
   },
   "author": "",
   "license": "ISC",
@@ -28,11 +30,11 @@
     "redux-saga": "^1.0.4",
     "reselect": "^4.0.0",
     "styled-components": "^4.3.2",
-    "tailwindcss": "^1.0.4",
-    "cross-env": "^5.2.0"
+    "tailwindcss": "^1.0.4"
   },
   "devDependencies": {
     "@zeit/next-sass": "^1.0.1",
+    "cross-env": "^5.2.0",
     "node-sass": "^4.12.0",
     "postcss": "^7.0.17",
     "postcss-preset-env": "^6.6.0",
