@@ -3,7 +3,7 @@ import cn from 'classnames';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { Divider, Image } from '../../components/core';
+import { Switch, Image } from '../../components/core';
 import MusicItem from './MusicItem';
 
 const PlaylistWrapper = styled.div`
@@ -26,6 +26,9 @@ const Playlist = ({ className, playingList, playingMusic, playingMusicActions })
         </div>
       </div>
       <div className="ui-playlist__musics flex-1 h-full">
+        {/* <div className="flex items-center justify-end my-5">
+          <Switch size="xs" color="teal-400" className="mr-3" />
+        </div> */}
         <ul className="flex flex-col text-white h-full overflow-scroll scrollbar-hidden">
           {playingList.musics.map((music, idx) => (
             <li key={idx}>
