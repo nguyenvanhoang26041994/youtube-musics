@@ -6,7 +6,7 @@ module.exports = fp.compose(
   withOffline,
   withSass,
 )({
-  target: 'serverless',
+  // target: 'serverless',
   workboxOpts: {
     swDest: 'static/service-worker.js',
     runtimeCaching: [
