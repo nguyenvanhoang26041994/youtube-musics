@@ -7,8 +7,10 @@ module.exports = fp.compose(
   withSass,
 )({
   // target: 'serverless',
+  generateInDevMode: true,
+  registerSwPrefix: '/_next',
+  devSwSrc: '/_next',
   workboxOpts: {
-    swDest: 'static/service-worker.js',
     runtimeCaching: [
       {
         urlPattern: /[.](png|jpg|ico|css)/,
