@@ -18,6 +18,7 @@ const defaultState = {
   src: '',
   name: '',
   singer: {},
+  singers: [],
   img: '',
   mode: mode.LOOP,
   isPlaying: false,
@@ -33,11 +34,7 @@ export default (state = defaultState, action) => {
     case music.CHANGE_MUSIC:
       return {
         ...state,
-        id: action.payload.id,
-        src: action.payload.src,
-        name: action.payload.name,
-        img: action.payload.img,
-        singer: action.payload.singer || {},
+        ...action.payload,
       };
     default:
       return state;

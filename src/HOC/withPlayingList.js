@@ -13,7 +13,15 @@ const withPlayingList = WrappedComponent => {
   const mapStateToProps = state => ({
     playingList: {
       ...state.playingList,
-      musics: fp.toArray(state.playingList.musics),
+      musics: fp.compose(
+        fp.map(music => {
+          return {
+            ...music,
+            singersName: music.singers.map(singer => singer.name).join(', '),
+          };
+        }),
+        fp.toArray
+      )(state.playingList.musics),
     },
   });
 

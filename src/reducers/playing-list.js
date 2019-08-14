@@ -8,6 +8,10 @@ const musics = {
       id: 'uid_edm-001',
       name: 'EDM',
     },
+    singers: [
+      { id: 'uid_edm-004', name: 'EDM Star'},
+      { id: 'alan_walker', name: 'Alan Walker'},
+    ],
     src: '/static/musics/please-dont-go.mp3',
     img: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/player-bg.jpg?alt=media&token=5176e0ee-7405-4478-90a7-ac260b48aee8',
     listenNumber: 1241562,
@@ -21,6 +25,10 @@ const musics = {
       id: 'uid_edm-001',
       name: 'EDM',
     },
+    singers: [
+      { id: 'uid_edm-004', name: 'EDM Star'},
+      { id: 'alan_walker', name: 'Alan Walker'},
+    ],
     src: '/static/musics/fly-away.mp3',
     img: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/player-bg.jpg?alt=media&token=5176e0ee-7405-4478-90a7-ac260b48aee8',
     listenNumber: 1241562,
@@ -34,6 +42,10 @@ const musics = {
       id: 'uid_edm-001',
       name: 'EDM',
     },
+    singers: [
+      { id: 'uid_edm-004', name: 'EDM Star'},
+      { id: 'alan_walker', name: 'Alan Walker'},
+    ],
     src: '/static/musics/perfect-violin.mp3',
     img: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/player-bg.jpg?alt=media&token=5176e0ee-7405-4478-90a7-ac260b48aee8',
     listenNumber: 1241562,
@@ -47,6 +59,10 @@ const musics = {
       id: 'uid_edm-001',
       name: 'EDM',
     },
+    singers: [
+      { id: 'uid_edm-004', name: 'Meow'},
+      { id: 'alan_walker', name: 'Kyo'},
+    ],
     src: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/edm-lol.mp3?alt=media&token=12c88e8f-7385-450d-9e0d-8b22ff246e81',
     img: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/player-bg.jpg?alt=media&token=5176e0ee-7405-4478-90a7-ac260b48aee8',
     listenNumber: 1241562,
@@ -60,6 +76,10 @@ const musics = {
       id: 'uid_jack-001',
       name: 'Jack',
     },
+    singers: [
+      { id: 'uid_edm-004', name: 'Meow'},
+      { id: 'alan_walker', name: 'Alan Walker'},
+    ],
     src: '/static/musics/sao-em-vo-tinh.mp3',
     img: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/player-bg.jpg?alt=media&token=5176e0ee-7405-4478-90a7-ac260b48aee8',
     listenNumber: 1241562,
@@ -73,6 +93,10 @@ const musics = {
       id: 'uid_jack-001',
       name: 'Jack',
     },
+    singers: [
+      { id: 'uid_edm-004', name: 'EDM Star'},
+      { id: 'alan_walker', name: 'Alan Walker'},
+    ],
     listenNumber: 1241562,
     time: 1.6 * 60,
     src: '/static/musics/bac-phan.mp3',
@@ -86,6 +110,10 @@ const musics = {
       id: 'uid_jack-001',
       name: 'Jack',
     },
+    singers: [
+      { id: 'uid_edm-004', name: 'EDM Star'},
+      { id: 'alan_walker', name: 'Adam'},
+    ],
     listenNumber: 1241562,
     time: 10.6 * 60,
     src: '/static/musics/hong-nhan.mp3',
@@ -99,6 +127,10 @@ const musics = {
       id: 'uid_walker-001',
       name: 'Alan Walker',
     },
+    singers: [
+      { id: 'uid_edm-004', name: 'EDM Star'},
+      { id: 'alan_walker', name: 'Alan Walker'},
+    ],
     listenNumber: 1241562,
     time: 14.6 * 60,
     src: '/static/musics/lost-control.mp3',
@@ -112,6 +144,10 @@ const musics = {
       id: 'uid_tung-mtp-001',
       name: 'Sơn Tùng M-TP',
     },
+    singers: [
+      { id: 'uid_edm-004', name: 'EDM Star'},
+      { id: 'alan_walker', name: 'Alan Walker'},
+    ],
     listenNumber: 1241562,
     time: 3.6 * 60,
     src: '/static/musics/hay-trao-cho-anh.mp3',
@@ -125,6 +161,10 @@ const musics = {
       id: 'uid_shayne-ward-001',
       name: 'Shayne Ward',
     },
+    singers: [
+      { id: 'uid_edm-004', name: 'Jessica'},
+      { id: 'alan_walker', name: 'Alan Walker'},
+    ],
     listenNumber: 1241562,
     time: 3.6 * 60,
     src: '/static/musics/no-promise.mp3',
@@ -150,10 +190,7 @@ export default (state = defaultState, action) => {
     case playlist.CHANGE_PLAYING_LIST:
       return {
         ...state,
-        id: action.payload.id,
-        name: action.payload.id,
-        musics: action.payload.musics || {},
-        user: action.payload.user || {},
+        ...action.payload,
       };
     default:
       return state;

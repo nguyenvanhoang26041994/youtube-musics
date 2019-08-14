@@ -26,13 +26,13 @@ const MusicItemWrapper = styled.div`
   }
 `;
 
-const MusicItem = ({ className, onClick, name, singer, time, listenNumber, isActive, isPlaying, index }) => {
+const MusicItem = ({ className, onClick, name, singersName, time, listenNumber, isActive, isPlaying, index }) => {
   return (
     <MusicItemWrapper className={cn('ui-music-item flex h-8 items-center hover:glass cursor-pointer transition-fast', { 'ui-music-item--active': isActive }, className)} onClick={onClick}>
       <div className="flex items-center pl-3">
         <div className="text-white text-2xs font-mono w-12">{index}</div>
         <h5 className="ui-music-item__name cursor-pointer w-72 text-white text-sm">{name}</h5>
-        <h5 className="cursor-pointer w-64 text-xs text-gray-400">{singer.name}</h5>
+        <h5 className="cursor-pointer w-64 text-xs text-gray-400">{singersName}</h5>
       </div>
       <div className="flex items-center flex-1 justify-end pr-3">
         <div className="ui-music-item__options flex items-center flex-1 justify-end mr-5">
