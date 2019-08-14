@@ -4,8 +4,8 @@ import { bindActionCreators } from 'redux';
 import * as actionCreators from '../actions/playing-list';
 
 const withPlayingList = WrappedComponent => {
-  const ReturnComponent = ({ playingList, playinglistActions, ...otherProps }) => (
-    <WrappedComponent playingList={playingList} playinglistActions={playinglistActions} {...otherProps} />
+  const ReturnComponent = ({ playingList, playingListActions, ...otherProps }) => (
+    <WrappedComponent playingList={playingList} playingListActions={playingListActions} {...otherProps} />
   );
 
   ReturnComponent.displayName = `withPlayingList(${WrappedComponent.displayName ||
@@ -27,7 +27,7 @@ const withPlayingList = WrappedComponent => {
   });
 
   const mapDispatchToProps = dispatch => ({
-    playinglistActions: bindActionCreators(actionCreators, dispatch)
+    playingListActions: bindActionCreators(actionCreators, dispatch)
   });
 
   return connect(

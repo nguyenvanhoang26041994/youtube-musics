@@ -2,7 +2,7 @@ import cn from 'classnames';
 import fp from 'lodash/fp';
 import styled from 'styled-components';
 import { Icon, Slider, BlurBackground, Image } from '../../components/core';
-import Playlist from '../../components/Playlist';
+import Playlist from '../../containers/Playlist';
 import { mode } from '../../constants/playing-list';
 import withPlayingList from '../../HOC/withPlayingList';
 import withPlayingMusic from '../../HOC/withPlayingMusic';
@@ -93,7 +93,7 @@ class GlobalMusicPlayer extends React.Component {
   onLoadedData = this.setStateWhenAudioLoaded;
 
   render() {
-    const { className, playingMusic, playingList, playinglistActions } = this.props;
+    const { className, playingMusic, playingList, playingListActions, playingMusicActions } = this.props;
     const { currentMusicTime, musicTime, musicVolume, isShowBiggerPlayer } = this.state;
 
     return (
@@ -120,12 +120,7 @@ class GlobalMusicPlayer extends React.Component {
               onClick={this.handleHiddenBiggerPlayer}
             />
             <BlurBackground />
-            <Playlist
-              className="w-full h-full"
-              playingList={playingList}
-              playingMusic={playingMusic}
-              changeMusic={this.props.playingMusicActions.changeMusic}
-            />
+            <Playlist className="w-full h-full" />
           </div>
         </div>
         <div className="w-full relative">
@@ -164,7 +159,7 @@ class GlobalMusicPlayer extends React.Component {
                 name={listMode[playingList.mode] || 'repeat'}
                 size="sm" color="teal-400"
                 className="mx-2"
-                onClick={playinglistActions.changeToNextMode}
+                onClick={playingListActions.changeToNextMode}
               />
               <Icon name="list" size="sm" color={isShowBiggerPlayer ? 'teal-400': 'white'} className="mx-2" onClick={this.toggleShowBiggerPlayer} />
             </div>

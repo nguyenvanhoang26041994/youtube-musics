@@ -11,7 +11,7 @@ const PlaylistWrapper = styled.div`
   }
 `;
 
-const Playlist = ({ className, playingList, playingMusic, changeMusic }) => {
+const Playlist = ({ className, playingList, playingMusic, playingMusicActions }) => {
   return (
     <PlaylistWrapper className={cn('ui-playlist flex flex-col', className)}>
       <div className="w-full p-3">
@@ -33,7 +33,7 @@ const Playlist = ({ className, playingList, playingMusic, changeMusic }) => {
             <li key={idx}>
               <MusicItem
                 index={idx + 1}
-                onClick={() => changeMusic(music)}
+                onClick={() => playingMusicActions.changeMusic(music)}
                 isActive={playingMusic.id === music.id}
                 isPlaying={playingMusic.id === music.id && playingMusic.isPlaying}
                 {...music}
