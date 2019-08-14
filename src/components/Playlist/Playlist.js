@@ -7,8 +7,6 @@ import { Divider, Image } from '../../components/core';
 import MusicItem from './MusicItem';
 
 const PlaylistWrapper = styled.div`
-  & .ui-playlist__musics {
-  }
 `;
 
 const Playlist = ({ className, playingList, playingMusic, playingMusicActions }) => {
@@ -27,8 +25,8 @@ const Playlist = ({ className, playingList, playingMusic, playingMusicActions })
           </div>
         </div>
       </div>
-      <div className="ui-playlist__musics flex-1">
-        <ul className="flex flex-col text-white">
+      <div className="ui-playlist__musics flex-1 h-full">
+        <ul className="flex flex-col text-white h-full overflow-scroll scrollbar-hidden">
           {playingList.musics.map((music, idx) => (
             <li key={idx}>
               <MusicItem

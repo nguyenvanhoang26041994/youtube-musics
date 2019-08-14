@@ -13,7 +13,7 @@ import { Logo, BlurBackground } from '../../components/core';
 // ];
 
 const Navbar = ({ className }) => (
-  <nav className={cn('ui-navbar relative overflow-hidden flex justify-center text-white w-full h-16', className)}>
+  <nav className={cn('ui-navbar relative overflow-hidden flex justify-center text-white w-full h-16 bg-gradient', className)}>
     {/* <BlurBackground /> */}
     <div className="container flex items-center px-1">
       <div className="flex items-center flex-1">

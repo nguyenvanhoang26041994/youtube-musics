@@ -123,7 +123,7 @@ class GlobalMusicPlayer extends React.Component {
             <Playlist className="w-full h-full" />
           </div>
         </div>
-        <div className="w-full relative">
+        <div className="w-full relative bg-gradient">
           <div className="container relative flex items-center h-16 mx-auto z-10 px-1">
             <div className="flex mr-2 items-center mr-5">
               <Image className="h-10 w-10 mr-2 cursor-pointer rounded-sm" src={playingMusic.img} />
