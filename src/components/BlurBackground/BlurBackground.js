@@ -2,11 +2,14 @@ import cn from 'classnames';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+import Image from '../Image';
+
 const BlurBackgroundWrapper = styled.div`
   &.ui-blur-background--custom {
     z-index: -1;
 
-    > img {
+    img {
+      object-fit: cover;
       filter: blur(50px) grayscale(35%) brightness(25%);
       transform: scale(1.2, 1.2);
     }
@@ -16,7 +19,7 @@ const BlurBackgroundWrapper = styled.div`
 const BlurBackground = ({ className, img, ...otherProps }) => {
   return (
     <BlurBackgroundWrapper className={cn('ui-blur-background ui-blur-background--custom w-full h-full object-cover overflow-hidden absolute', className)}>
-      <img src={img} className="w-full h-full object-cover" {...otherProps} />
+      <Image src={img} className="w-full h-full" {...otherProps} />
     </BlurBackgroundWrapper>
   );
 };

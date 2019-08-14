@@ -8,25 +8,27 @@ import tailwindColors from '../../utils/tailwindColors';
 import { calcTime } from '../../utils/time';
 
 const MusicItemWrapper = styled.div`
+  &.ui-music-item {
+    &:hover {
+      .ui-music-item__options {
+        opacity: 1;
+      }
+    }
+
+    .ui-music-item__options {
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+  }
+
   &.ui-music-item--active {
     background-color: ${tailwindColors['teal-600']};
-  }
-
-  & .ui-music-item__options {
-    opacity: 0;
-    transition: opacity 0.15s ease-in;
-  }
-
-  &:hover {
-    .ui-music-item__options {
-      opacity: 1;
-    }
   }
 `;
 
 const MusicItem = ({ className, onClick, name, singer, time, listenNumber, isActive, isPlaying, index }) => {
   return (
-    <MusicItemWrapper className={cn('ui-music-item flex h-8 items-center hover:glass cursor-pointer', { 'ui-music-item--active': isActive }, className)} onClick={onClick}>
+    <MusicItemWrapper className={cn('ui-music-item flex h-8 items-center hover:glass cursor-pointer transition-fast', { 'ui-music-item--active': isActive }, className)} onClick={onClick}>
       <div className="flex items-center pl-3">
         <div className="text-white text-2xs font-mono w-12">{index}</div>
         <h5 className="ui-music-item__name cursor-pointer w-72 text-white text-sm">{name}</h5>

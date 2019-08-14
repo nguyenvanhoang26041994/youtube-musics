@@ -1,7 +1,7 @@
 import './GlobalMusicPlayer.scss';
 import cn from 'classnames';
 import fp from 'lodash/fp';
-import { Icon, Slider, BlurBackground } from '../../components/core';
+import { Icon, Slider, BlurBackground, Image } from '../../components/core';
 import Playlist from '../../components/Playlist';
 import { mode } from '../../constants/playing-music';
 import withPlayingList from '../../HOC/withPlayingList';
@@ -129,7 +129,7 @@ class GlobalMusicPlayer extends React.Component {
               />
             )}
             <div className="flex mr-2 items-center mr-5">
-              <img className="h-10 w-10 mr-2 cursor-pointer rounded-sm" src={playingMusic.img} />
+              <Image className="h-10 w-10 mr-2 cursor-pointer rounded-sm" src={playingMusic.img} />
               <div className="flex flex-col">
                 <div className="text-sm text-white cursor-pointer w-48 overflow-hidden truncate">{playingMusic.name}</div>
                 <div className="text-xs text-gray-500 cursor-pointer w-48 overflow-hidden truncate">{playingMusic.singer.name}</div>

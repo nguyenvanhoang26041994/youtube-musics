@@ -1,1 +1,5 @@
-export default props => <img src="/static/img/logo.svg" alt="logo" {...props} />;
+import React from 'react';
+import Image from '../Image';
+
+export default props => <Image src="/static/img/logo.svg" alt="logo" {...props} />;
+
