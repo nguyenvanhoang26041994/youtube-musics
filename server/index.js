@@ -1,7 +1,5 @@
 const express = require('express');
 const next = require('next');
-const { join } = require('path');
-const { parse } = require('url');
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
@@ -15,12 +13,6 @@ app
     server.use(express.static('static'));
 
     server.get('*', (req, res) => {
-      const pathname = parse(req.url).pathname;
-
-      if (pathname === '/service-worker.js') {
-        app.serveStatic(req, res, join(__dirname, '.next', '/service-worker.js'));
-        return;
-      }
       return handle(req, res);
     });
 
