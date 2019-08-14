@@ -1,3 +1,16 @@
+// .bg-primary-gradient {
+//   background: rgba($color: #16222a, $alpha: 0.9); /* fallback for old browsers */
+//   background: -webkit-linear-gradient(to right, rgba($color: #16222a, $alpha: 0.9), rgba($color: #3a6073, $alpha: 0.9)); /* Chrome 10-25, Safari 5.1-6 */
+//   background: linear-gradient(to right, rgba($color: #16222a, $alpha: 0.9), rgba($color: #3a6073, $alpha: 0.9)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+// }
+
+.bg-primary-gradient,
+.bg-body-gradient {
+  background: #00416a; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #00416a, #e4e5e6); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #00416a, #e4e5e6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
 .bg-primary-blur {
   background-image: url('/static/img/bg-blur.jpg');
   background-attachment: fixed;
@@ -16,12 +29,24 @@
   z-index: -1;
 }
 
+.font-cool {
+  font-family: 'Shadows Into Light', cursive;
+}
+
+.glass {
+  background-color: rgba(0,0,0,0.1);
+}
+
 .hover\:glass:hover {
-  background-color: rgba(0,0,0,0.1)
+  background-color: rgba(0,0,0,0.1);
 }
 
 .bg-darker {
   filter: brightness(40%);
+}
+
+.text-2xs {
+  font-size: 0.6rem;
 }
 
 .animated.linear {
@@ -30,6 +55,14 @@
 
 .top-haft {
   top: 50%;
+}
+
+.bottom-full {
+  bottom: 100%;
+}
+
+.top-full {
+  top: 100%;
 }
 
 .absolute-center {

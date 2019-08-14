@@ -3,7 +3,7 @@
 
 // ./pages/_document.js
 import Document, { Html, Head, Main, NextScript } from 'next/document';
-import { ServerStyleSheet } from 'styled-components'
+import { ServerStyleSheet } from 'styled-components';
 
 export default class extends Document {
   static async getInitialProps (ctx) {
@@ -37,8 +37,9 @@ export default class extends Document {
         <Head>
           <link rel="stylesheet" href="/static/css/fontawesome.min.css" />
           <link rel="stylesheet" href="/static/css/animate.min.css" />
+          <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light&display=swap" rel="stylesheet" />
         </Head>
-        <body className="font-serif">
+        <body className="font-cool">
           <Main />
           <NextScript />
         </body>

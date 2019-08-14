@@ -15,7 +15,7 @@ BlurBackground.propTypes = {
   img: PropTypes.string,
 };
 BlurBackground.defaultProps = {
-  img: '/static/img/player-bg.jpg',
+  img: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/player-bg.jpg?alt=media&token=5176e0ee-7405-4478-90a7-ac260b48aee8',
 };
 
 export default BlurBackground;

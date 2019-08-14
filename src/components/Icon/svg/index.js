@@ -20,6 +20,7 @@ const icons = {
   'remove': require('./remove').default,
   'checked': require('./checked').default,
   'dot': require('./dot').default,
+  'volume': require('./volume').default,
 };
 
 export default icons;
