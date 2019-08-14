@@ -1,12 +1,23 @@
-import './BlurBackground.scss';
 import cn from 'classnames';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
+
+const BlurBackgroundWrapper = styled.div`
+  &.ui-blur-background--custom {
+    z-index: -1;
+
+    > img {
+      filter: blur(50px) grayscale(35%) brightness(25%);
+      transform: scale(1.2, 1.2);
+    }
+  }
+`;
 
 const BlurBackground = ({ className, img, ...otherProps }) => {
   return (
-    <div className={cn('ui-blur-background ui-blur-background--custom w-full h-full object-cover overflow-hidden absolute', className)}>
+    <BlurBackgroundWrapper className={cn('ui-blur-background ui-blur-background--custom w-full h-full object-cover overflow-hidden absolute', className)}>
       <img src={img} className="w-full h-full object-cover" {...otherProps} />
-    </div>
+    </BlurBackgroundWrapper>
   );
 };
 

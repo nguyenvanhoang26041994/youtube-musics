@@ -1,15 +1,33 @@
-import './Slider.scss';
 import React, { useRef } from 'react';
 import cn from 'classnames';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import getPageX from '../../utils/getPageX';
+
+const SliderWrapper = styled.div`
+  &.ui-slider {
+    .ui-slider__handler {
+      &.--position {
+        transform: translate(-50%, 0.25rem); // 0.25rem is height of ui-slider
+      }
+    }
+
+    .ui-slider__track,
+    .ui-slider__handler {
+      &.--transition {
+        transition: all 0.1s;
+        transition-timing-function: ease-in-out;
+      }
+    }
+  }
+`;
 
 const Slider = ({ className, percent, onChange, ...otherProps }) => {
   const sliderRef = useRef(null);
   const onClick = e => onChange(e, { value: (e.pageX - getPageX(sliderRef.current))/sliderRef.current.offsetWidth })
 
   return (
-    <div className={cn('ui-slider h-1 cursor-pointer relative', className)} {...otherProps} onClick={onClick} ref={sliderRef}>
+    <SliderWrapper className={cn('ui-slider h-1 cursor-pointer relative', className)} {...otherProps} onClick={onClick} ref={sliderRef}>
       <div className="ui-slider__rail absolute w-full h-full bg-gray-100 rounded-full" />
       <div
         className="ui-slider__track bg-teal-400 absolute h-full rounded-full --transition"
@@ -19,7 +37,7 @@ const Slider = ({ className, percent, onChange, ...otherProps }) => {
         className="ui-slider__handler --position absolute bottom-0 h-3 w-3 bg-white rounded-full --transition"
         style={{ left: `${percent * 100}%` }}
       />
-    </div>
+    </SliderWrapper>
   );
 };
 
