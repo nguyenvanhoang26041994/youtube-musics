@@ -49,8 +49,8 @@ const HomePage = ({ playerActions }) => (
         <did className="w-1/4 p-2">
           <PlaylistCard
             className="w-full"
-            onClickPlayPlaylist={() => playerActions.playPlaylist(playlistsAsObject['playlist-001'])}
-            {...playlistsAsObject['playlist-001']}
+            onClickPlayPlaylist={() => playerActions.playPlaylist(playlistsAsObject['playlist-004'])}
+            {...playlistsAsObject['playlist-004']}
           />
         </did>
       </div>
