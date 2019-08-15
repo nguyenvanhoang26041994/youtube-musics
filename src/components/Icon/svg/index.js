@@ -23,6 +23,7 @@ const icons = {
   'volume': require('./volume').default,
   'shuffle': require('./shuffle').default,
   'loop': require('./loop').default,
+  'headphones': require('./headphones').default,
 };
 
 export default icons;

@@ -1,12 +1,10 @@
 import '../../assets/css/tailwind.scss';
 import '../../assets/css/user.scss';
-import './App.scss';
 import App, { Container } from 'next/app';
 import { Provider } from 'react-redux';
 
 import Layout from '../layouts/Layout';
 import GlobalMusicPlayer from '../containers/GlobalMusicPlayer';
-import withPlayingMusic from '../HOC/withPlayingMusic';
 import store from '../store';
 
 class RootApp extends App {
@@ -24,7 +22,7 @@ class RootApp extends App {
           <Layout>
             <Component {...pageProps} />
           </Layout>
-          <GlobalMusicPlayer />
+          <GlobalMusicPlayer className="z-20" />
         </Provider>
       </Container>
     );

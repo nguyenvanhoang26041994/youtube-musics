@@ -15,6 +15,7 @@ const withPlayingList = WrappedComponent => {
   const mapStateToProps = state => ({
     playingList: {
       ...state.playingList,
+      listenCount: fp.sumBy(music => music.listenCount)(state.playingList.musics),
       musics: fp.compose(
         fp.map(music => {
           return {

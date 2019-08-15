@@ -4,7 +4,7 @@ import cn from 'classnames';
 
 const Image = ({ className, ...otherProps }) => {
   return (
-    <div className={cn('ui-image', className)}>
+    <div className={cn('ui-image overflow-hidden', className)}>
       <img {...otherProps} className="w-full h-full object-cover" />
     </div>
   );

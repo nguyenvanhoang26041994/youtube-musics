@@ -13,7 +13,7 @@ const ButtonWrapper = styled.button`
 
 const Button = ({ className, size, color, ...otherProps }) => (
   <ButtonWrapper
-    className={cn(`ui-button outline-none flex px-2 hover:shadow-lg rounded-sm justify-center items-center text-${size} bg-${color}`, className)}
+    className={cn(`ui-button outline-none flex px-2 hover:shadow-lg justify-center items-center text-${size} bg-${color}`, className)}
     {...otherProps}
   />
 );

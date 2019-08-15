@@ -1,6 +1,7 @@
 import fp from 'lodash/fp';
 import { mode } from '../constants/playing-list';
 import { changeMusic } from '../actions/playing-music';
+import { changePlayingList } from './playing-list';
 
 export const goNextSong = () => ({ dispatch, getState }) => {
   const state = getState();
@@ -53,5 +54,12 @@ export const goPrevSong = () => ({ dispatch, getState }) => {
 
     default:
       break;
+  }
+};
+
+export const playPlaylist = payload => ({ dispatch }) => {
+  dispatch(changePlayingList(payload));
+  if (payload && payload.musics) {
+    dispatch(changeMusic(payload.musics[0]));
   }
 };
