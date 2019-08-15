@@ -14,6 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "classnames": "^2.2.6",
+    "compression": "^1.7.4",
     "express": "^4.17.1",
     "firebase-admin": "^8.3.0",
     "isomorphic-fetch": "^2.2.1",

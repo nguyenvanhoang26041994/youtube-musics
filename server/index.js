@@ -1,5 +1,6 @@
 const express = require('express');
 const next = require('next');
+const compression = require('compression');
 const LRUCache = require('lru-cache');
 
 const ssrCache = new LRUCache({
@@ -49,13 +50,14 @@ app
   .then(() => {
     const server = express();
 
+    server.use(compression());
+    server.use('/', express.static('.next'));
+    server.use(express.static('static'));
+
     server.get('/_next/*', (req, res) => {
       /* serving _next static content using next.js handler */
       handle(req, res);
     });
-
-    server.use('/', express.static('.next'));
-    server.use(express.static('static'));
 
     server.get('*', (req, res) => {
       return handle(req, res);

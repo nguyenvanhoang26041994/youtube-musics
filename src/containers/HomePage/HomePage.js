@@ -47,7 +47,7 @@ const HomePage = ({ playerActions }) => (
   <HomePageWrapper id="home-page" className="home-page container-custom container mx-auto flex flex-col">
     <Panel className="mb-10" title="HOT PLAYLIST">
       {playlists.map(playlist => (
-        <div className="w-1/4 p-2">
+        <div className="w-1/4 p-2" key={playlist.id}>
           <PlaylistCard
             className="w-full"
             onClickPlayPlaylist={() => playerActions.playPlaylist(playlist)}
@@ -58,7 +58,7 @@ const HomePage = ({ playerActions }) => (
     </Panel>
     <Panel className="mb-10" title="HOT SONGS">
       {hotSongs.map(song => (
-        <div className="w-1/4 p-2">
+        <div className="w-1/4 p-2" key={song.id}>
           <SongCard
             className="w-full"
             onClick={() => playerActions.playMusic(song)}

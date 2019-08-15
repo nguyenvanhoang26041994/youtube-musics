@@ -9,8 +9,9 @@ const SongCardWrapper = styled.div`
   &.ui-song-card {
     .ui-song-card__bg-img {
       img {
-        filter: blur(2px) grayscale(50%) brightness(50%);
-        transition: 0.5s;
+        filter: none;
+        transform: scale(1.1, 1.1);
+        
       }
     }
 
@@ -22,8 +23,8 @@ const SongCardWrapper = styled.div`
     &:hover {
       .ui-song-card__bg-img {
         img {
-          filter: none;
-          transform: scale(1.1, 1.1);
+          filter: blur(2px) grayscale(50%) brightness(50%);
+          transition: 0.5s;
         }
       }
 
