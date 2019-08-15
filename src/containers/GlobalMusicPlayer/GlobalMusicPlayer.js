@@ -39,7 +39,7 @@ class GlobalMusicPlayer extends React.Component {
     musicTime: 0,
     currentMusicTime: 0,
     musicVolume: 0,
-    isShowBiggerPlayer: true,
+    isShowBiggerPlayer: false,
     isMusicReady: false,
   };
 
@@ -124,8 +124,8 @@ class GlobalMusicPlayer extends React.Component {
               className="absolute top-0 left-haft z-20 animated fast hidden global-music-player__biger-player__scroll"
               onClick={this.handleHiddenBiggerPlayer}
             />
-            <BlurBackground />
-            <Playlist className="w-full h-full" />
+            {/* <BlurBackground /> */}
+            <Playlist className="w-full h-full bg-gradient" />
           </div>
         </div>
         <div className="w-full relative bg-gradient">

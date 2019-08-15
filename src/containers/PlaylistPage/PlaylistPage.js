@@ -3,12 +3,13 @@ import cn from 'classnames';
 import PropTypes from 'prop-types';
 
 import Playlist from '../../containers/Playlist';
+import RankingBoard from '../../containers/RankingBoard'
 
 const PlaylistPage = ({ className }) => {
   return (
-    <div className={cn('ui-playlist-page container mx-auto flex', className)}>
-      <Playlist className="w-8/12" />
-      <div className="w-4/12"></div>
+    <div className={cn('ui-playlist-page container mx-auto flex relative', className)}>
+      <Playlist className="w-9/12 bg-gradient" />
+      <RankingBoard className="w-3/12" />
     </div>
   );
 };

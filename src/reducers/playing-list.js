@@ -6,6 +6,19 @@ const nextMode = Object.freeze({
   [mode.REPEAT]: mode.LOOP,
 });
 
+const anonimous = {
+  id001: {
+    id: 'id001',
+    name: 'FlodD',
+    img: 'https://product.hstatic.net/1000160337/product/figure_047753_01_1e2e998a53c84209a99c30eb17efb81f_1024x1024.jpg'
+  },
+  id002: {
+    id: 'id002',
+    name: 'M!',
+    img: 'https://product.hstatic.net/1000160337/product/figure_047753_01_1e2e998a53c84209a99c30eb17efb81f_1024x1024.jpg'
+  }
+}
+
 const musics = [
   {
     id: 'iQp1_GfDhwQ',
@@ -217,6 +230,18 @@ const musics = [
     img: 'https://www.mtrend.vn/wp-content/uploads/2019/06/Charlie-Puth-la-ai.jpg',
     listenNumber: 884,
     time: 3 * 60 + 19,
+  },
+  {
+    id: 'afNQLlTRvfM',
+    name: `Ai Chờ Ai`,
+    singers: [
+      anonimous.id001,
+      anonimous.id002,
+    ],
+    src: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/y2mate.com%20-%20aichoai_flod_ft_m_giang_nguyen_official_lyric_video_tas_release_afNQLlTRvfM.mp3?alt=media&token=d3f634e1-0b76-440a-81f6-9c10614c7a42',
+    img: anonimous.id001.img,
+    listenNumber: 8345,
+    time: 2 * 60 + 40,
   },
 ];
 
