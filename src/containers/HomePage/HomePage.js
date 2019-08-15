@@ -9,6 +9,8 @@ import reducer from './reducer';
 import saga from './saga';
 import RankingBoard from '../RankingBoard';
 import PlaylistCard from '../../components/PlaylistCard';
+import SongCard from '../../components/SongCard';
+import Panel from './Panel';
 import { musicsAsObject } from '../../data/musics';
 import { playlistsAsObject } from '../../data/playlists';
 
@@ -20,51 +22,44 @@ const HomePageWrapper = styled.div`
   }
 `;
 
+const playlists = [
+  playlistsAsObject['playlist-001'],
+  playlistsAsObject['playlist-002'],
+  playlistsAsObject['playlist-003'],
+  playlistsAsObject['playlist-004'],
+];
+
+const hotSongs = [
+  musicsAsObject['iQp1_GfDhwQ'],
+  musicsAsObject['87gWaABqGYs'],
+  musicsAsObject['j4zP5saRZqg'],
+  musicsAsObject['fB8TyLTD7EE'],
+];
+
 const HomePage = ({ playerActions }) => (
   <HomePageWrapper id="home-page" className="home-page container-custom container mx-auto flex flex-col">
-    <div className="mb-2 w-full flex flex-col">
-      <h2 className="text-teal-500 font-bold text-lg mb-2 px-2">HOT PLAYLISTS</h2>
-      <div className="flex w-full">
-        <did className="w-1/4 p-2">
+    <Panel className="mb-10" title="HOT PLAYLIST">
+      {playlists.map(playlist => (
+        <div className="w-1/4 p-2">
           <PlaylistCard
             className="w-full"
-            onClickPlayPlaylist={() => playerActions.playPlaylist(playlistsAsObject['playlist-001'])}
-            {...playlistsAsObject['playlist-001']}
+            onClickPlayPlaylist={() => playerActions.playPlaylist(playlist)}
+            {...playlist}
           />
-        </did>
-        <did className="w-1/4 p-2">
-          <PlaylistCard
+        </div>
+      ))}
+    </Panel>
+    <Panel className="mb-10" title="HOT SONGS">
+      {hotSongs.map(song => (
+        <div className="w-1/4 p-2">
+          <SongCard
             className="w-full"
-            onClickPlayPlaylist={() => playerActions.playPlaylist(playlistsAsObject['playlist-002'])}
-            {...playlistsAsObject['playlist-002']}
+            onClick={f => f}
+            {...song}
           />
-        </did>
-        <did className="w-1/4 p-2">
-          <PlaylistCard
-            className="w-full"
-            onClickPlayPlaylist={() => playerActions.playPlaylist(playlistsAsObject['playlist-003'])}
-            {...playlistsAsObject['playlist-003']}
-          />
-        </did>
-        <did className="w-1/4 p-2">
-          <PlaylistCard
-            className="w-full"
-            onClickPlayPlaylist={() => playerActions.playPlaylist(playlistsAsObject['playlist-004'])}
-            {...playlistsAsObject['playlist-004']}
-          />
-        </did>
-      </div>
-    </div>
-
-    {/* <div className="mb-2 w-full flex flex-col">
-      <h2 className="text-teal-500 font-bold text-lg mb-2 px-2">HOT SONGS</h2>
-      <div className="flex w-full">
-        <did className="w-1/4 p-2"><PlaylistCard className="w-full" {...playlistsAsObject['playlist-001']} /></did>
-        <did className="w-1/4 p-2"><PlaylistCard className="w-full" {...playlistsAsObject['playlist-002']} /></did>
-        <did className="w-1/4 p-2"><PlaylistCard className="w-full" {...playlistsAsObject['playlist-003']} /></did>
-        <did className="w-1/4 p-2"><PlaylistCard className="w-full" {...playlistsAsObject['playlist-001']} /></did>
-      </div>
-    </div> */}
+        </div>
+      ))}
+    </Panel>
   </HomePageWrapper>
 );
 

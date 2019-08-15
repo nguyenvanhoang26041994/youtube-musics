@@ -14,8 +14,7 @@ const withPlayingMusic = WrappedComponent => {
   const mapStateToProps = state => ({
     playingMusic: {
       ...state.playingMusic,
-      singersName: state.playingMusic.singers.map(singer => singer.name).join(', '),
-      isShowPlayer: true || state.playingMusic.id,
+      // singersName: state.playingMusic.singers.map(singer => singer.name).join(', '),
     },
   });
 
