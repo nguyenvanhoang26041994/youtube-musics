@@ -11,6 +11,11 @@ const ssrCache = new LRUCache({
   maxAge: 60 * 1000, // ten seconds
 });
 
+const asking = {
+  '_next': 'NO-CACHE',
+  'static': 'NO-CACHE',
+};
+
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
@@ -59,7 +64,18 @@ app
       handle(req, res);
     });
 
+    server.get('/static/*', (req, res) => {
+      handle(req, res);
+    });
+
     server.get('*', (req, res) => {
+      const question = req.path.split('/')[0];
+      const shouldCache = asking[question] !== 'NO-CACHE';
+
+      if (shouldCache) {
+        return renderAndCache(req, res);
+      }
+
       return handle(req, res);
     });
 
