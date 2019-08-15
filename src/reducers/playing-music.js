@@ -7,6 +7,7 @@ const defaultState = {
   singers: [],
   img: '',
   isPlaying: false,
+  isPlayed: false,
 };
 
 export default (state = defaultState, action) => {

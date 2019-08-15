@@ -88,11 +88,20 @@ class GlobalMusicPlayer extends React.Component {
   onLoadedData = this.setStateWhenAudioLoaded;
 
   render() {
-    const { className, playingMusic, playingList, playingListActions, playingMusicActions } = this.props;
+    const { className, playingMusic, playingList, playingListActions } = this.props;
     const { currentMusicTime, musicTime, musicVolume, isShowBiggerPlayer } = this.state;
 
     return (
-      <GlobalMusicPlayerWrapper id="global-music-player" className={cn('ui-global-music-player fixed bottom-0 left-0 w-full', className)}>
+      <GlobalMusicPlayerWrapper
+        id="global-music-player"
+        className={cn(
+          'ui-global-music-player fixed bottom-0 left-0 w-full transition-normal',
+          {
+            'opacity-0': !playingMusic.src,
+          },
+          className
+        )}
+      >
         <Audio
           src={playingMusic.src}
           musicRef={this.musicRef}
