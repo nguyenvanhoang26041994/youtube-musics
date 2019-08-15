@@ -16,12 +16,8 @@ const PlaylistPageWrapper = styled.div`
 
 const PlaylistPage = ({ className }) => {
   return (
-    <PlaylistPageWrapper className={cn('playlist-page container mx-auto flex flex-col relative', className)}>
-      <Playlist className="w-9/12 bg-gradient shadow-lg mx-auto" />
-      <div className="h-32 w-full"></div>
-      {/* <div className="w-3/12 pl-2">
-        <RankingBoard className="playlist-page__ranking w-full" />
-      </div> */}
+    <PlaylistPageWrapper className={cn('playlist-page container-custom container mx-auto flex flex-col relative flex-1', className)}>
+      <Playlist className="bg-gradient shadow-lg mx-auto w-full flex-1" />
     </PlaylistPageWrapper>
   );
 };
