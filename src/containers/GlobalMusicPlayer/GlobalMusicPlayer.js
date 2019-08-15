@@ -156,7 +156,7 @@ class GlobalMusicPlayer extends React.Component {
                 className="mx-2"
                 onClick={playingListActions.changeToNextMode}
               />
-              <Icon name="list" size="sm" color={isShowBiggerPlayer ? 'teal-400': 'white'} className="mx-2" onClick={this.toggleShowBiggerPlayer} />
+              {playingList.id && playingList.musics.length && <Icon name="list" size="sm" color={isShowBiggerPlayer ? 'teal-400': 'white'} className="mx-2" onClick={this.toggleShowBiggerPlayer} />}
             </div>
             <div className="flex items-center w-32 ml-10">
               <Icon name="volume" size="xl" color="white" onClick={this.pauseMusic} />
