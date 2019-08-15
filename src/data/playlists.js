@@ -22,6 +22,13 @@ const musics_004 = [
   musicsAsObject['50VNCymT-Cs'],
 ];
 
+const musics_005 = [
+  musicsAsObject['SvRFNNbxuAk'],
+  musicsAsObject['kXYiU_JCYtU'],
+  musicsAsObject['j4zP5saRZqg'],
+  musicsAsObject['50VNCymT-Cs'],
+];
+
 const playlists = [
   {
     id: 'playlist-001',
@@ -58,6 +65,16 @@ const playlists = [
     name: 'Siêu khủng khiếp',
     listenCount: fp.sumBy(music => music.listenCount)(musics_004),
     musics: musics_004,
+    user: {
+      name: 'BOSS ADMIN',
+      id: 'admin',
+    },
+  },
+  {
+    id: 'playlist-005',
+    name: 'Trộn bậy bạ vô chung',
+    listenCount: fp.sumBy(music => music.listenCount)(musics_005),
+    musics: musics_005,
     user: {
       name: 'BOSS ADMIN',
       id: 'admin',

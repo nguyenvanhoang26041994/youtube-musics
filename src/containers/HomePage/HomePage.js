@@ -27,6 +27,7 @@ const playlists = [
   playlistsAsObject['playlist-002'],
   playlistsAsObject['playlist-003'],
   playlistsAsObject['playlist-004'],
+  playlistsAsObject['playlist-005'],
 ];
 
 const hotSongs = [
@@ -34,6 +35,12 @@ const hotSongs = [
   musicsAsObject['87gWaABqGYs'],
   musicsAsObject['j4zP5saRZqg'],
   musicsAsObject['fB8TyLTD7EE'],
+  musicsAsObject['kXYiU_JCYtU'],
+  musicsAsObject['SvRFNNbxuAk'],
+  musicsAsObject['Tv6WImqSuxA'],
+  musicsAsObject['iKzRIweSBLA'],
+  musicsAsObject['S2oxFIsENgM'],
+  musicsAsObject['yaJx0Gj_LCY'],
 ];
 
 const HomePage = ({ playerActions }) => (
