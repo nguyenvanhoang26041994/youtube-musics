@@ -34,7 +34,7 @@ const playlists = [
     id: 'playlist-001',
     name: 'Nhạc cực hay mọi thể loại tuyển chọn',
     musics,
-    listenCount: fp.sumBy(music => music.listenCount)(musics),
+    // listenCount: fp.sumBy(music => music.listenCount)(musics),
     user: {
       name: 'Nguyễn Văn Hoàng',
       id: 'uid_001',
@@ -43,7 +43,7 @@ const playlists = [
   {
     id: 'playlist-002',
     name: 'Nhạc EDM chọn lọc',
-    listenCount: fp.sumBy(music => music.listenCount)(musics_002),
+    // listenCount: fp.sumBy(music => music.listenCount)(musics_002),
     musics: musics_002,
     user: {
       name: 'BOSS ADMIN',
@@ -53,7 +53,7 @@ const playlists = [
   {
     id: 'playlist-003',
     name: 'Nhạc Việt siêu thấm',
-    listenCount: fp.sumBy(music => music.listenCount)(musics_003),
+    // listenCount: fp.sumBy(music => music.listenCount)(musics_003),
     musics: musics_003,
     user: {
       name: 'BOSS ADMIN',
@@ -63,7 +63,7 @@ const playlists = [
   {
     id: 'playlist-004',
     name: 'Siêu khủng khiếp',
-    listenCount: fp.sumBy(music => music.listenCount)(musics_004),
+    // listenCount: fp.sumBy(music => music.listenCount)(musics_004),
     musics: musics_004,
     user: {
       name: 'BOSS ADMIN',
@@ -73,7 +73,7 @@ const playlists = [
   {
     id: 'playlist-005',
     name: 'Trộn bậy bạ vô chung',
-    listenCount: fp.sumBy(music => music.listenCount)(musics_005),
+    // listenCount: fp.sumBy(music => music.listenCount)(musics_005),
     musics: musics_005,
     user: {
       name: 'BOSS ADMIN',

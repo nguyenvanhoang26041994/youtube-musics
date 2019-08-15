@@ -1,11 +1,15 @@
 import { combineReducers } from 'redux';
 import appReducer from '../App/reducer';
-import playingMusic from './playing-music';
-import playingList from './playing-list';
+import playingMusicReducer from './playingMusicReducer';
+import playingListReducer from './playingListReducer';
+import playlistsReducer from './playlistsReducer';
+import hotSongsReducer from './hotSongsReducer';
 
 const createReducer = (injectedReducers) => combineReducers({
-  playingMusic,
-  playingList,
+  playlistsReducer,
+  hotSongsReducer,
+  playingMusic: playingMusicReducer,
+  playingList: playingListReducer,
   app: appReducer,
   ...injectedReducers,
 });

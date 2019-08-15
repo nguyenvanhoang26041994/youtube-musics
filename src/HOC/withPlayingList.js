@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import fp from 'lodash/fp';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from '../actions/playing-list';
+import playingListSelector from '../selectors/playingListSelector';
 
 const withPlayingList = WrappedComponent => {
   const ReturnComponent = ({ playingList, playingListActions, ...otherProps }) => (
@@ -13,18 +14,7 @@ const withPlayingList = WrappedComponent => {
     'Component'})`;
 
   const mapStateToProps = state => ({
-    playingList: {
-      ...state.playingList,
-      // listenCount: fp.sumBy(music => music.listenCount)(state.playingList.musics),
-      musics: fp.compose(
-        fp.map(music => {
-          return {
-            ...music,
-            singersName: music.singers.map(singer => singer.name).join(', '),
-          };
-        }),
-      )(state.playingList.musics),
-    },
+    playingList: playingListSelector(state),
   });
 
   const mapDispatchToProps = dispatch => ({
