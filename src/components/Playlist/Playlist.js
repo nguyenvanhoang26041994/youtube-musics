@@ -3,10 +3,19 @@ import cn from 'classnames';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { Switch, Image, Button, Icon } from '../../components/core';
+import { Divider, Image, Button, Icon } from '../../components/core';
 import MusicItem from './MusicItem';
 
 const PlaylistWrapper = styled.div`
+  &.ui-playlist {
+    .ui-playlist__musics {
+      li:nth-child(even) {
+        .ui-playlist__music:not(.ui-music-item--active):not(:hover) {
+          background: rgba(0, 0, 0, 0.05);
+        }
+      }
+    }
+  }
 `;
 
 const Playlist = ({ className, playingList, playingMusic, playingMusicActions, isPlaying }) => {
@@ -42,12 +51,14 @@ const Playlist = ({ className, playingList, playingMusic, playingMusicActions, i
           {playingList.musics.map((music, idx) => (
             <li key={idx}>
               <MusicItem
+                className="ui-playlist__music"
                 index={idx + 1}
                 onClick={() => playingMusicActions.changeMusic(music)}
                 isActive={playingMusic.id === music.id}
                 isPlaying={playingMusic.id === music.id && playingMusic.isPlaying}
                 {...music}
               />
+              {/* <Divider /> */}
             </li>
           ))}
         </ul>
