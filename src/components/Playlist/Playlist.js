@@ -9,7 +9,7 @@ import MusicItem from './MusicItem';
 const PlaylistWrapper = styled.div`
 `;
 
-const Playlist = ({ className, playingList, playingMusic, playingMusicActions }) => {
+const Playlist = ({ className, playingList, playingMusic, playingMusicActions, isPlaying }) => {
   return (
     <PlaylistWrapper className={cn('ui-playlist flex flex-col', className)}>
       <div className="w-full p-3">
@@ -24,10 +24,12 @@ const Playlist = ({ className, playingList, playingMusic, playingMusicActions })
               </h3>
             </div>
             <h3 className="text-sm text-gray-500 uppercase flex">
-              <Button size="sm" color="teal-400" className="mr-2 text-white rounded-full">
-                PLAY PLAYLIST
-                <Icon name="play" size="xs" className="ml-3" />
-              </Button>
+              {!isPlaying && (
+                <Button size="sm" color="teal-400" className="mr-2 text-white rounded-full">
+                  PLAY PLAYLIST
+                  <Icon name="play" size="xs" className="ml-3" />
+                </Button>
+              )}
               <Button size="sm" color="teal-400" className="mr-2 text-white rounded-full">
                 <Icon name="ellipsis-h" />
               </Button>
@@ -36,9 +38,6 @@ const Playlist = ({ className, playingList, playingMusic, playingMusicActions })
         </div>
       </div>
       <div className="ui-playlist__musics flex-1 h-full">
-        {/* <div className="flex items-center justify-end">
-          <Button size="sm" color="teal-400" className="mr-2 text-white rounded-full">PLAY PLAYLIST</Button>
-        </div> */}
         <ul className="flex flex-col text-white h-full overflow-scroll scrollbar-hidden">
           {playingList.musics.map((music, idx) => (
             <li key={idx}>

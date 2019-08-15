@@ -16,16 +16,6 @@ const listMode = Object.freeze({
 });
 
 const GlobalMusicPlayerWrapper = styled.div`
-  &.ui-global-music-player {
-    .global-music-player__biger-player-container {
-      &:hover {
-        .global-music-player__biger-player__scroll {
-          display: block;
-          animation-name: fadeIn;
-        }
-      }
-    }
-  }
 `;
 
 const Audio = ({ className, src, musicRef, ...otherProps }) => (
@@ -117,24 +107,24 @@ class GlobalMusicPlayer extends React.Component {
           onEnded={this.onEnded}
         />
         <div className="global-music-player__biger-player relative w-full z-10 overflow-hidden transition-fast" style={{ height: isShowBiggerPlayer ? 'calc(100vh - 8rem)' : 0 }}>
-          <div className="global-music-player__biger-player-container container flex mx-auto h-full relative">
+          <div className="global-music-player__biger-player-container container container-custom flex mx-auto h-full relative">
             <Icon
-              name="ellipsis-h"
+              name="chevron-arrow-down"
               color="teal-600"
-              className="absolute top-0 left-haft z-20 animated fast hidden global-music-player__biger-player__scroll"
+              size="xs"
+              className="absolute top-0 right-0 z-20 m-2"
               onClick={this.handleHiddenBiggerPlayer}
             />
-            {/* <BlurBackground /> */}
-            <Playlist className="w-full h-full bg-gradient" />
+            <Playlist className="w-full h-full bg-gradient shadow-lg" isPlaying />
           </div>
         </div>
         <div className="w-full relative bg-gradient">
-          <div className="container relative flex items-center h-16 mx-auto z-10 px-1">
+          <div className="container-custom container relative flex items-center h-16 mx-auto z-10 px-1">
             <div className="flex mr-2 items-center mr-5">
               <Image className="h-10 w-10 mr-2 cursor-pointer rounded-sm" src={playingMusic.img} />
               <div className="flex flex-col">
-                <div className="text-sm text-white cursor-pointer w-48 overflow-hidden truncate">{playingMusic.name}</div>
-                <div className="text-xs text-gray-500 cursor-pointer w-48 overflow-hidden truncate">{playingMusic.singersName}</div>
+                <div className="text-sm text-white cursor-pointer w-32 overflow-hidden truncate">{playingMusic.name}</div>
+                <div className="text-xs text-gray-500 cursor-pointer w-32 overflow-hidden truncate">{playingMusic.singersName}</div>
               </div>
             </div>
             <div className="flex items-center">

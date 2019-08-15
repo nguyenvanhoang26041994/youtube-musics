@@ -1,3 +1,13 @@
+// .container.container-custom {
+//   max-width: 60rem;
+// }
+
+@media (min-width: 1280px) {
+  .container-custom.container {
+    max-width: 960px;
+  }
+}
+
 .bg-gradient {
   background: #232526; /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #232526, #414345); /* Chrome 10-25, Safari 5.1-6 */
