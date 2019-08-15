@@ -59,18 +59,12 @@ app
     server.use('/', express.static('.next'));
     server.use(express.static('static'));
 
-    server.get('/_next/*', (req, res) => {
-      /* serving _next static content using next.js handler */
-      handle(req, res);
-    });
-
-    server.get('/static/*', (req, res) => {
-      handle(req, res);
-    });
+    server.get('/_next/*', (req, res) => handle(req, res));
+    server.get('/static/*', (req, res) => handle(req, res));
 
     server.get('*', (req, res) => {
       const question = req.path.split('/')[0];
-      const shouldCache = asking[question] !== 'NO-CACHE';
+      const shouldCache = !dev && asking[question] !== 'NO-CACHE';
 
       if (shouldCache) {
         return renderAndCache(req, res);
