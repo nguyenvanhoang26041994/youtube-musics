@@ -54,11 +54,6 @@ class GlobalMusicPlayer extends React.Component {
       this.musicRef.current.load && this.musicRef.current.load();
       this.musicRef.current.play && this.musicRef.current.play();
     }
-
-    if (this.musicRef.current) {
-      this.musicRef.current.volume = prevState.musicVolume;
-      this.musicRef.current.currentMusicTime = prevState.currentMusicTime;
-    }
   }
 
   setStateWhenAudioLoaded = () => {
@@ -73,15 +68,25 @@ class GlobalMusicPlayer extends React.Component {
 
   playMusic = () => this.musicRef && this.musicRef.current && this.musicRef.current.play && this.musicRef.current.play();
   pauseMusic = () => this.musicRef && this.musicRef.current && this.musicRef.current.pause && this.musicRef.current.pause();
+  changeVolume = volume => {
+    if (this.musicRef && this.musicRef.current) {
+      this.musicRef.current.volume = volume;
+    }
+  };
+  changeCurrentTime = time => {
+    if (this.musicRef && this.musicRef.current) {
+      this.musicRef.current.currentTime = time;
+    }
+  };
 
-  handleChangeMusicVolume = (e, { value }) => this.setState({ musicVolume: value });
-  handleChangeCurrentMusicTime = (e, { value }) => this.setState({ currentMusicTime: value * this.state.musicTime });
+  handleChangeMusicVolume = (e, { value }) => this.changeVolume(value);
+  handleChangeCurrentMusicTime = (e, { value }) => this.changeCurrentTime(value * this.state.musicTime);
   handleHiddenBiggerPlayer = () => this.setState({ isShowBiggerPlayer : false });
   handleShowBiggerPlayer = () => this.setState({ isShowBiggerPlayer : true });
   toggleShowBiggerPlayer = () => this.setState(prevState => ({ ...prevState, isShowBiggerPlayer: !prevState.isShowBiggerPlayer }))
 
   onTimeUpdate = e => this.setState({ currentMusicTime: e.target.currentTime });
-  onVolumeChange = e => this.setState({ volume: e.target.volume });
+  onVolumeChange = e => this.setState({ musicVolume: e.target.volume });
   onEnded = e => this.props.playingMusicActions.changeIsPlaying(!e.target.paused);
   onPlay = e => this.props.playingMusicActions.changeIsPlaying(!e.target.paused);
   onPause = e => this.props.playingMusicActions.changeIsPlaying(!e.target.paused);

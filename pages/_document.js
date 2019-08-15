@@ -35,7 +35,6 @@ export default class extends Document {
     return (
       <Html>
         <Head>
-          <link rel="stylesheet" href="/static/css/fontawesome.min.css" />
           <link rel="stylesheet" href="/static/css/animate.min.css" />
           <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light&display=swap" rel="stylesheet" />
         </Head>
