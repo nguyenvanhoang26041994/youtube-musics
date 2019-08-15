@@ -1,11 +1,16 @@
 import fp from 'lodash/fp';
 import { mode } from '../constants/playing-list';
 import { changeMusic } from '../actions/playing-music';
-import { changePlayingList } from './playing-list';
+import { changePlayingList, changeMode } from './playing-list';
 
 export const goNextSong = () => ({ dispatch, getState }) => {
   const state = getState();
   const musics = state.playingList.musics;
+
+  if (!musics.length) {
+    return;
+  }
+
   const idx = fp.findIndex(music => music.id === state.playingMusic.id, musics);
 
   switch(state.playingList.mode) {
@@ -33,7 +38,12 @@ export const goNextSong = () => ({ dispatch, getState }) => {
 export const goPrevSong = () => ({ dispatch, getState }) => {
   const state = getState();
   const musics = state.playingList.musics;
-  const idx = fp.findIndex(music => music.id === state.playingMusic.id, musics);
+
+  if (!musics.length) {
+    return;
+  }
+
+  const idx = fp.findIndex(music => music.id === state.playingMusic.id, musics) || 0;
 
   switch(state.playingList.mode) {
     case mode.REPEAT: {
@@ -59,7 +69,13 @@ export const goPrevSong = () => ({ dispatch, getState }) => {
 
 export const playPlaylist = payload => ({ dispatch }) => {
   dispatch(changePlayingList(payload));
-  if (payload && payload.musics) {
+  if (payload && payload.musics && payload.musics[0]) {
     dispatch(changeMusic(payload.musics[0]));
+    dispatch(changeMode(mode.LOOP));
   }
+};
+
+export const playMusic = payload => ({ dispatch }) => {
+  dispatch(changeMusic(payload));
+  dispatch(changeMode(mode.REPEAT));
 };

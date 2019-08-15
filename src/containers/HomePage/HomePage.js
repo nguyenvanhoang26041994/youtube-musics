@@ -54,7 +54,7 @@ const HomePage = ({ playerActions }) => (
         <div className="w-1/4 p-2">
           <SongCard
             className="w-full"
-            onClick={f => f}
+            onClick={() => playerActions.playMusic(song)}
             {...song}
           />
         </div>

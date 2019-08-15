@@ -34,12 +34,12 @@ const SongCardWrapper = styled.div`
   }
 `;
 
-const SongCard = ({ className, img, name, singersName }) => {
+const SongCard = ({ className, img, name, singersName, onClick }) => {
   return (
     <SongCardWrapper className={cn('ui-song-card h-64 w-48 cursor-pointer p-1 flex flex-col', className)}>
       <div className="w-full h-48 relative">
         <div className="ui-song-card__playbutton absolute z-10 absolute-center">
-          <Icon name="play-circle" size="5xl" color="gray-200" />
+          <Icon name="play-circle" size="5xl" color="gray-200" onClick={onClick} />
         </div>
         <Image className="ui-song-card__bg-img w-full h-full" src={img} />
       </div>

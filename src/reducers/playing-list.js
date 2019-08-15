@@ -23,7 +23,7 @@ export default (state = defaultState, action) => {
     case playlist.CHANGE_MODE:
       return {
         ...state,
-        mode: payload,
+        mode: action.payload,
       };
     case playlist.CHANGE_TO_NEXT_MODE:
       return {
