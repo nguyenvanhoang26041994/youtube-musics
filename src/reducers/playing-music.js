@@ -4,7 +4,6 @@ const defaultState = {
   id: '',
   src: '',
   name: '',
-  singer: {},
   singers: [],
   img: '',
   isPlaying: false,

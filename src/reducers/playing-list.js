@@ -9,7 +9,11 @@ const nextMode = Object.freeze({
 
 
 const defaultState = {
-  ...playlistsAsObject['playlist-001'],
+  id: '',
+  name: '',
+  musics: [],
+  listenCount: 0,
+  user: {},
   mode: mode.LOOP,
 };
 
