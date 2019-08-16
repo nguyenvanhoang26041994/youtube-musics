@@ -3,12 +3,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-// import withInjectReducer from '../../HOC/withInjectReducer';
-// import withInjectSaga from '../../HOC/withInjectSaga';
 import withPlayerActions from '../../HOC/withPlayerActions';
-import reducer from './reducer';
-import saga from './saga';
-import RankingBoard from '../RankingBoard';
 import PlaylistCard from '../../components/PlaylistCard';
 import SongCard from '../../containers/SongCard';
 import Panel from './Panel';

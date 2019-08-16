@@ -10,8 +10,6 @@ import { Image, Icon } from '../../components/core';
 import Profile from '../../components/Profile';
 import musicsFormater from '../../selectors/utils/musicsFormater';
 
-import { fetchProfile } from './fetchs';
-
 import * as actionCreators from './actions';
 
 const ProfilePageWrapper = styled.div``;
@@ -19,6 +17,7 @@ const ProfilePageWrapper = styled.div``;
 const ProfilePage = ({ className, musics, profile }) => {
   const router = useRouter();
   const { id } = router.query;
+  console.log(router);
 
   return (
     <ProfilePageWrapper className={cn('profile-page container-custom container mx-auto flex flex-col flex-1 animated fadeIn', className)}>
@@ -46,9 +45,9 @@ const ProfilePageEnhancer = compose(
 
 ProfilePageEnhancer.displayName= 'ProfilePageEnhancer';
 
-ProfilePageEnhancer.getInitialProps = async ({ query, reduxStore }) => {
-  const profile = await fetchProfile(query.id);
-  reduxStore.dispatch(actionCreators.getProfileSuccess(profile));
+ProfilePageEnhancer.getInitialProps = async ({ query, reduxStore: store, isSever }) => {
+  console.log('SV', query);
+  await store.dispatch(actionCreators.getProfile(query.id));
   return {};
 }
 

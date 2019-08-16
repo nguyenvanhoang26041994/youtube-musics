@@ -7,11 +7,17 @@ import Layout from '../layouts/Layout';
 import GlobalMusicPlayer from '../containers/GlobalMusicPlayer';
 import withReduxStore from '../libs/with-redux-store';
 
+import isSever from '../utils/isSever';
+
 class RootApp extends App {
-  static getInitialProps = async ({ Component, ctx }) =>
-    Component.getInitialProps
+  static getInitialProps = async ({ Component, ctx }) => {
+    ctx.isSever = isSever
+
+    return Component.getInitialProps
       ? await Component.getInitialProps(ctx)
       : { pageProps: {} };
+  }
+
 
   render() {
     const { Component, pageProps, reduxStore } = this.props;

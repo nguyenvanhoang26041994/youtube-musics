@@ -28,7 +28,7 @@ export default (state = defaultState, action) => {
           name: action.payload.name,
           displayRole: action.payload.displayRole,
           isVerified: action.payload.isVerified,
-          qoute: action.payload.qoute,
+          qoute: action.payload.qoute || {},
           avatarImg: action.payload.avatarImg,
           coverImg: action.payload.coverImg,
         },
