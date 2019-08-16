@@ -8,8 +8,8 @@ const QuoteWrapper = styled.div``;
 const Quote = ({ className, children, author }) => {
   return (
     <QuoteWrapper className={cn('ui-qoute flex flex-col font-lovers-quarrel', className)}>
-      <q>{children}</q>
-      <div className="flex justify-end">--{author}--</div>
+      {children && <q>{children}</q>}
+      {author && <div className="flex justify-end">--{author}--</div>}
     </QuoteWrapper>
   );
 };

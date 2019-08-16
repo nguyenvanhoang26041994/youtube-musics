@@ -1,12 +1,16 @@
-import { takeEvery, put, fork } from 'redux-saga/effects';
-import { profilePageActions } from './constants';
+import { takeEvery, put, call } from 'redux-saga/effects';
+import fetch from 'isomorphic-fetch';
+import { profilePage } from './constants';
+import { getProfileSuccess } from './actions';
+
+import { fetchProfile } from './fetchs';
 
 function* getProfile() {
-  console.log(2);
+  const profile = yield call(fetchProfile);
+  console.log('profile', profile);
+  yield put(getProfileSuccess(profile));
 }
 
 export default function* () {
-  yield fork(
-    yield takeEvery(profilePageActions.GET_PROFILE_REQUEST, getProfile),
-  );
+  yield takeEvery(profilePage.GET_PROFILE_REQUEST, getProfile);
 }

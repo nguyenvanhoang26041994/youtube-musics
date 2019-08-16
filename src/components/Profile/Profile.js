@@ -12,14 +12,14 @@ const WallpaperWrapper = styled.div``;
 const ProfileHeadWrapper = styled.div``;
 const ProfileBobyWrapper = styled.div``;
 
-const Profile = ({ className, musics }) => {
+const Profile = ({ className, musics, profile }) => {
   return (
     <ProfileWrapper className={cn('ui-profile w-full', className)}>
       <ProfileHeadWrapper className="ui-profile__head flex flex-col">
         <WallpaperWrapper className="h-72 relative flex flex-col justify-end">
-          <Image src="https://musically.com/wp-content/uploads/2017/01/ed-sheeran-1500x500.jpg" className="w-full h-full absolute top-0 left-0 z-m1" />
-          <Quote className="text-white text-2xl absolute top-haft right-0 p-2" author="Helen Keller">
-            Love is like a beautiful flower which I may not touch, but whose fragrance makes the garden a place of delight just the same
+          <Image src={profile.coverImg} className="w-full h-full absolute top-0 left-0 z-m1" />
+          <Quote className="text-white text-2xl absolute top-haft right-0 p-2" author={profile.qoute.author}>
+            {profile.qoute.text}
           </Quote>
           <div className="flex justify-end m-2">
             <Button color="teal-400" className="rounded-full text-white">PLAY HIM MUSIC</Button>
@@ -32,14 +32,14 @@ const Profile = ({ className, musics }) => {
           <SingerSoftInfoWrapper className="absolute left-0 bottom-haft flex ml-5">
             <Image
               className="rounded-full w-32 h-32 cursor-pointer"
-              src="https://images-i.jpimedia.uk/imagefetch/c_fill,f_auto,h_1700,q_auto:eco,w_1133/https://inews.co.uk/wp-content/uploads/2018/09/Ed-Sheeran-credit-Mark-Surridge.jpg"
+              src={profile.avatarImg}
             />
             <div className="flex flex-col justify-center ml-5">
               <div className="text-white text-3xl font-lovers-quarrel">
-                Ed Sheeran
-                <Icon name="verified" size="sm" color="teal-400" className="ml-3" />
+                {profile.name}
+                {profile.isVerified && <Icon name="verified" size="sm" color="teal-400" className="ml-3" />}
               </div>
-              <div className="text-teal-400 text-xs">Famous singer</div>
+              <div className="text-teal-400 text-xs">{profile.displayRole}</div>
             </div>
           </SingerSoftInfoWrapper>
         </div>
@@ -61,7 +61,13 @@ const Profile = ({ className, musics }) => {
 };
 
 Profile.displayName = 'Profile';
-Profile.propTypes = {};
-Profile.defaultProps = {};
+Profile.propTypes = {
+  profile: PropTypes.object,
+};
+Profile.defaultProps = {
+  profile: {
+    qoute: {},
+  }
+};
 
 export default Profile;

@@ -1,4 +1,4 @@
-import { profilePageActions } from './constants';
+import { profilePage } from './constants';
 
 const defaultState = {
   profile: {
@@ -10,6 +10,8 @@ const defaultState = {
       text: '',
       author: '',
     },
+    avatarImg: '',
+    coverImg: '',
   },
   isProfileFetching: false,
   isProfileError: false,
@@ -18,28 +20,30 @@ const defaultState = {
 
 export default (state = defaultState, action) => {
   switch (action.type) {
-    case profilePageActions.GET_PROFILE_SUCCESS:
+    case profilePage.GET_PROFILE_SUCCESS:
       return {
         ...state,
         profile: {
-          id: action.playload.id,
-          name: action.playload.name,
-          displayRole: action.playload.displayRole,
-          isVerified: action.playload.isVerified,
-          qoute: action.playload.qoute,
+          id: action.payload.id,
+          name: action.payload.name,
+          displayRole: action.payload.displayRole,
+          isVerified: action.payload.isVerified,
+          qoute: action.payload.qoute,
+          avatarImg: action.payload.avatarImg,
+          coverImg: action.payload.coverImg,
         },
         isProfileFetching: false,
         isProfileError: false,
         isProfileSuccess: true,
       };
 
-    case profilePageActions.GET_PROFILE_REQUEST:
+    case profilePage.GET_PROFILE_REQUEST:
       return {
         ...state,
         isProfileFetching: true,
       };
 
-    case profilePageActions.GET_PROFILE_FAILURE:
+    case profilePage.GET_PROFILE_FAILURE:
       return {
         ...state,
         isProfileFetching: false,

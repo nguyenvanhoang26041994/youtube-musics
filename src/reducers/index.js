@@ -4,15 +4,13 @@ import playingMusicReducer from './playingMusicReducer';
 import playingListReducer from './playingListReducer';
 import playlistsReducer from './playlistsReducer';
 import hotSongsReducer from './hotSongsReducer';
+import profilePageReducer from '../containers/ProfilePage/reducer';
 
-const createReducer = (injectedReducers) => combineReducers({
+export default combineReducers({
   playlistsReducer,
   hotSongsReducer,
+  profilePageReducer,
   playingMusic: playingMusicReducer,
   playingList: playingListReducer,
   app: appReducer,
-  ...injectedReducers,
 });
-
-export default createReducer();
-export { createReducer };

@@ -10,23 +10,19 @@ import { Image, Icon } from '../../components/core';
 import Profile from '../../components/Profile';
 import musicsFormater from '../../selectors/utils/musicsFormater';
 
-import withInjectReducer from '../../HOC/withInjectReducer';
-import withInjectSaga from '../../HOC/withInjectSaga';
-
-import reducer from './reducer';
-import saga from './saga';
+import { fetchProfile } from './fetchs';
 
 import * as actionCreators from './actions';
 
 const ProfilePageWrapper = styled.div``;
 
-const ProfilePage = ({ className, musics }) => {
+const ProfilePage = ({ className, musics, profile }) => {
   const router = useRouter();
   const { id } = router.query;
 
   return (
     <ProfilePageWrapper className={cn('profile-page container-custom container mx-auto flex flex-col flex-1 animated fadeIn', className)}>
-      <Profile musics={musics} />
+      <Profile musics={musics} profile={profile} />
     </ProfilePageWrapper>
   );
 };
@@ -41,18 +37,18 @@ const mapStateToProps = state => ({
       ? state.playlistsReducer.playlists[0].musics
       : []
   ),
+  profile: state.profilePageReducer.profile,
 });
 
 const ProfilePageEnhancer = compose(
-  connect(
-    mapStateToProps,
-  ),
-  // withInjectSaga({ key: 'profilePage', saga }),
-  withInjectReducer({ key: 'profilePage', reducer }),
+  connect(mapStateToProps),
 )(ProfilePage);
 
-ProfilePageEnhancer.getInitialProps = async ({ query }, store) => {
-  store.dispatch(actionCreators.getProfile(query.id));
+ProfilePageEnhancer.displayName= 'ProfilePageEnhancer';
+
+ProfilePageEnhancer.getInitialProps = async ({ query, reduxStore }) => {
+  const profile = await fetchProfile(query.id);
+  reduxStore.dispatch(actionCreators.getProfileSuccess(profile));
   return {};
 }
 

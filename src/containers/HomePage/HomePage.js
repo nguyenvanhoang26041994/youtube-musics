@@ -3,8 +3,8 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import withInjectReducer from '../../HOC/withInjectReducer';
-import withInjectSaga from '../../HOC/withInjectSaga';
+// import withInjectReducer from '../../HOC/withInjectReducer';
+// import withInjectSaga from '../../HOC/withInjectSaga';
 import withPlayerActions from '../../HOC/withPlayerActions';
 import reducer from './reducer';
 import saga from './saga';
@@ -58,8 +58,8 @@ const HomePageEnhancer = compose(
     hotSongs: musicsFormater(state.hotSongsReducer.musics),
   })),
   withPlayerActions,
-  withInjectSaga({ key: 'homePage', saga }),
-  withInjectReducer({ key: 'homePage', reducer }),
+  // withInjectSaga({ key: 'homePage', saga }),
+  // withInjectReducer({ key: 'homePage', reducer }),
 )(HomePage);
 
 export default HomePageEnhancer;

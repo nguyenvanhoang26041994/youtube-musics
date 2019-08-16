@@ -20,5 +20,14 @@ const defaultState = {
 };
 
 export default (state = defaultState, action) => {
-  return state;
+  switch (action.type) {
+    case 'TEST':
+      return {
+        ...state,
+        isError: 'SUCCESS',
+      };
+  
+    default:
+      return state;
+  }
 }

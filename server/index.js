@@ -79,7 +79,9 @@ app
     server.get('/static/*', (req, res) => handle(req, res));
 
     server.get('/profile/:id', (req, res) => {
-      return renderAndCache(req, res, '/profile', { id: req.params.id });
+      return dev
+        ? app.render(req, res, '/profile', { id: req.params.id })
+        : renderAndCache(req, res, '/profile', { id: req.params.id });
     });
 
     server.get('*', (req, res) => {
