@@ -31,14 +31,14 @@
     "redux-saga": "^1.0.4",
     "reselect": "^4.0.0",
     "styled-components": "^4.3.2",
-    "tailwindcss": "^1.0.4"
-  },
-  "devDependencies": {
+    "tailwindcss": "^1.0.4",
     "@zeit/next-sass": "^1.0.1",
     "cross-env": "^5.2.0",
     "node-sass": "^4.12.0",
     "postcss": "^7.0.17",
     "postcss-preset-env": "^6.6.0",
     "redux-devtools-extension": "^2.13.8"
+  },
+  "devDependencies": {
   }
 }
