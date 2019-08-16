@@ -16,40 +16,19 @@
   background: #232526;
 }
 
-.bg-gradient {
-  background: #232526; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #232526, #414345); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #232526, #414345); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+.bg-lizard {
+  background-color: rgb(48, 67, 82);
+}
+
+.bg-lizard-gradient {
+  background: rgb(48, 67, 82);
+  background: -webkit-linear-gradient(to right, rgb(48, 67, 82), rgb(215, 210, 204));
+  background: linear-gradient(to right, rgb(48, 67, 82), rgb(215, 210, 204));
 }
 
 .scrollbar-hidden::-webkit-scrollbar,
 .scrollbar-hidden ::-webkit-scrollbar { 
   display: none; 
-}
-
-.bg-primary-gradient,
-.bg-body-gradient {
-  background: #00416a; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #00416a, #e4e5e6); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #00416a, #e4e5e6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
-
-.bg-primary-blur {
-  background-image: url('/static/img/bg-blur.jpg');
-  background-attachment: fixed;
-  background-size: cover;
-  background-repeat: no-repeat;
-  // filter: brightness(20%) opacity(100%);
-}
-
-.bg-primary {
-  // background-image: url('https://media.laodong.vn/storage/newsportal/2019/7/1/741910/Stg02291-15619849253.jpg');
-  background-image: url('/static/img/bg-blur.jpg');
-  filter: grayscale(65%) brightness(45%) opacity(100%);
-  background-attachment: fixed;
-  background-size: cover;
-  background-repeat: no-repeat;
-  z-index: -1;
 }
 
 .font-cool {

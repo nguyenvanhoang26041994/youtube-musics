@@ -125,10 +125,10 @@ class GlobalMusicPlayer extends React.Component {
               className="absolute top-0 right-0 z-20 m-2"
               onClick={this.handleHiddenBiggerPlayer}
             />
-            <Playlist className="w-full h-full bg-gradient shadow-lg" isPlaying />
+            <Playlist className="w-full h-full bg-lizard-gradient shadow-lg" isPlaying />
           </div>
         </div>
-        <div className="w-full relative bg-matteblack">
+        <div className="w-full relative bg-lizard">
           <div className="container-custom container relative flex items-center h-16 mx-auto z-10 px-1">
             <div className="flex mr-2 items-center mr-5">
               <Image className="h-10 w-10 mr-2 cursor-pointer rounded-sm" src={playingMusic.img} />

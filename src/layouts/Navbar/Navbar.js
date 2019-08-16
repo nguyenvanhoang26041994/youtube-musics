@@ -7,7 +7,7 @@ const NavbarWrapper = styled.nav`
 `;
 
 const Navbar = ({ className }) => (
-  <NavbarWrapper className={cn('ui-navbar relative overflow-hidden flex justify-center text-white w-full h-16 bg-gradient', className)}>
+  <NavbarWrapper className={cn('ui-navbar relative overflow-hidden flex justify-center text-white w-full h-16 bg-lizard-gradient', className)}>
     <div className="container-custom container flex items-center px-1">
       <div className="flex items-center flex-1">
         <div className="w-72">
