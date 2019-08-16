@@ -8,7 +8,23 @@ import MusicCard from '../../containers/MusicCard';
 
 const ProfileWrapper = styled.div``;
 const SingerSoftInfoWrapper = styled.div``;
-const WallpaperWrapper = styled.div``;
+const WallpaperWrapper = styled.div`
+  .ui-profile__cover-bg {
+    img {
+      filter: blur(2px) grayscale(50%) brightness(50%);;
+      transition: 0.5s;
+    }
+  }
+
+  &:hover {
+    .ui-profile__cover-bg {
+      img {
+        filter: none;
+        transform: scale(1.1, 1.1);
+      }
+    }
+  }
+`;
 const ProfileHeadWrapper = styled.div``;
 const ProfileBobyWrapper = styled.div``;
 
@@ -17,7 +33,7 @@ const Profile = ({ className, musics, profile }) => {
     <ProfileWrapper className={cn('ui-profile w-full', className)}>
       <ProfileHeadWrapper className="ui-profile__head flex flex-col">
         <WallpaperWrapper className="h-72 relative flex flex-col justify-end">
-          <Image src={profile.coverImg} className="w-full h-full absolute top-0 left-0 z-m1" />
+          <Image src={profile.coverImg} className="ui-profile__cover-bg w-full h-full absolute top-0 left-0 z-m1" />
           <Quote className="text-white text-2xl absolute top-haft right-0 p-2" author={profile.qoute.author}>
             {profile.qoute.text}
           </Quote>
