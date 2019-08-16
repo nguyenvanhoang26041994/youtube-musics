@@ -13,32 +13,32 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@zeit/next-sass": "^1.0.1",
     "classnames": "^2.2.6",
     "compression": "^1.7.4",
+    "cross-env": "^5.2.0",
     "express": "^4.17.1",
     "firebase-admin": "^8.3.0",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.11",
     "lru-cache": "^5.1.1",
+    "mobile-detect": "^1.4.3",
     "next": "^8.1.0",
     "next-offline": "^4.0.2",
+    "node-sass": "^4.12.0",
     "path": "^0.12.7",
+    "postcss": "^7.0.17",
+    "postcss-preset-env": "^6.6.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.1.0",
     "redux": "^4.0.1",
+    "redux-devtools-extension": "^2.13.8",
     "redux-saga": "^1.0.4",
     "reselect": "^4.0.0",
     "styled-components": "^4.3.2",
-    "tailwindcss": "^1.0.4",
-    "@zeit/next-sass": "^1.0.1",
-    "cross-env": "^5.2.0",
-    "node-sass": "^4.12.0",
-    "postcss": "^7.0.17",
-    "postcss-preset-env": "^6.6.0",
-    "redux-devtools-extension": "^2.13.8"
+    "tailwindcss": "^1.0.4"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }

@@ -20,8 +20,8 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
-const renderAndCache = async (req, res) => {
-  const key = `${req.path}`;
+const renderAndCache = async (req, res, path, query) => {
+  const key = `${path || req.path}`;
 
   // If we have a page in the cache, let's serve it
   if (ssrCache.has(key)) {
@@ -32,7 +32,12 @@ const renderAndCache = async (req, res) => {
 
   try {
     // If not let's render the page into HTML
-    const html = await app.renderToHTML(req, res, req.path, req.query);
+    const html = await app.renderToHTML(
+      req,
+      res,
+      path || req.path,
+      query || req.query
+    );
 
     // Something is wrong with the request, let's skip the cache
     if (res.statusCode !== 200) {
@@ -46,7 +51,13 @@ const renderAndCache = async (req, res) => {
     res.setHeader('x-cache', 'MISS');
     res.send(html);
   } catch(err) {
-    app.renderError(err, req, res, req.path, req.query);
+    app.renderError(
+      err,
+      req,
+      res,
+      path || req.path,
+      query || req.query
+    );
   }
 };
 
@@ -61,6 +72,10 @@ app
 
     server.get('/_next/*', (req, res) => handle(req, res));
     server.get('/static/*', (req, res) => handle(req, res));
+
+    server.get('/profile/:id', (req, res) => {
+      return renderAndCache(req, res, '/profile', { id: req.params.id });
+    });
 
     server.get('*', (req, res) => {
       const question = req.path.split('/')[0];
