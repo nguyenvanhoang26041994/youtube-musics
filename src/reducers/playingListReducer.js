@@ -12,7 +12,6 @@ const defaultState = {
   id: '',
   name: '',
   musics: [],
-  listenCount: 0,
   user: {},
   mode: mode.LOOP,
 };
@@ -22,7 +21,10 @@ export default (state = defaultState, action) => {
     case playlist.CHANGE_PLAYING_LIST:
       return {
         ...state,
-        ...action.payload,
+        id: action.payload.id,
+        name: action.payload.name,
+        musics: action.payload.musics,
+        user: action.payload.user,
       };
     case playlist.CHANGE_MODE:
       return {
