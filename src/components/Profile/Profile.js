@@ -35,11 +35,11 @@ const Profile = ({ className, musics }) => {
               src="https://images-i.jpimedia.uk/imagefetch/c_fill,f_auto,h_1700,q_auto:eco,w_1133/https://inews.co.uk/wp-content/uploads/2018/09/Ed-Sheeran-credit-Mark-Surridge.jpg"
             />
             <div className="flex flex-col justify-center ml-5">
-              <div className="text-white text-3xl">
+              <div className="text-white text-3xl font-lovers-quarrel">
                 Ed Sheeran
-                <Icon name="verified" size="2xl" color="teal-400" className="ml-3" />
+                <Icon name="verified" size="sm" color="teal-400" className="ml-3" />
               </div>
-              <div className="text-teal-400 text-sm">Famous singer</div>
+              <div className="text-teal-400 text-xs">Famous singer</div>
             </div>
           </SingerSoftInfoWrapper>
         </div>
