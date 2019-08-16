@@ -10,7 +10,7 @@ import store from '../store';
 class RootApp extends App {
   static getInitialProps = async ({ Component, ctx }) =>
     Component.getInitialProps
-      ? await Component.getInitialProps(ctx)
+      ? await Component.getInitialProps(ctx, store)
       : { pageProps: {} };
 
   render() {

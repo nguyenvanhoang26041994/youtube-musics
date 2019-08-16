@@ -22,4 +22,6 @@ const PlaylistPage = ({ className }) => {
   );
 };
 
-export default PlaylistPage;
+const PlaylistPageEnhancer = PlaylistPage;
+
+export default PlaylistPageEnhancer;

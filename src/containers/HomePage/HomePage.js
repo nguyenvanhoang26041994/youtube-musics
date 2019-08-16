@@ -52,7 +52,7 @@ const HomePage = ({ playerActions, playlists, hotSongs = [] }) => {
   );
 };
 
-export default compose(
+const HomePageEnhancer = compose(
   connect(state => ({
     playlists: playlistsFormater(state.playlistsReducer.playlists),
     hotSongs: musicsFormater(state.hotSongsReducer.musics),
@@ -61,3 +61,5 @@ export default compose(
   withInjectSaga({ key: 'homePage', saga }),
   withInjectReducer({ key: 'homePage', reducer }),
 )(HomePage);
+
+export default HomePageEnhancer;

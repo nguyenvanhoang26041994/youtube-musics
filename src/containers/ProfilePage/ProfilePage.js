@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { compose, bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import cn from 'classnames';
@@ -9,6 +9,14 @@ import styled from 'styled-components';
 import { Image, Icon } from '../../components/core';
 import Profile from '../../components/Profile';
 import musicsFormater from '../../selectors/utils/musicsFormater';
+
+import withInjectReducer from '../../HOC/withInjectReducer';
+import withInjectSaga from '../../HOC/withInjectSaga';
+
+import reducer from './reducer';
+import saga from './saga';
+
+import * as actionCreators from './actions';
 
 const ProfilePageWrapper = styled.div``;
 
@@ -35,6 +43,17 @@ const mapStateToProps = state => ({
   ),
 });
 
-export default compose(
-  connect(mapStateToProps),
+const ProfilePageEnhancer = compose(
+  connect(
+    mapStateToProps,
+  ),
+  // withInjectSaga({ key: 'profilePage', saga }),
+  withInjectReducer({ key: 'profilePage', reducer }),
 )(ProfilePage);
+
+ProfilePageEnhancer.getInitialProps = async ({ query }, store) => {
+  store.dispatch(actionCreators.getProfile(query.id));
+  return {};
+}
+
+export default ProfilePageEnhancer;

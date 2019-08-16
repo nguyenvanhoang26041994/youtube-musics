@@ -3,17 +3,21 @@ const next = require('next');
 const compression = require('compression');
 const LRUCache = require('lru-cache');
 
+const api = require('./api');
+
 const ssrCache = new LRUCache({
   max: 1 * 1024 * 1024,
   length: function (n, key) {
     return n.length
   },
-  maxAge: 60 * 1000, // ten seconds
+  maxAge: 0,
+  // maxAge: 60 * 1000, // ten seconds
 });
 
 const asking = {
   '_next': 'NO-CACHE',
   'static': 'NO-CACHE',
+  'api': 'NO-CACHE',
 };
 
 const dev = process.env.NODE_ENV !== 'production';
@@ -21,7 +25,7 @@ const app = next({ dev });
 const handle = app.getRequestHandler();
 
 const renderAndCache = async (req, res, path, query) => {
-  const key = `${path || req.path}`;
+  const key = `${req.path}`;
 
   // If we have a page in the cache, let's serve it
   if (ssrCache.has(key)) {
@@ -69,6 +73,7 @@ app
     server.use(compression());
     server.use('/', express.static('.next'));
     server.use(express.static('static'));
+    server.use('/api', api);
 
     server.get('/_next/*', (req, res) => handle(req, res));
     server.get('/static/*', (req, res) => handle(req, res));
