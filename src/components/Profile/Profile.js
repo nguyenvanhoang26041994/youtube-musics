@@ -6,10 +6,19 @@ import PropTypes from 'prop-types';
 import { Image, Icon, Button, Quote } from '../../components/core';
 import MusicCard from '../../containers/MusicCard';
 
+const defaultPropfile = {
+  id: 'unknown',
+  name: 'Unknown',
+  qoute: {},
+  coverImg: 'https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832__340.jpg',
+  avatarImg: 'https://img.icons8.com/bubbles/2x/user.png',
+  displayRole: 'Unknown',
+}
+
 const ProfileWrapper = styled.div``;
 const SingerSoftInfoWrapper = styled.div``;
 const WallpaperWrapper = styled.div`
-  .ui-profile__cover-bg {
+  .--cover-background {
     img {
       filter: blur(2px) grayscale(50%) brightness(50%);;
       transition: 0.5s;
@@ -17,7 +26,7 @@ const WallpaperWrapper = styled.div`
   }
 
   &:hover {
-    .ui-profile__cover-bg {
+    .--cover-background {
       img {
         filter: none;
         transform: scale(1.1, 1.1);
@@ -33,7 +42,7 @@ const Profile = ({ className, musics, profile }) => {
     <ProfileWrapper className={cn('ui-profile w-full', className)}>
       <ProfileHeadWrapper className="ui-profile__head flex flex-col">
         <WallpaperWrapper className="h-72 relative flex flex-col justify-end">
-          <Image src={profile.coverImg} className="ui-profile__cover-bg w-full h-full absolute top-0 left-0 z-m1" />
+          <Image src={profile.coverImg || defaultPropfile.coverImg} className="--cover-background w-full h-full absolute top-0 left-0 z-m1" />
           <Quote className="text-white text-2xl absolute top-haft right-0 p-2" author={profile.qoute.author}>
             {profile.qoute.text}
           </Quote>
@@ -48,14 +57,14 @@ const Profile = ({ className, musics, profile }) => {
           <SingerSoftInfoWrapper className="absolute left-0 bottom-haft flex ml-5">
             <Image
               className="rounded-full w-32 h-32 cursor-pointer"
-              src={profile.avatarImg}
+              src={profile.avatarImg || defaultPropfile.avatarImg}
             />
             <div className="flex flex-col justify-center ml-5">
               <div className="text-white text-3xl font-lovers-quarrel">
-                {profile.name}
+                {profile.name || defaultPropfile.name}
                 {profile.isVerified && <Icon name="verified" size="sm" color="teal-400" className="ml-3" />}
               </div>
-              <div className="text-teal-400 text-xs">{profile.displayRole}</div>
+              <div className="text-teal-400 text-xs">{profile.displayRole || defaultPropfile.displayRole}</div>
             </div>
           </SingerSoftInfoWrapper>
         </div>
