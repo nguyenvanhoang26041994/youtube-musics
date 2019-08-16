@@ -42,7 +42,13 @@ const ProfilePageEnhancer = compose(
 ProfilePageEnhancer.displayName= 'ProfilePageEnhancer';
 
 ProfilePageEnhancer.getInitialProps = async ({ query, reduxStore: store, isSever }) => {
-  await store.dispatch(actionCreators.getProfile(query.id));
+  // in client-side await will be stop render
+  if (isSever) {
+    await store.dispatch(actionCreators.getProfile(query.id));
+  } else {
+    store.dispatch(actionCreators.getProfile(query.id));
+  }
+
   return {};
 }
 
