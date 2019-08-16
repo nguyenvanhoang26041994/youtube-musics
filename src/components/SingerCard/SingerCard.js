@@ -22,15 +22,15 @@ const SingerCardWrapper = styled.div`
 
 const SingerCard = ({ className, avatarImg, name, id, isVerified }) => {
   return (
-    <SingerCardWrapper className={cn('ui-singer-card relative cursor-pointer flex flex-col items-center', className)}>
-      <Link href={`/profile?id=${id}`} as={`/profile/${id}`}>
+    <Link href={`/profile?id=${id}`} as={`/profile/${id}`}>
+      <SingerCardWrapper className={cn('ui-singer-card relative cursor-pointer flex flex-col items-center', className)}>
         <Image className="ui-singer-card__avatar rounded-full h-48 w-48" src={avatarImg} />
-      </Link>
-      <div className="h-12 w-full flex justify-center items-center text-white font-lovers-quarrel text-2xl">
-        {name}
-        {isVerified && <Icon name="verified" size="xs" color="teal-400" className="ml-3" />}
-      </div>
-    </SingerCardWrapper>
+        <div className="h-12 w-full flex justify-center items-center text-white font-lovers-quarrel text-2xl">
+          {name}
+          {isVerified && <Icon name="verified" size="xs" color="teal-400" className="ml-3" />}
+        </div>
+      </SingerCardWrapper>
+    </Link>
   );
 };
 
