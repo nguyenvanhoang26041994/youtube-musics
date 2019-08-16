@@ -72,7 +72,7 @@ const Profile = ({ className, musics, profile }) => {
       <ProfileBobyWrapper>
         <div className="flex flex-wrap">
           {musics.map(music => (
-            <div className="w-1/5 p-2" key={music.id}>
+            <div className="w-1/5 p-1" key={music.id}>
               <MusicCard
                 className="w-full"
                 {...music}

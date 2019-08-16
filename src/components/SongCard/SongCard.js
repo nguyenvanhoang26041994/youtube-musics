@@ -11,6 +11,7 @@ const SongCardWrapper = styled.div`
     .ui-song-card__bg-img {
       img {
         filter: none;
+        transform: scale(1.1, 1.1);
         transition: 0.5s;
       }
     }
@@ -23,8 +24,8 @@ const SongCardWrapper = styled.div`
     &:hover {
       .ui-song-card__bg-img {
         img {
-          filter: blur(2px) grayscale(50%) brightness(50%);
-          transform: scale(1.1, 1.1);
+          filter: blur(1px) grayscale(50%) brightness(50%);
+          transform: scale(1.2, 1.2);
         }
       }
 
@@ -35,10 +36,12 @@ const SongCardWrapper = styled.div`
   }
 `;
 
+const SongCardWrapperRelative = styled.div``;
+
 const SongCard = ({ className, img, name, singersName, listenCount, onClick }) => {
   return (
-    <SongCardWrapper className={cn('ui-song-card h-64 w-48 cursor-pointer p-1 flex flex-col', className)}>
-      <div className="w-full h-48 relative">
+    <SongCardWrapper className={cn('ui-song-card h-64 cursor-pointer flex flex-col', className)}>
+      <SongCardWrapperRelative className="w-full h-48 relative">
         <div className="ui-song-card__playbutton absolute z-10 absolute-center">
           <Icon name="play-circle" size="6xl" color="gray-200" onClick={onClick} />
         </div>
@@ -47,7 +50,8 @@ const SongCard = ({ className, img, name, singersName, listenCount, onClick }) =
           <Icon name="headphones" className="ml-2 text-2xs" />
         </div>
         <Image className="ui-song-card__bg-img w-full h-full" src={img} />
-      </div>
+      </SongCardWrapperRelative>
+
       <div className="flex flex-col">
         <h2 className="text-sm font-bold text-white">{name}</h2>
         <h3 className="text-xs font-bold text-gray-500">{singersName}</h3>
