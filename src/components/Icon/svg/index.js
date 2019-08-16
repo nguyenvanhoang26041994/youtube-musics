@@ -25,6 +25,7 @@ const icons = {
   'loop': require('./loop').default,
   'headphones': require('./headphones').default,
   'play-circle': require('./play-circle').default,
+  'verified': require('./verified').default,
 };
 
 export default icons;

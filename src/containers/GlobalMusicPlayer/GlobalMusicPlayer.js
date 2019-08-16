@@ -1,6 +1,7 @@
 import cn from 'classnames';
 import fp from 'lodash/fp';
 import styled from 'styled-components';
+import Link from 'next/link'
 import { Icon, Slider, BlurBackground, Image } from '../../components/core';
 import Playlist from '../../containers/Playlist';
 import { mode } from '../../constants/playing-list';
@@ -133,7 +134,13 @@ class GlobalMusicPlayer extends React.Component {
               <Image className="h-10 w-10 mr-2 cursor-pointer rounded-sm" src={playingMusic.img} />
               <div className="flex flex-col">
                 <div className="text-sm text-white cursor-pointer w-32 overflow-hidden truncate font-bold">{playingMusic.name}</div>
-                <div className="text-xs text-gray-500 cursor-pointer w-32 overflow-hidden truncate">{playingMusic.singersName}</div>
+                <div className="text-xs text-gray-500 cursor-pointer w-32 overflow-hidden truncate">
+                  {playingMusic.singers.map(singer => (
+                    <Link href={`/profile?id=${singer.id}`}>
+                      {singer.name}
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
             <div className="flex items-center">

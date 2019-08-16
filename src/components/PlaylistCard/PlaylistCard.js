@@ -37,7 +37,7 @@ const PlaylistCard = ({ className, name, musics, listenCount, onClickPlayPlaylis
         <div className="flex flex-col my-2">
           <div className="w-full overflow-hidden truncate text-white text-lg font-bold">{name}</div>
           <div className="w-full overflow-hidden truncate text-gray-400 text-2xs font-mono flex items-center">
-            {musics.length} <span className="font-cool ml-1 text-xs">songs</span>, {formatNumber(listenCount)}<Icon name="headphones" className="ml-1" />
+            {musics.length} <span className="font-shadows-into-light ml-1 text-xs">songs</span>, {formatNumber(listenCount)}<Icon name="headphones" className="ml-1" />
           </div>
         </div>
         <Button size="sm" color="teal-700" size="xs" className="ui-playlist-card__playbutton text-white rounded-sm my-2" onClick={onClickPlayPlaylist}>

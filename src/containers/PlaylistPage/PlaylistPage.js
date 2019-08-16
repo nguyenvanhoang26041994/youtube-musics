@@ -16,7 +16,7 @@ const PlaylistPageWrapper = styled.div`
 
 const PlaylistPage = ({ className }) => {
   return (
-    <PlaylistPageWrapper className={cn('playlist-page container-custom container mx-auto flex flex-col relative flex-1', className)}>
+    <PlaylistPageWrapper className={cn('playlist-page container-custom container mx-auto flex flex-col relative flex-1 animated fadeIn', className)}>
       <Playlist className="bg-gradient shadow-lg mx-auto w-full flex-1" />
     </PlaylistPageWrapper>
   );

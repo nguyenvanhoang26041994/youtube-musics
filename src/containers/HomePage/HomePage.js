@@ -26,7 +26,7 @@ const HomePageWrapper = styled.div`
 
 const HomePage = ({ playerActions, playlists, hotSongs = [] }) => {
   return (
-    <HomePageWrapper id="home-page" className="home-page container-custom container mx-auto flex flex-col">
+    <HomePageWrapper id="home-page" className="home-page container-custom container mx-auto flex flex-col animated fadeIn">
       <Panel className="mb-10" title="HOT PLAYLIST">
         {playlists.map(playlist => (
           <div className="w-1/4 p-2" key={playlist.id}>

@@ -36,9 +36,9 @@ export default class extends Document {
       <Html>
         <Head>
           <link rel="stylesheet" href="/static/css/animate.min.css" />
-          <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light&display=swap" rel="stylesheet" />
+          <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light|Lovers+Quarrel&display=swap" rel="stylesheet" />
         </Head>
-        <body className="font-cool">
+        <body className="font-shadows-into-light">
           <Main />
           <NextScript />
         </body>
