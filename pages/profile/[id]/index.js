@@ -1,1 +1,1 @@
-export { default } from '../../../src/containers/ProfilePage';
+export { default } from '../';
