@@ -31,13 +31,17 @@ const PlaylistCardWrapper = styled.section`
 const PlaylistCard = ({ className, name, musics, listenCount, onClickPlayPlaylist }) => {
   return (
     <PlaylistCardWrapper className={cn('ui-playlist-card h-48 w-48 cursor-pointer p-1 flex flex-col justify-between relative', className)}>
-      <div />
       <Image className="ui-playlist-card__bg-img absolute top-0 left-0 w-full h-full" src={musics[0] && musics[0].img} />
+      <div className="text-white flex items-center absolute top-0 right-0 m-2 z-10">
+        <span className="font-mono text-2xs">{formatNumber(listenCount)}</span>
+        <Icon name="headphones" className="ml-2 text-2xs" />
+      </div>
+      <div />
       <div className="z-10">
         <div className="flex flex-col my-2">
           <div className="w-full overflow-hidden truncate text-white text-lg font-bold">{name}</div>
           <div className="w-full overflow-hidden truncate text-gray-400 text-2xs font-mono flex items-center">
-            {musics.length} <span className="font-shadows-into-light ml-1 text-xs">songs</span>, {formatNumber(listenCount)}<Icon name="headphones" className="ml-1" />
+            {musics.length} <span className="font-shadows-into-light ml-1 text-xs">songs</span>
           </div>
         </div>
         <Button size="sm" color="teal-700" size="xs" className="ui-playlist-card__playbutton text-white rounded-sm my-2" onClick={onClickPlayPlaylist}>

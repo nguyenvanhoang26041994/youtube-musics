@@ -1,17 +1,20 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import styled from 'styled-components';
 
 import { Image, Icon } from '../../components/core';
 import Profile from '../../components/Profile';
+import musicsFormater from '../../selectors/utils/musicsFormater';
 
 const ProfilePageWrapper = styled.div``;
 
-const ProfilePage = ({ className }) => {
+const ProfilePage = ({ className, musics }) => {
   return (
     <ProfilePageWrapper className={cn('profile-page container-custom container mx-auto flex flex-col flex-1 animated fadeIn', className)}>
-      <Profile />
+      <Profile musics={musics} />
     </ProfilePageWrapper>
   );
 };
@@ -20,4 +23,14 @@ ProfilePage.displayName = 'ProfilePage';
 ProfilePage.propTypes = {};
 ProfilePage.defaultProps = {};
 
-export default ProfilePage;
+const mapStateToProps = state => ({
+  musics: musicsFormater(
+    state.playlistsReducer.playlists[0]
+      ? state.playlistsReducer.playlists[0].musics
+      : []
+  ),
+});
+
+export default compose(
+  connect(mapStateToProps),
+)(ProfilePage);

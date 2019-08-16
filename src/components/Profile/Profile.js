@@ -4,16 +4,18 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import { Image, Icon, Button, Quote } from '../../components/core';
+import MusicCard from '../../containers/MusicCard';
 
 const ProfileWrapper = styled.div``;
 const SingerSoftInfoWrapper = styled.div``;
-const TabsWrapper = styled.div``;
 const WallpaperWrapper = styled.div``;
+const ProfileHeadWrapper = styled.div``;
+const ProfileBobyWrapper = styled.div``;
 
-const Profile = ({ className }) => {
+const Profile = ({ className, musics }) => {
   return (
     <ProfileWrapper className={cn('ui-profile w-full', className)}>
-      <div className="ui-profile__head flex flex-col">
+      <ProfileHeadWrapper className="ui-profile__head flex flex-col">
         <WallpaperWrapper className="h-72 relative flex flex-col justify-end">
           <Image src="https://musically.com/wp-content/uploads/2017/01/ed-sheeran-1500x500.jpg" className="w-full h-full absolute top-0 left-0 z-m1" />
           <Quote className="text-white text-2xl absolute top-haft right-0 p-2" author="Helen Keller">
@@ -40,22 +42,22 @@ const Profile = ({ className }) => {
               <div className="text-teal-400 text-sm">Famous singer</div>
             </div>
           </SingerSoftInfoWrapper>
-          {/* <TabsWrapper className="flex w-full bg-matteblack">
-            <div className="w-1/4" />
-            <div className="w-1/4 text-white text-lg flex justify-center items-center cursor-pointer hover:text-teal-400">
-              TIMELINES
-            </div>
-            <div className="w-1/4 text-white text-lg flex justify-center items-center cursor-pointer hover:text-teal-400">
-              SONGS
-            </div>
-            <div className="w-1/4 text-white text-lg flex justify-center items-center cursor-pointer hover:text-teal-400">
-              OTHER
-            </div>
-          </TabsWrapper> */}
         </div>
-      </div>
+      </ProfileHeadWrapper>
+      <ProfileBobyWrapper>
+        <div className="flex flex-wrap">
+          {musics.map(music => (
+            <div className="w-1/5 p-2" key={music.id}>
+              <MusicCard
+                className="w-full"
+                {...music}
+              />
+            </div>
+          ))}
+        </div>
+      </ProfileBobyWrapper>
     </ProfileWrapper>
-  )
+  );
 };
 
 Profile.displayName = 'Profile';

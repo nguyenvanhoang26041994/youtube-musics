@@ -20,6 +20,7 @@ const Layout = ({ children }) => (
     <main className="flex flex-col flex-1">
       {children}
     </main>
+    <div id="__gap-for-fix-global-music-player" className="h-16" />
     <Footer />
   </LayoutWrapper>
 );

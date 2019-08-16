@@ -20,7 +20,11 @@ export default (state = defaultState, action) => {
     case music.CHANGE_MUSIC:
       return {
         ...state,
-        ...action.payload,
+        id: action.payload.id,
+        src: action.payload.src,
+        name: action.payload.name,
+        singers: action.payload.singers,
+        img: action.payload.img,
       };
     default:
       return state;

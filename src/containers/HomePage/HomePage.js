@@ -10,7 +10,7 @@ import reducer from './reducer';
 import saga from './saga';
 import RankingBoard from '../RankingBoard';
 import PlaylistCard from '../../components/PlaylistCard';
-import SongCard from '../../components/SongCard';
+import SongCard from '../../containers/SongCard';
 import Panel from './Panel';
 
 import musicsFormater from '../../selectors/utils/musicsFormater';
@@ -43,7 +43,6 @@ const HomePage = ({ playerActions, playlists, hotSongs = [] }) => {
           <div className="w-1/4 p-2" key={song.id}>
             <SongCard
               className="w-full"
-              onClick={() => playerActions.playMusic(song)}
               {...song}
             />
           </div>
