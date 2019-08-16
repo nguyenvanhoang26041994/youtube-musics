@@ -2,14 +2,20 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import fp from 'lodash/fp';
 
 import withPlayerActions from '../../HOC/withPlayerActions';
 import PlaylistCard from '../../components/PlaylistCard';
 import SongCard from '../../containers/SongCard';
+import SingerCard from '../../components/SingerCard';
 import Panel from './Panel';
 
 import musicsFormater from '../../selectors/utils/musicsFormater';
 import playlistsFormater from '../../selectors/utils/playlistsFormater';
+
+import profiles from '../../../server/data/profiles';
+
+const trendingSingers = profiles;
 
 const HomePageWrapper = styled.div`
   &.home-page {
@@ -22,8 +28,8 @@ const HomePageWrapper = styled.div`
 const HomePage = ({ playerActions, playlists, hotSongs = [] }) => {
   return (
     <HomePageWrapper id="home-page" className="home-page container-custom container mx-auto flex flex-col animated fadeIn">
-      <Panel className="mb-10" title="HOT PLAYLIST">
-        {playlists.map(playlist => (
+      <Panel className="mb-10" title="COOL PLAYLIST">
+        {fp.take(4, playlists).map(playlist => (
           <div className="w-1/4 p-2" key={playlist.id}>
             <PlaylistCard
               className="w-full"
@@ -33,12 +39,22 @@ const HomePage = ({ playerActions, playlists, hotSongs = [] }) => {
           </div>
         ))}
       </Panel>
-      <Panel className="mb-10" title="HOT SONGS">
-        {hotSongs.map(song => (
+      <Panel className="mb-10" title="HOT & NEW SONGS">
+        {fp.take(8, hotSongs).map(song => (
           <div className="w-1/4 p-2" key={song.id}>
             <SongCard
               className="w-full"
               {...song}
+            />
+          </div>
+        ))}
+      </Panel>
+      <Panel className="mb-10" title="TRENDING SINGER">
+        {fp.take(5, trendingSingers).map(singer => (
+          <div className="w-1/4 p-2" key={singer.id}>
+            <SingerCard
+              className="w-full"
+              {...singer}
             />
           </div>
         ))}
@@ -53,8 +69,6 @@ const HomePageEnhancer = compose(
     hotSongs: musicsFormater(state.hotSongsReducer.musics),
   })),
   withPlayerActions,
-  // withInjectSaga({ key: 'homePage', saga }),
-  // withInjectReducer({ key: 'homePage', reducer }),
 )(HomePage);
 
 export default HomePageEnhancer;

@@ -2,6 +2,15 @@ const fp = require('lodash/fp');
 
 const profiles = [
   {
+    id: 'ncs',
+    name: 'No Copyright Sounds',
+    displayRole: 'supper-cool',
+    isVerified: false,
+    qoute: {},
+    avatarImg: 'https://zmp3-photo-fbcrawler.zadn.vn/avatars/b/c/0/d/bc0d7f8d36ef96a040eaad24095d34b9.jpg',
+    coverImg: 'https://s1-ssl.dmcdn.net/v/Kxbeg1T1CXisFvuzM/x240',
+  },
+  {
     id: 'ed-sheeran',
     name: 'Ed Sheeran',
     displayRole: 'famous-singer',
