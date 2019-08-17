@@ -2,7 +2,7 @@ import React from 'react';
 import cn from 'classnames';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import formatNumber from '../../utils/formatNumber';
 
 import { Button, Icon, Image } from '../../components/core';
@@ -41,7 +41,7 @@ const PlaylistCard = ({ className, name, musics, id, listenCount, onClickPlayPla
       return;
     }
 
-    router.push(`/playlist?id=${id}`);
+    return router.push(`/playlist?id=${id}`, `/playlist/${id}`);
   };
 
   return (

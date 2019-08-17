@@ -125,7 +125,7 @@ class GlobalMusicPlayer extends React.Component {
               className="absolute top-0 right-0 z-20 m-2"
               onClick={this.handleHiddenBiggerPlayer}
             />
-            <PlayingList className="w-full h-full bg-lizard-gradient shadow-lg" />
+            <PlayingList className="w-full h-full bg-lizard shadow-lg" />
           </div>
         </div>
         <div className="w-full relative bg-lizard">

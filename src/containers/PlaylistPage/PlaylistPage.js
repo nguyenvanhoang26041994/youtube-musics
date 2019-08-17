@@ -24,7 +24,7 @@ const PlaylistPage = ({ playlist, className }) => {
   return (
     <PlaylistPageWrapper className={cn('playlist-page container-custom container mx-auto flex flex-col relative flex-1 animated fadeIn', className)}>
       <Playlist
-        className="bg-lizard mx-auto w-full flex-1"
+        className="bg-transparent mx-auto w-full flex-1"
         {...playlist}
       />
     </PlaylistPageWrapper>

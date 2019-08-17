@@ -83,6 +83,12 @@ app
         : renderAndCache(req, res, '/profile', { id: req.params.id });
     });
 
+    server.get('/playlist/:id', (req, res) => {
+      return dev
+        ? app.render(req, res, '/playlist', { id: req.params.id })
+        : renderAndCache(req, res, '/playlist', { id: req.params.id });
+    });
+
     server.get('*', (req, res) => {
       const question = req.path.split('/')[0];
       const shouldCache = !dev && asking[question] !== 'NO-CACHE';
