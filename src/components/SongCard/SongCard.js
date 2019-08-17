@@ -2,6 +2,7 @@ import React from 'react';
 import cn from 'classnames';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import Link from 'next/link';
 
 import { Image, Icon } from '../../components/core';
 import formatNumber from '../../utils/formatNumber';
@@ -38,7 +39,7 @@ const SongCardWrapper = styled.div`
 
 const SongCardWrapperRelative = styled.div``;
 
-const SongCard = ({ className, img, name, singersName, listenCount, onClick }) => {
+const SongCard = ({ className, img, name, singers, listenCount, onClick }) => {
   return (
     <SongCardWrapper className={cn('ui-song-card h-64 cursor-pointer flex flex-col', className)}>
       <SongCardWrapperRelative className="w-full h-48 relative">
@@ -52,9 +53,20 @@ const SongCard = ({ className, img, name, singersName, listenCount, onClick }) =
         <Image className="ui-song-card__bg-img w-full h-full" src={img} />
       </SongCardWrapperRelative>
 
-      <div className="flex flex-col">
-        <h2 className="text-sm font-bold text-white">{name}</h2>
-        <h3 className="text-xs font-bold text-gray-300">{singersName}</h3>
+      <div className="flex flex-col w-full p-1">
+        <h2 className="text-sm font-bold text-white overflow-hidden truncate">{name}</h2>
+        <div className="flex w-full overflow-hidden truncate">
+          {singers.map((singer, idx) => (
+            <Link href={`/profile?id=${singer.id}`} as={`/profile/${singer.id}`} key={singer.id}>
+              <a>
+                <h3 className="text-xs font-bold text-gray-300 flex">
+                  <span>{singer.name}</span>
+                  <span className="mr-1">{singers.length <= idx + 1 ? '' : ','}</span>
+                </h3>
+              </a>
+            </Link>
+          ))}
+        </div>
       </div>
     </SongCardWrapper>
   );

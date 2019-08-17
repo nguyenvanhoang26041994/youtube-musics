@@ -13,6 +13,10 @@ const anonimous = {
 }
 
 const singers = {
+  'afNQLlTRvfM': [
+    anonimous.id001,
+    anonimous.id002,
+  ],
   'iQp1_GfDhwQ': [
     { id: 'jess-glynne', name: 'Jess Glynne' },
   ],
@@ -67,13 +71,31 @@ const singers = {
   'RPYumdhRMkU': [
     { id: 'charlie-puth', name: 'Charlie Puth' },
   ],
-  'afNQLlTRvfM': [
-    anonimous.id001,
-    anonimous.id002,
-  ],
 };
 
 const musics = [
+  {
+    id: 'id_edm',
+    name: 'EDM Bất hủ cho dân cày liên minh',
+    singers: [
+      { id: 'uid_edm-004', name: 'Meow' },
+      { id: 'alan_walker', name: 'Kyo' },
+    ],
+    src: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/edm-lol.mp3?alt=media&token=12c88e8f-7385-450d-9e0d-8b22ff246e81',
+    img: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/player-bg.jpg?alt=media&token=5176e0ee-7405-4478-90a7-ac260b48aee8',
+    listenCount: 1241562,
+    time: 60 * 60 + 17,
+    imgBlur: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/player-bg.jpg?alt=media&token=5176e0ee-7405-4478-90a7-ac260b48aee8',
+  },
+  {
+    id: 'afNQLlTRvfM',
+    name: `Ai Chờ Ai`,
+    singers: singers['afNQLlTRvfM'],
+    src: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/y2mate.com%20-%20aichoai_flod_ft_m_giang_nguyen_official_lyric_video_tas_release_afNQLlTRvfM.mp3?alt=media&token=d3f634e1-0b76-440a-81f6-9c10614c7a42',
+    img: anonimous.id001.img,
+    listenCount: 8345,
+    time: 2 * 60 + 40,
+  },
   {
     id: 'iQp1_GfDhwQ',
     name: `I'll Be There`,
@@ -110,19 +132,6 @@ const musics = [
     listenCount: 7990,
     time: 3 * 60 + 32,
   },
-  // {
-  //   id: 'id_edm',
-  //   name: 'EDM Bất hủ cho dân cày liên minh',
-  //   singers: [
-  //     { id: 'uid_edm-004', name: 'Meow' },
-  //     { id: 'alan_walker', name: 'Kyo' },
-  //   ],
-  //   src: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/edm-lol.mp3?alt=media&token=12c88e8f-7385-450d-9e0d-8b22ff246e81',
-  //   img: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/player-bg.jpg?alt=media&token=5176e0ee-7405-4478-90a7-ac260b48aee8',
-  //   listenCount: 1241562,
-  //   time: 60 * 60 + 17,
-  //   imgBlur: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/player-bg.jpg?alt=media&token=5176e0ee-7405-4478-90a7-ac260b48aee8',
-  // },
   {
     id: 'cHHLHGNpCSA',
     name: `Waiting For Love`,
@@ -248,15 +257,6 @@ const musics = [
     img: 'https://www.mtrend.vn/wp-content/uploads/2019/06/Charlie-Puth-la-ai.jpg',
     listenCount: 884,
     time: 3 * 60 + 19,
-  },
-  {
-    id: 'afNQLlTRvfM',
-    name: `Ai Chờ Ai`,
-    singers: singers['afNQLlTRvfM'],
-    src: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/y2mate.com%20-%20aichoai_flod_ft_m_giang_nguyen_official_lyric_video_tas_release_afNQLlTRvfM.mp3?alt=media&token=d3f634e1-0b76-440a-81f6-9c10614c7a42',
-    img: anonimous.id001.img,
-    listenCount: 8345,
-    time: 2 * 60 + 40,
   },
 ];
 
