@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { Icon } from '../../components/core';
+import withYoutubeLink from '../../HOC/withYoutubeLink'
 import tailwindColors from '../../utils/tailwindColors';
 import { calcTime } from '../../utils/time';
 
@@ -26,7 +27,9 @@ const MusicItemWrapper = styled.div`
   }
 `;
 
-const MusicItem = ({ className, onClick, name, singersName, time, listenNumber, isActive, isPlaying, index }) => {
+const YoutubeLink = withYoutubeLink(Icon);
+
+const MusicItem = ({ className, onClick, name, singersName, time, id, listenNumber, isActive, isPlaying, index }) => {
   return (
     <MusicItemWrapper className={cn('ui-music-item flex h-8 items-center hover:glass cursor-pointer transition-fast', { 'ui-music-item--active': isActive }, className)} onClick={onClick}>
       <div className="flex items-center pl-3 w-2/3 h-full">
@@ -36,6 +39,7 @@ const MusicItem = ({ className, onClick, name, singersName, time, listenNumber, 
       </div>
       <div className="flex items-center flex-1 justify-end pr-3 w-1/3 h-full">
         <div className="ui-music-item__options flex items-center flex-1 justify-end mr-5">
+          <YoutubeLink name="youtube" size="2xl" color="white" className="mx-2" v={id} />
           <Icon name="download" size="sm" color="white" className="mx-2" />
           <Icon name="heart" size="sm" color="white" className="mx-2" />
           <Icon name="share" size="sm" color="white" className="mx-2" />

@@ -1,4 +1,6 @@
 
+const { singersAsObject } = require('./singers');
+
 const anonimous = {
   id001: {
     id: 'id001',
@@ -30,7 +32,7 @@ const singers = {
     { id: 'joel-adams', name: 'Joel Adams' },
   ],
   'cHHLHGNpCSA': [
-    { id: 'cvicii', name: 'Avicii' },
+    { id: 'avicii', name: 'Avicii' },
   ],
   'j4zP5saRZqg': [
     { id: 'huong-ly-cover', name: 'Hương Ly Cover' },
@@ -75,6 +77,39 @@ const singers = {
 
 const musics = [
   {
+    id: 'JDglMK9sgIQ',
+    name: 'The Days',
+    singers: [
+      singersAsObject['avicii'],
+    ],
+    src: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/y2mate.com%20-%20avicii_the_days_lyric_video_JDglMK9sgIQ_320kbps.mp3?alt=media&token=e6f433a5-d0e6-45fd-8e8f-a6c969f05130',
+    img: singersAsObject['avicii'].avatarImg,
+    listenCount: 8456432,
+    time: 4 * 60 + 07,
+  },
+  {
+    id: '_ovdm2yX4MA',
+    name: 'Levels',
+    singers: [
+      singersAsObject['avicii'],
+    ],
+    src: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/Avicii%20-%20Levels.mp3?alt=media&token=0873b31d-18af-41bc-b452-578285c0f92b',
+    img: singersAsObject['avicii'].avatarImg,
+    listenCount: 352342,
+    time: 3 * 60 + 18,
+  },
+  {
+    id: 'WRz2MxhAdJo',
+    name: 'Without You',
+    singers: [
+      singersAsObject['avicii'],
+    ],
+    src: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/Avicii%20-%20Without%20You%20%E2%80%9CAudio%E2%80%9D%20ft.%20Sandro%20Cavazza.mp3?alt=media&token=e872d4a3-a6cb-40f1-8ae4-78afe6702a04',
+    img: 'https://amp.thenational.ae/image/policy:1.851304:1555739352/Avicii.jpg?f=16x9&w=1200&$p$f$w=aae39fc',
+    listenCount: 53562,
+    time: 3 * 60 + 3,
+  },
+  {
     id: 'id_edm',
     name: 'EDM Bất hủ cho dân cày liên minh',
     singers: [
@@ -82,10 +117,10 @@ const musics = [
       { id: 'alan_walker', name: 'Kyo' },
     ],
     src: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/edm-lol.mp3?alt=media&token=12c88e8f-7385-450d-9e0d-8b22ff246e81',
-    img: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/player-bg.jpg?alt=media&token=5176e0ee-7405-4478-90a7-ac260b48aee8',
+    img: 'https://amp.thenational.ae/image/policy:1.851304:1555739352/Avicii.jpg?f=16x9&w=1200&$p$f$w=aae39fc',
     listenCount: 1241562,
     time: 60 * 60 + 17,
-    imgBlur: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/player-bg.jpg?alt=media&token=5176e0ee-7405-4478-90a7-ac260b48aee8',
+    imgBlur: 'https://amp.thenational.ae/image/policy:1.851304:1555739352/Avicii.jpg?f=16x9&w=1200&$p$f$w=aae39fc',
   },
   {
     id: 'afNQLlTRvfM',

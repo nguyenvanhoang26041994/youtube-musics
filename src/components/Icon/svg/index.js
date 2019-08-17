@@ -1,5 +1,3 @@
-import withLazy from '../../../HOC/withLazy';
-
 const icons = {
   'chevron-arrow-down': require('./chevron-arrow-down').default,
   'chevron-arrow-up': require('./chevron-arrow-up').default,
@@ -26,6 +24,7 @@ const icons = {
   'headphones': require('./headphones').default,
   'play-circle': require('./play-circle').default,
   'verified': require('./verified').default,
+  'youtube': require('./youtube').default,
 };
 
 export default icons;
