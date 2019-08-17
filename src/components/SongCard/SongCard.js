@@ -54,7 +54,7 @@ const SongCard = ({ className, img, name, singersName, listenCount, onClick }) =
 
       <div className="flex flex-col">
         <h2 className="text-sm font-bold text-white">{name}</h2>
-        <h3 className="text-xs font-bold text-gray-500">{singersName}</h3>
+        <h3 className="text-xs font-bold text-gray-300">{singersName}</h3>
       </div>
     </SongCardWrapper>
   );
