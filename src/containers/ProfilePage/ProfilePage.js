@@ -47,9 +47,9 @@ ProfilePageEnhancer.getInitialProps = async ({ query, reduxStore: store, isSever
       store.dispatch(actionCreators.getOwnerMusics(query.id))
     ]);
   } else {
-    if (rendered[query.id]) {
-      return {};
-    }
+    // if (rendered[query.id]) {
+    //   return {};
+    // }
     store.dispatch(actionCreators.getProfile(query.id));
     store.dispatch(actionCreators.getOwnerMusics(query.id));
 
