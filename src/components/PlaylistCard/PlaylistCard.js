@@ -2,6 +2,7 @@ import React from 'react';
 import cn from 'classnames';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { useRouter } from 'next/router';
 import formatNumber from '../../utils/formatNumber';
 
 import { Button, Icon, Image } from '../../components/core';
@@ -31,9 +32,20 @@ const PlaylistCardWrapper = styled.section`
 
 const PlaylistCardWrapperRelative = styled.div``;
 
-const PlaylistCard = ({ className, name, musics, listenCount, onClickPlayPlaylist }) => {
+const PlaylistCard = ({ className, name, musics, id, listenCount, onClickPlayPlaylist }) => {
+  const router = useRouter();
+  const playButtonRef = React.useRef();
+
+  const goToPlaylistPage = e => {
+    if (playButtonRef.current && playButtonRef.current.contains && playButtonRef.current.contains(e.target)) {
+      return;
+    }
+
+    router.push(`/playlist?id=${id}`);
+  };
+
   return (
-    <PlaylistCardWrapper className={cn('ui-playlist-card cursor-pointer flex flex-col', className)}>
+    <PlaylistCardWrapper className={cn('ui-playlist-card cursor-pointer flex flex-col', className)} onClick={goToPlaylistPage}>
       <PlaylistCardWrapperRelative className="relative flex flex-col justify-end h-48">
         <Image className="ui-playlist-card__bg-img absolute top-0 left-0 w-full h-full" src={musics[0] && musics[0].img} />
 
@@ -49,7 +61,14 @@ const PlaylistCard = ({ className, name, musics, listenCount, onClickPlayPlaylis
               {musics.length} <span className="font-shadows-into-light ml-1 text-xs">songs</span>
             </div>
           </div>
-          <Button size="sm" color="teal-700" size="xs" className="ui-playlist-card__playbutton text-white rounded-sm my-2" onClick={onClickPlayPlaylist}>
+          <Button
+            size="sm"
+            color="teal-700"
+            size="xs"
+            className="ui-playlist-card__playbutton text-white rounded-sm my-2"
+            onClick={onClickPlayPlaylist}
+            buttonRef={playButtonRef}
+          >
             <span className="mr-3 overflow-hidden --display-when-hover-to-parent">PLAY PLAYLIST</span>
             <Icon name="play" />
           </Button>

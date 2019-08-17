@@ -3,7 +3,7 @@ import fp from 'lodash/fp';
 import styled from 'styled-components';
 import Link from 'next/link'
 import { Icon, Slider, BlurBackground, Image } from '../../components/core';
-import Playlist from '../../containers/Playlist';
+import PlayingList from '../../containers/PlayingList';
 import { mode } from '../../constants/playing-list';
 import withPlayingList from '../../HOC/withPlayingList';
 import withPlayingMusic from '../../HOC/withPlayingMusic';
@@ -125,7 +125,7 @@ class GlobalMusicPlayer extends React.Component {
               className="absolute top-0 right-0 z-20 m-2"
               onClick={this.handleHiddenBiggerPlayer}
             />
-            <Playlist className="w-full h-full bg-lizard-gradient shadow-lg" isPlaying />
+            <PlayingList className="w-full h-full bg-lizard-gradient shadow-lg" isPlaying />
           </div>
         </div>
         <div className="w-full relative bg-lizard">
