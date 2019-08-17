@@ -2,19 +2,43 @@ const express = require('express');
 const router = express.Router();
 const fp = require('lodash/fp');
 
+const profiles = require('../data/profiles');
 const { profilesAsObject } = require('../data/profiles');
 const musics = require('../data/musics');
+const playlists = require('../data/playlists');
 
 router.get('/profile/:id', (req, res) => {
-  res.json(profilesAsObject[req.params.id]);
+  return res.json(profilesAsObject[req.params.id]);
+});
+
+router.get('/profiles', (req, res) => {
+  const { rank, role, pageSize, pageNumber } = req.query;
+  return res.json(profiles);
 });
 
 router.get('/musics', (req, res) => {
-  const { belongTo: singerId } = req.query;
-  res.json(fp.filter(music =>
+  const { belongTo, rank, pageSize, pageNumber } = req.query;
+  const singerId = belongTo;
+
+  return res.json(fp.filter(music =>
     music.singers
-      .filter(singer => singer.id === singerId).length)(musics)
+      .filter(singer => {
+        if (singerId) {
+          return singer.id === singerId;
+        }
+        
+        return true;
+      }).length)(musics)
   );
+});
+
+router.get('/playlists', (req, res) => {
+  const { rank, pageSize, pageNumber } = req.query;
+  if (rank === 'trend') {
+    return res.json(playlists);
+  }
+
+  return res.json([]);
 });
 
 module.exports = router;

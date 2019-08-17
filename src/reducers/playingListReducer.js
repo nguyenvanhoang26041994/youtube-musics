@@ -1,5 +1,4 @@
 import { playlist, mode } from '../constants/playing-list';
-import { playlistsAsObject } from '../data/playlists';
 
 const nextMode = Object.freeze({
   [mode.LOOP]: mode.SHUFFLE,

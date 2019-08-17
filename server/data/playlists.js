@@ -1,5 +1,5 @@
-import fp from 'lodash/fp';
-import musics, { musicsAsObject } from './musics';
+const musics = require('./musics');
+const { musicsAsObject } = require('./musics');
 
 const musics_002 = [
   musicsAsObject['Tv6WImqSuxA'],
@@ -83,5 +83,5 @@ playlists.map(playlist => {
   playlistsAsObject[playlist.id] = playlist;
 });
 
-export default playlists;
-export { playlistsAsObject };
+module.exports = playlists;
+module.exports.playlistsAsObject = playlistsAsObject;

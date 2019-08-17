@@ -12,10 +12,7 @@ import Panel from './Panel';
 
 import musicsFormater from '../../selectors/utils/musicsFormater';
 import playlistsFormater from '../../selectors/utils/playlistsFormater';
-
-import profiles from '../../../server/data/profiles';
-
-const trendingSingers = profiles;
+import * as actionCreators from './actions';
 
 const HomePageWrapper = styled.div`
   &.home-page {
@@ -25,11 +22,11 @@ const HomePageWrapper = styled.div`
   }
 `;
 
-const HomePage = ({ playerActions, playlists, hotSongs = [] }) => {
+const HomePage = ({ playerActions, trendingPlaylists, trendingSongs, trendingSingers }) => {
   return (
     <HomePageWrapper id="home-page" className="home-page container-custom container mx-auto flex flex-col animated fadeIn">
       <Panel className="mb-10" title="HOT & NEW SONGS">
-        {fp.take(10, hotSongs).map(song => (
+        {fp.take(10, trendingSongs).map(song => (
           <div className="w-1/5 p-1" key={song.id}>
             <SongCard
               className="w-full"
@@ -39,7 +36,7 @@ const HomePage = ({ playerActions, playlists, hotSongs = [] }) => {
         ))}
       </Panel>
       <Panel className="mb-10" title="COOL PLAYLIST">
-        {fp.take(5, playlists).map(playlist => (
+        {fp.take(5, trendingPlaylists).map(playlist => (
           <div className="w-1/5 p-1" key={playlist.id}>
             <PlaylistCard
               className="w-full"
@@ -65,10 +62,30 @@ const HomePage = ({ playerActions, playlists, hotSongs = [] }) => {
 
 const HomePageEnhancer = compose(
   connect(state => ({
-    playlists: playlistsFormater(state.playlistsReducer.playlists),
-    hotSongs: musicsFormater(state.hotSongsReducer.musics),
+    trendingPlaylists: playlistsFormater(state.homePageReducer.trendingPlaylists),
+    trendingSongs: musicsFormater(state.homePageReducer.trendingSongs),
+    trendingSingers: state.homePageReducer.trendingSingers,
   })),
   withPlayerActions,
 )(HomePage);
+
+HomePageEnhancer.getInitialProps = async ({ query, reduxStore: store, isSever }) => {
+  // in client-side await will be stop render
+  if (isSever) {
+    await Promise.all([
+      store.dispatch(actionCreators.getTrendingPlaylists()),
+      store.dispatch(actionCreators.getTrendingSongs()),
+      store.dispatch(actionCreators.getTrendingSingers()),
+    ]);
+  } else {
+    Promise.all([
+      store.dispatch(actionCreators.getTrendingPlaylists()),
+      store.dispatch(actionCreators.getTrendingSongs()),
+      store.dispatch(actionCreators.getTrendingSingers()),
+    ]);
+  }
+
+  return {};
+}
 
 export default HomePageEnhancer;
