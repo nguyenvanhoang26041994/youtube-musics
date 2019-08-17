@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import fp from 'lodash/fp';
 
 import withPlayerActions from '../../HOC/withPlayerActions';
-import PlaylistCard from '../../components/PlaylistCard';
+import PlaylistCard from '../../containers/PlaylistCard';
 import SongCard from '../../containers/SongCard';
 import SingerCard from '../../components/SingerCard';
 import Panel from './Panel';
@@ -23,7 +23,7 @@ const HomePageWrapper = styled.div`
   }
 `;
 
-const HomePage = ({ playerActions, trendingPlaylists, trendingSongs, trendingSingers }) => {
+const HomePage = ({ trendingPlaylists, trendingSongs, trendingSingers }) => {
   return (
     <HomePageWrapper id="home-page" className="home-page container-custom container mx-auto flex flex-col animated fadeIn">
       <Panel className="mb-10" title="HOT & NEW SONGS">
@@ -41,7 +41,6 @@ const HomePage = ({ playerActions, trendingPlaylists, trendingSongs, trendingSin
           <div className="w-1/5 p-1" key={playlist.id}>
             <PlaylistCard
               className="w-full"
-              onClickPlayPlaylist={() => playerActions.playPlaylist(playlist)}
               {...playlist}
             />
           </div>

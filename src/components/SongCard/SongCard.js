@@ -11,7 +11,7 @@ const SongCardWrapper = styled.div`
   &.ui-song-card {
     .ui-song-card__bg-img {
       img {
-        filter: none;
+        filter: blur(1px) grayscale(50%) brightness(50%);
         transform: scale(1.1, 1.1);
         transition: 0.5s;
       }
@@ -25,7 +25,7 @@ const SongCardWrapper = styled.div`
     &:hover {
       .ui-song-card__bg-img {
         img {
-          filter: blur(1px) grayscale(50%) brightness(50%);
+          filter: none;
           transform: scale(1.2, 1.2);
         }
       }
@@ -35,20 +35,41 @@ const SongCardWrapper = styled.div`
       }
     }
   }
+
+  &.ui-song-card--is-playing.ui-song-card--is-playing,
+  &.ui-song-card--is-playing.ui-song-card--is-playing:hover {
+    .ui-song-card__playbutton {
+      opacity: 0;
+    }
+
+    .ui-song-card__bg-img {
+      img {
+        filter: none;
+      }
+    }
+  }
 `;
 
 const SongCardWrapperRelative = styled.div``;
 
-const SongCard = ({ className, id, img, name, singers, listenCount, onClick }) => {
+const SongCard = ({ className, id, img, name, singers, listenCount, onClick, isPlaying }) => {
+  const onPlayMusic = () => {
+    if (isPlaying) {
+      return;
+    }
+
+    return onClick();
+  };
+
   return (
-    <SongCardWrapper className={cn('ui-song-card h-64 cursor-pointer flex flex-col', className)}>
+    <SongCardWrapper className={cn('ui-song-card h-64 cursor-pointer flex flex-col', { 'ui-song-card--is-playing': isPlaying }, className)}>
       <SongCardWrapperRelative className="w-full h-48 relative">
         <div className="ui-song-card__playbutton absolute z-10 absolute-center">
-          <Icon name="play-circle" size="6xl" color="gray-200" onClick={onClick} />
+          <Icon name="play-circle" size="6xl" color="gray-200" onClick={onPlayMusic} />
         </div>
         <div className="text-white flex items-center absolute top-0 right-0 m-2 z-10">
           <span className="font-mono text-2xs">{formatNumber(listenCount)}</span>
-          <Icon name="headphones" className="ml-2 text-2xs" />
+          <Icon name="headphones" className={cn('ml-2 text-2xs', { 'animated heartBeat infinite': isPlaying })} />
         </div>
         <Image className="ui-song-card__bg-img w-full h-full" src={img} />
       </SongCardWrapperRelative>
@@ -74,7 +95,7 @@ const SongCard = ({ className, id, img, name, singers, listenCount, onClick }) =
       </div>
     </SongCardWrapper>
   );
-}
+};
 
 SongCard.displayName = 'SongCard';
 SongCard.propTypes = {};

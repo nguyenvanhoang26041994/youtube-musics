@@ -37,7 +37,7 @@ const WallpaperWrapper = styled.div`
 const ProfileHeadWrapper = styled.div``;
 const ProfileBobyWrapper = styled.div``;
 
-const Profile = ({ className, ownerMusics, profile, onPlayOwnerMusics }) => {
+const Profile = ({ className, ownerMusics, profile, onPlayOwnerMusics, isPlaylistPlaying, playingMusic }) => {
   return (
     <ProfileWrapper className={cn('ui-profile w-full', className)}>
       <ProfileHeadWrapper className="ui-profile__head flex flex-col">
@@ -47,7 +47,9 @@ const Profile = ({ className, ownerMusics, profile, onPlayOwnerMusics }) => {
             {profile.qoute.text}
           </Quote>
           <div className="flex justify-end m-2">
-            <Button color="teal-400" className="rounded-full text-white" onClick={onPlayOwnerMusics}>PLAY HIM MUSIC</Button>
+            {!isPlaylistPlaying && (
+              <Button color="teal-400" className="rounded-full text-white" onClick={onPlayOwnerMusics}>PLAY HIM MUSIC</Button>
+            )}
             <Button color="teal-400" className="rounded-full text-white ml-2">
               <Icon name="ellipsis-h" />
             </Button>
@@ -90,11 +92,13 @@ Profile.propTypes = {
   profile: PropTypes.object,
   ownerMusics: PropTypes.array,
   onPlayOwnerMusics: PropTypes.func,
+  playingMusic: PropTypes.object,
 };
 Profile.defaultProps = {
   profile: {
     qoute: {},
   },
+  playingMusic: {},
   ownerMusics: [],
   onPlayOwnerMusics: f => f,
 };

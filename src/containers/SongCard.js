@@ -1,10 +1,13 @@
 import React from 'react';
+import { compose } from 'redux';
 import SongCard from '../components/SongCard';
 import withPlayerActions from '../HOC/withPlayerActions';
+import withPlayingMusic from '../HOC/withPlayingMusic';
 
-const SongCardEnhancer = ({ playerActions, ...otherProps }) => {
+const SongCardEnhancer = ({ playerActions, playingMusic, ...otherProps }) => {
+  const id = otherProps.id
   const onClick = () => playerActions.playMusic({
-    id: otherProps.id,
+    id,
     src: otherProps.src,
     name: otherProps.name,
     singers: otherProps.singers,
@@ -12,8 +15,15 @@ const SongCardEnhancer = ({ playerActions, ...otherProps }) => {
   });
 
   return (
-    <SongCard onClick={onClick} {...otherProps} />
+    <SongCard
+      onClick={onClick}
+      isPlaying={playingMusic.id === id}
+      {...otherProps}
+    />
   );
 }
 
-export default withPlayerActions(SongCardEnhancer);
+export default compose(
+  withPlayingMusic,
+  withPlayerActions,
+)(SongCardEnhancer);

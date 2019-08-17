@@ -28,11 +28,20 @@ const PlaylistCardWrapper = styled.section`
       }
     }
   }
+
+  &.ui-playlist-card--is-playing.ui-playlist-card--is-playing,
+  &.ui-playlist-card--is-playing.ui-playlist-card--is-playing:hover {
+    .ui-playlist-card__bg-img {
+      img {
+        filter: none;
+      }
+    }
+  }
 `;
 
 const PlaylistCardWrapperRelative = styled.div``;
 
-const PlaylistCard = ({ className, name, musics, id, listenCount, onClickPlayPlaylist }) => {
+const PlaylistCard = ({ className, name, musics, id, user, listenCount, playPlaylist, isPlaying }) => {
   const router = useRouter();
   const playButtonRef = React.useRef();
 
@@ -44,14 +53,26 @@ const PlaylistCard = ({ className, name, musics, id, listenCount, onClickPlayPla
     return router.push(`/playlist?id=${id}`, `/playlist/${id}`);
   };
 
+  const handleClickPlayPlaylist = () => {
+    if (isPlaying) {
+      return;
+    }
+    return playPlaylist({
+      id,
+      name,
+      musics,
+      user,
+    });
+  };
+
   return (
-    <PlaylistCardWrapper className={cn('ui-playlist-card cursor-pointer flex flex-col', className)} onClick={goToPlaylistPage}>
+    <PlaylistCardWrapper className={cn('ui-playlist-card cursor-pointer flex flex-col', { 'ui-playlist-card--is-playing': isPlaying }, className)} onClick={goToPlaylistPage}>
       <PlaylistCardWrapperRelative className="relative flex flex-col justify-end h-48">
         <Image className="ui-playlist-card__bg-img absolute top-0 left-0 w-full h-full" src={musics[0] && musics[0].img} />
 
         <div className="text-white flex items-center absolute top-0 right-0 m-2 z-10">
           <span className="font-mono text-2xs">{formatNumber(listenCount)}</span>
-          <Icon name="headphones" className="ml-2 text-2xs" />
+          <Icon name="headphones" className={cn('ml-2 text-2xs', { 'animated heartBeat infinite': isPlaying })} />
         </div>
 
         <div className="z-10 p-2 w-full">
@@ -65,8 +86,8 @@ const PlaylistCard = ({ className, name, musics, id, listenCount, onClickPlayPla
             size="sm"
             color="teal-700"
             size="xs"
-            className="ui-playlist-card__playbutton text-white rounded-sm my-2"
-            onClick={onClickPlayPlaylist}
+            className={cn('ui-playlist-card__playbutton text-white rounded-sm my-2', { 'opacity-0': isPlaying })}
+            onClick={handleClickPlayPlaylist}
             buttonRef={playButtonRef}
           >
             <span className="mr-3 overflow-hidden --display-when-hover-to-parent">PLAY PLAYLIST</span>
@@ -81,10 +102,10 @@ const PlaylistCard = ({ className, name, musics, id, listenCount, onClickPlayPla
 
 PlaylistCard.displayName = 'PlaylistCard';
 PlaylistCard.propTypes = {
-  onClickPlayPlaylist: PropTypes.func,
+  playPlaylist: PropTypes.func,
 };
 PlaylistCard.defaultProps = {
-  onClickPlayPlaylist: f => f,
+  playPlaylist: f => f,
 };
 
 export default PlaylistCard;
