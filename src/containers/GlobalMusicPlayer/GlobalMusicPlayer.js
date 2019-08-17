@@ -162,7 +162,8 @@ class GlobalMusicPlayer extends React.Component {
               </div>
               <Icon name="step-forward" size="xs" color="white" className="ml-4" onClick={this.onPlayNext} />
             </div>
-            <div className="flex-1 relative mx-10">
+            {playingList.id && playingList.musics.length && <Icon name="list" size="sm" color={isShowBiggerPlayer ? 'teal-400': 'white'} className="ml-5" onClick={this.toggleShowBiggerPlayer} />}
+            <div className="flex-1 relative mx-5">
               <Slider
                 className="w-full"
                 percent={currentMusicTime/musicTime}
@@ -181,9 +182,8 @@ class GlobalMusicPlayer extends React.Component {
                 className="mx-2"
                 onClick={playingListActions.changeToNextMode}
               />
-              {playingList.id && playingList.musics.length && <Icon name="list" size="sm" color={isShowBiggerPlayer ? 'teal-400': 'white'} className="mx-2" onClick={this.toggleShowBiggerPlayer} />}
             </div>
-            <div className="flex items-center w-32 ml-10">
+            <div className="flex items-center w-32 ml-5">
               <Icon name="volume" size="xl" color="white" onClick={this.pauseMusic} />
               <Slider
                 className="w-full ml-2"

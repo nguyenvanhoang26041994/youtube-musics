@@ -106,7 +106,7 @@ const musics = [
       singersAsObject['avicii'],
     ],
     src: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/Avicii%20-%20Without%20You%20%E2%80%9CAudio%E2%80%9D%20ft.%20Sandro%20Cavazza.mp3?alt=media&token=e872d4a3-a6cb-40f1-8ae4-78afe6702a04',
-    img: 'https://amp.thenational.ae/image/policy:1.851304:1555739352/Avicii.jpg?f=16x9&w=1200&$p$f$w=aae39fc',
+    img: singersAsObject['avicii'].avatarImg,
     listenCount: 53562,
     time: 3 * 60 + 3,
   },
