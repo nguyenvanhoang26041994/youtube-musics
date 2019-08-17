@@ -1,3 +1,4 @@
+import React, { useRef } from 'react';
 import cn from 'classnames';
 import fp from 'lodash/fp';
 import styled from 'styled-components';
@@ -8,6 +9,7 @@ import { mode } from '../../constants/playing-list';
 import withPlayingList from '../../HOC/withPlayingList';
 import withPlayingMusic from '../../HOC/withPlayingMusic';
 import withPlayerActions from '../../HOC/withPlayerActions';
+import useClickOutside from '../../hooks/useClickOutside';
 import { calcTime } from '../../utils/time';
 
 const listMode = Object.freeze({
@@ -24,6 +26,24 @@ const Audio = ({ className, src, musicRef, ...otherProps }) => (
     <source src={src} />
   </audio>
 );
+
+const PlaylistModal = ({ handleHiddenBiggerPlayer }) => {
+  const playlistModalRef = useRef();
+  useClickOutside(playlistModalRef, handleHiddenBiggerPlayer);
+
+  return (
+    <div className="global-music-player__biger-player-container container container-custom flex mx-auto h-full relative" ref={playlistModalRef}>
+      <Icon
+        name="chevron-arrow-down"
+        color="teal-600"
+        size="xs"
+        className="absolute top-0 right-0 z-20 m-2"
+        onClick={handleHiddenBiggerPlayer}
+      />
+      <PlayingList className="w-full h-full bg-lizard shadow-lg" />
+    </div>
+  );
+}
 
 class GlobalMusicPlayer extends React.Component {
   state = {
@@ -44,6 +64,10 @@ class GlobalMusicPlayer extends React.Component {
     if (this.props.playingMusic.id && this.props.playingMusic.id !== prevProps.playingMusic.id && this.musicRef && this.musicRef.current) {
       this.musicRef.current.load && this.musicRef.current.load();
       this.musicRef.current.play && this.musicRef.current.play();
+    }
+
+    if (this.props.playingList.id !== prevProps.playingList.id) {
+      this.handleShowBiggerPlayer();
     }
   }
 
@@ -117,16 +141,7 @@ class GlobalMusicPlayer extends React.Component {
           onEnded={this.onEnded}
         />
         <div className="global-music-player__biger-player relative w-full z-10 overflow-hidden transition-fast" style={{ height: isShowBiggerPlayer ? 'calc(100vh - 8rem)' : 0 }}>
-          <div className="global-music-player__biger-player-container container container-custom flex mx-auto h-full relative">
-            <Icon
-              name="chevron-arrow-down"
-              color="teal-600"
-              size="xs"
-              className="absolute top-0 right-0 z-20 m-2"
-              onClick={this.handleHiddenBiggerPlayer}
-            />
-            <PlayingList className="w-full h-full bg-lizard shadow-lg" />
-          </div>
+          <PlaylistModal handleHiddenBiggerPlayer={this.handleHiddenBiggerPlayer} />
         </div>
         <div className="w-full relative bg-lizard">
           <div className="container-custom container relative flex items-center h-16 mx-auto z-10 px-1">
