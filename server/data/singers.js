@@ -8,7 +8,7 @@ const singers = [
       text: 'Beauty has so many forms, and I think the most beautiful thing is confidence and loving yourself.',
       author: 'Kiesza',
     },
-    avatarImg: 'http://kenh14cdn.com/crop/640_360/2019/6/7/082903-tim-studio2271-15598950807911850192687-crop-15598952164482123884955.jpg',
+    avatarImg: 'https://i1.sndcdn.com/avatars-000400433727-l071h7-t500x500.jpg',
     coverImg: 'https://media.distractify.com/brand-img/6PW-bw8P-/480x252/how-is-avicii-releasing-music-3-1559943581638.jpg',
   },
   {

@@ -77,6 +77,28 @@ const singers = {
 
 const musics = [
   {
+    id: 'YxIiPLVR6NA',
+    name: 'Hey Brother',
+    singers: [
+      singersAsObject['avicii'],
+    ],
+    src: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/y2mate.com%20-%20avicii_hey_brother_lyric_YxIiPLVR6NA_320kbps.mp3?alt=media&token=6f43ca31-0522-49f5-b083-30e4036baf0b',
+    img: singersAsObject['avicii'].avatarImg,
+    listenCount: 67634364,
+    time: 4 * 60 + 18,
+  },
+  {
+    id: 'JDglMK9sgIQ',
+    name: 'Broken Arrows',
+    singers: [
+      singersAsObject['avicii'],
+    ],
+    src: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/y2mate.com%20-%20avicii_broken_arrows_V6iKSUoUN48_320kbps.mp3?alt=media&token=950d358f-cc1b-4484-8045-4af5e6fd2d7b',
+    img: singersAsObject['avicii'].avatarImg,
+    listenCount: 43634364,
+    time: 4 * 60 + 14,
+  },
+  {
     id: 'JDglMK9sgIQ',
     name: 'The Days',
     singers: [
