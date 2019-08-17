@@ -1,6 +1,8 @@
 import cn from 'classnames';
 import styled from 'styled-components';
 import Link from 'next/link';
+import PropTypes from 'prop-types';
+
 import { Logo } from '../../components/core';
 
 const NavbarWrapper = styled.nav`
@@ -21,5 +23,9 @@ const Navbar = ({ className }) => (
 );
 
 Navbar.displayName = 'Navbar';
+Navbar.propTypes = {
+  className: PropTypes.string,
+};
+Navbar.defaultProps = {};
 
 export default Navbar;

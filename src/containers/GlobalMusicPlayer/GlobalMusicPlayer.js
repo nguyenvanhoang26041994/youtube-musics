@@ -136,7 +136,7 @@ class GlobalMusicPlayer extends React.Component {
                 <div className="text-sm text-white cursor-pointer w-32 overflow-hidden truncate font-bold">{playingMusic.name}</div>
                 <div className="text-xs text-gray-500 cursor-pointer w-32 overflow-hidden truncate flex">
                   {playingMusic.singers.map((singer, idx) => (
-                    <Link href={`/profile?id=${singer.id}`} as={`/profile/${singer.id}`}>
+                    <Link href={`/profile?id=${singer.id}`} as={`/profile/${singer.id}`} key={singer.id}>
                       <a>
                         <h3 className="text-xs font-bold text-teal-400 flex">
                           <span>{singer.name}</span>

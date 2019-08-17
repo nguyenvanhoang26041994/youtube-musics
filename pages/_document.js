@@ -38,7 +38,7 @@ export default class extends Document {
           <link rel="stylesheet" href="/static/css/animate.min.css" />
           <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light|Lovers+Quarrel&display=swap" rel="stylesheet" />
         </Head>
-        <body className="font-shadows-into-light">
+        <body className="font-shadows-into-light scrollbar-hidden">
           <Main />
           <NextScript />
         </body>

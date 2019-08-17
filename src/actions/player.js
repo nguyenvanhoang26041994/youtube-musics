@@ -67,6 +67,7 @@ export const goPrevSong = () => ({ dispatch, getState }) => {
   }
 };
 
+// Play all song in playlist, first song will be play first
 export const playPlaylist = payload => ({ dispatch }) => {
   dispatch(changePlayingList(payload));
   if (payload && payload.musics && payload.musics[0]) {
@@ -75,6 +76,7 @@ export const playPlaylist = payload => ({ dispatch }) => {
   }
 };
 
+// Just play one song
 export const playMusic = payload => ({ dispatch }) => {
   dispatch(changeMusic(payload));
   dispatch(changeMode(mode.REPEAT));
