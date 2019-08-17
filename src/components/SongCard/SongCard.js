@@ -39,7 +39,7 @@ const SongCardWrapper = styled.div`
 
 const SongCardWrapperRelative = styled.div``;
 
-const SongCard = ({ className, img, name, singers, listenCount, onClick }) => {
+const SongCard = ({ className, id, img, name, singers, listenCount, onClick }) => {
   return (
     <SongCardWrapper className={cn('ui-song-card h-64 cursor-pointer flex flex-col', className)}>
       <SongCardWrapperRelative className="w-full h-48 relative">
@@ -54,7 +54,11 @@ const SongCard = ({ className, img, name, singers, listenCount, onClick }) => {
       </SongCardWrapperRelative>
 
       <div className="flex flex-col w-full p-1">
-        <h2 className="text-sm font-bold text-white overflow-hidden truncate">{name}</h2>
+        <h2 className="text-sm font-bold text-white overflow-hidden truncate">
+          <Link href={`/music?id=${id}`} as={`/music/${id}`}>
+            <a>{name}</a>
+          </Link>
+        </h2>
         <div className="flex w-full overflow-hidden truncate">
           {singers.map((singer, idx) => (
             <Link href={`/profile?id=${singer.id}`} as={`/profile/${singer.id}`} key={singer.id}>

@@ -25,6 +25,7 @@ const defaultState = {
 
 export default (state = defaultState, action) => {
   switch (action.type) {
+    // PROFILE
     case profilePage.GET_PROFILE_SUCCESS:
       return {
         ...state,
@@ -56,6 +57,8 @@ export default (state = defaultState, action) => {
         isProfileError: true,
         isProfileSuccess: false,
       };
+
+    // OWNER
     case profilePage.GET_OWNER_MUSICS_SUCCESS:
       return {
         ...state,

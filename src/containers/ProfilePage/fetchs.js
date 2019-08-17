@@ -14,4 +14,4 @@ export const fetchOwnerMusics = id => new Promise((resolve, reject) =>
   fetch(`${root}/api/musics?belongTo=${id}`)
     .then(response => resolve(response.json()))
     .catch(e => reject(e))
-);
+  );
