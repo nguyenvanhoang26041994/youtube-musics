@@ -17,6 +17,8 @@ const defaultState = {
 
 export default (state = defaultState, action) => {
   switch (action.type) {
+    case playlist.RESET:
+      return defaultState;
     case playlist.CHANGE_PLAYING_LIST:
       return {
         ...state,

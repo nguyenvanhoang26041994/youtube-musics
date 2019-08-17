@@ -22,17 +22,8 @@ const singers = {
   'iQp1_GfDhwQ': [
     { id: 'jess-glynne', name: 'Jess Glynne' },
   ],
-  '87gWaABqGYs': [
-    { id: 'ed-sheeran', name: 'Ed Sheeran' },
-  ],
-  'iKzRIweSBLA': [
-    { id: 'ed-sheeran', name: 'Ed Sheeran' },
-  ],
   'S2oxFIsENgM': [
     { id: 'joel-adams', name: 'Joel Adams' },
-  ],
-  'cHHLHGNpCSA': [
-    { id: 'avicii', name: 'Avicii' },
   ],
   'j4zP5saRZqg': [
     { id: 'huong-ly-cover', name: 'Hương Ly Cover' },
@@ -40,23 +31,11 @@ const singers = {
   'yaJx0Gj_LCY': [
     { id: 'billie-eilish', name: 'Billie Eilish' },
   ],
-  'Tv6WImqSuxA': [
-    { id: 'ncs', name: 'No Copyright Sounds' },
-  ],
-  'SvRFNNbxuAk': [
-    { id: 'ncs', name: 'No Copyright Sounds' },
-  ],
-  'u1I9ITfzqFs': [
-    { id: 'ncs', name: 'No Copyright Sounds' },
-  ],
   'fB8TyLTD7EE': [
     { id: 'lol', name: 'League of Legends' },
   ],
   'RfXLyP2_XbA': [
     { id: 'deamn', name: 'DEAMN' },
-  ],
-  'vBGiFtb8Rpw': [
-    { id: 'ncs', name: 'No Copyright Sounds' },
   ],
   'kXYiU_JCYtU': [
     { id: 'linkin-park', name: 'Linkin Park' },
@@ -165,18 +144,22 @@ const musics = [
   {
     id: '87gWaABqGYs',
     name: `Galway Girl`,
-    singers: singers['87gWaABqGYs'],
+    singers: [
+      singersAsObject['ed-sheeran'],
+    ],
     src: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/y2mate.com%20-%20ed_sheeran_galway_girl_official_video_87gWaABqGYs.mp3?alt=media&token=d2f36088-51e1-43a6-b89c-638b19bafead',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/5/55/Ed_Sheeran_2013.jpg',
+    img: singersAsObject['ed-sheeran'].avatarImg,
     listenCount: 1000,
     time: 3 * 60 + 19,
   },
   {
     id: 'iKzRIweSBLA',
     name: `Perfect`,
-    singers: singers['iKzRIweSBLA'],
+    singers: [
+      singersAsObject['ed-sheeran'],
+    ],
     src: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/y2mate.com%20-%20ed_sheeran_perfect_official_lyric_video_iKzRIweSBLA.mp3?alt=media&token=75fa5dad-564b-48f8-ac4b-1cb6199cffb6',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/5/55/Ed_Sheeran_2013.jpg',
+    img: singersAsObject['ed-sheeran'].avatarImg,
     listenCount: 7990,
     time: 4 * 60 + 23,
   },
@@ -192,9 +175,11 @@ const musics = [
   {
     id: 'cHHLHGNpCSA',
     name: `Waiting For Love`,
-    singers: singers['cHHLHGNpCSA'],
+    singers: [
+      singersAsObject['avicii'],
+    ],
     src: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/y2mate.com%20-%20avicii_waiting_for_love_cHHLHGNpCSA.mp3?alt=media&token=5a385519-d6e0-4cd1-add8-7477e01f0b54',
-    img: 'https://avatar-nct.nixcdn.com/singer/avatar/2017/11/18/7/a/1/0/1510943948217_600.jpg',
+    img: singersAsObject['avicii'].avatarImg,
     listenCount: 10000,
     time: 3 * 60 + 50,
   },
@@ -219,27 +204,33 @@ const musics = [
   {
     id: 'Tv6WImqSuxA',
     name: `High`,
-    singers: singers['Tv6WImqSuxA'],
+    singers: [
+      singersAsObject['ncs'],
+    ],
     src: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/y2mate.com%20-%20jpb_high_ncs_release_Tv6WImqSuxA.mp3?alt=media&token=d48ca186-5b90-4251-877c-45da12c437f2',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/No_Copyright_Sounds_logo.jpg/220px-No_Copyright_Sounds_logo.jpg',
+    img: singersAsObject['ncs'].avatarImg,
     listenCount: 10500,
     time: 3 * 60 + 12,
   },
   {
     id: 'SvRFNNbxuAk',
     name: `Weakness`,
-    singers: singers['SvRFNNbxuAk'],
+    singers: [
+      singersAsObject['ncs'],
+    ],
     src: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/y2mate.com%20-%20prismo_weakness_ncs_release_SvRFNNbxuAk.mp3?alt=media&token=54026bc9-1f60-4b5e-aa77-ad988284d77a',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/No_Copyright_Sounds_logo.jpg/220px-No_Copyright_Sounds_logo.jpg',
+    img: singersAsObject['ncs'].avatarImg,
     listenCount: 103500,
     time: 3 * 60 + 17,
   },
   {
     id: 'u1I9ITfzqFs',
     name: `Savannah`,
-    singers: singers['u1I9ITfzqFs'],
+    singers: [
+      singersAsObject['ncs'],
+    ],
     src: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/y2mate.com%20-%20diviners_savannah_feat_philly_k_ncs_release_u1I9ITfzqFs.mp3?alt=media&token=37bc2b34-9eb7-4c60-9926-4cc121da1ba3',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/No_Copyright_Sounds_logo.jpg/220px-No_Copyright_Sounds_logo.jpg',
+    img: singersAsObject['ncs'].avatarImg,
     listenCount: 62523,
     time: 3 * 60 + 23,
   },
@@ -264,9 +255,11 @@ const musics = [
   {
     id: 'vBGiFtb8Rpw',
     name: `Make Me Move`,
-    singers: singers['vBGiFtb8Rpw'],
+    singers: [
+      singersAsObject['ncs'],
+    ],
     src: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/y2mate.com%20-%20culture_code_make_me_move_feat_karra_ncs_release_vBGiFtb8Rpw.mp3?alt=media&token=c94dddc2-aa9f-48c1-9288-c420132cee79',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/No_Copyright_Sounds_logo.jpg/220px-No_Copyright_Sounds_logo.jpg',
+    img: singersAsObject['ncs'].avatarImg,
     listenCount: 63324,
     time: 3 * 60 + 16,
   },

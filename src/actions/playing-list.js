@@ -1,5 +1,9 @@
 import { playlist } from '../constants/playing-list';
 
+export const reset = () => ({
+  type: playlist.RESET,
+});
+
 export const changeMode = payload => ({
   payload,
   type: playlist.CHANGE_MODE,

@@ -5,4 +5,5 @@ export const mode = Object.freeze({
 export const music = Object.freeze({
   CHANGE_IS_PLAYING: '/src/constants/playing-music.music.CHANGE_IS_PLAYING',
   CHANGE_MUSIC: '/src/constants/playing-music.music.CHANGE_MUSIC',
+  RESET: '/src/constants/playing-music.music.RESET',
 });
