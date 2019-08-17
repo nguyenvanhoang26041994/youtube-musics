@@ -14,6 +14,8 @@ import musicsFormater from '../../selectors/utils/musicsFormater';
 import playlistsFormater from '../../selectors/utils/playlistsFormater';
 import * as actionCreators from './actions';
 
+let isRendered = false;
+
 const HomePageWrapper = styled.div`
   &.home-page {
     .home-page__ranking {
@@ -78,11 +80,15 @@ HomePageEnhancer.getInitialProps = async ({ query, reduxStore: store, isSever })
       store.dispatch(actionCreators.getTrendingSingers()),
     ]);
   } else {
-    Promise.all([
-      store.dispatch(actionCreators.getTrendingPlaylists()),
-      store.dispatch(actionCreators.getTrendingSongs()),
-      store.dispatch(actionCreators.getTrendingSingers()),
-    ]);
+    if (isRendered) {
+      return {};
+    }
+  
+    store.dispatch(actionCreators.getTrendingPlaylists());
+    store.dispatch(actionCreators.getTrendingSongs());
+    store.dispatch(actionCreators.getTrendingSingers());
+
+    isRendered = true;
   }
 
   return {};

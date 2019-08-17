@@ -12,6 +12,8 @@ import musicsFormater from '../../selectors/utils/musicsFormater';
 
 import * as actionCreators from './actions';
 
+const rendered = [];
+
 const ProfilePageWrapper = styled.div``;
 
 const ProfilePage = ({ className, ownerMusics, profile }) => {
@@ -40,11 +42,18 @@ ProfilePageEnhancer.displayName= 'ProfilePageEnhancer';
 ProfilePageEnhancer.getInitialProps = async ({ query, reduxStore: store, isSever }) => {
   // in client-side await will be stop render
   if (isSever) {
-    await store.dispatch(actionCreators.getProfile(query.id));
-    await store.dispatch(actionCreators.getOwnerMusics(query.id));
+    await Profile.all([
+      store.dispatch(actionCreators.getProfile(query.id)),
+      store.dispatch(actionCreators.getOwnerMusics(query.id))
+    ]);
   } else {
+    if (rendered[query.id]) {
+      return {};
+    }
     store.dispatch(actionCreators.getProfile(query.id));
     store.dispatch(actionCreators.getOwnerMusics(query.id));
+
+    rendered[query.id] = true;
   }
 
   return {};
