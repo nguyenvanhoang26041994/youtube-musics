@@ -5,7 +5,10 @@ import playingListReducer from './playingListReducer';
 import profilePageReducer from '../containers/ProfilePage/reducer';
 import homePageReducer from '../containers/HomePage/reducer';
 
+import reduxCache from './reduxCache';
+
 export default combineReducers({
+  reduxCache,
   profilePageReducer,
   homePageReducer,
   playingMusic: playingMusicReducer,

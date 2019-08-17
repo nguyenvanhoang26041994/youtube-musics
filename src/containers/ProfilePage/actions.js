@@ -1,5 +1,6 @@
 import { profilePage } from './constants';
 import { fetchProfile, fetchOwnerMusics } from './fetchs';
+import { cache } from '../../actions/redux-cache';
 
 export const getProfileRequest = () => ({
   type: profilePage.GET_PROFILE_REQUEST,
@@ -14,11 +15,12 @@ export const getProfileFailure = () => ({
   type: profilePage.GET_PROFILE_FAILURE,
 });
 
-export const getProfile = id => async ({ dispatch }) => {
+export const getProfile = (id, callback) => async ({ dispatch }) => {
   dispatch(getProfileRequest());
   try {
     const profile = await fetchProfile(id);
     dispatch(getProfileSuccess(profile));
+    callback && callback(profile);
   } catch (e) {
     dispatch(getProfileFailure());
   }
@@ -37,11 +39,12 @@ export const getOwnerMusicsFailure = () => ({
   type: profilePage.GET_OWNER_MUSICS_FAILURE,
 });
 
-export const getOwnerMusics = id => async ({ dispatch }) => {
+export const getOwnerMusics = (id, callback) => async ({ dispatch }) => {
   dispatch(getOwnerMusicsRequest());
   try {
-    const profile = await fetchOwnerMusics(id);
-    dispatch(getOwnerMusicsSuccess(profile));
+    const musics = await fetchOwnerMusics(id);
+    dispatch(getOwnerMusicsSuccess(musics));
+    callback && callback(musics);
   } catch (e) {
     dispatch(getOwnerMusicsFailure());
   }

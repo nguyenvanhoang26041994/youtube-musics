@@ -13,8 +13,7 @@ import Panel from './Panel';
 import musicsFormater from '../../selectors/utils/musicsFormater';
 import playlistsFormater from '../../selectors/utils/playlistsFormater';
 import * as actionCreators from './actions';
-
-let isRendered = false;
+import { cache } from '../../actions/redux-cache';
 
 const HomePageWrapper = styled.div`
   &.home-page {
@@ -72,23 +71,38 @@ const HomePageEnhancer = compose(
 )(HomePage);
 
 HomePageEnhancer.getInitialProps = async ({ query, reduxStore: store, isSever }) => {
+  // cache data to redux
+  const cacheTrendingPlaylists = playlists => store.dispatch(cache(`cacheTrendingPlaylists({})`, playlists));
+  const cacheTrendingSongs = songs => store.dispatch(cache(`cacheTrendingSongs({})`, songs));
+  const cacheTrendingSingers = singers => store.dispatch(cache(`cacheTrendingSingers({})`, singers));
+
   // in client-side await will be stop render
   if (isSever) {
     await Promise.all([
-      store.dispatch(actionCreators.getTrendingPlaylists()),
-      store.dispatch(actionCreators.getTrendingSongs()),
-      store.dispatch(actionCreators.getTrendingSingers()),
+      store.dispatch(actionCreators.getTrendingPlaylists({}, cacheTrendingPlaylists)),
+      store.dispatch(actionCreators.getTrendingSongs({}, cacheTrendingSongs)),
+      store.dispatch(actionCreators.getTrendingSingers({}, cacheTrendingSingers)),
     ]);
   } else {
-    if (isRendered) {
-      return {};
-    }
-  
-    store.dispatch(actionCreators.getTrendingPlaylists());
-    store.dispatch(actionCreators.getTrendingSongs());
-    store.dispatch(actionCreators.getTrendingSingers());
+    const reduxCache = store.getState().reduxCache;
 
-    isRendered = true;
+    if (reduxCache[`cacheTrendingPlaylists({})`]) {
+      store.dispatch(actionCreators.getTrendingPlaylistsSuccess(reduxCache[`cacheTrendingPlaylists({})`]));
+    } else {
+      store.dispatch(actionCreators.getTrendingPlaylists({}, cacheTrendingPlaylists));
+    }
+    
+    if (reduxCache[`cacheTrendingSongs({})`]) {
+      store.dispatch(actionCreators.getTrendingSongsSuccess(reduxCache[`cacheTrendingSongs({})`]));
+    } else {
+      store.dispatch(actionCreators.getTrendingSongs({}, cacheTrendingSongs));
+    }
+
+    if (reduxCache[`cacheTrendingSingers({})`]) {
+      store.dispatch(actionCreators.getTrendingSingersSuccess(reduxCache[`cacheTrendingSingers({})`]));
+    } else {
+      store.dispatch(actionCreators.getTrendingSingers({}, cacheTrendingSingers));
+    }
   }
 
   return {};
