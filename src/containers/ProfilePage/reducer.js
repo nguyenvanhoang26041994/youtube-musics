@@ -16,6 +16,11 @@ const defaultState = {
   isProfileFetching: false,
   isProfileError: false,
   isProfileSuccess: false,
+
+  ownerMusics: [],
+  isOwnerMusicsFetching: false,
+  isOwnerMusicsError: false,
+  isOwnerMusicsSuccess: false,
 };
 
 export default (state = defaultState, action) => {
@@ -46,9 +51,33 @@ export default (state = defaultState, action) => {
     case profilePage.GET_PROFILE_FAILURE:
       return {
         ...state,
+        profile: defaultState.profile,
         isProfileFetching: false,
         isProfileError: true,
         isProfileSuccess: false,
+      };
+    case profilePage.GET_OWNER_MUSICS_SUCCESS:
+      return {
+        ...state,
+        ownerMusics: action.payload,
+        isOwnerMusicsFetching: false,
+        isOwnerMusicsError: false,
+        isOwnerMusicsSuccess: true,
+      };
+
+    case profilePage.GET_OWNER_MUSICS_REQUEST:
+      return {
+        ...state,
+        isOwnerMusicsFetching: true,
+      };
+
+    case profilePage.GET_OWNER_MUSICS_FAILURE:
+      return {
+        ...state,
+        ownerMusics: defaultState.ownerMusics,
+        isOwnerMusicsFetching: false,
+        isOwnerMusicsError: true,
+        isOwnerMusicsSuccess: false,
       };
     default:
       return state;

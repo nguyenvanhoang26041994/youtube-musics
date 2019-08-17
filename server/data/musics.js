@@ -1,6 +1,4 @@
 
-import fp from 'lodash/fp';
-
 const anonimous = {
   id001: {
     id: 'id001',
@@ -268,5 +266,5 @@ musics.map(music => {
   musicsAsObject[music.id] = music;
 });
 
-export default musics;
-export { musicsAsObject };
+module.exports = musics;
+module.exports.musicsAsObject = musicsAsObject;

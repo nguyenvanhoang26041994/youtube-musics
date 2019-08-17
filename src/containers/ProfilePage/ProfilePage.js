@@ -7,17 +7,17 @@ import cn from 'classnames';
 import styled from 'styled-components';
 
 import { Image, Icon } from '../../components/core';
-import Profile from '../../components/Profile';
+import Profile from '../../containers/Profile';
 import musicsFormater from '../../selectors/utils/musicsFormater';
 
 import * as actionCreators from './actions';
 
 const ProfilePageWrapper = styled.div``;
 
-const ProfilePage = ({ className, musics, profile }) => {
+const ProfilePage = ({ className, ownerMusics, profile }) => {
   return (
     <ProfilePageWrapper className={cn('profile-page container-custom container mx-auto flex flex-col flex-1 animated fadeIn', className)}>
-      <Profile musics={musics} profile={profile} />
+      <Profile ownerMusics={ownerMusics} profile={profile} />
     </ProfilePageWrapper>
   );
 };
@@ -27,11 +27,7 @@ ProfilePage.propTypes = {};
 ProfilePage.defaultProps = {};
 
 const mapStateToProps = state => ({
-  musics: musicsFormater(
-    state.playlistsReducer.playlists[0]
-      ? state.playlistsReducer.playlists[0].musics
-      : []
-  ),
+  ownerMusics: musicsFormater(state.profilePageReducer.ownerMusics),
   profile: state.profilePageReducer.profile,
 });
 
@@ -45,8 +41,10 @@ ProfilePageEnhancer.getInitialProps = async ({ query, reduxStore: store, isSever
   // in client-side await will be stop render
   if (isSever) {
     await store.dispatch(actionCreators.getProfile(query.id));
+    await store.dispatch(actionCreators.getOwnerMusics(query.id));
   } else {
     store.dispatch(actionCreators.getProfile(query.id));
+    store.dispatch(actionCreators.getOwnerMusics(query.id));
   }
 
   return {};
