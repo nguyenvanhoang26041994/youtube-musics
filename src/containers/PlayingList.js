@@ -5,16 +5,13 @@ import Playlist from '../components/Playlist';
 import withPlayingList from '../HOC/withPlayingList';
 import withPlayingMusic from '../HOC/withPlayingMusic';
 
-const PlayingList = ({ ...otherProps }) => {
+const PlayingList = ({ playingList, playingMusic, playingMusicActions, ...otherProps }) => {
   return (
     <Playlist
-      isPlaying={false}
-      musics={[]}
-      name=''
-      user={{}}
-      playingMusic={{}}
-      onPlayMusic={f => f}
-      onPlayPlaylist={f => f}
+      isPlaying
+      playingMusic={playingMusic}
+      onPlayMusic={playingMusicActions.changeMusic}
+      {...playingList}
       {...otherProps}
     />
   );
