@@ -27,9 +27,16 @@ const Audio = ({ className, src, musicRef, ...otherProps }) => (
   </audio>
 );
 
-const PlaylistModal = ({ handleHiddenBiggerPlayer }) => {
+const PlaylistModal = ({ controllerRef, handleHiddenBiggerPlayer }) => {
   const playlistModalRef = useRef();
-  useClickOutside(playlistModalRef, handleHiddenBiggerPlayer);
+  const handler = event => {
+    if (controllerRef && controllerRef.current && controllerRef.current.contains(event.target)) {
+      return;
+    }
+    return handleHiddenBiggerPlayer();
+  };
+
+  useClickOutside(playlistModalRef, handler);
 
   return (
     <div className="global-music-player__biger-player-container container container-custom flex mx-auto h-full relative" ref={playlistModalRef}>
@@ -55,6 +62,7 @@ class GlobalMusicPlayer extends React.Component {
   };
 
   musicRef = React.createRef(null);
+  controllerRef = React.createRef(null);
 
   componentDidMount() {
     this.setStateWhenAudioLoaded();
@@ -141,9 +149,12 @@ class GlobalMusicPlayer extends React.Component {
           onEnded={this.onEnded}
         />
         <div className="global-music-player__biger-player relative w-full z-10 overflow-hidden transition-fast" style={{ height: isShowBiggerPlayer ? 'calc(100vh - 8rem)' : 0 }}>
-          <PlaylistModal handleHiddenBiggerPlayer={this.handleHiddenBiggerPlayer} />
+          <PlaylistModal
+            handleHiddenBiggerPlayer={this.handleHiddenBiggerPlayer}
+            controllerRef={this.controllerRef}
+          />
         </div>
-        <div className="w-full relative bg-lizard">
+        <div className="w-full relative bg-lizard" ref={this.controllerRef}>
           <div className="container-custom container relative flex items-center h-16 mx-auto z-10 px-1">
             <div className="flex mr-2 items-center mr-5">
               <Image className="h-10 w-10 mr-2 cursor-pointer rounded-sm" src={playingMusic.img} />
