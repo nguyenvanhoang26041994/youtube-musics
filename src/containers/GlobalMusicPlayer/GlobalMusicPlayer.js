@@ -3,7 +3,7 @@ import cn from 'classnames';
 import fp from 'lodash/fp';
 import styled from 'styled-components';
 import Link from 'next/link'
-import { Icon, Slider, BlurBackground, Image } from '../../components/core';
+import { Icon, Slider, Image } from '../../components/core';
 import PlayingList from '../../containers/PlayingList';
 import { mode } from '../../constants/playing-list';
 import withPlayingList from '../../HOC/withPlayingList';
