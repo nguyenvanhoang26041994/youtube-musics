@@ -159,7 +159,7 @@ class GlobalMusicPlayer extends React.Component {
         <div className={cn('w-full relative bg-lizard transition-normal', { 'opacity-0': !shouldShowOff })} ref={this.controllerRef}>
           <Icon
             name="close"
-            size="lg"
+            size="sm"
             color="white"
             className="absolute z-10 right-0 top-haft translate-x-mhaft-y-mhaft"
             onClick={playerActions.resetPlayinglistAndPlayingMusic}
