@@ -1,12 +1,23 @@
 const fp = require('lodash/fp');
 const withOffline = require('next-offline');
 const withSass = require('@zeit/next-sass');
+const webpack = require('webpack')
+
+const webpackConfig = config => {
+  config.plugins.push(
+    new webpack.EnvironmentPlugin({
+      API_SERVER_ORIGIN: 'http://localhost:3000'
+    })
+  );
+  return config;
+};
 
 module.exports = fp.compose(
   withOffline,
   withSass,
 )({
   // target: 'serverless',
+  webpack: webpackConfig,
   workboxOpts: {
     runtimeCaching: [
       {

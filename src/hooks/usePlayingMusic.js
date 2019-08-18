@@ -11,11 +11,12 @@ export default function usePlayingMusic() {
 
   useEffect(
     () => {
-      reduxStore = window[secretReduxStore];
+      const reduxStore = window[secretReduxStore];
       const state = reduxStore.getState();
 
       playingMusic = playingMusicSelector(state);
       playingMusicActions = bindActionCreators(actionCreators, reduxStore.dispatch);
+      console.log(playingMusic);
     }
   );
 
