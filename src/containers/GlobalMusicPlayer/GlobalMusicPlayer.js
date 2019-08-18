@@ -74,6 +74,10 @@ class GlobalMusicPlayer extends React.Component {
       this.musicRef.current.play && this.musicRef.current.play();
     }
 
+    if (!this.props.playingMusic.src && !this.musicRef.current.paused) {
+      this.musicRef.current.pause && this.musicRef.current.pause();
+    }
+
     if (this.props.playingList.id !== prevProps.playingList.id) {
       this.handleShowBiggerPlayer();
     }
@@ -121,19 +125,14 @@ class GlobalMusicPlayer extends React.Component {
   onLoadedData = this.setStateWhenAudioLoaded;
 
   render() {
-    const { className, playingMusic, playingList, playingListActions } = this.props;
+    const { className, playingMusic, playingList, playingListActions, playerActions } = this.props;
     const { currentMusicTime, musicTime, musicVolume, isShowBiggerPlayer } = this.state;
+    const shouldShowOff = playingMusic.src;
 
     return (
       <GlobalMusicPlayerWrapper
         id="global-music-player"
-        className={cn(
-          'ui-global-music-player fixed bottom-0 left-0 w-full transition-normal',
-          {
-            'opacity-0': !playingMusic.src,
-          },
-          className
-        )}
+        className={cn('ui-global-music-player fixed bottom-0 left-0 w-full', className)}
       >
         <Audio
           src={playingMusic.src}
@@ -148,13 +147,23 @@ class GlobalMusicPlayer extends React.Component {
           onVolumeChange={this.onVolumeChange}
           onEnded={this.onEnded}
         />
-        <div className="global-music-player__biger-player relative w-full z-10 overflow-hidden transition-fast" style={{ height: isShowBiggerPlayer ? 'calc(100vh - 8rem)' : 0 }}>
+        <div
+          className="global-music-player__biger-player relative w-full z-10 overflow-hidden transition-fast"
+          style={{ height: shouldShowOff && isShowBiggerPlayer ? 'calc(100vh - 8rem)' : 0 }}
+        >
           <PlaylistModal
             handleHiddenBiggerPlayer={this.handleHiddenBiggerPlayer}
             controllerRef={this.controllerRef}
           />
         </div>
-        <div className="w-full relative bg-lizard" ref={this.controllerRef}>
+        <div className={cn('w-full relative bg-lizard transition-normal', { 'opacity-0': !shouldShowOff })} ref={this.controllerRef}>
+          <Icon
+            name="close"
+            size="lg"
+            color="white"
+            className="absolute z-10 right-0 top-haft translate-x-mhaft-y-mhaft"
+            onClick={playerActions.resetPlayinglistAndPlayingMusic}
+          />
           <div className="container-custom container relative flex items-center h-16 mx-auto z-10 px-1">
             <div className="flex mr-2 items-center mr-5">
               <Image className="h-10 w-10 mr-2 cursor-pointer rounded-sm" src={playingMusic.img} />
@@ -188,7 +197,14 @@ class GlobalMusicPlayer extends React.Component {
               </div>
               <Icon name="step-forward" size="xs" color="white" className="ml-4" onClick={this.onPlayNext} />
             </div>
-            {playingList.id && playingList.musics.length && <Icon name="list" size="sm" color={isShowBiggerPlayer ? 'teal-400': 'white'} className="ml-5" onClick={this.toggleShowBiggerPlayer} />}
+            {playingList.id && playingList.musics.length && (
+              <Icon
+                name="list"
+                size="sm"
+                color={isShowBiggerPlayer && playingMusic.src ? 'teal-400': 'white'}
+                className="ml-5" onClick={this.toggleShowBiggerPlayer}
+              />
+            )}
             <div className="flex-1 relative mx-5">
               <Slider
                 className="w-full"

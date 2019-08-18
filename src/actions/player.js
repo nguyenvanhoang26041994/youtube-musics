@@ -1,6 +1,6 @@
 import fp from 'lodash/fp';
 import { mode } from '../constants/playing-list';
-import { changeMusic } from '../actions/playing-music';
+import { changeMusic, reset as resetPlayingMusic } from '../actions/playing-music';
 import { changePlayingList, changeMode, reset as resetPlayinglist } from './playing-list';
 
 export const goNextSong = () => ({ dispatch, getState }) => {
@@ -87,4 +87,10 @@ export const playMusicAndResetPlayingList = payload => ({ dispatch }) => {
   dispatch(changeMusic(payload));
   dispatch(resetPlayinglist());
   dispatch(changeMode(mode.REPEAT));
+};
+
+// close player
+export const resetPlayinglistAndPlayingMusic = () => ({ dispatch }) => {
+  dispatch(resetPlayingMusic());
+  dispatch(resetPlayinglist());
 };

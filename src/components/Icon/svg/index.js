@@ -25,6 +25,7 @@ const icons = {
   'play-circle': require('./play-circle').default,
   'verified': require('./verified').default,
   'youtube': require('./youtube').default,
+  'close': require('./close').default,
 };
 
 export default icons;

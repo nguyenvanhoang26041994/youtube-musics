@@ -97,6 +97,11 @@
   transform: translateX(100%);
 }
 
+.translate-x-mhaft-y-mhaft,
+.translate-y-mhaft-x-mhaft {
+  transform: translate(-50%, -50%);
+}
+
 .translate-y-mhaft {
   transform: translateY(-50%);
 }

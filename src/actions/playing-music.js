@@ -1,7 +1,7 @@
 import { music } from '../constants/playing-music';
 
 export const reset = () => ({
-  type: playlist.RESET,
+  type: music.RESET,
 });
 
 export const changeIsPlaying = isPlaying => ({
