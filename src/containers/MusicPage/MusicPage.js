@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { Button, Icon } from '../../components/core';
+// import AudioAnalyzer from '../../components/AudioAnalyzer-new';
 import MusicWithLyric from '../../components/MusicWithLyric';
 import MusicWithLyricSkeleton from '../../components/MusicWithLyric/Skeleton';
 import musicFormater from '../../selectors/utils/musicFormater';
@@ -36,6 +37,9 @@ const MusicPage = ({ className, music, playerActions, playingMusic, lyric, isFet
           lyric={lyric}
         />
       )}
+      {/* <div className="fixed z-m1 absolute-center w-screen h-screen">
+        <AudioAnalyzer />
+      </div> */}
     </MusicPageWrapper>
   );
 }

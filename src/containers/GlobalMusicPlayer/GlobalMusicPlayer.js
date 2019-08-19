@@ -26,7 +26,8 @@ const GlobalMusicPlayerWrapper = styled.div`
 const Audio = ({ className, src, musicRef, ...otherProps }) => {
   return (
     <audio id="music-audio" className={cn('hidden', className)} ref={musicRef} {...otherProps}>
-      <source src={src} />
+      {/* <source src={src || `/static/musics/edm-lol.mp3`} /> */}
+      <source src={src || `/static/musics/edm-lol.mp3`} />
     </audio>
   );
 };
@@ -69,6 +70,8 @@ class GlobalMusicPlayer extends React.Component {
   controllerRef = React.createRef(null);
 
   componentDidMount() {
+    // this.musicRef.current.play();
+    // this.musicRef.current.pause();
     this.setStateWhenAudioLoaded();
   }
 

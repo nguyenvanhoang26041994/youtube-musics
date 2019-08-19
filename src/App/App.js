@@ -6,8 +6,8 @@ import { Provider } from 'react-redux';
 import Layout from '../layouts/Layout';
 import GlobalMusicPlayer from '../containers/GlobalMusicPlayer';
 import withReduxStore from '../libs/with-redux-store';
-
 import isSever from '../utils/isSever';
+// require('../components/AudioAnalyzer-new'); // please DON'T REMOVE THIS LINE, we register something here
 
 const appVersion = '2.0.0';
 
