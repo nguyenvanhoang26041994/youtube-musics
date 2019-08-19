@@ -8,7 +8,9 @@ import withPlayerActions from '../../HOC/withPlayerActions';
 import PlaylistCard from '../../containers/PlaylistCard';
 import SongCard from '../../containers/SongCard';
 import SingerCard from '../../components/SingerCard';
-import SongCardSkeleton from '../../components/SongCardSkeleton';
+import SongCardSkeleton from '../../components/SongCard/Skeleton';
+import PlaylistCardSkeleton from '../../components/PlaylistCard/Skeleton';
+import SingerCardSkeleton from '../../components/SingerCard/Skeleton';
 import Panel from './Panel';
 
 import musicsFormater from '../../selectors/utils/musicsFormater';
@@ -42,7 +44,7 @@ const HomePage = ({ trendingPlaylists, trendingSongs, trendingSingers, loaders }
         ))}
       </Panel>
       <Panel className="mb-10" title="COOL PLAYLIST">
-        {fp.take(5, trendingPlaylists).map(playlist => (
+        {!loaders.isTrendingPlaylistsFetching && fp.take(5, trendingPlaylists).map(playlist => (
           <div className="w-1/2 xl:w-1/5 lg:w-1/5 md:w-1/4 p-1" key={playlist.id}>
             <PlaylistCard
               className="w-full"
@@ -50,14 +52,24 @@ const HomePage = ({ trendingPlaylists, trendingSongs, trendingSingers, loaders }
             />
           </div>
         ))}
+        {loaders.isTrendingPlaylistsFetching && fp.times(String, 5).map(idx => (
+          <div className="w-1/2 xl:w-1/5 lg:w-1/5 md:w-1/4 p-1" key={idx}>
+            <PlaylistCardSkeleton className="w-full" />
+          </div>
+        ))}
       </Panel>
       <Panel className="mb-10" title="TRENDING SINGER">
-        {fp.take(5, trendingSingers).map(singer => (
+        {!loaders.isTrendingSingersFetching && fp.take(5, trendingSingers).map(singer => (
           <div className="w-1/2 xl:w-1/5 lg:w-1/5 md:w-1/4 p-1" key={singer.id}>
             <SingerCard
               className="w-full"
               {...singer}
             />
+          </div>
+        ))}
+        {loaders.isTrendingSingersFetching && fp.times(String, 5).map(idx => (
+          <div className="w-1/2 xl:w-1/5 lg:w-1/5 md:w-1/4 p-1" key={idx}>
+            <SingerCardSkeleton className="w-full" />
           </div>
         ))}
       </Panel>
