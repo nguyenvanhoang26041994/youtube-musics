@@ -14,7 +14,7 @@ export const getTrendingPlaylistsFailure = () => ({
   type: homePage.GET_TRENDING_PLAYLISTS_FAILURE,
 });
 
-export const getTrendingPlaylists = (params, callback) => async ({ dispatch }) => {
+export const getTrendingPlaylists = (params, callback) => async (dispatch) => {
   dispatch(getTrendingPlaylistsRequest());
   try {
     const playlists = await fetchTrendingPlaylists(params);
@@ -38,7 +38,7 @@ export const getTrendingSongsFailure = () => ({
   type: homePage.GET_TRENDING_SONGS_FAILURE,
 });
 
-export const getTrendingSongs = (params, callback) => async ({ dispatch }) => {
+export const getTrendingSongs = (params, callback) => async (dispatch) => {
   dispatch(getTrendingPlaylistsRequest());
   try {
     const songs = await fetchTrendingSongs(params);
@@ -62,7 +62,7 @@ export const getTrendingSingersFailure = () => ({
   type: homePage.GET_TRENDING_SINGERS_FAILURE,
 });
 
-export const getTrendingSingers = (params, callback) => async ({ dispatch }) => {
+export const getTrendingSingers = (params, callback) => async (dispatch) => {
   dispatch(getTrendingSingersRequest());
   try {
     const singers = await fetchTrendingSingers(params);

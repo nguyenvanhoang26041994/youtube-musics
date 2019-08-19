@@ -13,7 +13,7 @@ export const getMusicFailure = () => ({
   type: musicPage.GET_MUSIC_FAILURE,
 });
 
-export const getMusic = (id, callback) => async ({ dispatch }) => {
+export const getMusic = (id, callback) => async (dispatch) => {
   dispatch(getMusicRequest());
   try {
     const music = await fetchMusic(id);

@@ -13,7 +13,7 @@ export const getProfileFailure = () => ({
   type: profilePage.GET_PROFILE_FAILURE,
 });
 
-export const getProfile = (id, callback) => async ({ dispatch }) => {
+export const getProfile = (id, callback) => async (dispatch) => {
   dispatch(getProfileRequest());
   try {
     const profile = await fetchProfile(id);
@@ -37,7 +37,7 @@ export const getOwnerMusicsFailure = () => ({
   type: profilePage.GET_OWNER_MUSICS_FAILURE,
 });
 
-export const getOwnerMusics = (id, callback) => async ({ dispatch }) => {
+export const getOwnerMusics = (id, callback) => async (dispatch) => {
   dispatch(getOwnerMusicsRequest());
   try {
     const musics = await fetchOwnerMusics(id);

@@ -14,7 +14,7 @@ export const getPlaylistFailure = () => ({
   type: playlistPage.GET_PLAYLIST_FAILURE,
 });
 
-export const getPlaylist = (id, callback) => async ({ dispatch }) => {
+export const getPlaylist = (id, callback) => async (dispatch) => {
   dispatch(getPlaylistRequest());
   try {
     const profile = await fetchPlaylist(id);

@@ -3,7 +3,7 @@ import { mode } from '../constants/playing-list';
 import { changeMusic, reset as resetPlayingMusic } from '../actions/playing-music';
 import { changePlayingList, changeMode, reset as resetPlayinglist } from './playing-list';
 
-export const goNextSong = () => ({ dispatch, getState }) => {
+export const goNextSong = () => (dispatch, getState) => {
   const state = getState();
   const musics = state.playingList.musics;
 
@@ -35,7 +35,7 @@ export const goNextSong = () => ({ dispatch, getState }) => {
   }
 };
 
-export const goPrevSong = () => ({ dispatch, getState }) => {
+export const goPrevSong = () => (dispatch, getState) => {
   const state = getState();
   const musics = state.playingList.musics;
 
@@ -68,7 +68,7 @@ export const goPrevSong = () => ({ dispatch, getState }) => {
 };
 
 // Play all song in playlist, first song will be play first
-export const playPlaylist = payload => ({ dispatch }) => {
+export const playPlaylist = payload => dispatch => {
   dispatch(changePlayingList(payload));
   if (payload && payload.musics && payload.musics[0]) {
     dispatch(changeMusic(payload.musics[0]));
@@ -77,20 +77,20 @@ export const playPlaylist = payload => ({ dispatch }) => {
 };
 
 // Just play one song
-export const playMusic = payload => ({ dispatch }) => {
+export const playMusic = payload => (dispatch) => {
   dispatch(changeMusic(payload));
   dispatch(changeMode(mode.REPEAT));
 };
 
 // Just play one song but also reset playinglist
-export const playMusicAndResetPlayingList = payload => ({ dispatch }) => {
+export const playMusicAndResetPlayingList = payload => dispatch => {
   dispatch(changeMusic(payload));
   dispatch(resetPlayinglist());
   dispatch(changeMode(mode.REPEAT));
 };
 
 // close player
-export const resetPlayinglistAndPlayingMusic = () => ({ dispatch }) => {
+export const resetPlayinglistAndPlayingMusic = () => dispatch => {
   dispatch(resetPlayingMusic());
   dispatch(resetPlayinglist());
 };

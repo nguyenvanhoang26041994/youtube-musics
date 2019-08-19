@@ -1,10 +1,9 @@
 import { createStore, applyMiddleware } from 'redux';
-import createSagaMiddleware from 'redux-saga'
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
-import reduxMiddleware from './middlewares/redux-middleware';
+import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 
-const middleWare = [reduxMiddleware];
+const middleWare = [thunk];
 
 export const initializeStore = (initialState = {}) => createStore(
   rootReducer,
