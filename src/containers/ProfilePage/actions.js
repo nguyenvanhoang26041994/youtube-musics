@@ -39,12 +39,12 @@ export const getOwnerMusicsRequest = () => ({
   type: profilePage.GET_OWNER_MUSICS_REQUEST,
 });
 
-export const getOwnerMusicsSuccess = payload => {
+export const getOwnerMusicsSuccess = (payload, belongTo) => {
   const type = profilePage.GET_OWNER_MUSICS_SUCCESS;
   return {
     type,
     payload,
-    [cacheKey]: `${type}(${payload.id})`,
+    [cacheKey]: `${type}(${belongTo})`,
   }
 };
 
@@ -56,13 +56,13 @@ export const getOwnerMusics = (id) => async (dispatch, getState) => {
   const state = getState();
   const key = `${profilePage.GET_OWNER_MUSICS_SUCCESS}(${id})`;
   if (state.reduxCacheReducer[key]) {
-    return dispatch(getOwnerMusicsSuccess(state.reduxCacheReducer[key].payload));
+    return dispatch(getOwnerMusicsSuccess(state.reduxCacheReducer[key].payload), id);
   }
 
   dispatch(getOwnerMusicsRequest());
   try {
     const musics = await fetchOwnerMusics(id);
-    dispatch(getOwnerMusicsSuccess(musics));
+    dispatch(getOwnerMusicsSuccess(musics, id));
   } catch (e) {
     dispatch(getOwnerMusicsFailure());
   }
