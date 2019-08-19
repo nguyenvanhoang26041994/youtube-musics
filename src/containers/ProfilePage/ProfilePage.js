@@ -12,10 +12,15 @@ import * as actionCreators from './actions';
 
 const ProfilePageWrapper = styled.div``;
 
-const ProfilePage = ({ className, ownerMusics, profile }) => {
+const ProfilePage = ({ className, ownerMusics, profilePageReducer, }) => {
   return (
     <ProfilePageWrapper className={cn('profile-page container-custom container mx-auto flex flex-col flex-1 animated fadeIn', className)}>
-      <Profile ownerMusics={ownerMusics} profile={profile} />
+      <Profile
+        ownerMusics={ownerMusics}
+        profile={profilePageReducer.profile}
+        isOwnerMusicsFetching={profilePageReducer.isOwnerMusicsFetching}
+        isProfileFetching={profilePageReducer.isProfileFetching}
+      />
     </ProfilePageWrapper>
   );
 };
@@ -25,8 +30,8 @@ ProfilePage.propTypes = {};
 ProfilePage.defaultProps = {};
 
 const mapStateToProps = state => ({
+  profilePageReducer: state.profilePageReducer,
   ownerMusics: musicsFormater(state.profilePageReducer.ownerMusics),
-  profile: state.profilePageReducer.profile,
 });
 
 const ProfilePageEnhancer = compose(

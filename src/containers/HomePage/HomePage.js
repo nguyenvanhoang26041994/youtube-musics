@@ -8,6 +8,7 @@ import withPlayerActions from '../../HOC/withPlayerActions';
 import PlaylistCard from '../../containers/PlaylistCard';
 import SongCard from '../../containers/SongCard';
 import SingerCard from '../../components/SingerCard';
+import SongCardSkeleton from '../../components/SongCardSkeleton';
 import Panel from './Panel';
 
 import musicsFormater from '../../selectors/utils/musicsFormater';
@@ -22,16 +23,21 @@ const HomePageWrapper = styled.div`
   }
 `;
 
-const HomePage = ({ trendingPlaylists, trendingSongs, trendingSingers }) => {
+const HomePage = ({ trendingPlaylists, trendingSongs, trendingSingers, loaders }) => {
   return (
     <HomePageWrapper id="home-page" className="home-page container-custom container mx-auto flex flex-col animated fadeIn">
       <Panel className="mb-10" title="HOT & NEW SONGS">
-        {fp.take(10, trendingSongs).map(song => (
+        {!loaders.isTrendingSongsFetching && fp.take(10, trendingSongs).map(song => (
           <div className="w-1/2 xl:w-1/5 lg:w-1/5 md:w-1/4 p-1" key={song.id}>
             <SongCard
               className="w-full"
               {...song}
             />
+          </div>
+        ))}
+        {loaders.isTrendingSongsFetching && fp.times(String, 10).map(idx => (
+          <div className="w-1/2 xl:w-1/5 lg:w-1/5 md:w-1/4 p-1" key={idx}>
+            <SongCardSkeleton className="w-full" />
           </div>
         ))}
       </Panel>
@@ -64,6 +70,11 @@ const HomePageEnhancer = compose(
     trendingPlaylists: playlistsFormater(state.homePageReducer.trendingPlaylists),
     trendingSongs: musicsFormater(state.homePageReducer.trendingSongs),
     trendingSingers: state.homePageReducer.trendingSingers,
+    loaders: {
+      isTrendingPlaylistsFetching: state.homePageReducer.isTrendingPlaylistsFetching,
+      isTrendingSongsFetching: state.homePageReducer.isTrendingSongsFetching,
+      isTrendingSingersFetching: state.homePageReducer.isTrendingSingersFetching,
+    },
   })),
   withPlayerActions,
 )(HomePage);

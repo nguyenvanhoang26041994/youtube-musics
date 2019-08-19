@@ -1,10 +1,12 @@
 import React from 'react';
 import cn from 'classnames';
+import fp from 'lodash/fp';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import { Image, Icon, Button, Quote } from '../../components/core';
 import MusicCard from '../../containers/MusicCard';
+import MusicCardSkeleton from '../../components/MusicCardSkeleton';
 
 const defaultPropfile = {
   id: 'unknown',
@@ -37,7 +39,7 @@ const WallpaperWrapper = styled.div`
 const ProfileHeadWrapper = styled.div``;
 const ProfileBobyWrapper = styled.div``;
 
-const Profile = ({ className, ownerMusics, profile, onPlayOwnerMusics, isPlaylistPlaying, playingMusic }) => {
+const Profile = ({ className, ownerMusics, isOwnerMusicsFetching, profile, isProfileFetching, onPlayOwnerMusics, isPlaylistPlaying, playingMusic }) => {
   return (
     <ProfileWrapper className={cn('ui-profile w-full', className)}>
       <ProfileHeadWrapper className="ui-profile__head flex flex-col">
@@ -73,12 +75,17 @@ const Profile = ({ className, ownerMusics, profile, onPlayOwnerMusics, isPlaylis
       </ProfileHeadWrapper>
       <ProfileBobyWrapper>
         <div className="flex flex-wrap">
-          {ownerMusics.map(music => (
+          {!isOwnerMusicsFetching && ownerMusics.map(music => (
             <div className="w-1/5 p-1" key={music.id}>
               <MusicCard
                 className="w-full"
                 {...music}
               />
+            </div>
+          ))}
+          {isOwnerMusicsFetching && fp.times(String, 10).map(idx => (
+            <div className="w-1/5 p-1" key={idx}>
+              <MusicCardSkeleton className="w-full" />
             </div>
           ))}
         </div>

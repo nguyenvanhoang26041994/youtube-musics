@@ -6,6 +6,10 @@ import styled from 'styled-components';
 const ButtonWrapper = styled.button`
   height: 2em;
 
+  &:disabled {
+    cursor: not-allowed;
+  }
+
   &.outline-none {
     outline: 0;
   }

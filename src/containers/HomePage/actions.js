@@ -60,7 +60,7 @@ export const getTrendingSongs = (params) => async (dispatch, getState) => {
     return dispatch(getTrendingSongsSuccess(songsFromCache));
   }
 
-  dispatch(getTrendingPlaylistsRequest());
+  dispatch(getTrendingSongsRequest());
   try {
     const songs = await fetchTrendingSongs(params);
     dispatch(getTrendingSongsSuccess(songs));

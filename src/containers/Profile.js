@@ -1,11 +1,12 @@
 import React from 'react';
 import { compose } from 'redux';
+import { connect } from 'react-redux';
 import Profile from '../components/Profile';
 import withPlayerActions from '../HOC/withPlayerActions';
 import withPlayingList from '../HOC/withPlayingList';
 import withPlayingMusic from '../HOC/withPlayingMusic';
 
-const ProfileEnhancer = ({ playerActions, playingList, playingMusic, ownerMusics, profile, ...otherProps }) => {
+const ProfileEnhancer = ({ playerActions, playingList, playingMusic, isOwnerMusicsFetching, isProfileFetching, ownerMusics, profile, ...otherProps }) => {
   const onPlayOwnerMusics = () => playerActions.playPlaylist({
     id: profile.id,
     name: profile.name,
@@ -23,6 +24,8 @@ const ProfileEnhancer = ({ playerActions, playingList, playingMusic, ownerMusics
       profile={profile}
       isPlaylistPlaying={isPlaylistPlaying}
       playingMusic={playingMusic}
+      isOwnerMusicsFetching={isOwnerMusicsFetching}
+      isProfileFetching={isProfileFetching}
       {...otherProps}
     />
   );
