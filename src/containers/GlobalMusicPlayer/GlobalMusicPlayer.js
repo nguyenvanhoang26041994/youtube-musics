@@ -23,7 +23,7 @@ const GlobalMusicPlayerWrapper = styled.div`
 `;
 
 const Audio = ({ className, src, musicRef, ...otherProps }) => (
-  <audio className={cn('hidden', className)} ref={musicRef} {...otherProps}>
+  <audio id="music-audio" className={cn('hidden', className)} ref={musicRef} {...otherProps}>
     <source src={src} />
   </audio>
 );
@@ -114,6 +114,7 @@ class GlobalMusicPlayer extends React.Component {
   toggleShowBiggerPlayer = () => this.setState(prevState => ({ ...prevState, isShowBiggerPlayer: !prevState.isShowBiggerPlayer }))
 
   onTimeUpdate = e => this.setState({ currentMusicTime: e.target.currentTime });
+  // onTimeUpdate = fp.debounce(777, this._onTimeUpdate);
   onVolumeChange = e => this.setState({ musicVolume: e.target.volume });
   onEnded = e => this.props.playingMusicActions.changeIsPlaying(!e.target.paused);
   onPlay = e => this.props.playingMusicActions.changeIsPlaying(!e.target.paused);

@@ -3,16 +3,29 @@ import cn from 'classnames';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Button, Icon } from '../../components/core';
+import usePlayingMusicNode from '../../hooks/usePlayingMusicNode';
 
-const MusicWithLyricWrapper = styled.section``;
+const MusicWithLyricWrapper = styled.section`
+  &.ui-music-with-lyric {
+    .ui-music-with-lyric__name {
+      top: 4rem;
+    }
+
+    .ui-music-with-lyric__lyric-wrapper {
+      height: ${props => props.isCollapsed ? '500px' : 'initial' };
+    }
+  }
+`;
 
 const MusicWithLyric = ({ className, music, lyric, playMusic }) => {
   const [isCollapsed, setCollapsed] = React.useState(true);
   const toggleLyric = () => setCollapsed(prevValue => !prevValue);
+  const [currentTime] = usePlayingMusicNode();
+
   return (
-    <MusicWithLyricWrapper className={cn('ui-music-with-lyric flex flex-col w-full', className)}>
-      <div className="w-full flex justify-center">
-        <Button size="sm" color="teal-400" className={cn('m-2 text-white rounded-full sticky top-0')} onClick={playMusic}>
+    <MusicWithLyricWrapper className={cn('ui-music-with-lyric flex flex-col w-full relative', className)} isCollapsed={isCollapsed}>
+      <div className="ui-music-with-lyric__name w-full flex justify-center sticky z-10">
+        <Button size="sm" color="teal-400" className={cn('m-2 text-white rounded-full')} onClick={playMusic}>
           <div className="text-sm flex items-center mx-4">
             <Icon name="music-note" className="mr-3" />
             <span className="font-lovers-quarrel text-xl">{music.singersName} - {music.name}</span>
@@ -22,10 +35,10 @@ const MusicWithLyric = ({ className, music, lyric, playMusic }) => {
       </div>
       {lyric && lyric.data && lyric.data.length && (
         <div className="flex flex-col">
-          <ul className="flex flex-col items-center font-shadows-into-light text-base overflow-hidden" style={{ height: isCollapsed ? '500px' : 'auto' }}>
+          <ul className="ui-music-with-lyric__lyric-wrapper flex flex-col items-center font-shadows-into-light text-base overflow-hidden">
             {lyric && lyric.data.map((obj, idx) => (
-              <li key={idx}>
-                <p className="text-gray-100">{obj.text}</p>
+              <li key={idx} className="text-gray-100">
+                <p className={cn('lyric-line transition-fast', { 'lyric-line--active text-teal-400': obj.timeStart < currentTime && obj.timeEnd > currentTime})}>{obj.text}</p>
               </li>
             ))}
           </ul>
