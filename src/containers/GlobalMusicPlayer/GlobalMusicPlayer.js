@@ -205,7 +205,7 @@ class GlobalMusicPlayer extends React.Component {
                 className="ml-5" onClick={this.toggleShowBiggerPlayer}
               />
             )}
-            <div className="flex-1 relative mx-5">
+            <div className="hidden xl:block lg:block md:block flex-1 relative mx-5">
               <Slider
                 className="w-full"
                 percent={currentMusicTime/musicTime}
@@ -225,7 +225,7 @@ class GlobalMusicPlayer extends React.Component {
                 onClick={playingListActions.changeToNextMode}
               />
             </div>
-            <div className="flex items-center w-32 ml-5">
+            <div className="flex items-center w-32 ml-5 hidden xl:flex lg:flex md:flex ">
               <Icon name="volume" size="xl" color="white" onClick={this.pauseMusic} />
               <Slider
                 className="w-full ml-2"

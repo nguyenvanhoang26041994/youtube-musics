@@ -28,7 +28,7 @@ const HomePage = ({ trendingPlaylists, trendingSongs, trendingSingers }) => {
     <HomePageWrapper id="home-page" className="home-page container-custom container mx-auto flex flex-col animated fadeIn">
       <Panel className="mb-10" title="HOT & NEW SONGS">
         {fp.take(10, trendingSongs).map(song => (
-          <div className="w-1/5 p-1" key={song.id}>
+          <div className="w-1/2 xl:w-1/5 lg:w-1/5 md:w-1/4 p-1" key={song.id}>
             <SongCard
               className="w-full"
               {...song}
@@ -38,7 +38,7 @@ const HomePage = ({ trendingPlaylists, trendingSongs, trendingSingers }) => {
       </Panel>
       <Panel className="mb-10" title="COOL PLAYLIST">
         {fp.take(5, trendingPlaylists).map(playlist => (
-          <div className="w-1/5 p-1" key={playlist.id}>
+          <div className="w-1/2 xl:w-1/5 lg:w-1/5 md:w-1/4 p-1" key={playlist.id}>
             <PlaylistCard
               className="w-full"
               {...playlist}
@@ -48,7 +48,7 @@ const HomePage = ({ trendingPlaylists, trendingSongs, trendingSingers }) => {
       </Panel>
       <Panel className="mb-10" title="TRENDING SINGER">
         {fp.take(5, trendingSingers).map(singer => (
-          <div className="w-1/5 p-1" key={singer.id}>
+          <div className="w-1/2 xl:w-1/5 lg:w-1/5 md:w-1/4 p-1" key={singer.id}>
             <SingerCard
               className="w-full"
               {...singer}
