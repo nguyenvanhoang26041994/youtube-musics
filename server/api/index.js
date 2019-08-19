@@ -8,6 +8,7 @@ const musics = require('../data/musics');
 const { musicsAsObject } = require('../data/musics');
 const playlists = require('../data/playlists');
 const { playlistsAsObject } = require('../data/playlists');
+const { lyricsAsObject } = require('../data/lyrics');
 
 router.get('/profile/:id', (req, res) => {
   return res.json(profilesAsObject[req.params.id]);
@@ -19,6 +20,10 @@ router.get('/playlist/:id', (req, res) => {
 
 router.get('/music/:id', (req, res) => {
   return res.json(musicsAsObject[req.params.id]);
+});
+
+router.get('/lyric/:id', (req, res) => {
+  return res.json(lyricsAsObject[req.params.id]);
 });
 
 router.get('/profiles', (req, res) => {

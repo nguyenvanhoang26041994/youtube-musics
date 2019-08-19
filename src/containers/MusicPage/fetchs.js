@@ -6,3 +6,9 @@ export const fetchMusic = id => new Promise((resolve, reject) =>
     .then(response => resolve(response.json()))
     .catch(e => reject(e))
   );
+
+export const fetchLyric = id => new Promise((resolve, reject) =>
+  fetch(`${apiServers.main}/api/lyric/${id}`)
+    .then(response => resolve(response.json()))
+    .catch(e => reject(e))
+  );

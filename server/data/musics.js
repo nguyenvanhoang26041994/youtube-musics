@@ -121,7 +121,6 @@ const musics = [
     img: 'https://amp.thenational.ae/image/policy:1.851304:1555739352/Avicii.jpg?f=16x9&w=1200&$p$f$w=aae39fc',
     listenCount: 1241562,
     time: 60 * 60 + 17,
-    imgBlur: 'https://amp.thenational.ae/image/policy:1.851304:1555739352/Avicii.jpg?f=16x9&w=1200&$p$f$w=aae39fc',
   },
   {
     id: 'afNQLlTRvfM',
