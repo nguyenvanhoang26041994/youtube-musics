@@ -79,7 +79,7 @@ class GlobalMusicPlayer extends React.Component {
       this.musicRef.current.pause && this.musicRef.current.pause();
     }
 
-    if (this.props.playingList.id !== prevProps.playingList.id && this.props.router.pathname !== '/playlist') {
+    if (this.props.playingList.id && this.props.playingList.id !== prevProps.playingList.id && this.props.router.pathname !== '/playlist') {
       this.handleShowBiggerPlayer();
     }
   }
