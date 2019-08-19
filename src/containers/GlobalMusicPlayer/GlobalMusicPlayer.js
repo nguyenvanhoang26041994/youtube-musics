@@ -12,6 +12,7 @@ import withPlayingMusic from '../../HOC/withPlayingMusic';
 import withPlayerActions from '../../HOC/withPlayerActions';
 import useClickOutside from '../../hooks/useClickOutside';
 import { calcTime } from '../../utils/time';
+import usePlayingMusicNode from '../../hooks/usePlayingMusicNode';
 
 const listMode = Object.freeze({
   [mode.LOOP]: 'loop',
@@ -22,11 +23,13 @@ const listMode = Object.freeze({
 const GlobalMusicPlayerWrapper = styled.div`
 `;
 
-const Audio = ({ className, src, musicRef, ...otherProps }) => (
-  <audio id="music-audio" className={cn('hidden', className)} ref={musicRef} {...otherProps}>
-    <source src={src} />
-  </audio>
-);
+const Audio = ({ className, src, musicRef, ...otherProps }) => {
+  return (
+    <audio id="music-audio" className={cn('hidden', className)} ref={musicRef} {...otherProps}>
+      <source src={src} />
+    </audio>
+  );
+};
 
 const PlaylistModal = ({ controllerRef, handleHiddenBiggerPlayer }) => {
   const playlistModalRef = useRef();
@@ -114,7 +117,6 @@ class GlobalMusicPlayer extends React.Component {
   toggleShowBiggerPlayer = () => this.setState(prevState => ({ ...prevState, isShowBiggerPlayer: !prevState.isShowBiggerPlayer }))
 
   onTimeUpdate = e => this.setState({ currentMusicTime: e.target.currentTime });
-  // onTimeUpdate = fp.debounce(777, this._onTimeUpdate);
   onVolumeChange = e => this.setState({ musicVolume: e.target.volume });
   onEnded = e => this.props.playingMusicActions.changeIsPlaying(!e.target.paused);
   onPlay = e => this.props.playingMusicActions.changeIsPlaying(!e.target.paused);

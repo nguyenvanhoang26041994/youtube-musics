@@ -5,7 +5,7 @@ export default function usePlayingMusicNode(audioNode) {
   const [currentTime, setCurrentTime] = useState(0);
 
   const onTimeUpdate = e => setCurrentTime(e.target.currentTime);
-  const onDebounceTimeUpdate = fp.debounce(200, onTimeUpdate);
+  const onDebounceTimeUpdate = fp.debounce(333, onTimeUpdate);
 
   useEffect(() => {
     const _audioNode = audioNode || document.getElementById('music-audio');
