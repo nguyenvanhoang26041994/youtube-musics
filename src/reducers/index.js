@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { reduxCacheReducer } from '../libs/redux-cache';
 import appReducer from '../App/reducer';
 import playingMusicReducer from './playingMusicReducer';
 import playingListReducer from './playingListReducer';
@@ -7,10 +8,8 @@ import homePageReducer from '../containers/HomePage/reducer';
 import playlistPageReducer from '../containers/PlaylistPage/reducer';
 import musicPageReducer from '../containers/MusicPage/reducer';
 
-import reduxCache from './reduxCache';
-
 export default combineReducers({
-  reduxCache,
+  reduxCacheReducer,
   musicPageReducer,
   profilePageReducer,
   playlistPageReducer,

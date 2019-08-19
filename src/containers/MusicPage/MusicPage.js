@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import * as actionCreators from './actions';
-import { cache } from '../../actions/redux-cache';
 
 const MusicPageWrapper = styled.div``;
 
@@ -19,22 +18,11 @@ MusicPage.displayName = 'MusicPage';
 MusicPageEnhancer.displayName = 'MusicPageEnhancer';
 
 MusicPageEnhancer.getInitialProps = async ({ query, reduxStore: store, isSever }) => {
-  // cache data to redux
-  const cacheMusic = music => store.dispatch(cache(`cacheMusic(${query.id})`, music));
+  const callApi = store.dispatch(actionCreators.getMusic(query.id));
 
   // in client-side await will be stop render
   if (isSever) {
-    await Promise.all([
-      store.dispatch(actionCreators.getMusic(query.id, cacheMusic)),
-    ]);
-  } else {
-    const reduxCache = store.getState().reduxCache;
-
-    if (reduxCache[`cacheMusic(${query.id})`]) {
-      store.dispatch(actionCreators.getMusicSuccess(reduxCache[`cacheMusic(${query.id})`]));
-    } else {
-      store.dispatch(actionCreators.getMusic(query.id, cacheMusic));
-    }
+    await callApi;
   }
 
   return {};

@@ -7,7 +7,6 @@ import styled from 'styled-components';
 
 import Profile from '../../containers/Profile';
 import musicsFormater from '../../selectors/utils/musicsFormater';
-import { cache } from '../../actions/redux-cache';
 
 import * as actionCreators from './actions';
 
@@ -37,30 +36,14 @@ const ProfilePageEnhancer = compose(
 ProfilePageEnhancer.displayName= 'ProfilePageEnhancer';
 
 ProfilePageEnhancer.getInitialProps = async ({ query, reduxStore: store, isSever }) => {
-  // cache data to redux
-  const cacheProfile = profile => store.dispatch(cache(`cacheProfile(${query.id})`, profile));
-  const cacheOwnerMusics = musics => store.dispatch(cache(`cacheOwnerMusics(${query.id})`, musics));
+  const callApiStack = [
+    store.dispatch(actionCreators.getProfile(query.id)),
+    store.dispatch(actionCreators.getOwnerMusics(query.id)),
+  ];
 
   // in client-side await will be stop render
   if (isSever) {
-    await Promise.all([
-      store.dispatch(actionCreators.getProfile(query.id, cacheProfile)),
-      store.dispatch(actionCreators.getOwnerMusics(query.id, cacheOwnerMusics)),
-    ]);
-  } else {
-    const reduxCache = store.getState().reduxCache;
-
-    if (reduxCache[`cacheProfile(${query.id})`]) {
-      store.dispatch(actionCreators.getProfileSuccess(reduxCache[`cacheProfile(${query.id})`]));
-    } else {
-      store.dispatch(actionCreators.getProfile(query.id, cacheProfile));
-    }
-
-    if (reduxCache[`cacheOwnerMusics(${query.id})`]) {
-      store.dispatch(actionCreators.getOwnerMusicsSuccess(reduxCache[`cacheOwnerMusics(${query.id})`]));
-    } else {
-      store.dispatch(actionCreators.getOwnerMusics(query.id, cacheOwnerMusics));
-    }
+    await Promise.all(callApiStack);
   }
 
   return {};

@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { Icon, Slider, Image } from '../../components/core';
 import PlayingList from '../../containers/PlayingList';
 import { mode } from '../../constants/playing-list';
+import { withRouter } from 'next/router';
 import withPlayingList from '../../HOC/withPlayingList';
 import withPlayingMusic from '../../HOC/withPlayingMusic';
 import withPlayerActions from '../../HOC/withPlayerActions';
@@ -78,7 +79,7 @@ class GlobalMusicPlayer extends React.Component {
       this.musicRef.current.pause && this.musicRef.current.pause();
     }
 
-    if (this.props.playingList.id !== prevProps.playingList.id) {
+    if (this.props.playingList.id !== prevProps.playingList.id && this.props.router.pathname !== '/playlist') {
       this.handleShowBiggerPlayer();
     }
   }
@@ -243,5 +244,6 @@ class GlobalMusicPlayer extends React.Component {
 export default fp.compose(
   withPlayerActions,
   withPlayingList,
-  withPlayingMusic
+  withPlayingMusic,
+  withRouter,
 )(GlobalMusicPlayer);
