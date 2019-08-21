@@ -40,14 +40,14 @@ const ProfilePageEnhancer = compose(
 
 ProfilePageEnhancer.displayName= 'ProfilePageEnhancer';
 
-ProfilePageEnhancer.getInitialProps = async ({ query, reduxStore: store, isSever }) => {
+ProfilePageEnhancer.getInitialProps = async ({ query, reduxStore: store, isServer }) => {
   const callApiStack = [
     store.dispatch(actionCreators.getProfile(query.id)),
     store.dispatch(actionCreators.getOwnerMusics(query.id)),
   ];
 
   // in client-side await will be stop render
-  if (isSever) {
+  if (isServer) {
     await Promise.all(callApiStack);
   }
 

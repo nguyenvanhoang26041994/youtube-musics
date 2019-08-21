@@ -1,6 +1,6 @@
 import { homePage } from './constants';
 import { fetchTrendingPlaylists, fetchTrendingSongs, fetchTrendingSingers } from './fetchs';
-import { cacheKey } from '../../libs/redux-cache';
+import { cacheKey, getCacheStorage } from '../../libs/redux-cache';
 
 export const getTrendingPlaylistsRequest = () => ({
   type: homePage.GET_TRENDING_PLAYLISTS_REQUEST,
@@ -20,10 +20,9 @@ export const getTrendingPlaylistsFailure = () => ({
 });
 
 export const getTrendingPlaylists = (params) => async (dispatch, getState) => {
-  const state = getState();
-  const key = homePage.GET_TRENDING_PLAYLISTS_SUCCESS;
-  if (state.reduxCacheReducer[key]) {
-    return dispatch(getTrendingPlaylistsSuccess(state.reduxCacheReducer[key].payload));
+  const dataFromCache = getCacheStorage(homePage.GET_TRENDING_PLAYLISTS_SUCCESS);
+  if (dataFromCache) {
+    return dispatch(getTrendingPlaylistsSuccess(dataFromCache.payload));
   }
 
   dispatch(getTrendingPlaylistsRequest());
@@ -53,10 +52,9 @@ export const getTrendingSongsFailure = () => ({
 });
 
 export const getTrendingSongs = (params) => async (dispatch, getState) => {
-  const state = getState();
-  const key = homePage.GET_TRENDING_SONGS_SUCCESS;
-  if (state.reduxCacheReducer[key]) {
-    const songsFromCache = state.reduxCacheReducer[key].payload;
+  const dataFromCache = getCacheStorage(homePage.GET_TRENDING_SONGS_SUCCESS);
+  if (dataFromCache) {
+    const songsFromCache = dataFromCache.payload;
     return dispatch(getTrendingSongsSuccess(songsFromCache));
   }
 
@@ -87,10 +85,9 @@ export const getTrendingSingersFailure = () => ({
 });
 
 export const getTrendingSingers = (params) => async (dispatch, getState) => {
-  const state = getState();
-  const key = homePage.GET_TRENDING_SINGERS_SUCCESS;
-  if (state.reduxCacheReducer[key]) {
-    return dispatch(getTrendingSingersSuccess(state.reduxCacheReducer[key].payload));
+  const dataFromCache = getCacheStorage(homePage.GET_TRENDING_SINGERS_SUCCESS);
+  if (dataFromCache) {
+    return dispatch(getTrendingSingersSuccess(dataFromCache.payload));
   }
 
   dispatch(getTrendingSingersRequest());

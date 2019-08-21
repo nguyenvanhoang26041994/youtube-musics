@@ -2,11 +2,13 @@ import '../../assets/css/tailwind.scss';
 import '../../assets/css/user.scss';
 import App, { Container } from 'next/app';
 import { Provider } from 'react-redux';
+import fp from 'lodash/fp';
 
 import Layout from '../layouts/Layout';
 import GlobalMusicPlayer from '../containers/GlobalMusicPlayer';
 import withReduxStore from '../libs/with-redux-store';
-import isSever from '../utils/isSever';
+import withCache from '../libs/with-cache';
+import isServer from '../utils/isServer';
 // require('../components/AudioAnalyzer-new'); // please DON'T REMOVE THIS LINE, we register something here
 
 const appVersion = '2.0.0';
@@ -14,8 +16,8 @@ const appVersion = '2.0.0';
 // To make cool performace, we don't let browser fetch API to get common data which one rarely change
 // Ex: Dynamic topmenu or some data for selectbox
 // SHOULD BE COOL
-const registerGlobalState = ({ reduxStore, isSever }) => new Promise((resolve, reject) => {
-  if (isSever) {
+const registerGlobalState = ({ reduxStore, isServer }) => new Promise((resolve, reject) => {
+  if (isServer) {
     reduxStore.dispatch({ type: 'CHANGE_APP_VERSION', payload: appVersion });
     return resolve({});
   }
@@ -25,7 +27,7 @@ const registerGlobalState = ({ reduxStore, isSever }) => new Promise((resolve, r
 
 class RootApp extends App {
   static getInitialProps = async ({ Component, ctx }) => {
-    ctx.isSever = isSever;
+    ctx.isServer = isServer;
 
     await registerGlobalState(ctx);
 
@@ -51,4 +53,7 @@ class RootApp extends App {
   }
 }
 
-export default withReduxStore(RootApp);
+export default fp.compose(
+  withReduxStore,
+  withCache,
+)(RootApp);

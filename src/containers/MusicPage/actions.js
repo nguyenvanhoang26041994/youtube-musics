@@ -1,6 +1,6 @@
 import { musicPage } from './constants';
 import { fetchMusic, fetchLyric } from './fetchs';
-import { cacheKey } from '../../libs/redux-cache';
+import { cacheKey, getCacheStorage } from '../../libs/redux-cache';
 
 export const getMusicRequest = () => ({
   type: musicPage.GET_MUSIC_REQUEST,
@@ -21,10 +21,9 @@ export const getMusicFailure = () => ({
 });
 
 export const getMusic = id => async (dispatch, getState) => {
-  const state = getState();
-  const key = `${musicPage.GET_MUSIC_SUCCESS}(${id})`;
-  if (state.reduxCacheReducer[key]) {
-    return dispatch(getMusicSuccess(state.reduxCacheReducer[key].payload));
+  const dataFromCache = getCacheStorage(`${musicPage.GET_MUSIC_SUCCESS}(${id})`);
+  if (dataFromCache) {
+    return dispatch(getMusicSuccess(dataFromCache.payload));
   }
 
   dispatch(getMusicRequest());
@@ -56,10 +55,9 @@ export const getLyricFailure = () => ({
 });
 
 export const getLyric = id => async (dispatch, getState) => {
-  const state = getState();
-  const key = `${musicPage.GET_LYRIC_SUCCESS}(${id})`;
-  if (state.reduxCacheReducer[key]) {
-    return dispatch(getLyricSuccess(state.reduxCacheReducer[key].payload, id));
+  const dataFromCache = getCacheStorage(`${musicPage.GET_LYRIC_SUCCESS}(${id})`);
+  if (dataFromCache) {
+    return dispatch(getLyricSuccess(dataFromCache.payload, id));
   }
 
   dispatch(getLyricRequest());

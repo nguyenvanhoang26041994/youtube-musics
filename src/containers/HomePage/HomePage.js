@@ -91,7 +91,7 @@ const HomePageEnhancer = compose(
   withPlayerActions,
 )(HomePage);
 
-HomePageEnhancer.getInitialProps = async ({ query, reduxStore: store, isSever }) => {
+HomePageEnhancer.getInitialProps = async ({ query, reduxStore: store, isServer }) => {
   const callApiStack = [
     store.dispatch(actionCreators.getTrendingPlaylists()),
     store.dispatch(actionCreators.getTrendingSongs()),
@@ -99,7 +99,7 @@ HomePageEnhancer.getInitialProps = async ({ query, reduxStore: store, isSever })
   ];
 
   // in client-side await will be stop render
-  if (isSever) {
+  if (isServer) {
     await Promise.all(callApiStack);
   }
 

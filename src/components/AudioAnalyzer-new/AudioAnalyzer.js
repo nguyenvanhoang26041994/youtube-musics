@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-import isSever from '../../utils/isSever';
+import isServer from '../../utils/isServer';
 
 let audioNode = null;
 let context = null;
 let analyser = null;
 
-if (!isSever) {
+if (!isServer) {
   try {
     audioNode = document.getElementById('music-audio');
     context = new AudioContext();

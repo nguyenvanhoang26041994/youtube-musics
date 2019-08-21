@@ -1,6 +1,6 @@
 import { playlistPage } from './constants';
 import { fetchPlaylist } from './fetchs';
-import { cacheKey } from '../../libs/redux-cache';
+import { cacheKey, getCacheStorage } from '../../libs/redux-cache';
 
 export const getPlaylistRequest = () => ({
   type: playlistPage.GET_PLAYLIST_REQUEST,
@@ -20,10 +20,9 @@ export const getPlaylistFailure = () => ({
 });
 
 export const getPlaylist = (id) => async (dispatch, getState) => {
-  const state = getState();
-  const key = `${playlistPage.GET_PLAYLIST_SUCCESS}(${id})`;
-  if (state.reduxCacheReducer[key]) {
-    return dispatch(getPlaylistSuccess(state.reduxCacheReducer[key].payload));
+  const dataFromCache = getCacheStorage(`${playlistPage.GET_PLAYLIST_SUCCESS}(${id})`);
+  if (dataFromCache) {
+    return dispatch(getPlaylistSuccess(dataFromCache.payload));
   }
 
   dispatch(getPlaylistRequest());

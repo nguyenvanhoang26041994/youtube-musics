@@ -1,6 +1,6 @@
 import { profilePage } from './constants';
 import { fetchProfile, fetchOwnerMusics } from './fetchs';
-import { cacheKey } from '../../libs/redux-cache';
+import { cacheKey, getCacheStorage } from '../../libs/redux-cache';
 
 export const getProfileRequest = () => ({
   type: profilePage.GET_PROFILE_REQUEST,
@@ -20,10 +20,9 @@ export const getProfileFailure = () => ({
 });
 
 export const getProfile = (id) => async (dispatch, getState) => {
-  const state = getState();
-  const key = `${profilePage.GET_PROFILE_SUCCESS}(${id})`;
-  if (state.reduxCacheReducer[key]) {
-    return dispatch(getProfileSuccess(state.reduxCacheReducer[key].payload));
+  const dataFromCache = getCacheStorage(`${profilePage.GET_PROFILE_SUCCESS}(${id})`);
+  if (dataFromCache) {
+    return dispatch(getProfileSuccess(dataFromCache.payload));
   }
 
   dispatch(getProfileRequest());
@@ -53,10 +52,9 @@ export const getOwnerMusicsFailure = () => ({
 });
 
 export const getOwnerMusics = (id) => async (dispatch, getState) => {
-  const state = getState();
-  const key = `${profilePage.GET_OWNER_MUSICS_SUCCESS}(${id})`;
-  if (state.reduxCacheReducer[key]) {
-    return dispatch(getOwnerMusicsSuccess(state.reduxCacheReducer[key].payload), id);
+  const dataFromCache = getCacheStorage(`${profilePage.GET_OWNER_MUSICS_SUCCESS}(${id})`);
+  if (dataFromCache) {
+    return dispatch(getOwnerMusicsSuccess(dataFromCache.payload), id);
   }
 
   dispatch(getOwnerMusicsRequest());

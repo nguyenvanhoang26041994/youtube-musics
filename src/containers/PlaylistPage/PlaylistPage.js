@@ -39,10 +39,10 @@ const PlaylistPageEnhancer = compose(
 
 PlaylistPageEnhancer.displayName= 'PlaylistPageEnhancer';
 
-PlaylistPageEnhancer.getInitialProps = async ({ query, reduxStore: store, isSever }) => {
+PlaylistPageEnhancer.getInitialProps = async ({ query, reduxStore: store, isServer }) => {
   const callApi = store.dispatch(actionCreators.getPlaylist(query.id));
   // in client-side await will be stop render
-  if (isSever) {
+  if (isServer) {
     await callApi;
   }
 

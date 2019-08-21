@@ -57,14 +57,14 @@ const MusicPageEnhancer = compose(
 MusicPage.displayName = 'MusicPage';
 MusicPageEnhancer.displayName = 'MusicPageEnhancer';
 
-MusicPageEnhancer.getInitialProps = async ({ query, reduxStore: store, isSever }) => {
+MusicPageEnhancer.getInitialProps = async ({ query, reduxStore: store, isServer }) => {
   const callApiStack = [
     store.dispatch(actionCreators.getMusic(query.id)),
     store.dispatch(actionCreators.getLyric(query.id)),
   ];
 
   // in client-side await will be stop render
-  if (isSever) {
+  if (isServer) {
     await Promise.all(callApiStack);
   }
 
