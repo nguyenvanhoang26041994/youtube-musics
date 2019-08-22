@@ -13,6 +13,7 @@ import withPlayerActions from '../../HOC/withPlayerActions';
 import useClickOutside from '../../hooks/useClickOutside';
 import { calcTime } from '../../utils/time';
 import usePlayingMusicNode from '../../hooks/usePlayingMusicNode';
+import { getNode } from '../GlobalAudio';
 
 const listMode = Object.freeze({
   [mode.LOOP]: 'loop',
@@ -22,15 +23,6 @@ const listMode = Object.freeze({
 
 const GlobalMusicPlayerWrapper = styled.div`
 `;
-
-const Audio = ({ className, src, musicRef, ...otherProps }) => {
-  return (
-    <audio id="music-audio" className={cn('hidden', className)} ref={musicRef} {...otherProps}>
-      {/* <source src={src || `/static/musics/edm-lol.mp3`} /> */}
-      <source src={src || `/static/musics/edm-lol.mp3`} />
-    </audio>
-  );
-};
 
 const PlaylistModal = ({ controllerRef, handleHiddenBiggerPlayer }) => {
   const playlistModalRef = useRef();
@@ -66,23 +58,34 @@ class GlobalMusicPlayer extends React.Component {
     isMusicReady: false,
   };
 
-  musicRef = React.createRef(null);
   controllerRef = React.createRef(null);
 
   componentDidMount() {
-    // this.musicRef.current.play();
-    // this.musicRef.current.pause();
+    this.audioNode = getNode();
+
+    this.audioNode.loop = this.props.playingList.mode === mode.REPEAT
+
+    this.audioNode.addEventListener('timeupdate', this._onTimeUpdate);
+    this.audioNode.addEventListener('loadeddata', this.onLoadedData);
+    this.audioNode.addEventListener('play', this.onPlay);
+    this.audioNode.addEventListener('timeupdate', this.onPause);
+    this.audioNode.addEventListener('pause', this.onPause);
+    this.audioNode.addEventListener('waiting', this.onWaiting);
+    this.audioNode.addEventListener('playing', this.onPlaying);
+    this.audioNode.addEventListener('volumechange', this.onVolumeChange);
+    this.audioNode.addEventListener('ended', this.onEnded);
+
     this.setStateWhenAudioLoaded();
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.playingMusic.id && this.props.playingMusic.id !== prevProps.playingMusic.id && this.musicRef && this.musicRef.current) {
-      this.musicRef.current.load && this.musicRef.current.load();
-      this.musicRef.current.play && this.musicRef.current.play();
+    if (this.props.playingMusic.id && this.props.playingMusic.id !== prevProps.playingMusic.id) {
+      this.audioNode.load && this.audioNode.load();
+      this.audioNode.play && this.audioNode.play();
     }
 
-    if (!this.props.playingMusic.src && !this.musicRef.current.paused) {
-      this.musicRef.current.pause && this.musicRef.current.pause();
+    if (!this.props.playingMusic.src && !this.audioNode.paused) {
+      this.audioNode.pause();
     }
 
     if (this.props.playingList.id && this.props.playingList.id !== prevProps.playingList.id && this.props.router.pathname !== '/playlist') {
@@ -90,27 +93,33 @@ class GlobalMusicPlayer extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    this.audioNode.removeEventListener('timeupdate', this._onTimeUpdate);
+    this.audioNode.removeEventListener('loadeddata', this.onLoadedData);
+    this.audioNode.removeEventListener('play', this.onPlay);
+    this.audioNode.removeEventListener('timeupdate', this.onPause);
+    this.audioNode.removeEventListener('pause', this.onPause);
+    this.audioNode.removeEventListener('waiting', this.onWaiting);
+    this.audioNode.removeEventListener('playing', this.onPlaying);
+    this.audioNode.removeEventListener('volumechange', this.onVolumeChange);
+    this.audioNode.removeEventListener('ended', this.onEnded);
+  }
+
   setStateWhenAudioLoaded = () => {
-    if (this.musicRef && this.musicRef.current) {
-      this.setState({
-        musicTime: this.musicRef.current.duration,
-        musicVolume: this.musicRef.current.volume,
-        currentMusicTime: this.musicRef.current.currentTime,
-      }, () => this.props.playingMusicActions.changeIsPlaying(!this.musicRef.current.paused));
-    }
+    this.setState({
+      musicTime: this.audioNode.duration,
+      musicVolume: this.audioNode.volume,
+      currentMusicTime: this.audioNode.currentTime,
+    }, () => this.props.playingMusicActions.changeIsPlaying(!this.audioNode.paused));
   };
 
-  playMusic = () => this.musicRef && this.musicRef.current && this.musicRef.current.play && this.musicRef.current.play();
-  pauseMusic = () => this.musicRef && this.musicRef.current && this.musicRef.current.pause && this.musicRef.current.pause();
+  playMusic = () => this.audioNode.play();
+  pauseMusic = () => this.audioNode.pause();
   changeVolume = volume => {
-    if (this.musicRef && this.musicRef.current) {
-      this.musicRef.current.volume = volume;
-    }
+    this.audioNode.volume = volume;
   };
   changeCurrentTime = time => {
-    if (this.musicRef && this.musicRef.current) {
-      this.musicRef.current.currentTime = time;
-    }
+    this.audioNode.currentTime = time;
   };
 
   handleChangeMusicVolume = (e, { value }) => this.changeVolume(value);
@@ -119,7 +128,8 @@ class GlobalMusicPlayer extends React.Component {
   handleShowBiggerPlayer = () => this.setState({ isShowBiggerPlayer : true });
   toggleShowBiggerPlayer = () => this.setState(prevState => ({ ...prevState, isShowBiggerPlayer: !prevState.isShowBiggerPlayer }))
 
-  onTimeUpdate = e => this.setState({ currentMusicTime: e.target.currentTime });
+  _onTimeUpdate = e => this.setState({ currentMusicTime: e.target.currentTime });
+  onTimeUpdate = fp.debounce(333, this._onTimeUpdate);
   onVolumeChange = e => this.setState({ musicVolume: e.target.volume });
   onEnded = e => this.props.playingMusicActions.changeIsPlaying(!e.target.paused);
   onPlay = e => this.props.playingMusicActions.changeIsPlaying(!e.target.paused);
@@ -141,19 +151,6 @@ class GlobalMusicPlayer extends React.Component {
         id="global-music-player"
         className={cn('ui-global-music-player fixed bottom-0 left-0 w-full', className)}
       >
-        <Audio
-          src={playingMusic.src}
-          musicRef={this.musicRef}
-          loop={playingList.mode === mode.REPEAT}
-          onTimeUpdate={this.onTimeUpdate}
-          onLoadedData={this.onLoadedData}
-          onPlay={this.onPlay}
-          onPause={this.onPause}
-          onWaiting={this.onWaiting}
-          onPlaying={this.onPlaying}
-          onVolumeChange={this.onVolumeChange}
-          onEnded={this.onEnded}
-        />
         <div
           className="global-music-player__biger-player relative w-full z-10 overflow-hidden transition-fast"
           style={{ height: shouldShowOff && isShowBiggerPlayer ? 'calc(100vh - 8rem)' : 0 }}

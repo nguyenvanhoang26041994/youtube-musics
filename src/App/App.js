@@ -7,7 +7,7 @@ import MobileDetect from 'mobile-detect';
 import { registerMobile } from '../HOC/mobile';
 
 import Layout from '../layouts/Layout';
-import GlobalMusicPlayer from '../containers/GlobalMusicPlayer';
+import GlobalAudio from '../containers/GlobalAudio';
 import withReduxStore from '../libs/with-redux-store';
 import withCache from '../libs/with-cache';
 import isServer from '../utils/isServer';
@@ -56,6 +56,7 @@ class RootApp extends App {
       <Container>
         <Provider store={reduxStore}>
           <Component {...pageProps} mobile={mobile} />
+          <GlobalAudio />
         </Provider>
       </Container>
     );
