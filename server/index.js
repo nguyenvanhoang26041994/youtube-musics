@@ -2,6 +2,7 @@ const express = require('express');
 const next = require('next');
 const compression = require('compression');
 const LRUCache = require('lru-cache');
+const MobileDetect = require('mobile-detect');
 
 const api = require('./api');
 
@@ -93,6 +94,18 @@ app
       return dev
         ? app.render(req, res, '/music', { id: req.params.id })
         : renderAndCache(req, res, '/music', { id: req.params.id });
+    });
+
+    server.get('/', (req, res) => {
+      const md = new MobileDetect(req.headers['user-agent']);
+      const isMobile = md.mobile();
+
+      if (isMobile) {
+        return dev
+          ? app.render(req, res, '/mobile')
+          : renderAndCache(req, res, '/mobile');
+      }
+      return handle(req, res);
     });
 
     server.get('*', (req, res) => {

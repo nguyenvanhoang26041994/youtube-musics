@@ -12,6 +12,7 @@ import musicFormater from '../../selectors/utils/musicFormater';
 import * as actionCreators from './actions';
 import withPlayerActions from '../../HOC/withPlayerActions';
 import withPlayingMusic from '../../HOC/withPlayingMusic';
+import withLayout from '../../HOC/withLayout';
 
 const MusicPageWrapper = styled.div``;
 const MainSection = styled.section``;
@@ -52,6 +53,7 @@ const MusicPageEnhancer = compose(
   connect(mapStateToProps),
   withPlayingMusic,
   withPlayerActions,
+  withLayout,
 )(MusicPage);
 
 MusicPage.displayName = 'MusicPage';

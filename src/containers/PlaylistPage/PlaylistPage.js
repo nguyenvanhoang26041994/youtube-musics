@@ -6,7 +6,7 @@ import { compose } from 'redux';
 import PropTypes from 'prop-types';
 
 import Playlist from '../../containers/Playlist';
-
+import withLayout from '../../HOC/withLayout';
 import * as actionCreators from './actions';
 import playlistFormater from '../../selectors/utils/playlistFormater';
 
@@ -35,6 +35,7 @@ const mapStateToProps = state => ({
 
 const PlaylistPageEnhancer = compose(
   connect(mapStateToProps),
+  withLayout,
 )(PlaylistPage);
 
 PlaylistPageEnhancer.displayName= 'PlaylistPageEnhancer';

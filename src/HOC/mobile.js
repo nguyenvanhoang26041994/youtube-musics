@@ -6,4 +6,5 @@ export const registerMobile = value => {
   return mobile;
 };
 
-export default mobile;
+export default () => mobile;
+

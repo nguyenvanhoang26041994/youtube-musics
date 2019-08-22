@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import fp from 'lodash/fp';
 
 import withPlayerActions from '../../HOC/withPlayerActions';
+import withLayout from '../../HOC/withLayout';
 import PlaylistCard from '../../containers/PlaylistCard';
 import SongCard from '../../containers/SongCard';
 import SingerCard from '../../components/SingerCard';
@@ -89,6 +90,7 @@ const HomePageEnhancer = compose(
     },
   })),
   withPlayerActions,
+  withLayout,
 )(HomePage);
 
 HomePageEnhancer.getInitialProps = async ({ query, reduxStore: store, isServer }) => {

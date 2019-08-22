@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 import Profile from '../../containers/Profile';
 import musicsFormater from '../../selectors/utils/musicsFormater';
-
+import withLayout from '../../HOC/withLayout';
 import * as actionCreators from './actions';
 
 const ProfilePageWrapper = styled.div``;
@@ -36,6 +36,7 @@ const mapStateToProps = state => ({
 
 const ProfilePageEnhancer = compose(
   connect(mapStateToProps),
+  withLayout,
 )(ProfilePage);
 
 ProfilePageEnhancer.displayName= 'ProfilePageEnhancer';

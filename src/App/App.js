@@ -33,16 +33,20 @@ class RootApp extends App {
     const md = new MobileDetect(ctx.req ? ctx.req.headers['user-agent'] : navigator.userAgent);
     const mobile = md.mobile();
 
-    registerMobile(mobile);
-
     ctx.isServer = isServer;
     ctx.mobile = mobile;
 
     await registerGlobalState(ctx);
 
-    return Component.getInitialProps
-      ? await Component.getInitialProps(ctx)
-      : { pageProps: {}, mobile };
+    let props = {};
+    if (Component.getInitialProps) {
+      props = await Component.getInitialProps(ctx)
+    }
+
+    return {
+      ...props,
+      mobile: mobile,
+    };
   }
 
   render() {
@@ -51,10 +55,7 @@ class RootApp extends App {
     return (
       <Container>
         <Provider store={reduxStore}>
-          <Layout>
-            <Component {...pageProps} mobile={mobile} />
-          </Layout>
-          <GlobalMusicPlayer className="z-20" />
+          <Component {...pageProps} mobile={mobile} />
         </Provider>
       </Container>
     );
