@@ -1,5 +1,17 @@
 const singers = [
   {
+    id: 'the-chainsmokers',
+    name: 'The Chainsmokers',
+    displayRole: 'famous-producer',
+    isVerified: true,
+    qoute: {
+      text: 'Beauty has so many forms, and I think the most beautiful thing is confidence and loving yourself.',
+      author: 'Kiesza',
+    },
+    avatarImg: 'https://i1.sndcdn.com/avatars-000400433727-l071h7-t500x500.jpg',
+    coverImg: 'https://media.distractify.com/brand-img/6PW-bw8P-/480x252/how-is-avicii-releasing-music-3-1559943581638.jpg',
+  },
+  {
     id: 'avicii',
     name: 'Avicii',
     displayRole: 'famous-producer',

@@ -56,6 +56,17 @@ const singers = {
 
 const musics = [
   {
+    id: 'lzkKzZmRZk8',
+    name: 'Takeaway',
+    singers: [
+      singersAsObject['the-chainsmokers'],
+    ],
+    src: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/y2mate.com%20-%20the_chainsmokers_illenium_takeaway_official_video_ft_lennon_stella_lzkKzZmRZk8.mp3?alt=media&token=bdb0c631-323e-4e71-a55d-80c18bb00ac7',
+    img: singersAsObject['the-chainsmokers'].avatarImg,
+    listenCount: 83433235,
+    time: 3 * 60 + 48,
+  },
+  {
     id: 'YxIiPLVR6NA',
     name: 'Hey Brother',
     singers: [

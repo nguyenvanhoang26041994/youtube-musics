@@ -1,5 +1,6 @@
 const defaultState = {
   version: '1.0.0',
+  mobile: false,
 };
 
 export default (state = defaultState, action) => {
@@ -8,6 +9,12 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         version: action.payload,
+      };
+
+    case 'DESKTOP_OR_MOBILE':
+      return {
+        ...state,
+        mobile: action.payload,
       };
   
     default:
