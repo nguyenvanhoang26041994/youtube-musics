@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import cn from 'classnames';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
@@ -22,7 +22,8 @@ const SongCardWrapper = styled.div`
       transition: 0.5s;
     }
 
-    &:hover {
+    &:hover,
+    &.--hover {
       .ui-song-card__bg-img {
         img {
           filter: none;
@@ -61,8 +62,14 @@ const SongCard = ({ className, id, img, name, singers, listenCount, onClick, isP
     return onClick();
   };
 
+  const [isHover, setIsHover] = useState(false);
+
   return (
-    <SongCardWrapper className={cn('ui-song-card h-64 cursor-pointer flex flex-col', { 'ui-song-card--is-playing': isPlaying }, className)}>
+    <SongCardWrapper
+      className={cn('ui-song-card h-64 cursor-pointer flex flex-col', { 'ui-song-card--is-playing': isPlaying, '--hover': isHover }, className)}
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}
+    >
       <SongCardWrapperRelative className="w-full h-48 relative">
         <div className="ui-song-card__playbutton absolute z-10 absolute-center">
           <Icon name="play-circle" size="6xl" color="gray-200" onClick={onPlayMusic} />

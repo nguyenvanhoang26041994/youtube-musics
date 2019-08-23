@@ -63,31 +63,14 @@ class GlobalMusicPlayer extends React.Component {
   componentDidMount() {
     this.audioNode = getNode();
 
-    this.audioNode.loop = this.props.playingList.mode === mode.REPEAT
-
     this.audioNode.addEventListener('timeupdate', this._onTimeUpdate);
     this.audioNode.addEventListener('loadeddata', this.onLoadedData);
-    this.audioNode.addEventListener('play', this.onPlay);
-    this.audioNode.addEventListener('timeupdate', this.onPause);
-    this.audioNode.addEventListener('pause', this.onPause);
-    this.audioNode.addEventListener('waiting', this.onWaiting);
-    this.audioNode.addEventListener('playing', this.onPlaying);
     this.audioNode.addEventListener('volumechange', this.onVolumeChange);
-    this.audioNode.addEventListener('ended', this.onEnded);
 
     this.setStateWhenAudioLoaded();
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.playingMusic.id && this.props.playingMusic.id !== prevProps.playingMusic.id) {
-      this.audioNode.load && this.audioNode.load();
-      this.audioNode.play && this.audioNode.play();
-    }
-
-    if (!this.props.playingMusic.src && !this.audioNode.paused) {
-      this.audioNode.pause();
-    }
-
     if (this.props.playingList.id && this.props.playingList.id !== prevProps.playingList.id && this.props.router.pathname !== '/playlist') {
       this.handleShowBiggerPlayer();
     }
@@ -96,13 +79,7 @@ class GlobalMusicPlayer extends React.Component {
   componentWillUnmount() {
     this.audioNode.removeEventListener('timeupdate', this._onTimeUpdate);
     this.audioNode.removeEventListener('loadeddata', this.onLoadedData);
-    this.audioNode.removeEventListener('play', this.onPlay);
-    this.audioNode.removeEventListener('timeupdate', this.onPause);
-    this.audioNode.removeEventListener('pause', this.onPause);
-    this.audioNode.removeEventListener('waiting', this.onWaiting);
-    this.audioNode.removeEventListener('playing', this.onPlaying);
     this.audioNode.removeEventListener('volumechange', this.onVolumeChange);
-    this.audioNode.removeEventListener('ended', this.onEnded);
   }
 
   setStateWhenAudioLoaded = () => {
@@ -131,11 +108,6 @@ class GlobalMusicPlayer extends React.Component {
   _onTimeUpdate = e => this.setState({ currentMusicTime: e.target.currentTime });
   onTimeUpdate = fp.debounce(333, this._onTimeUpdate);
   onVolumeChange = e => this.setState({ musicVolume: e.target.volume });
-  onEnded = e => this.props.playingMusicActions.changeIsPlaying(!e.target.paused);
-  onPlay = e => this.props.playingMusicActions.changeIsPlaying(!e.target.paused);
-  onPause = e => this.props.playingMusicActions.changeIsPlaying(!e.target.paused);
-  onWaiting = e => this.props.playingMusicActions.changeIsPlaying(!e.target.paused);
-  onPlaying = e => this.props.playingMusicActions.changeIsPlaying(!e.target.paused);
   onEnded = () => this.props.playerActions.goNextSong();
   onPlayNext = () => this.props.playerActions.goNextSong();
   onPlayPrev = () => this.props.playerActions.goPrevSong();

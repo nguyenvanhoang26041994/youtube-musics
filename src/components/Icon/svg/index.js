@@ -26,6 +26,7 @@ const icons = {
   'verified': require('./verified').default,
   'youtube': require('./youtube').default,
   'close': require('./close').default,
+  'bars': require('./bars').default,
 };
 
 export default icons;
