@@ -31,7 +31,6 @@ export default App => {
     constructor (props) {
       super(props);
       this.cacheStorage = getOrCreateCacheStorage(props.initialCacheStorage);
-      
     }
 
     render () {

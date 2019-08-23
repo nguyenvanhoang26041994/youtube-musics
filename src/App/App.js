@@ -28,6 +28,19 @@ const registerGlobalState = ({ reduxStore, isServer, mobile }) => new Promise((r
   return resolve({});
 });
 
+
+function getOrCreateMobileVariable (initialVaule) {
+  // Always make a new store if server, otherwise state is shared between requests
+  if (isServer) {
+    return {};
+  }
+
+  if (!window['MOBILE_VAR']) {
+    window['MOBILE_VAR'] = initialVaule;
+  }
+  return registerMobile(window['MOBILE_VAR']);
+}
+
 class RootApp extends App {
   static getInitialProps = async ({ Component, ctx }) => {
     const md = new MobileDetect(ctx.req ? ctx.req.headers['user-agent'] : navigator.userAgent);
@@ -45,8 +58,13 @@ class RootApp extends App {
 
     return {
       ...props,
-      mobile: mobile,
+      mobile: ctx.mobile,
     };
+  }
+
+  constructor (props) {
+    super(props);
+    this.mobile = getOrCreateMobileVariable(props.mobile);
   }
 
   render() {
