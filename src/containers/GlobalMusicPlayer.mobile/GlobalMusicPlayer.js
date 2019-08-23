@@ -17,7 +17,7 @@ const GlobalMusicPlayer = ({ className, playingMusic, playerActions }) => {
   return (
     <GlobalMusicPlayerWrapper
       id="global-music-player-mobile"
-      className={cn('ui-global-music-player-mobile fixed bottom-0 left-0 w-full', { 'hidden': !playingMusic.src }, className)}
+      className={cn('ui-global-music-player-mobile fixed bottom-0 left-0 w-full shadow-2xl', { 'hidden': !playingMusic.src }, className)}
     >
       <Divider />
       <div className="w-full h-10 bg-white flex justify-between items-center">
