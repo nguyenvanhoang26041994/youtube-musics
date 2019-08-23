@@ -1,12 +1,12 @@
 import React from 'react';
 import Layout from '../layouts.mobile/Layout';
-// import GlobalMusicPlayer from '../containers/GlobalMusicPlayer';
+import GlobalMusicPlayer from '../containers/GlobalMusicPlayer.mobile';
 
 const withMobileLayout = WrappedComponent => {
   const ReturnComponent = props => (
     <Layout>
       <WrappedComponent {...props} />
-      {/* <GlobalMusicPlayer className="z-20" /> */}
+      <GlobalMusicPlayer className="z-20" />
     </Layout>
   );
 

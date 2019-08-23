@@ -16,5 +16,5 @@ export default function usePlayingMusicNode() {
     }
   }, []);
 
-  return [currentTime, setCurrentTime];
+  return [currentTime];
 }

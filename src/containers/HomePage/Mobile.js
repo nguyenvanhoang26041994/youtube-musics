@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import fp from 'lodash/fp';
 
-import SongCard from '../../containers/SongCard';
-import SongCardSkeleton from '../../components/SongCard/Skeleton';
-import Panel from './Panel';
-
+import { Button } from '../../components/core';
+import MusicCard from '../../containers/MusicCard';
+import PlaylistCard from '../../containers/PlaylistCard';
+import SingerCard from '../../components/SingerCard';
 import withPlayerActions from '../../HOC/withPlayerActions';
 import withMobileLayout from '../../HOC/withMobileLayout';
 
@@ -23,21 +23,56 @@ const HomePageWrapper = styled.div`
   }
 `;
 
-const HomePage = ({ trendingPlaylists, trendingSongs, trendingSingers, loaders }) => {
+const PanelWrapper = styled.section``;
+const Panel = ({ title, children }) => {
+  return (
+    <PanelWrapper className="w-full flex flex-col">
+      <h2 className="text-gray-900 font-bold text-sm mb-2 px-2">
+        {title}
+      </h2>
+      <div className="flex w-full flex-wrap">
+        {children}
+      </div>
+    </PanelWrapper>
+  );
+}
+
+const HomePage = ({ trendingPlaylists, trendingSongs, trendingSingers, playerActions, loaders }) => {
   return (
     <HomePageWrapper id="home-page" className="home-page home-page-mobile">
-      <Panel className="mb-10" title="HOT & NEW SONGS">
-        {!loaders.isTrendingSongsFetching && fp.take(10, trendingSongs).map(song => (
-          <div className="w-1/2 xl:w-1/5 lg:w-1/5 md:w-1/4 p-1" key={song.id}>
-            <SongCard
-              className="w-full"
+      <div className="h-12" />
+      <Panel title="Hot & Trending Music">
+        {!loaders.isTrendingSongsFetching && fp.take(4, trendingSongs).map(song => (
+          <div className="w-1/2 p-1" key={song.id}>
+            <MusicCard
+              className="w-full z-10"
               {...song}
             />
           </div>
         ))}
-        {loaders.isTrendingSongsFetching && fp.times(String, 10).map(idx => (
+      </Panel>
+      <Panel className="mb-10" title="Cool playlist">
+        {!loaders.isTrendingPlaylistsFetching && fp.take(2, trendingPlaylists).map(playlist => (
+          <div className="w-1/2 p-1" key={playlist.id}>
+            <PlaylistCard
+              className="w-full z-10"
+              {...playlist}
+            />
+          </div>
+        ))}
+      </Panel>
+      <Panel className="mb-10" title="Treding singer">
+        {!loaders.isTrendingSingersFetching && fp.take(3, trendingSingers).map(singer => (
+          <div className="w-1/3 p-1" key={singer.id}>
+            <SingerCard
+              className="w-full"
+              {...singer}
+            />
+          </div>
+        ))}
+        {loaders.isTrendingSingersFetching && fp.times(String, 5).map(idx => (
           <div className="w-1/2 xl:w-1/5 lg:w-1/5 md:w-1/4 p-1" key={idx}>
-            <SongCardSkeleton className="w-full" />
+            <SingerCardSkeleton className="w-full" />
           </div>
         ))}
       </Panel>

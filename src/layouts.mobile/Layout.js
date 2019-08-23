@@ -8,7 +8,7 @@ const LayoutWrapper = styled.div``;
 const Layout = ({ children }) => {
   return (
     <LayoutWrapper id="layout-mobile">
-      <Navbar className="h-12 fixed top-0 w-full z-50" />
+      <Navbar className="h-10 fixed top-0 w-full z-50" />
       <main className="flex flex-col flex-1">
         {children}
       </main>
