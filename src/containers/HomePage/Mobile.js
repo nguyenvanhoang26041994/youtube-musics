@@ -34,7 +34,7 @@ const MenuWithIcon = ({ name, text, active, onClick, className }) => {
       className={cn(
         'flex flex-col justify-center items-center font-bold transition-fast',
         {
-          'text-blue-400': active,
+          'text-indigo-700': active,
           'text-gray-700': !active,
         },
         className
@@ -101,26 +101,14 @@ const LayoutWithCustomNavbar = ({ children }) => {
 };
 
 const PanelWrapper = styled.section``;
-const Panel = ({ title, children }) => {
-  return (
-    <PanelWrapper className="w-full flex flex-col">
-      <h2 className="text-gray-900 text-sm mb-2 px-2">
-        {title}
-      </h2>
-      <div className="flex w-full flex-wrap">
-        {children}
-      </div>
-    </PanelWrapper>
-  );
-};
 
 const Song = ({ img, name, singersName, onClick }) => {
   return (
     <div className="ui-song flex flex-col" onClick={onClick}>
       <Image src={img} className="w-full h-24" />
       <div className="w-full h-12 flex flex-col justify-center">
-        <div className="text-xs text-blue-400">{name}</div>
-        <div className="text-2xs text-gray-500">{singersName}</div>
+        <div className="text-xs text-indigo-500">{name}</div>
+        <div className="text-2xs text-gray-700">{singersName}</div>
       </div>
     </div>
   );
@@ -132,7 +120,7 @@ const HomePage = ({ trendingPlaylists, trendingSongs, trendingSingers, playerAct
       <HomePageWrapper id="home-page" className="home-page home-page-mobile">
         <div className="h-24" />
         <div className="bg-white">
-          <div className="text-xs px-1 h-8 flex items-center text-blue-400">
+          <div className="text-xs px-1 h-8 flex items-center text-indigo-500">
             <Icon name="music-note" />
             <span className="ml-2">Nghe Gì Hôm Nay</span>
           </div>

@@ -23,18 +23,18 @@ const GlobalMusicPlayer = ({ className, playingMusic, playerActions }) => {
       <div className="w-full h-10 bg-white flex justify-between items-center">
         <div className="h-full flex items-center">
           <Image src={playingMusic.img} className="w-10 h-full" />
-          <div className="flex flex-col ml-1">
-            <div className="text-blue-400 text-xs w-48 overflow-hidden">{playingMusic.name}</div>
+          <div className="flex flex-col ml-1 justify-center">
+            <div className="text-indigo-500 text-xs w-48 overflow-hidden">{playingMusic.name}</div>
             <div className="text-gray-700 text-2xs w-48 overflow-hidden">{playingMusic.singersName}</div>
           </div>
         </div>
         <div className="h-full flex items-center px-5">
           {playingMusic.isPlaying ? (
-            <Icon name="pause" color="blue-400" size="sm" onClick={pauseMusic}/>
+            <Icon name="pause" color="indigo-500" size="sm" onClick={pauseMusic}/>
           ) : (
-            <Icon name="play" color="blue-400" size="sm" onClick={playMusic} />
+            <Icon name="play" color="indigo-500" size="sm" onClick={playMusic} />
           )}
-          <Icon name="step-forward" color="blue-400" size="sm" className="ml-5" />
+          <Icon name="step-forward" color="indigo-500" size="sm" className="ml-5" />
         </div>
       </div>
     </GlobalMusicPlayerWrapper>
