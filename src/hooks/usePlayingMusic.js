@@ -1,24 +1,23 @@
-import { useEffect } from 'react';
-import { bindActionCreators } from 'redux'
-import * as actionCreators from '../actions/playing-music';
+import { useMemo } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import playingMusicSelector from '../selectors/playingMusicSelector';
+import * as playingMusicActions from '../actions/playing-music';
 
-const secretReduxStore = '__NEXT_REDUX_STORE__'; // you should to use Symbol to make key private
-const playingMusicSelector = state => state.playingMusic;
+let shouldSkip = false;
+let state = [];
 
-export default function usePlayingMusic() {
-  let playingMusic = {};
-  let playingMusicActions = {};
+export default () => {
+  if (shouldSkip) {
+    return state;
+  }
 
-  useEffect(
-    () => {
-      const reduxStore = window[secretReduxStore];
-      const state = reduxStore.getState();
+  state = [
+    useSelector(playingMusicSelector),
+    bindActionCreators(playingMusicActions, useDispatch())
+  ];
 
-      playingMusic = playingMusicSelector(state);
-      playingMusicActions = bindActionCreators(actionCreators, reduxStore.dispatch);
-      console.log(playingMusic);
-    }
-  );
+  shouldSkip = true;
 
-  return [playingMusic, playingMusicActions];
-}
+  return state;
+};
