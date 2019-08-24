@@ -27,6 +27,11 @@ const icons = {
   'youtube': require('./youtube').default,
   'close': require('./close').default,
   'bars': require('./bars').default,
+
+  //FA
+  'home': require('./home').default,
+  'video': require('./video').default,
+  'bell': require('./bell').default,
 };
 
 export default icons;

@@ -37,8 +37,8 @@ export default class extends Document {
         <Head>
           <link rel="stylesheet" href="/static/css/animate.min.css" />
           <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light|Lovers+Quarrel&display=swap" rel="stylesheet" />
-          <link href="https://fonts.googleapis.com/css?family=Raleway:300,900" rel="stylesheet" />
-          <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,900&text=0123456789" rel="stylesheet" />
+          <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" />
+          <link href="https://fonts.googleapis.com/css?family=Work+Sans&text=0123456789" rel="stylesheet" />
         </Head>
         <body className="font-shadows-into-light scrollbar-hidden">
           <Main />

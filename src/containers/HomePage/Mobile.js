@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import fp from 'lodash/fp';
+import cn from 'classnames';
 
-import { Button } from '../../components/core';
+import { Button, Icon, Image } from '../../components/core';
 import MusicCard from '../../containers/MusicCard';
 import PlaylistCard from '../../containers/PlaylistCard';
 import SingerCard from '../../components/SingerCard';
 import withPlayerActions from '../../HOC/withPlayerActions';
 import withMobileLayout from '../../HOC/withMobileLayout';
+import Navbar from '../../layouts.mobile/Navbar';
+import GlobalMusicPlayer from '../GlobalMusicPlayer.mobile';
 
 import musicsFormater from '../../selectors/utils/musicsFormater';
 import playlistsFormater from '../../selectors/utils/playlistsFormater';
@@ -23,6 +26,80 @@ const HomePageWrapper = styled.div`
   }
 `;
 
+const LayoutWrapper = styled.div``;
+
+const MenuWithIcon = ({ name, text, active, onClick, className }) => {
+  return (
+    <div
+      className={cn(
+        'flex flex-col justify-center items-center p-1 font-bold transition-fast',
+        {
+          'text-teal-400': active,
+          'text-gray-700': !active,
+        },
+        className
+      )}
+      onClick={onClick}
+    >
+      <Icon name={name} size="xl" />
+      <span className="text-xs">
+        {text}
+      </span>
+    </div>
+  );
+};
+
+const LayoutWithCustomNavbar = ({ children }) => {
+  const [activeTab, setActiveTab] = useState('Home');
+  return (
+    <LayoutWrapper className="font-common overflow-hidden min-h-screen bg-gray-200">
+      <GlobalMusicPlayer className="z-20" />
+      <Navbar className="fixed top-0 w-full z-50">
+        <div className="flex items-center bg-white text-gray-900 w-full h-12">
+          <MenuWithIcon
+            name="home"
+            text="Home"
+            className="w-1/5"
+            active={activeTab === 'Home'}
+            onClick={() => setActiveTab('Home')}
+          />
+          <MenuWithIcon
+            name="video"
+            text="Video"
+            className="w-1/5"
+            active={activeTab === 'Video'}
+            // onClick={() => setActiveTab('Video')}
+          />
+          <MenuWithIcon
+            name="heart"
+            text="BXH"
+            className="w-1/5"
+            active={activeTab === 'BXH'}
+            // onClick={() => setActiveTab('BXH')}
+          />
+          <MenuWithIcon
+            name="heart"
+            text="Topic"
+            className="w-1/5"
+            active={activeTab === 'Topic'}
+            // onClick={() => setActiveTab('Topic')}
+          />
+          <MenuWithIcon
+            name="bell" 
+            text="Notification"
+            className="w-1/5"
+            active={activeTab === 'Notification'}
+            // onClick={() => setActiveTab('Notification')}
+          />
+        </div>
+      </Navbar>
+      <main className="flex flex-col flex-1">
+        {children}
+      </main>
+    </LayoutWrapper>
+  );
+};
+
 const PanelWrapper = styled.section``;
 const Panel = ({ title, children }) => {
   return (
@@ -35,48 +112,75 @@ const Panel = ({ title, children }) => {
       </div>
     </PanelWrapper>
   );
+};
+
+const Song = ({ img, name, singersName, onClick }) => {
+  return (
+    <div className="ui-song flex flex-col" onClick={onClick}>
+      <Image src={img} className="w-full h-24" />
+      <div className="w-full h-12 flex flex-col justify-center">
+        <div className="text-xs text-blue-500">{name}</div>
+        <div className="text-2xs text-gray-600">{singersName}</div>
+      </div>
+    </div>
+  );
 }
 
 const HomePage = ({ trendingPlaylists, trendingSongs, trendingSingers, playerActions, loaders }) => {
   return (
-    <HomePageWrapper id="home-page" className="home-page home-page-mobile">
-      <div className="h-12" />
-      <Panel title="Hot & Trending Music">
-        {!loaders.isTrendingSongsFetching && fp.take(4, trendingSongs).map(song => (
-          <div className="w-1/2 p-1" key={song.id}>
-            <MusicCard
-              className="w-full z-10"
-              {...song}
-            />
+    <LayoutWithCustomNavbar>
+      <HomePageWrapper id="home-page" className="home-page home-page-mobile">
+        <div className="h-24" />
+        <div className="bg-white">
+          <div className="text-sm px-1 h-8 flex items-center text-blue-400 font-bold">
+            <Icon name="music-note" />
+            <span className="ml-3">Nghe Gì Hôm Nay</span>
           </div>
-        ))}
-      </Panel>
-      <Panel className="mb-10" title="Cool playlist">
-        {!loaders.isTrendingPlaylistsFetching && fp.take(2, trendingPlaylists).map(playlist => (
-          <div className="w-1/2 p-1" key={playlist.id}>
-            <PlaylistCard
-              className="w-full z-10"
-              {...playlist}
-            />
+          <div className="flex flex-wrap p-1/2">
+            <div className="w-1/3 p-1/2">
+              <Song
+                {...trendingSongs[0]}
+                onClick={() => playerActions.playMusic(trendingSongs[0])}
+              />
+            </div>
+
+            <div className="w-1/3 p-1/2">
+              <Song
+                {...trendingSongs[7]}
+                onClick={() => playerActions.playMusic(trendingSongs[7])}
+              />
+            </div>
+
+            <div className="w-1/3 p-1/2">
+              <Song
+                {...trendingSongs[5]}
+                onClick={() => playerActions.playMusic(trendingSongs[5])}
+              />
+            </div>
+
+            <div className="w-1/3 p-1/2">
+              <Song
+                {...trendingSongs[1]}
+                onClick={() => playerActions.playMusic(trendingSongs[1])}
+              />
+            </div>
+
+            <div className="w-1/3 p-1/2">
+              <Song
+                {...trendingSongs[9]}
+                onClick={() => playerActions.playMusic(trendingSongs[9])}
+              />
+            </div>
+            <div className="w-1/3 p-1/2">
+              <Song
+                {...trendingSongs[16]}
+                onClick={() => playerActions.playMusic(trendingSongs[16])}
+              />
+            </div>
           </div>
-        ))}
-      </Panel>
-      <Panel className="mb-10" title="Treding singer">
-        {!loaders.isTrendingSingersFetching && fp.take(3, trendingSingers).map(singer => (
-          <div className="w-1/3 p-1" key={singer.id}>
-            <SingerCard
-              className="w-full"
-              {...singer}
-            />
-          </div>
-        ))}
-        {loaders.isTrendingSingersFetching && fp.times(String, 5).map(idx => (
-          <div className="w-1/2 xl:w-1/5 lg:w-1/5 md:w-1/4 p-1" key={idx}>
-            <SingerCardSkeleton className="w-full" />
-          </div>
-        ))}
-      </Panel>
-    </HomePageWrapper>
+        </div>
+      </HomePageWrapper>
+    </LayoutWithCustomNavbar>
   );
 };
 
@@ -92,7 +196,6 @@ const HomePageEnhancer = compose(
     },
   })),
   withPlayerActions,
-  withMobileLayout,
 )(HomePage);
 
 HomePageEnhancer.getInitialProps = async ({ query, reduxStore: store, isServer }) => {

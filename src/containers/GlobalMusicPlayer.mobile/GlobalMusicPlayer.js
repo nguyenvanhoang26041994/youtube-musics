@@ -17,15 +17,14 @@ const GlobalMusicPlayer = ({ className, playingMusic, playerActions }) => {
   return (
     <GlobalMusicPlayerWrapper
       id="global-music-player-mobile"
-      className={cn('ui-global-music-player-mobile fixed bottom-0 left-0 w-full shadow-2xl', { 'hidden': !playingMusic.src }, className)}
+      className={cn('ui-global-music-player-mobile fixed bottom-0 left-0 w-full', { 'hidden': !playingMusic.src }, className)}
     >
-      <Divider />
       <div className="w-full h-10 bg-white flex justify-between items-center">
         <div className="h-full flex items-center">
           <Image src={playingMusic.img} className="w-10 h-full" />
           <div className="flex flex-col ml-1">
-            <div className="text-gray-900 text-sm w-48 overflow-hidden">{playingMusic.name}</div>
-            <div className="text-gray-600 text-2xs w-48 overflow-hidden">{playingMusic.singersName}</div>
+            <div className="text-teal-500 text-xs w-48 overflow-hidden">{playingMusic.name}</div>
+            <div className="text-gray-800 text-2xs w-48 overflow-hidden">{playingMusic.singersName}</div>
           </div>
         </div>
         <div className="h-full flex items-center px-5">
