@@ -13,6 +13,7 @@ const GlobalMusicPlayerWrapper = styled.div``;
 
 const GlobalMusicPlayer = ({ className, playingMusic, playerActions }) => {
   const playMusic = () => getNode().play();
+  const pauseMusic = () => getNode().pause();
 
   return (
     <GlobalMusicPlayerWrapper
@@ -23,17 +24,17 @@ const GlobalMusicPlayer = ({ className, playingMusic, playerActions }) => {
         <div className="h-full flex items-center">
           <Image src={playingMusic.img} className="w-10 h-full" />
           <div className="flex flex-col ml-1">
-            <div className="text-teal-500 text-xs w-48 overflow-hidden">{playingMusic.name}</div>
-            <div className="text-gray-800 text-2xs w-48 overflow-hidden">{playingMusic.singersName}</div>
+            <div className="text-blue-400 text-xs w-48 overflow-hidden">{playingMusic.name}</div>
+            <div className="text-gray-700 text-2xs w-48 overflow-hidden">{playingMusic.singersName}</div>
           </div>
         </div>
         <div className="h-full flex items-center px-5">
           {playingMusic.isPlaying ? (
-            <Icon name="pause" color="teal-400" size="sm" />
+            <Icon name="pause" color="blue-400" size="sm" onClick={pauseMusic}/>
           ) : (
-            <Icon name="play" color="teal-400" size="sm" onClick={playMusic} />
+            <Icon name="play" color="blue-400" size="sm" onClick={playMusic} />
           )}
-          <Icon name="step-forward" color="teal-400" size="sm" className="ml-5" />
+          <Icon name="step-forward" color="blue-400" size="sm" className="ml-5" />
         </div>
       </div>
     </GlobalMusicPlayerWrapper>

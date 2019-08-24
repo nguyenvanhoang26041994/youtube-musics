@@ -32,9 +32,9 @@ const MenuWithIcon = ({ name, text, active, onClick, className }) => {
   return (
     <div
       className={cn(
-        'flex flex-col justify-center items-center p-1 font-bold transition-fast',
+        'flex flex-col justify-center items-center font-bold transition-fast',
         {
-          'text-teal-400': active,
+          'text-blue-400': active,
           'text-gray-700': !active,
         },
         className
@@ -58,7 +58,7 @@ const LayoutWithCustomNavbar = ({ children }) => {
         <div className="flex items-center bg-white text-gray-900 w-full h-12">
           <MenuWithIcon
             name="home"
-            text="Home"
+            text="Trang chủ"
             className="w-1/5"
             active={activeTab === 'Home'}
             onClick={() => setActiveTab('Home')}
@@ -79,14 +79,14 @@ const LayoutWithCustomNavbar = ({ children }) => {
           />
           <MenuWithIcon
             name="heart"
-            text="Topic"
+            text="Chủ đề"
             className="w-1/5"
             active={activeTab === 'Topic'}
             // onClick={() => setActiveTab('Topic')}
           />
           <MenuWithIcon
             name="bell" 
-            text="Notification"
+            text="Thông báo"
             className="w-1/5"
             active={activeTab === 'Notification'}
             // onClick={() => setActiveTab('Notification')}
@@ -104,7 +104,7 @@ const PanelWrapper = styled.section``;
 const Panel = ({ title, children }) => {
   return (
     <PanelWrapper className="w-full flex flex-col">
-      <h2 className="text-gray-900 font-bold text-sm mb-2 px-2">
+      <h2 className="text-gray-900 text-sm mb-2 px-2">
         {title}
       </h2>
       <div className="flex w-full flex-wrap">
@@ -119,8 +119,8 @@ const Song = ({ img, name, singersName, onClick }) => {
     <div className="ui-song flex flex-col" onClick={onClick}>
       <Image src={img} className="w-full h-24" />
       <div className="w-full h-12 flex flex-col justify-center">
-        <div className="text-xs text-blue-500">{name}</div>
-        <div className="text-2xs text-gray-600">{singersName}</div>
+        <div className="text-xs text-blue-400">{name}</div>
+        <div className="text-2xs text-gray-500">{singersName}</div>
       </div>
     </div>
   );
@@ -132,9 +132,9 @@ const HomePage = ({ trendingPlaylists, trendingSongs, trendingSingers, playerAct
       <HomePageWrapper id="home-page" className="home-page home-page-mobile">
         <div className="h-24" />
         <div className="bg-white">
-          <div className="text-sm px-1 h-8 flex items-center text-blue-400 font-bold">
+          <div className="text-xs px-1 h-8 flex items-center text-blue-400">
             <Icon name="music-note" />
-            <span className="ml-3">Nghe Gì Hôm Nay</span>
+            <span className="ml-2">Nghe Gì Hôm Nay</span>
           </div>
           <div className="flex flex-wrap p-1/2">
             <div className="w-1/3 p-1/2">
