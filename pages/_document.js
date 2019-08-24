@@ -36,7 +36,7 @@ export default class extends Document {
       <Html>
         <Head>
           <link rel="stylesheet" href="/static/css/animate.min.css" />
-          <link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet" />
+          <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond&display=swap" rel="stylesheet" />
         </Head>
         <body className="font-common scrollbar-hidden">
           <Main />
