@@ -6,7 +6,7 @@ const withLayout = WrappedComponent => {
   const ReturnComponent = props => (
     <Layout>
       <WrappedComponent {...props} />
-      <GlobalMusicPlayer className="z-20" />
+      <GlobalMusicPlayer className="z-50" />
     </Layout>
   );
 

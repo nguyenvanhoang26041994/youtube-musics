@@ -8,16 +8,8 @@ let shouldSkip = false;
 let state = [];
 
 export default () => {
-  if (shouldSkip) {
-    return state;
-  }
-
-  state = [
+  return [
     useSelector(playingMusicSelector),
     bindActionCreators(playingMusicActions, useDispatch())
   ];
-
-  shouldSkip = true;
-
-  return state;
 };

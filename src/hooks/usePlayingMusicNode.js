@@ -1,20 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import fp from 'lodash/fp';
+import { useEffect, useState } from 'react';
+
+let node = {};
 
 export default function usePlayingMusicNode() {
+  const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
-
-  const onTimeUpdate = e => setCurrentTime(e.target.currentTime);
-  const onDebounceTimeUpdate = fp.debounce(333, onTimeUpdate);
 
   useEffect(() => {
     const audioNode = document.getElementById('music-audio');
-    audioNode.addEventListener('timeupdate', onDebounceTimeUpdate);
+    node = audioNode;
 
+    const onTimeUpdate = e => setCurrentTime(e.target.currentTime);
+
+    audioNode.addEventListener('timeupdate', onTimeUpdate);
+
+    setDuration(audioNode.duration);
     return () => {
-      audioNode.removeEventListener('timeupdate', onDebounceTimeUpdate);
+      audioNode.removeEventListener('timeupdate', onTimeUpdate);
     }
-  }, []);
+  }, [node.src, node.duration]);
 
-  return [currentTime];
+  return [node, duration, currentTime];
 }

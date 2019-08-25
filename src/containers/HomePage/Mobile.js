@@ -50,8 +50,8 @@ const LayoutWithCustomNavbar = ({ children }) => {
   const [activeTab, setActiveTab] = useState('Home');
   return (
     <LayoutWrapper className="font-common overflow-hidden min-h-screen bg-gray-200 scrollbar-hidden">
-      <GlobalMusicPlayer className="z-20" />
-      <Navbar className="fixed top-0 w-full z-50">
+      <GlobalMusicPlayer className="z-50" />
+      <Navbar className="fixed top-0 w-full z-20">
         <div className="flex items-center bg-white text-gray-900 w-full h-12">
           <MenuWithIcon
             name="home"
@@ -67,7 +67,7 @@ const LayoutWithCustomNavbar = ({ children }) => {
             active={activeTab === 'Video'}
           />
           <MenuWithIcon
-            name="heart"
+            name="analytics"
             text="BXH"
             className="w-1/5"
             active={activeTab === 'BXH'}

@@ -5,10 +5,14 @@ import styled from 'styled-components';
 import getPageX from '../../utils/getPageX';
 
 const SliderWrapper = styled.div`
+  &.h-tiny {
+    height: 0.15rem;
+  }
+
   &.ui-slider {
     .ui-slider__handler {
       &.--position {
-        transform: translate(-50%, 0.25rem); // 0.25rem is height of ui-slider
+        transform: translate(-50%, 0.35rem);
       }
     }
 
@@ -27,7 +31,7 @@ const Slider = ({ className, percent, onChange, ...otherProps }) => {
   const onClick = e => onChange(e, { value: (e.pageX - getPageX(sliderRef.current))/sliderRef.current.offsetWidth })
 
   return (
-    <SliderWrapper className={cn('ui-slider h-1 cursor-pointer relative', className)} {...otherProps} onClick={onClick} ref={sliderRef}>
+    <SliderWrapper className={cn('ui-slider h-tiny cursor-pointer relative', className)} {...otherProps} onClick={onClick} ref={sliderRef}>
       <div className="ui-slider__rail absolute w-full h-full bg-gray-100 rounded-full" />
       <div
         className="ui-slider__track bg-teal-400 absolute h-full rounded-full --transition"
