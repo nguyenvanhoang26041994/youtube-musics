@@ -2,7 +2,7 @@ import React from 'react';
 import cn from 'classnames';
 import { compose } from 'redux';
 import styled from 'styled-components';
-import { Slider } from '../../components/core';
+import { Slider, Icon } from '../../components/core';
 import AnimationIcon from './AnimationIcon';
 import withPlayingMusic from '../../HOC/withPlayingMusic';
 import withPlayerActions from '../../HOC/withPlayerActions';
@@ -26,8 +26,8 @@ const MusicController = ({ className, playingMusic, playerActions }) => {
         <AnimationIcon name="step-backward" color="white" size="xs" />
         <div className="flex items-center justify-center rounded-full bg-white h-10 w-10">
           {playingMusic.isPlaying
-            ? <AnimationIcon name="pause" size="sm" color="indigo-500" onClick={() => node.pause()} />
-            : <AnimationIcon name="play" size="sm" color="indigo-500" className="ml-1/2" onClick={() => node.play()}/>
+            ? <Icon name="pause" size="sm" color="indigo-500" onClick={() => node.pause()} />
+            : <Icon name="play" size="sm" color="indigo-500" className="ml-1/2" onClick={() => node.play()}/>
           }
         </div>
         <AnimationIcon name="step-forward" color="white" size="xs" />

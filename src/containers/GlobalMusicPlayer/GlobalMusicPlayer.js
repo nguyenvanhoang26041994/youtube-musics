@@ -39,7 +39,7 @@ const PlaylistModal = ({ controllerRef, handleHiddenBiggerPlayer }) => {
     <div className="global-music-player__biger-player-container container container-custom flex mx-auto h-full relative" ref={playlistModalRef}>
       <Icon
         name="chevron-arrow-down"
-        color="teal-600"
+        color="white"
         size="xs"
         className="absolute top-0 right-0 z-20 m-2"
         onClick={handleHiddenBiggerPlayer}
@@ -135,7 +135,7 @@ class GlobalMusicPlayer extends React.Component {
         <div className={cn('w-full relative bg-lizard transition-normal', { 'opacity-0': !shouldShowOff })} ref={this.controllerRef}>
           <Icon
             name="close"
-            size="sm"
+            size="xs"
             color="white"
             className="absolute z-10 right-0 top-haft translate-x-mhaft-y-mhaft"
             onClick={playerActions.resetPlayinglistAndPlayingMusic}
@@ -153,7 +153,7 @@ class GlobalMusicPlayer extends React.Component {
                   {playingMusic.singers.map((singer, idx) => (
                     <Link href={`/profile?id=${singer.id}`} as={`/profile/${singer.id}`} key={singer.id}>
                       <a>
-                        <h3 className="text-xs font-bold text-teal-400 flex">
+                        <h3 className="text-xs font-bold text-indigo-400 flex">
                           <span>{singer.name}</span>
                           <span className="mr-1">{playingMusic.singers.length <= idx + 1 ? '' : ','}</span>
                         </h3>
@@ -167,8 +167,8 @@ class GlobalMusicPlayer extends React.Component {
               <Icon name="step-backward" size="xs" color="white" className="mr-4" onClick={this.onPlayPrev} />
               <div className="flex items-center justify-center rounded-full bg-white h-8 w-8">
                 {playingMusic.isPlaying
-                  ? <Icon name="pause" size="xs" color="teal-500" onClick={this.pauseMusic} />
-                  : <Icon name="play" size="xs" color="teal-500" onClick={this.playMusic} />
+                  ? <Icon name="pause" size="xs" color="indigo-400" onClick={this.pauseMusic} />
+                  : <Icon name="play" size="xs" color="indigo-400" onClick={this.playMusic} />
                 }
               </div>
               <Icon name="step-forward" size="xs" color="white" className="ml-4" onClick={this.onPlayNext} />
@@ -177,7 +177,7 @@ class GlobalMusicPlayer extends React.Component {
               <Icon
                 name="list"
                 size="sm"
-                color={isShowBiggerPlayer && playingMusic.src ? 'teal-400': 'white'}
+                color={isShowBiggerPlayer && playingMusic.src ? 'indigo-400' : 'white'}
                 className="ml-5" onClick={this.toggleShowBiggerPlayer}
               />
             )}
@@ -188,7 +188,7 @@ class GlobalMusicPlayer extends React.Component {
                 onChange={this.handleChangeCurrentMusicTime}
               />
               <div className="text-2xs absolute right-0 bottom-full flex font-mono">
-                <div className="text-teal-300">{calcTime(currentMusicTime)}</div>
+                <div className="text-white">{calcTime(currentMusicTime)}</div>
                 <span className="text-white">/</span>
                 <div className="text-white">{calcTime(musicTime)}</div>
               </div>
@@ -196,7 +196,8 @@ class GlobalMusicPlayer extends React.Component {
             <div className="flex items-center">
               <Icon
                 name={listMode[playingList.mode] || 'repeat'}
-                size="sm" color="teal-400"
+                size="sm"
+                color="white"
                 className="mx-2"
                 onClick={playingListActions.changeToNextMode}
               />

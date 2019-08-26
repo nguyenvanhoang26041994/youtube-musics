@@ -28,9 +28,9 @@ const SingerCard = ({ className, avatarImg, name, id, isVerified }) => {
     <Link href={`/profile?id=${id}`} as={`/profile/${id}`}>
       <SingerCardWrapper className={cn('ui-singer-card cursor-pointer', className)}>
         <SingerCardWrapperRelative className="relative top-0 left-0 flex flex-col items-center">
-          <Image className="ui-singer-card__avatar rounded-full h-32 w-32" src={avatarImg} />
-          <div className="h-16 w-full flex justify-center items-center text-white">
-            {name}
+          <Image className="ui-singer-card__avatar rounded-full h-20 w-20" src={avatarImg} />
+          <div className="h-10 w-full flex justify-center items-center">
+            <span className="truncate text-sm text-indigo-500">{name}</span>
             {isVerified && <Icon name="verified" size="xs" color="teal-400" className="ml-3" />}
           </div>
         </SingerCardWrapperRelative>

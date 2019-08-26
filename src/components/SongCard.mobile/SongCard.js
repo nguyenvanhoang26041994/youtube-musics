@@ -12,8 +12,8 @@ const SongCard = ({ className, singersName, name, img, onClick }) => {
     <SongCardWrapper className={cn('ui-song-card flex flex-col', className)} onClick={onClick}>
       <Image src={img} className="w-full h-24" />
       <div className="w-full h-12 flex flex-col justify-center">
-        <div className="text-xs text-indigo-500">{name}</div>
-        <div className="text-2xs text-gray-700">{singersName}</div>
+        <div className="text-sm text-indigo-500 w-full truncate">{name}</div>
+        <div className="text-xs text-gray-700 w-full truncate">{singersName}</div>
       </div>
     </SongCardWrapper>
   );
