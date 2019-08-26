@@ -9,8 +9,6 @@ import { Image, Icon } from '../../components/core';
 const SingerCardWrapper = styled.div`
   &.ui-singer-card {
     .ui-singer-card__avatar {
-      filter: blur(1px) grayscale(50%) brightness(50%);
-      transform: scale(1.1, 1.1);
       transition: 0.5s;
 
       &:hover {

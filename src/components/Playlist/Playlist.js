@@ -33,20 +33,20 @@ const Playlist = ({ className, musics, name, id, user, playingMusic, onPlayMusic
           <Image src={musics[0] && musics[0].img} className="h-32 w-32" />
           <div className="ml-5 flex flex-col justify-between">
             <div className="flex flex-col">
-              <h2 className="text-2xl text-white font-bold">{name}</h2>
-              <h3 className="text-sm text-white flex items-center">
-                <span>Created by <span className="cursor-pointer text-teal-400">{user.name}</span></span>
+              <h2 className="text-2xl text-indigo-500 font-bold">{name}</h2>
+              <h3 className="text-sm text-gray-500 flex items-center">
+                <span>Created by <span className="cursor-pointer text-indigo-400">{user.name}</span></span>
                 <span>, {musics.length} songs</span>
               </h3>
             </div>
             <h3 className="text-sm text-gray-500 uppercase flex">
               {!isPlaying && (
-                <Button size="sm" color="teal-400" className="mr-2 text-white rounded-full" onClick={handlePlayPlaylist}>
+                <Button size="sm" color="indigo-400" className="mr-2 text-white rounded-full" onClick={handlePlayPlaylist}>
                   PLAY PLAYLIST
                   <Icon name="play" size="xs" className="ml-3" />
                 </Button>
               )}
-              <Button size="sm" color="teal-400" className="mr-2 text-white rounded-full">
+              <Button size="sm" color="indigo-400" className="mr-2 text-white rounded-full">
                 <Icon name="ellipsis-h" />
               </Button>
             </h3>

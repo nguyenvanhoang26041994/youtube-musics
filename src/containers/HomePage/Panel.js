@@ -7,8 +7,8 @@ const PanelWrapper = styled.section``;
 
 const Panel = ({ className, title, children, icon }) => (
   <PanelWrapper className={cn('flex flex-col rounded', className)}>
-    <h2 className="flex items-center text-indigo-500 font-bold text-lg m-1">
-      <Icon name={icon} className="mr-2"/>{title}
+    <h2 className="flex items-center justify-between m-1">
+      <span className="text-indigo-500 font-bold text-lg">{title}</span>
     </h2>
     <div className="flex w-full flex-wrap">
       {children}

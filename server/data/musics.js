@@ -56,39 +56,6 @@ const singers = {
 
 const musics = [
   {
-    id: 'lzkKzZmRZk8',
-    name: 'Takeaway',
-    singers: [
-      singersAsObject['the-chainsmokers'],
-    ],
-    src: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/y2mate.com%20-%20the_chainsmokers_illenium_takeaway_official_video_ft_lennon_stella_lzkKzZmRZk8.mp3?alt=media&token=bdb0c631-323e-4e71-a55d-80c18bb00ac7',
-    img: singersAsObject['the-chainsmokers'].avatarImg,
-    listenCount: 83433235,
-    time: 3 * 60 + 48,
-  },
-  {
-    id: 'YxIiPLVR6NA',
-    name: 'Hey Brother',
-    singers: [
-      singersAsObject['avicii'],
-    ],
-    src: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/y2mate.com%20-%20avicii_hey_brother_lyric_YxIiPLVR6NA_320kbps.mp3?alt=media&token=6f43ca31-0522-49f5-b083-30e4036baf0b',
-    img: singersAsObject['avicii'].avatarImg,
-    listenCount: 67634364,
-    time: 4 * 60 + 18,
-  },
-  {
-    id: 'V6iKSUoUN48',
-    name: 'Broken Arrows',
-    singers: [
-      singersAsObject['avicii'],
-    ],
-    src: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/y2mate.com%20-%20avicii_broken_arrows_V6iKSUoUN48_320kbps.mp3?alt=media&token=950d358f-cc1b-4484-8045-4af5e6fd2d7b',
-    img: singersAsObject['avicii'].avatarImg,
-    listenCount: 43634364,
-    time: 4 * 60 + 14,
-  },
-  {
     id: 'JDglMK9sgIQ',
     name: 'The Days',
     singers: [
@@ -100,40 +67,6 @@ const musics = [
     time: 4 * 60 + 7,
   },
   {
-    id: '_ovdm2yX4MA',
-    name: 'Levels',
-    singers: [
-      singersAsObject['avicii'],
-    ],
-    src: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/Avicii%20-%20Levels.mp3?alt=media&token=0873b31d-18af-41bc-b452-578285c0f92b',
-    img: singersAsObject['avicii'].avatarImg,
-    listenCount: 352342,
-    time: 3 * 60 + 18,
-  },
-  {
-    id: 'WRz2MxhAdJo',
-    name: 'Without You',
-    singers: [
-      singersAsObject['avicii'],
-    ],
-    src: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/Avicii%20-%20Without%20You%20%E2%80%9CAudio%E2%80%9D%20ft.%20Sandro%20Cavazza.mp3?alt=media&token=e872d4a3-a6cb-40f1-8ae4-78afe6702a04',
-    img: singersAsObject['avicii'].avatarImg,
-    listenCount: 53562,
-    time: 3 * 60 + 3,
-  },
-  {
-    id: 'id_edm',
-    name: 'EDM Bất hủ cho dân cày liên minh',
-    singers: [
-      { id: 'uid_edm-004', name: 'Meow' },
-      { id: 'alan_walker', name: 'Kyo' },
-    ],
-    src: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/edm-lol.mp3?alt=media&token=12c88e8f-7385-450d-9e0d-8b22ff246e81',
-    img: 'https://amp.thenational.ae/image/policy:1.851304:1555739352/Avicii.jpg?f=16x9&w=1200&$p$f$w=aae39fc',
-    listenCount: 1241562,
-    time: 60 * 60 + 17,
-  },
-  {
     id: 'afNQLlTRvfM',
     name: `Ai Chờ Ai`,
     singers: singers['afNQLlTRvfM'],
@@ -141,6 +74,17 @@ const musics = [
     img: anonimous.id001.img,
     listenCount: 8345,
     time: 2 * 60 + 40,
+  },
+  {
+    id: 'lzkKzZmRZk8',
+    name: 'Takeaway',
+    singers: [
+      singersAsObject['the-chainsmokers'],
+    ],
+    src: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/y2mate.com%20-%20the_chainsmokers_illenium_takeaway_official_video_ft_lennon_stella_lzkKzZmRZk8.mp3?alt=media&token=bdb0c631-323e-4e71-a55d-80c18bb00ac7',
+    img: singersAsObject['the-chainsmokers'].avatarImg,
+    listenCount: 83433235,
+    time: 3 * 60 + 48,
   },
   {
     id: 'iQp1_GfDhwQ',
@@ -161,6 +105,17 @@ const musics = [
     img: singersAsObject['ed-sheeran'].avatarImg,
     listenCount: 1000,
     time: 3 * 60 + 19,
+  },
+  {
+    id: 'YxIiPLVR6NA',
+    name: 'Hey Brother',
+    singers: [
+      singersAsObject['avicii'],
+    ],
+    src: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/y2mate.com%20-%20avicii_hey_brother_lyric_YxIiPLVR6NA_320kbps.mp3?alt=media&token=6f43ca31-0522-49f5-b083-30e4036baf0b',
+    img: singersAsObject['avicii'].avatarImg,
+    listenCount: 67634364,
+    time: 4 * 60 + 18,
   },
   {
     id: 'iKzRIweSBLA',
@@ -234,6 +189,17 @@ const musics = [
     time: 3 * 60 + 17,
   },
   {
+    id: 'V6iKSUoUN48',
+    name: 'Broken Arrows',
+    singers: [
+      singersAsObject['avicii'],
+    ],
+    src: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/y2mate.com%20-%20avicii_broken_arrows_V6iKSUoUN48_320kbps.mp3?alt=media&token=950d358f-cc1b-4484-8045-4af5e6fd2d7b',
+    img: singersAsObject['avicii'].avatarImg,
+    listenCount: 43634364,
+    time: 4 * 60 + 14,
+  },
+  {
     id: 'u1I9ITfzqFs',
     name: `Savannah`,
     singers: [
@@ -263,6 +229,17 @@ const musics = [
     time: 3 * 60 + 11,
   },
   {
+    id: '_ovdm2yX4MA',
+    name: 'Levels',
+    singers: [
+      singersAsObject['avicii'],
+    ],
+    src: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/Avicii%20-%20Levels.mp3?alt=media&token=0873b31d-18af-41bc-b452-578285c0f92b',
+    img: singersAsObject['avicii'].avatarImg,
+    listenCount: 352342,
+    time: 3 * 60 + 18,
+  },
+  {
     id: 'vBGiFtb8Rpw',
     name: `Make Me Move`,
     singers: [
@@ -272,6 +249,29 @@ const musics = [
     img: singersAsObject['ncs'].avatarImg,
     listenCount: 63324,
     time: 3 * 60 + 16,
+  },
+  {
+    id: 'WRz2MxhAdJo',
+    name: 'Without You',
+    singers: [
+      singersAsObject['avicii'],
+    ],
+    src: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/Avicii%20-%20Without%20You%20%E2%80%9CAudio%E2%80%9D%20ft.%20Sandro%20Cavazza.mp3?alt=media&token=e872d4a3-a6cb-40f1-8ae4-78afe6702a04',
+    img: singersAsObject['avicii'].avatarImg,
+    listenCount: 53562,
+    time: 3 * 60 + 3,
+  },
+  {
+    id: 'id_edm',
+    name: 'EDM Bất hủ cho dân cày liên minh',
+    singers: [
+      { id: 'uid_edm-004', name: 'Meow' },
+      { id: 'alan_walker', name: 'Kyo' },
+    ],
+    src: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/edm-lol.mp3?alt=media&token=12c88e8f-7385-450d-9e0d-8b22ff246e81',
+    img: 'https://amp.thenational.ae/image/policy:1.851304:1555739352/Avicii.jpg?f=16x9&w=1200&$p$f$w=aae39fc',
+    listenCount: 1241562,
+    time: 60 * 60 + 17,
   },
   {
     id: 'kXYiU_JCYtU',

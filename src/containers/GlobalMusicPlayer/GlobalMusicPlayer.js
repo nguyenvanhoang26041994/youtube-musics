@@ -12,6 +12,7 @@ import withPlayingMusic from '../../HOC/withPlayingMusic';
 import withPlayerActions from '../../HOC/withPlayerActions';
 import useClickOutside from '../../hooks/useClickOutside';
 import { calcTime } from '../../utils/time';
+import tailwindColors from '../../utils/tailwindColors';
 import usePlayingMusicNode from '../../hooks/usePlayingMusicNode';
 import { getNode } from '../GlobalAudio';
 
@@ -22,9 +23,24 @@ const listMode = Object.freeze({
 });
 
 const GlobalMusicPlayerWrapper = styled.div`
+  .--filter img {
+    filter: blur(20px) brightness(30%) grayscale(50%);
+    transform: scale(1.2, 1.2);
+  }
+
+  .--custom-playlist-color {
+    .ui-playlist__music {
+      .ui-music-item__index,
+      .ui-music-item__name,
+      .ui-music-item__singers,
+      .ui-music-item__time {
+        color: ${tailwindColors['white']};
+      }
+    }
+  }
 `;
 
-const PlaylistModal = ({ controllerRef, handleHiddenBiggerPlayer }) => {
+const PlaylistModal = ({ controllerRef, handleHiddenBiggerPlayer, bgImg }) => {
   const playlistModalRef = useRef();
   const handler = event => {
     if (controllerRef && controllerRef.current && controllerRef.current.contains(event.target)) {
@@ -37,6 +53,7 @@ const PlaylistModal = ({ controllerRef, handleHiddenBiggerPlayer }) => {
 
   return (
     <div className="global-music-player__biger-player-container container container-custom flex mx-auto h-full relative" ref={playlistModalRef}>
+      <Image src={bgImg} className="absolute top-0 left-0 h-full w-full z-m1 --filter" />
       <Icon
         name="chevron-arrow-down"
         color="white"
@@ -44,7 +61,7 @@ const PlaylistModal = ({ controllerRef, handleHiddenBiggerPlayer }) => {
         className="absolute top-0 right-0 z-20 m-2"
         onClick={handleHiddenBiggerPlayer}
       />
-      <PlayingList className="w-full h-full bg-lizard shadow-lg" />
+      <PlayingList className="w-full h-full --custom-playlist-color" />
     </div>
   );
 }
@@ -125,9 +142,10 @@ class GlobalMusicPlayer extends React.Component {
       >
         <div
           className="global-music-player__biger-player relative w-full z-10 overflow-hidden transition-fast"
-          style={{ height: shouldShowOff && isShowBiggerPlayer ? 'calc(100vh - 8rem)' : 0 }}
+          style={{ height: shouldShowOff && isShowBiggerPlayer ? 'calc(100vh - 4rem)' : 0 }}
         >
           <PlaylistModal
+            bgImg={playingMusic.img}
             handleHiddenBiggerPlayer={this.handleHiddenBiggerPlayer}
             controllerRef={this.controllerRef}
           />
