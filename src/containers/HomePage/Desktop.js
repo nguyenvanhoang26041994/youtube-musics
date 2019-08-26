@@ -9,10 +9,11 @@ import withLayout from '../../HOC/withLayout';
 import PlaylistCard from '../../containers/PlaylistCard';
 import SongCard from '../../containers/SongCard.mobile';
 import SingerCard from '../../components/SingerCard';
+import TopSongs from '../../components/TopSongs';
 import SongCardSkeleton from '../../components/SongCard/Skeleton';
 import PlaylistCardSkeleton from '../../components/PlaylistCard/Skeleton';
 import SingerCardSkeleton from '../../components/SingerCard/Skeleton';
-import { Icon } from '../../components/core';
+import { Icon, Divider } from '../../components/core';
 import Panel from './Panel';
 
 import musicsFormater from '../../selectors/utils/musicsFormater';
@@ -30,6 +31,16 @@ const HomePageWrapper = styled.div`
       animation-name: identifier;
       animation-duration: 1s;
       animation-iteration-count: infinite;
+    }
+
+    .--song-image-h32 {
+      .ui-song-card__img {
+        height: 8rem;
+      }
+    }
+
+    .--playlist-img-h48 {
+      height: 12rem;
     }
   }
 
@@ -57,11 +68,11 @@ const HomePage = ({ trendingPlaylists, trendingSongs, trendingSingers, loaders }
     <HomePageWrapper id="home-page" className="home-page container-custom container mx-auto flex flex-col animated fadeIn">
       <div className="flex w-full">
         <div className="w-8/12 flex flex-col">
-          <Panel className="mb-10 w-full" title="Hôm Nay Nghe Gì" icon="music-note">
-            {!loaders.isTrendingSongsFetching && fp.take(10, trendingSongs).map(song => (
-              <div className="w-1/3 xl:w-1/5 lg:w-1/5 md:w-1/5 p-1/2" key={song.id}>
+          <Panel className="mb-3 w-full" title="Hôm Nay Nghe Gì" icon="music-note">
+            {!loaders.isTrendingSongsFetching && fp.take(12, trendingSongs).map(song => (
+              <div className="w-1/3 xl:w-1/4 lg:w-1/4 md:w-1/4 p-1/2" key={song.id}>
                 <SongCard
-                  className="w-full"
+                  className="w-full --song-image-h32"
                   {...song}
                 />
               </div>
@@ -72,11 +83,12 @@ const HomePage = ({ trendingPlaylists, trendingSongs, trendingSingers, loaders }
               </div>
             ))} */}
           </Panel>
-          <Panel className="mb-10" title="Playlist tuyển chọn" icon="heart">
-            {!loaders.isTrendingPlaylistsFetching && fp.take(5, trendingPlaylists).map(playlist => (
-              <div className="w-1/3 xl:w-1/5 lg:w-1/5 md:w-1/5 p-1/2" key={playlist.id}>
+          <Divider />
+          <Panel className="mb-3 w-full" title="Playlist tuyển chọn" icon="heart">
+            {!loaders.isTrendingPlaylistsFetching && fp.take(4, trendingPlaylists).map(playlist => (
+              <div className="w-1/3 xl:w-1/4 lg:w-1/4 md:w-1/4 p-1/2" key={playlist.id}>
                 <PlaylistCard
-                  className="w-full"
+                  className="w-full --playlist-img-h48"
                   {...playlist}
                 />
               </div>
@@ -87,9 +99,10 @@ const HomePage = ({ trendingPlaylists, trendingSongs, trendingSingers, loaders }
               </div>
             ))} */}
           </Panel>
-          <Panel className="mb-10" title="Ca sĩ đang hot" icon="music-note">
-            {!loaders.isTrendingSingersFetching && fp.take(5, trendingSingers).map(singer => (
-              <div className="w-1/3 xl:w-1/5 lg:w-1/5 md:w-1/5 p-1/2" key={singer.id}>
+          <Divider />
+          <Panel className="mb-3 w-full" title="Ca sĩ đang hot" icon="music-note">
+            {!loaders.isTrendingSingersFetching && fp.take(4, trendingSingers).map(singer => (
+              <div className="w-1/3 xl:w-1/4 lg:w-1/4 md:w-1/4 p-1/2" key={singer.id}>
                 <SingerCard
                   className="w-full"
                   {...singer}
@@ -103,11 +116,13 @@ const HomePage = ({ trendingPlaylists, trendingSongs, trendingSingers, loaders }
             ))} */}
           </Panel>
         </div>
-        <div className="w-4/12 flex flex-col">
-          <h2 className="flex items-center justify-center text-indigo-500 font-bold text-lg mb-2">
-            <Icon name="analytics" className="mr-2"/>Bảng Xếp Hạng
+        <div className="w-4/12 flex flex-col ml-2 rounded">
+          <h2 className="flex items-center text-indigo-500 font-bold text-lg mb-2">
+            <Icon name="analytics" className="m-1" />Bảng Xếp Hạng
           </h2>
-          <div className="flex-1 --animation-loading"></div>
+          <div className="flex-1">
+            <TopSongs />
+          </div>
         </div>
       </div>
     </HomePageWrapper>

@@ -97,7 +97,7 @@ const musics = [
     src: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/y2mate.com%20-%20avicii_the_days_lyric_video_JDglMK9sgIQ_320kbps.mp3?alt=media&token=e6f433a5-d0e6-45fd-8e8f-a6c969f05130',
     img: singersAsObject['avicii'].avatarImg,
     listenCount: 8456432,
-    time: 4 * 60 + 07,
+    time: 4 * 60 + 7,
   },
   {
     id: '_ovdm2yX4MA',
@@ -278,7 +278,7 @@ const musics = [
     name: `Numb`,
     singers: singers['kXYiU_JCYtU'],
     src: 'https://firebasestorage.googleapis.com/v0/b/musics-2bfdc.appspot.com/o/y2mate.com%20-%20numb_official_video_linkin_park_kXYiU_JCYtU.mp3?alt=media&token=95bb96ba-f8dc-475c-be84-e80cbd866662',
-    img: 'https://in.bookmyshow.com/entertainment-news/wp-content/uploads/2017/07/Linkin-Park.jpg',
+    img: 'https://media.pitchfork.com/photos/59df93e9caee2b6f8e6d9c61/2:1/w_790/Linkin%20Park_Photo%20by%20Chelsea%20Lauren:WireImage_451103390_News.jpg',
     listenCount: 6644,
     time: 3 * 60 + 6,
   },

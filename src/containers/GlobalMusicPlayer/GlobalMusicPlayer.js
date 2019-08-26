@@ -144,7 +144,7 @@ class GlobalMusicPlayer extends React.Component {
             <div className="flex mr-2 items-center mr-5">
               <Image className="h-10 w-10 mr-2 cursor-pointer rounded-sm" src={playingMusic.img} />
               <div className="flex flex-col">
-                <div className="text-sm text-white cursor-pointer w-32 overflow-hidden truncate font-bold">
+                <div className="text-sm text-indigo-400 cursor-pointer w-32 overflow-hidden truncate font-bold">
                   <Link href={`/music?id=${playingMusic.id}`} as={`/music/${playingMusic.id}`}>
                     <a>{playingMusic.name}</a>
                   </Link>
@@ -153,7 +153,7 @@ class GlobalMusicPlayer extends React.Component {
                   {playingMusic.singers.map((singer, idx) => (
                     <Link href={`/profile?id=${singer.id}`} as={`/profile/${singer.id}`} key={singer.id}>
                       <a>
-                        <h3 className="text-xs font-bold text-indigo-400 flex">
+                        <h3 className="text-xs font-bold text-white flex">
                           <span>{singer.name}</span>
                           <span className="mr-1">{playingMusic.singers.length <= idx + 1 ? '' : ','}</span>
                         </h3>

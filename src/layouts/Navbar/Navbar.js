@@ -43,7 +43,7 @@ const onFullScreen = e => {
 };
 
 const Navbar = ({ className }) => (
-  <NavbarWrapper className={cn('ui-navbar relative overflow-hidden flex justify-center bg-white text-white w-full h-16', className)}>
+  <NavbarWrapper className={cn('ui-navbar relative overflow-hidden flex justify-center bg-gray-100 text-white w-full h-16', className)}>
     <div className="container-custom container flex items-center px-1">
       <div className="flex items-center flex-1">
         <div className="w-72">
@@ -54,7 +54,7 @@ const Navbar = ({ className }) => (
       </div>
       <div>
         <Switch
-          color="teal-400"
+          color="indigo-400"
           size="sm"
           onChange={onFullScreen}
         />
