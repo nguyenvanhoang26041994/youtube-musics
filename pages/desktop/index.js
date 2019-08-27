@@ -1,1 +1,1 @@
-export { default } from '../../src/containers/HomePage/Desktop';
+export { default } from '../../src/containers/HomePage/HomePage.desktop';

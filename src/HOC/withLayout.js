@@ -1,6 +1,6 @@
 import React from 'react';
-import Layout from '../layouts/Layout';
-import GlobalMusicPlayer from '../containers/GlobalMusicPlayer';
+import Layout from '../layouts.desktop/Layout';
+import GlobalMusicPlayer from '../containers/GlobalMusicPlayer.desktop';
 
 const withLayout = WrappedComponent => {
   const ReturnComponent = props => (

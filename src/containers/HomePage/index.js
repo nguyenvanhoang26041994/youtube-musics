@@ -1,5 +1,5 @@
-import Desktop from './Desktop';
-import Mobile from './Mobile';
+import Desktop from './HomePage.desktop';
+import Mobile from './HomePage.mobile';
 
 import withPage from '../../HOC/withPage';
 

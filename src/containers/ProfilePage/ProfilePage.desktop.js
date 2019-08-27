@@ -9,7 +9,7 @@ import styled from 'styled-components';
 import { Panel, Divider } from '../../components/core';
 import Profile from '../../containers/Profile';
 import SongSmallCard from '../../containers/SongSmallCard';
-import SongCard from '../../containers/SongCard.mobile';
+import SongCard from '../../containers/SongCard';
 import musicsFormater from '../../selectors/utils/musicsFormater';
 import withLayout from '../../HOC/withLayout';
 import * as actionCreators from './actions';

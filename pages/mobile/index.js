@@ -1,1 +1,1 @@
-export { default } from '../../src/containers/HomePage/Mobile';
+export { default } from '../../src/containers/HomePage/HomePage.mobile';

@@ -6,7 +6,7 @@ import fp from 'lodash/fp';
 import cn from 'classnames';
 
 import { Icon, Image } from '../../components/core';
-import SongCard from '../../containers/SongCard.mobile';
+import SongCard from '../../containers/SongCard';
 import withPlayerActions from '../../HOC/withPlayerActions';
 import Navbar from '../../layouts.mobile/Navbar';
 import GlobalMusicPlayer from '../GlobalMusicPlayer.mobile';

@@ -1,29 +1,29 @@
-import React from 'react';
-import { compose } from 'redux';
+import React, { useMemo } from 'react';
+import { playMusic as _playMusic } from '../actions/player';
 import SongCard from '../components/SongCard';
-import withPlayerActions from '../HOC/withPlayerActions';
-import withPlayingMusic from '../HOC/withPlayingMusic';
+import usePlayingMusic from '../hooks/usePlayingMusic';
+import usePlayer from '../hooks/usePlayer';
 
-const SongCardEnhancer = ({ playerActions, playingMusic, ...otherProps }) => {
-  const id = otherProps.id
-  const onClick = () => playerActions.playMusic({
+const SongCardEnhancer = props => {
+  const [playingMusic] = usePlayingMusic();
+  const { playMusic } = usePlayer();
+
+  const id = props.id;
+  const onClick = () => playMusic({
     id,
-    src: otherProps.src,
-    name: otherProps.name,
-    singers: otherProps.singers,
-    img: otherProps.img,
+    src: props.src,
+    name: props.name,
+    singers: props.singers,
+    img: props.img,
   });
 
   return (
     <SongCard
       onClick={onClick}
       isPlaying={playingMusic.id === id}
-      {...otherProps}
+      {...props}
     />
   );
 }
 
-export default compose(
-  withPlayingMusic,
-  withPlayerActions,
-)(SongCardEnhancer);
+export default React.memo(SongCardEnhancer);

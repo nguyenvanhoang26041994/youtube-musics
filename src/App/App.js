@@ -6,7 +6,6 @@ import fp from 'lodash/fp';
 import MobileDetect from 'mobile-detect';
 import { registerMobile } from '../HOC/mobile';
 
-import Layout from '../layouts/Layout';
 import GlobalAudio from '../containers/GlobalAudio';
 import withReduxStore from '../libs/with-redux-store';
 import withCache from '../libs/with-cache';

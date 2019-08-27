@@ -5,8 +5,6 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import { Image, Icon, Button, Quote } from '../../components/core';
-import MusicCard from '../../containers/MusicCard';
-import MusicCardSkeleton from '../../components/MusicCard/Skeleton';
 
 const defaultPropfile = {
   id: 'unknown',

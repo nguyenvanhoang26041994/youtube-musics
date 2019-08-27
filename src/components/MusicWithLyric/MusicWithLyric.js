@@ -37,7 +37,7 @@ const MusicWithLyric = ({ className, music, lyric, playMusic }) => {
         </div>
       </div>
       <Divider  className="mb-5 mt-2" />
-      {lyric && lyric.data && lyric.data.length && (
+      {lyric && lyric.data && (
         <div className="flex flex-col">
           <ul className="ui-music-with-lyric__lyric-wrapper flex flex-col items-center font-shadows-into-light text-sm text-base overflow-hidden">
             {lyric && lyric.data.map((obj, idx) => (

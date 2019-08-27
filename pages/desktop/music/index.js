@@ -1,1 +1,1 @@
-export { default } from '../../../src/containers/MusicPage/Desktop';
+export { default } from '../../../src/containers/MusicPage/MusicPage.desktop';
