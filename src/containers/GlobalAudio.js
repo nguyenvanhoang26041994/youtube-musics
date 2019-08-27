@@ -17,7 +17,6 @@ const GlobalAudio = ({ playingMusic, playingMusicActions, playerActions, playing
   const onPlaying = e => playingMusicActions.changeIsPlaying(!e.target.paused);
 
   useEffect(() => {
-    audioRef.current.loop = playingList.mode === mode.REPEAT
     audioRef.current.addEventListener('play', onPlay);
     audioRef.current.addEventListener('pause', onPause);
     audioRef.current.addEventListener('waiting', onWaiting);
@@ -32,6 +31,10 @@ const GlobalAudio = ({ playingMusic, playingMusicActions, playerActions, playing
       audioRef.current.removeEventListener('ended', onEnded);
     }
   }, []);
+
+  useEffect(() => {
+    audioRef.current.loop = playingList.mode === mode.REPEAT
+  }, [playingList.mode]);
 
   useEffect(() => {
     if (playingMusic.src) {
