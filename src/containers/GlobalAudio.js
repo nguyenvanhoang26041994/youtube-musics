@@ -7,31 +7,24 @@ import withPlayingList from '../HOC/withPlayingList';
 import withPlayingMusic from '../HOC/withPlayingMusic';
 import withPlayerActions from '../HOC/withPlayerActions';
 
-const GlobalAudio = ({ playingMusic, playingMusicActions, playingList }) => {
+const GlobalAudio = ({ playingMusic, playingMusicActions, playerActions, playingList }) => {
   const audioRef = useRef();
 
-  const onEnded = e => playingMusicActions.changeIsPlaying(!e.target.paused);
+  const onEnded = () => playerActions.goNextSong();
   const onPlay = e => playingMusicActions.changeIsPlaying(!e.target.paused);
   const onPause = e => playingMusicActions.changeIsPlaying(!e.target.paused);
   const onWaiting = e => playingMusicActions.changeIsPlaying(!e.target.paused);
   const onPlaying = e => playingMusicActions.changeIsPlaying(!e.target.paused);
 
-  // const setStateWhenAudioLoaded = () => {
-  //   playingMusicActions.changeIsPlaying(!this.audioNode.paused)
-  // }
-
   useEffect(() => {
     audioRef.current.loop = playingList.mode === mode.REPEAT
-    // audioRef.current.addEventListener('loadeddata', onLoadedData);
     audioRef.current.addEventListener('play', onPlay);
     audioRef.current.addEventListener('pause', onPause);
     audioRef.current.addEventListener('waiting', onWaiting);
     audioRef.current.addEventListener('playing', onPlaying);
     audioRef.current.addEventListener('ended', onEnded);
 
-    // setStateWhenAudioLoaded();
     return () => {
-      // audioRef.current.removeEventListener('loadeddata', onLoadedData);
       audioRef.current.removeEventListener('play', onPlay);
       audioRef.current.removeEventListener('pause', onPause);
       audioRef.current.removeEventListener('waiting', onWaiting);
