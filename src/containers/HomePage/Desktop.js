@@ -16,7 +16,7 @@ import SongCardSkeleton from '../../components/SongCard/Skeleton';
 import PlaylistCardSkeleton from '../../components/PlaylistCard/Skeleton';
 import SingerCardSkeleton from '../../components/SingerCard/Skeleton';
 import { Icon, Divider, Carousel, Panel } from '../../components/core';
-
+import Topic from '../../components/Topic';
 import musicsFormater from '../../selectors/utils/musicsFormater';
 import playlistsFormater from '../../selectors/utils/playlistsFormater';
 import * as actionCreators from './actions';
@@ -76,59 +76,75 @@ const HomePage = ({ trendingPlaylists, trendingSongs, trendingSingers, loaders }
         </Carousel>
       </div>
       <Divider className="my-10" />
-      <div className="flex w-full">
-        <div className="w-8/12 flex flex-col">
-          <Panel className="w-full" title="Hôm Nay Nghe Gì" icon="music-note">
-            {!loaders.isTrendingSongsFetching && fp.take(8, trendingSongs).map(song => (
-              <div className="w-1/3 xl:w-1/4 lg:w-1/4 md:w-1/4 p-1/2" key={song.id}>
-                <SongCard
-                  className="w-full --song-image-h32"
-                  {...song}
-                />
+      <div className="flex w-full flex-col">
+        <div className="w-full flex">
+          <div className="w-8/12 flex flex-col">
+            <Panel className="w-full" title="Những bài hát hay" icon="music-note">
+              {!loaders.isTrendingSongsFetching && fp.compose(fp.take(12), fp.reverse)(trendingSongs).map(song => (
+                <div className="w-full xl:w-1/2 lg:w-1/2 md:w-1/2 p-1/2" key={song.id}>
+                  <SongSmallCard
+                    className="w-full"
+                    onClick={() => playMusic(song)}
+                    {...song}
+                  />
+                </div>
+              ))}
+            </Panel>
+          </div>
+          <div className="w-4/12 flex flex-col ml-1">
+            <Panel className="w-full" title="Chủ Đề" icon="music-note">
+              <div className="w-full flex flex-col mt-1/2">
+                <Topic color="blue-500 mb-1">
+                  <div className="text-white text-xl">Nhạc Cover</div>
+                </Topic>
+                <Topic color="teal-500 mb-1">
+                  <div className="text-white text-xl">Nhạc EDM</div>
+                </Topic>
+                <Topic color="indigo-500 mb-1">
+                  <div className="text-white text-xl">Nhạc Thất Tình</div>
+                </Topic>
               </div>
-            ))}
-          </Panel>
-          <Divider className="mb-5 mt-2" />
-          <Panel className="w-full" title="Playlist tuyển chọn" icon="heart">
-            {!loaders.isTrendingPlaylistsFetching && fp.take(4, trendingPlaylists).map(playlist => (
-              <div className="w-1/3 xl:w-1/4 lg:w-1/4 md:w-1/4 p-1/2" key={playlist.id}>
-                <PlaylistCard
-                  className="w-full --playlist-img-h48"
-                  {...playlist}
-                />
-              </div>
-            ))}
-          </Panel>
-          <Divider className="mb-5 mt-2" />
-          <Panel className="w-full" title="Những bài hát hay" icon="music-note">
-            {!loaders.isTrendingSongsFetching && fp.compose(fp.take(20), fp.reverse)(trendingSongs).map(song => (
-              <div className="w-full xl:w-1/2 lg:w-1/2 md:w-1/2 p-1/2" key={song.id}>
-                <SongSmallCard
-                  className="w-full"
-                  onClick={() => playMusic(song)}
-                  {...song}
-                />
-              </div>
-            ))}
-          </Panel>
-          <Divider className="mb-5 mt-2" />
-          <Panel className="w-full" title="Ca sĩ đang hot" icon="music-note">
-            {!loaders.isTrendingSingersFetching && fp.take(4, trendingSingers).map(singer => (
-              <div className="w-1/3 xl:w-1/4 lg:w-1/4 md:w-1/4 p-1/2" key={singer.id}>
-                <SingerCard
-                  className="w-full"
-                  {...singer}
-                />
-              </div>
-            ))}
-          </Panel>
+            </Panel>
+          </div>
         </div>
-        <div className="w-4/12 flex flex-col ml-2 rounded">
-          <h2 className="flex items-center text-indigo-500 font-bold text-lg my-1">
-            Bảng Xếp Hạng
-          </h2>
-          <div className="flex-1 mt-1/2">
-            <TopSongs />
+        <Divider className="mb-5 mt-2" />
+        <div className="w-full flex">
+          <div className="w-8/12 flex flex-col">
+            <Panel className="w-full" title="Hôm Nay Nghe Gì" icon="music-note">
+              {!loaders.isTrendingSongsFetching && fp.take(8, trendingSongs).map(song => (
+                <div className="w-1/3 xl:w-1/4 lg:w-1/4 md:w-1/4 p-1/2" key={song.id}>
+                  <SongCard
+                    className="w-full --song-image-h32"
+                    {...song}
+                  />
+                </div>
+              ))}
+            </Panel>
+            <Divider className="mb-5 mt-2" />
+            <Panel className="w-full" title="Playlist tuyển chọn" icon="heart">
+              {!loaders.isTrendingPlaylistsFetching && fp.take(4, trendingPlaylists).map(playlist => (
+                <div className="w-1/3 xl:w-1/4 lg:w-1/4 md:w-1/4 p-1/2" key={playlist.id}>
+                  <PlaylistCard
+                    className="w-full --playlist-img-h48"
+                    {...playlist}
+                  />
+                </div>
+              ))}
+            </Panel>
+            <Divider className="mb-5 mt-2" />
+            <Panel className="w-full" title="Ca sĩ đang hot" icon="music-note">
+              {!loaders.isTrendingSingersFetching && fp.take(4, trendingSingers).map(singer => (
+                <div className="w-1/3 xl:w-1/4 lg:w-1/4 md:w-1/4 p-1/2" key={singer.id}>
+                  <SingerCard
+                    className="w-full"
+                    {...singer}
+                  />
+                </div>
+              ))}
+            </Panel>
+          </div>
+          <div className="w-4/12 flex flex-col ml-1">
+            <TopSongs className="w-full" />
           </div>
         </div>
       </div>
