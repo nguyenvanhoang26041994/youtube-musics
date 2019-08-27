@@ -50,9 +50,9 @@ const Profile = ({ className, ownerMusics, isOwnerMusicsFetching, profile, isPro
           </Quote>
           <div className="flex justify-end m-2">
             {!isPlaylistPlaying && (
-              <Button color="teal-400" className="rounded-full text-white" onClick={onPlayOwnerMusics}>PLAY HIM MUSIC</Button>
+              <Button color="indigo-400" className="rounded-full text-white" onClick={onPlayOwnerMusics}>PLAY HIM MUSIC</Button>
             )}
-            <Button color="teal-400" className="rounded-full text-white ml-2">
+            <Button color="indigo-400" className="rounded-full text-white ml-2">
               <Icon name="ellipsis-h" />
             </Button>
           </div>
