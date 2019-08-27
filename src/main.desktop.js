@@ -3,7 +3,7 @@ const {app, BrowserWindow} = require('electron');
 const path = require('path');
 
 const loadURL = process.env.NODE_ENV === 'production'
-  ? 'https://www.youtube-musics.com.herokuapp.com/desktop'
+  ? 'https://youtube-musics.herokuapp.com/desktop'
   : 'http://localhost:3000/desktop';
 
 // Keep a global reference of the window object, if you don't, the window will
