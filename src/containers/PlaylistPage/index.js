@@ -1,1 +1,1 @@
-export { default } from './PlaylistPage';
+export { default } from './Desktop';
