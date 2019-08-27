@@ -7,6 +7,8 @@
     "dev": "cross-env NODE_ENV=development node server",
     "build": "next build",
     "start": "cross-env NODE_ENV=production node server $PORT",
+    "desktop": "cross-env NODE_ENV=production electron ./src/main.desktop.js",
+    "dev-desktop": "cross-env NODE_ENV=development electron ./src/main.desktop.js",
     "now-build": "next build",
     "heroku-postbuild": "npm run build"
   },
@@ -41,5 +43,7 @@
     "tailwindcss": "^1.0.4",
     "webpack": "^4.39.2"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "electron": "^6.0.4"
+  }
 }
