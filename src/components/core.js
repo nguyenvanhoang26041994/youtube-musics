@@ -9,4 +9,5 @@ export { default as Divider } from './Divider';
 export { default as BlurBackground } from './BlurBackground';
 export { default as Image } from './Image';
 export { default as Quote } from './Quote';
+export { default as Panel } from './Panel';
 export { default as Carousel } from './Carousel';

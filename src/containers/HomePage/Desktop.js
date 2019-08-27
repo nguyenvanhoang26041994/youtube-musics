@@ -15,8 +15,7 @@ import SongSmallCard from '../../components/SongSmallCard';
 import SongCardSkeleton from '../../components/SongCard/Skeleton';
 import PlaylistCardSkeleton from '../../components/PlaylistCard/Skeleton';
 import SingerCardSkeleton from '../../components/SingerCard/Skeleton';
-import { Icon, Divider, Carousel } from '../../components/core';
-import Panel from './Panel';
+import { Icon, Divider, Carousel, Panel } from '../../components/core';
 
 import musicsFormater from '../../selectors/utils/musicsFormater';
 import playlistsFormater from '../../selectors/utils/playlistsFormater';

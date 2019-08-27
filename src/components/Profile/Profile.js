@@ -45,7 +45,7 @@ const Profile = ({ className, ownerMusics, isOwnerMusicsFetching, profile, isPro
       <ProfileHeadWrapper className="ui-profile__head flex flex-col">
         <WallpaperWrapper className="h-72 relative flex flex-col justify-end">
           <Image src={profile.coverImg || defaultPropfile.coverImg} className="--cover-background w-full h-full absolute top-0 left-0 z-m1" />
-          <Quote className="text-white text-2xl absolute top-haft right-0 p-2" author={profile.qoute.author}>
+          <Quote className="text-white text-lg absolute top-haft right-0 p-2" author={profile.qoute.author}>
             {profile.qoute.text}
           </Quote>
           <div className="flex justify-end m-2">
@@ -74,21 +74,6 @@ const Profile = ({ className, ownerMusics, isOwnerMusicsFetching, profile, isPro
         </div>
       </ProfileHeadWrapper>
       <ProfileBobyWrapper>
-        <div className="flex flex-wrap">
-          {!isOwnerMusicsFetching && ownerMusics.map(music => (
-            <div className="w-1/5 p-1" key={music.id}>
-              <MusicCard
-                className="w-full"
-                {...music}
-              />
-            </div>
-          ))}
-          {isOwnerMusicsFetching && fp.times(String, 10).map(idx => (
-            <div className="w-1/5 p-1" key={idx}>
-              <MusicCardSkeleton className="w-full" />
-            </div>
-          ))}
-        </div>
       </ProfileBobyWrapper>
     </ProfileWrapper>
   );
