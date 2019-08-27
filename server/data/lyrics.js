@@ -43,7 +43,7 @@ const d = musics.map(music => ({
 }));
 
 const lyrics = [
-  ...d,
+  // ...d,
   {
     id: 'WRz2MxhAdJo',
     data: templeData,

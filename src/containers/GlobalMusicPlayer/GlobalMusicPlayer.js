@@ -80,7 +80,7 @@ class GlobalMusicPlayer extends React.Component {
   componentDidMount() {
     this.audioNode = getNode();
 
-    this.audioNode.addEventListener('timeupdate', this._onTimeUpdate);
+    this.audioNode.addEventListener('timeupdate', this.onTimeUpdate);
     this.audioNode.addEventListener('loadeddata', this.onLoadedData);
     this.audioNode.addEventListener('volumechange', this.onVolumeChange);
 
@@ -122,8 +122,7 @@ class GlobalMusicPlayer extends React.Component {
   handleShowBiggerPlayer = () => this.setState({ isShowBiggerPlayer : true });
   toggleShowBiggerPlayer = () => this.setState(prevState => ({ ...prevState, isShowBiggerPlayer: !prevState.isShowBiggerPlayer }))
 
-  _onTimeUpdate = e => this.setState({ currentMusicTime: e.target.currentTime });
-  onTimeUpdate = fp.debounce(333, this._onTimeUpdate);
+  onTimeUpdate = e => this.setState({ currentMusicTime: e.target.currentTime });
   onVolumeChange = e => this.setState({ musicVolume: e.target.volume });
   onEnded = () => this.props.playerActions.goNextSong();
   onPlayNext = () => this.props.playerActions.goNextSong();
