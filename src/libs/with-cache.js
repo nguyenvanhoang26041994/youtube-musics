@@ -1,5 +1,5 @@
 import React from 'react';
-import { cacheStorage, mergeCacheStorage } from './redux-cache';
+import { clearAllCaches, mergeCacheStorage, getAllCaches } from './redux-cache';
 import isServer from '../utils/isServer';
 
 function getOrCreateCacheStorage (initialCacheStorage) {
@@ -11,12 +11,17 @@ function getOrCreateCacheStorage (initialCacheStorage) {
   if (!window['_CACHE_STORAGE_']) {
     window['_CACHE_STORAGE_'] = mergeCacheStorage(initialCacheStorage);;
   }
+
   return window['_CACHE_STORAGE_'];
 }
 
 export default App => {
   return class AppWithCache extends React.Component {
     static async getInitialProps (appContext) {
+      if (isServer) {
+        clearAllCaches();
+      }
+
       let appProps = {};
       if (typeof App.getInitialProps === 'function') {
         appProps = await App.getInitialProps(appContext);
@@ -24,7 +29,7 @@ export default App => {
 
       return {
         ...appProps,
-        initialCacheStorage: cacheStorage,
+        initialCacheStorage: getAllCaches(),
       }
     }
 

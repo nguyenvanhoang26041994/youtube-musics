@@ -46,17 +46,11 @@ module.exports.mergeCacheStorage = function(otherCacheStorage) {
   return cacheStorage;
 }
 
-// module.exports.reduxCacheReducer = function(state = {}, action) {
-//   switch (action.type) {
-//     case constants.SET:
-//       return {
-//         ...state,
-//         [action.key]: action.value,
-//       };
-  
-//     default:
-//       return state;
-//   }
-// }
+module.exports.clearAllCaches = function() {
+  cacheStorage = {};
+  return cacheStorage;
+}
 
-
+module.exports.getAllCaches = function() {
+  return cacheStorage;
+}
