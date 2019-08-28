@@ -15,9 +15,8 @@ import withPlayingMusic from '../../HOC/withPlayingMusic';
 import withLayout from '../../HOC/withLayout';
 
 const MusicPageWrapper = styled.div``;
-const MainSection = styled.section``;
 
-const MusicPage = ({ className, music, playerActions, playingMusic, lyric, isFetching }) => {
+const MusicPage = ({ className, music, playerActions, playingMusic, isFetching }) => {
   const isSetToPlayerAlready = playingMusic.id === music.id;
   const playMusic = () => {
     if (isSetToPlayerAlready) {
@@ -35,7 +34,6 @@ const MusicPage = ({ className, music, playerActions, playingMusic, lyric, isFet
         <MusicWithLyric
           music={music}
           playMusic={playMusic}
-          lyric={lyric}
         />
       )}
       {/* <div className="fixed z-m1 absolute-center w-screen h-screen">
@@ -46,7 +44,6 @@ const MusicPage = ({ className, music, playerActions, playingMusic, lyric, isFet
 }
 const mapStateToProps = state => ({
   music: musicFormater(state.musicPageReducer.music),
-  lyric: state.musicPageReducer.lyric,
   isFetching: state.musicPageReducer.isMusicFetching || state.musicPageReducer.isLyricFetching,
 });
 const MusicPageEnhancer = compose(
@@ -62,7 +59,6 @@ MusicPageEnhancer.displayName = 'MusicPageEnhancer';
 MusicPageEnhancer.getInitialProps = async ({ query, reduxStore: store, isServer }) => {
   const callApiStack = [
     store.dispatch(actionCreators.getMusic(query.id)),
-    store.dispatch(actionCreators.getLyric(query.id)),
   ];
 
   // in client-side await will be stop render

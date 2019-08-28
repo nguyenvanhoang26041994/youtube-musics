@@ -90,7 +90,7 @@ const HomePage = ({ trendingPlaylists, trendingSongs, trendingSingers, loaders, 
             </Panel>
           </div>
           <div className="w-4/12 flex flex-col ml-1">
-            <TopSongs className="w-full" />
+            <TopSongs className="w-full" musics={trendingSongs} />
           </div>
         </div>
       </div>

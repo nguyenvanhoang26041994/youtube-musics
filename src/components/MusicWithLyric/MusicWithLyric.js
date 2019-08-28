@@ -22,7 +22,7 @@ const MusicWithLyricWrapper = styled.section`
   }
 `;
 
-const MusicWithLyric = ({ className, music, lyric, playMusic }) => {
+const MusicWithLyric = ({ className, music, playMusic }) => {
   const [isCollapsed, setCollapsed] = React.useState(true);
   const toggleLyric = () => setCollapsed(prevValue => !prevValue);
   const [node, time, currentTime] = usePlayingMusicNode();
@@ -37,10 +37,10 @@ const MusicWithLyric = ({ className, music, lyric, playMusic }) => {
         </div>
       </div>
       <Divider  className="mb-5 mt-2" />
-      {lyric && lyric.data && (
+      {music.lyrics && music.lyrics && (
         <div className="flex flex-col">
           <ul className="ui-music-with-lyric__lyric-wrapper flex flex-col items-center font-shadows-into-light text-sm text-base overflow-hidden">
-            {lyric && lyric.data.map((obj, idx) => (
+            {music.lyrics.map((obj, idx) => (
               <li key={idx} className="text-black">
                 <p className={cn('lyric-line transition-fast', { 'lyric-line--active text-indigo-400': obj.timeStart < currentTime && obj.timeEnd > currentTime})}>{obj.text}</p>
               </li>

@@ -1,12 +1,15 @@
 const fp = require('lodash/fp');
 const withOffline = require('next-offline');
 const withSass = require('@zeit/next-sass');
-const webpack = require('webpack')
+const webpack = require('webpack');
+
+const { mongodb } = require('./secret');
 
 const webpackConfig = config => {
   config.plugins.push(
     new webpack.EnvironmentPlugin({
       API_SERVER_ORIGIN: 'http://localhost:3000',
+      MONGODB_URI: 'mongodb.uri',
     })
   );
   return config;

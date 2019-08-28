@@ -2,76 +2,68 @@ const express = require('express');
 const router = express.Router();
 const fp = require('lodash/fp');
 
-const profiles = require('../data/profiles');
-const { profilesAsObject } = require('../data/profiles');
-const musics = require('../data/musics');
-const { musicsAsObject } = require('../data/musics');
-const playlists = require('../data/playlists');
-const topics = require('../data/topics');
-const { topicsAsObject } = require('../data/topics');
-const { playlistsAsObject } = require('../data/playlists');
-const { lyricsAsObject } = require('../data/lyrics');
+const Singer = require('../mongodb/models/Singer');
+const Music = require('../mongodb/models/Music');
+const Playlist = require('../mongodb/models/Playlist');
+const Topic = require('../mongodb/models/Topic');
 
-router.get('/profile/:id', (req, res) => {
-  return res.json(profilesAsObject[req.params.id]);
+router.get('/profile/:id', async (req, res) => {
+  const singer = await Singer.findOne({ id: req.params.id });
+  return res.json(singer);
 });
 
-router.get('/playlist/:id', (req, res) => {
-  return res.json(playlistsAsObject[req.params.id]);
+router.get('/playlist/:id', async (req, res) => {
+  const playlist = await Playlist.findOne({ id: req.params.id });
+  return res.json(playlist);
 });
 
-router.get('/music/:id', (req, res) => {
-  return res.json(musicsAsObject[req.params.id]);
+router.get('/music/:id', async (req, res) => {
+  const { lyrics } = req.query;
+  const music = await Music.findOne({ id: req.params.id });
+  return res.json(music);
 });
 
-router.get('/lyric/:id', (req, res) => {
-  return res.json(lyricsAsObject[req.params.id]);
-});
-
-router.get('/profiles', (req, res) => {
+router.get('/profiles', async (req, res) => {
   const { rank, role, pageSize, pageNumber } = req.query;
-  return res.json(profiles);
+  const singers = await Singer.find({}, null, {
+    skip: 0,
+    limit: pageNumber || 10,
+  });
+
+  return res.json(singers);
 });
 
-router.get('/topics', (req, res) => {
+router.get('/topics', async (req, res) => {
   const { rank, role, pageSize, pageNumber } = req.query;
-  return res.json(fp.take(10, topics));
+  const topics = await Topic.find({}, null , { skip: 0, limit: 5 });
+
+  return res.json(topics);
 });
 
-router.get('/topic/:id/musics', (req, res) => {
+router.get('/topic/:id/musics', async (req, res) => {
   const { rank, role, pageSize, pageNumber } = req.query;
-  return res.json(
-    fp.compose(
-      fp.take(20),
-      fp.shuffle,
-    )(musics)
-  );
+  const topic = await Topic.findOne({ id: req.params.id });
+  return res.json(fp.shuffle(topic.musics));
 });
 
-router.get('/musics', (req, res) => {
+router.get('/musics', async (req, res) => {
   const { belongTo, rank, pageSize, pageNumber } = req.query;
   const singerId = belongTo;
+  const musics = await Music.find({}, null, { skip: 0, limit: 20 });
 
-  return res.json(fp.filter(music =>
-    music.singers
-      .filter(singer => {
-        if (singerId) {
-          return singer.id === singerId;
-        }
-        
-        return true;
-      }).length)(musics)
-  );
+  return res.json(musics);
 });
 
 
-router.get('/playlists', (req, res) => {
+router.get('/playlists', async (req, res) => {
   const { rank, pageSize, pageNumber } = req.query;
-  if (rank === 'trend') {
-    return res.json(playlists);
-  }
+  const playlists = await Playlist.find({}, null, { skip: 0, limit: 20 });
 
-  return res.json([]);
+  return res.json(playlists);
+});
+
+router.get('/crud', async (req, res) => {
+  return res.json([])
 });
 
 module.exports = router;

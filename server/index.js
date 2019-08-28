@@ -4,7 +4,10 @@ const compression = require('compression');
 const LRUCache = require('lru-cache');
 const MobileDetect = require('mobile-detect');
 
+const { connect } = require('./mongodb');
 const api = require('./api');
+
+connect();
 
 const ssrCache = new LRUCache({
   max: 1 * 1024 * 1024,

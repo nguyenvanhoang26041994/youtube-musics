@@ -2,18 +2,13 @@ import React from 'react';
 import cn from 'classnames';
 import styled from 'styled-components';
 import fp from 'lodash/fp';
-import { playlistsAsObject } from '../../../server/data/playlists';
-import musicsFormater from '../../selectors/utils/musicsFormater';
 import SongItem from './SongItem';
 import { Divider, Button } from '../../components/core';
 import usePlayer from '../../hooks/usePlayer';
 
 const Wrapper = styled.div``;
 const TopSongsWrapper = styled.div``;
-
-const musics = musicsFormater(playlistsAsObject['playlist-001'].musics);
-
-const TopSongs = ({ className }) => {
+const TopSongs = ({ className, musics }) => {
   const { playMusic } = usePlayer();
 
   return (

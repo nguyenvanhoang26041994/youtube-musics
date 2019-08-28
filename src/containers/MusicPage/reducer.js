@@ -9,19 +9,11 @@ const defaultState = {
     img: '',
     listenCount: 0,
     time: 0,
+    lyrics: [],
   },
   isMusicFetching: false,
   isMusicError: false,
   isMusicSuccess: false,
-
-  // lyric
-  lyric: {
-    id: '',
-    data: [],
-  },
-  isLyricFetching: false,
-  isLyricError: false,
-  isLyricSuccess: false,
 };
 
 export default (state = defaultState, action) => {
@@ -37,6 +29,7 @@ export default (state = defaultState, action) => {
           img: action.payload.img,
           listenCount: action.payload.listenCount,
           time: action.payload.time,
+          lyrics: action.payload.lyrics,
         },
         isMusicFetching: false,
         isMusicError: false,
@@ -56,34 +49,6 @@ export default (state = defaultState, action) => {
         isMusicFetching: false,
         isMusicError: true,
         isMusicSuccess: false,
-      };
-
-    // LYRIC
-    case musicPage.GET_LYRIC_SUCCESS:
-      return {
-        ...state,
-        lyric: {
-          id: action.payload.id,
-          data: action.payload.data,
-        },
-        isLyricFetching: false,
-        isLyricError: false,
-        isLyricSuccess: true,
-      };
-
-    case musicPage.GET_LYRIC_REQUEST:
-      return {
-        ...state,
-        isLyricFetching: true,
-      };
-
-    case musicPage.GET_LYRIC_FAILURE:
-      return {
-        ...state,
-        lyric: defaultState.lyric,
-        isLyricFetching: false,
-        isLyricError: true,
-        isLyricSuccess: false,
       };
     default:
       return state;
