@@ -1,8 +1,10 @@
 import React from 'react';
-import { compose } from 'redux';
+import { compose, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import fp from 'lodash/fp';
+
+import * as actionCreators from '../actions';
 
 import withPlayerActions from '../../../HOC/withPlayerActions';
 import withLayout from '../../../HOC/withLayout';
@@ -15,20 +17,12 @@ import { Icon, Divider, Carousel, Panel } from '../../../components/core';
 import Topics from './Topics';
 import musicsFormater from '../../../selectors/utils/musicsFormater';
 import playlistsFormater from '../../../selectors/utils/playlistsFormater';
-import * as actionCreators from '../actions';
 import tailwindColors from '../../../utils/tailwindColors';
 
 const HomePageWrapper = styled.div`
   &.home-page {
     .home-page__ranking {
       background-color: #414345;
-    }
-
-    .--animation-loading {
-      animation-name: identifier;
-      animation-duration: 1s;
-      animation-iteration-count: infinite;
-      transition: background-color 0.1s;
     }
 
     .--song-image-h32 {
@@ -41,27 +35,9 @@ const HomePageWrapper = styled.div`
       height: 12rem;
     }
   }
-
-  @keyframes identifier {
-    0% {
-      background-color: ${tailwindColors['indigo-100']}
-    }
-    35% {
-      background-color: ${tailwindColors['indigo-200']}
-    }
-    50% {
-      background-color: ${tailwindColors['indigo-300']}
-    }
-    75% {
-      background-color: ${tailwindColors['indigo-200']}
-    }
-    100% {
-      background-color: ${tailwindColors['indigo-100']}
-    }
-  }
 `;
 
-const HomePage = ({ trendingPlaylists, trendingSongs, trendingSingers, loaders }) => {
+const HomePage = ({ trendingPlaylists, trendingSongs, trendingSingers, loaders, topics, topicMusics, getTopicMusics }) => {
   const { playMusic } = usePlayer();
 
   return (
@@ -73,7 +49,11 @@ const HomePage = ({ trendingPlaylists, trendingSongs, trendingSingers, loaders }
       </div>
       <Divider className="my-10" />
       <div className="flex w-full flex-col">
-        <Topics loaders={loaders} trendingSongs={trendingSongs} playMusic={playMusic} />
+        <Topics
+          topicMusics={topicMusics}
+          getTopicMusics={getTopicMusics}
+          topics={topics}
+        />
         <Divider className="mb-5 mt-2" />
         <div className="w-full flex">
           <div className="w-8/12 flex flex-col">
@@ -119,17 +99,28 @@ const HomePage = ({ trendingPlaylists, trendingSongs, trendingSingers, loaders }
   );
 };
 
+const mapStateToProps = state => ({
+  trendingPlaylists: playlistsFormater(state.homePageReducer.trendingPlaylists),
+  trendingSongs: musicsFormater(state.homePageReducer.trendingSongs),
+  trendingSingers: state.homePageReducer.trendingSingers,
+  topics: state.homePageReducer.topics,
+  topicMusics: musicsFormater(state.homePageReducer.topicMusics),
+  loaders: {
+    isTrendingPlaylistsFetching: state.homePageReducer.isTrendingPlaylistsFetching,
+    isTrendingSongsFetching: state.homePageReducer.isTrendingSongsFetching,
+    isTrendingSingersFetching: state.homePageReducer.isTrendingSingersFetching,
+  },
+});
+
+const mapDispatchToProps = dispatch => ({
+  getTopicMusics: id => dispatch(actionCreators.getTopicMusics(id)),
+});
+
 const HomePageEnhancer = compose(
-  connect(state => ({
-    trendingPlaylists: playlistsFormater(state.homePageReducer.trendingPlaylists),
-    trendingSongs: musicsFormater(state.homePageReducer.trendingSongs),
-    trendingSingers: state.homePageReducer.trendingSingers,
-    loaders: {
-      isTrendingPlaylistsFetching: state.homePageReducer.isTrendingPlaylistsFetching,
-      isTrendingSongsFetching: state.homePageReducer.isTrendingSongsFetching,
-      isTrendingSingersFetching: state.homePageReducer.isTrendingSingersFetching,
-    },
-  })),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
   withPlayerActions,
   withLayout,
 )(HomePage);
@@ -141,9 +132,21 @@ HomePageEnhancer.getInitialProps = async ({ query, reduxStore: store, isServer }
     store.dispatch(actionCreators.getTrendingSingers()),
   ];
 
+  await store.dispatch(actionCreators.getTopics());
+
+  let callTopicMusicsApi = Promise.resolve({});
+  const topics = store.getState().homePageReducer.topics;
+
+  if (topics && topics[0]) {
+    callTopicMusicsApi = store.dispatch(actionCreators.getTopicMusics(topics[0].id));
+  }
+
   // in client-side await will be stop render
   if (isServer) {
-    await Promise.all(callApiStack);
+    await Promise.all([
+      ...callApiStack,
+      callTopicMusicsApi,
+    ]);
   }
 
   return {};

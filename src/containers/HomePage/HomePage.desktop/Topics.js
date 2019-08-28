@@ -1,47 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import cn from 'classnames';
 import fp from 'lodash/fp';
 import styled from 'styled-components';
 
 import { Icon, Divider, Carousel, Panel } from '../../../components/core';
 import Topic from '../../../components/Topic';
-import SongSmallCard from '../../../components/SongSmallCard';
+import SongSmallCard from '../../../containers/SongSmallCard';
 import tailwindColors from '../../../utils/tailwindColors';
-
-const _topics = [
-  { id: '001', name: 'Nhạc Hay Tuyển Chọn', color: 'yellow-500' },
-  { id: '002', name: 'Nhạc Nhẹ', color: 'blue-500' },
-  { id: '003', name: 'Nhạc Cover', color: 'teal-500' },
-  { id: '004', name: 'Nhạc EDM', color: 'red-500' },
-  { id: '005', name: 'Nhạc Thất Tình', color: 'indigo-500' },
-];
-
-const topicsAsObject = fp.reduce((rs, topic) => {
-  rs[topic.id] = topic;
-  return rs;
-}, {})(_topics);
 
 const Wrapper = styled.div``;
 const SongSmallCardStyled = styled(SongSmallCard)`
-  .ui-song-small-card__name {
-    color: ${props => tailwindColors[topicsAsObject[props.activeTopic].color]};
+  .ui-song-small-card__name,
+  .ui-song-small-card__actions .ui-svg-icon {
+    ${props => props.customColor ? `color: ${tailwindColors[props.customColor]}` : ''}
   }
 `;
 
-const Topics = ({ className, loaders, trendingSongs, playMusic }) => {
-  const topics = _topics;
-  const [activeTopic, setActiveTopic] = useState('001');
+const Topics = ({ className, topicMusics, topics, getTopicMusics }) => {
+  const defaultTopic = topics[0] ? topics[0].id : '';
+  const [activeTopic, setActiveTopic] = useState(defaultTopic);
+
+  const customColor = useMemo(
+    () => fp.find(topic => topic.id === activeTopic, topics).color,
+    [activeTopic]
+  );
+
+  useEffect(() => {
+    getTopicMusics(activeTopic);
+  }, [activeTopic]);
 
   return (
     <Wrapper className={cn('w-full flex', className)}>
       <div className="w-8/12 flex flex-col">
-        <Panel className="w-full" title="Nhạc theo chủ đề" icon="music-note">
-          {!loaders.isTrendingSongsFetching && fp.compose(fp.take(20), fp.reverse)(trendingSongs).map(song => (
+        <Panel className="w-full" title="Nhạc Theo Chủ Đề" icon="music-note">
+          {fp.take(20)(topicMusics).map(song => (
             <div className="w-full xl:w-1/2 lg:w-1/2 md:w-1/2 p-1/2" key={song.id}>
               <SongSmallCardStyled
                 className="w-full"
-                activeTopic={activeTopic}
-                onClick={() => playMusic(song)}
+                customColor={customColor}
                 {...song}
               />
             </div>

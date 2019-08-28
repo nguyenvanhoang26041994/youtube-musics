@@ -1,5 +1,11 @@
 import { homePage } from './constants';
-import { fetchTrendingPlaylists, fetchTrendingSongs, fetchTrendingSingers } from './fetchs';
+import {
+  fetchTrendingPlaylists,
+  fetchTrendingSongs,
+  fetchTrendingSingers,
+  fetchTopics,
+  fetchTopicMusics,
+} from './fetchs';
 import { cacheKey, getCacheStorage } from '../../libs/redux-cache';
 
 export const getTrendingPlaylistsRequest = () => ({
@@ -96,5 +102,72 @@ export const getTrendingSingers = (params) => async (dispatch, getState) => {
     dispatch(getTrendingSingersSuccess(singers));
   } catch (e) {
     dispatch(getTrendingSingersFailure());
+  }
+};
+
+
+// Topics
+export const getTopicsRequest = () => ({
+  type: homePage.GET_TOPICS_REQUEST,
+});
+
+export const getTopicsSuccess = payload => {
+  const type = homePage.GET_TOPICS_SUCCESS;
+  return {
+    payload,
+    type,
+    [cacheKey]: type,
+  };
+};
+
+export const getTopicsFailure = () => ({
+  type: homePage.GET_TOPICS_FAILURE,
+});
+
+export const getTopics = (params) => async (dispatch, getState) => {
+  const dataFromCache = getCacheStorage(homePage.GET_TOPICS_SUCCESS);
+  if (dataFromCache) {
+    return dispatch(getTopicsSuccess(dataFromCache.payload));
+  }
+
+  dispatch(getTopicsRequest());
+  try {
+    const topics = await fetchTopics(params);
+    return dispatch(getTopicsSuccess(topics));
+  } catch (e) {
+    dispatch(getTopicsFailure());
+  }
+};
+
+// Topic Musics
+export const getTopicMusicsRequest = () => ({
+  type: homePage.GET_TOPIC_MUSICS_REQUEST,
+});
+
+export const getTopicMusicsSuccess = (payload, belongTo) => {
+  const type = homePage.GET_TOPIC_MUSICS_SUCCESS;
+  return {
+    payload,
+    type,
+    [cacheKey]: `${type}(${belongTo})`,
+  };
+};
+
+export const getTopicMusicsFailure = () => ({
+  type: homePage.GET_TOPIC_MUSICS_FAILURE,
+});
+
+export const getTopicMusics = id => async (dispatch, getState) => {
+  const dataFromCache = getCacheStorage(`${homePage.GET_TOPIC_MUSICS_SUCCESS}(${id})`);
+  if (dataFromCache) {
+    return dispatch(getTopicMusicsSuccess(dataFromCache.payload, id));
+  }
+
+  dispatch(getTopicMusicsRequest());
+  try {
+    const musics = await fetchTopicMusics(id);
+    dispatch(getTopicMusicsSuccess(musics, id));
+  } catch (e) {
+    dispatch(getTopicMusicsFailure());
   }
 };

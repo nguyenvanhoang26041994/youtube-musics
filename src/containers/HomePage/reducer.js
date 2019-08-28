@@ -15,6 +15,16 @@ const defaultState = {
   isTrendingSingersFetching: false,
   isTrendingSingersError: false,
   isTrendingSingersSuccess: false,
+
+  topics: [],
+  isTopicsFetching: false,
+  isTopicsError: false,
+  isTopicsSuccess: false,
+
+  topicMusics: [],
+  isTopicMusicsFetching: false,
+  isTopicMusicsError: false,
+  isTopicMusicsSuccess: false,
 };
 
 export default (state = defaultState, action) => {
@@ -69,7 +79,7 @@ export default (state = defaultState, action) => {
         isTrendingSongsSuccess: false,
       };
 
-      // TRENDING SINGERS
+    // TRENDING SINGERS
     case homePage.GET_TRENDING_SINGERS_SUCCESS:
       return {
         ...state,
@@ -92,6 +102,54 @@ export default (state = defaultState, action) => {
         isTrendingSingersFetching: false,
         isTrendingSingersError: true,
         isTrendingSingersSuccess: false,
+      };
+    // TOPICS
+    case homePage.GET_TOPICS_SUCCESS:
+      return {
+        ...state,
+        topics: action.payload,
+        isTopicsFetching: false,
+        isTopicsError: false,
+        isTopicsSuccess: true,
+      };
+
+    case homePage.GET_TOPICS_REQUEST:
+      return {
+        ...state,
+        isTopicsFetching: true,
+      };
+
+    case homePage.GET_TOPICS_FAILURE:
+      return {
+        ...state,
+        topics: defaultState.topics,
+        isTopicsFetching: false,
+        isTopicsError: true,
+        isTopicsSuccess: false,
+      };
+    // TOPIC MUSICS
+    case homePage.GET_TOPIC_MUSICS_SUCCESS:
+      return {
+        ...state,
+        topicMusics: action.payload,
+        isTopicMusicsFetching: false,
+        isTopicMusicsError: false,
+        isTopicMusicsSuccess: true,
+      };
+
+    case homePage.GET_TOPIC_MUSICS_REQUEST:
+      return {
+        ...state,
+        isTopicMusicsFetching: true,
+      };
+
+    case homePage.GET_TOPIC_MUSICS_FAILURE:
+      return {
+        ...state,
+        topicMusics: defaultState.topicMusics,
+        isTopicMusicsFetching: false,
+        isTopicMusicsError: true,
+        isTopicMusicsSuccess: false,
       };
     default:
       return state;

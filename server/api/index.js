@@ -7,6 +7,8 @@ const { profilesAsObject } = require('../data/profiles');
 const musics = require('../data/musics');
 const { musicsAsObject } = require('../data/musics');
 const playlists = require('../data/playlists');
+const topics = require('../data/topics');
+const { topicsAsObject } = require('../data/topics');
 const { playlistsAsObject } = require('../data/playlists');
 const { lyricsAsObject } = require('../data/lyrics');
 
@@ -29,6 +31,21 @@ router.get('/lyric/:id', (req, res) => {
 router.get('/profiles', (req, res) => {
   const { rank, role, pageSize, pageNumber } = req.query;
   return res.json(profiles);
+});
+
+router.get('/topics', (req, res) => {
+  const { rank, role, pageSize, pageNumber } = req.query;
+  return res.json(fp.take(10, topics));
+});
+
+router.get('/topic/:id/musics', (req, res) => {
+  const { rank, role, pageSize, pageNumber } = req.query;
+  return res.json(
+    fp.compose(
+      fp.take(20),
+      fp.shuffle,
+    )(musics)
+  );
 });
 
 router.get('/musics', (req, res) => {

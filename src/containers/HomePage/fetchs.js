@@ -25,3 +25,18 @@ export const fetchTrendingSingers = params => new Promise((resolve, reject) => {
     .then(response => resolve(response.json()))
     .catch(e => reject(e))
 });
+
+export const fetchTopicMusics = id => new Promise((resolve, reject) => {
+  return fetch(`${apiServers.main}/api/topic/${id}/musics`)
+    .then(response => resolve(response.json()))
+    .catch(e => reject(e))
+});
+
+export const fetchTopics = params => new Promise((resolve, reject) => {
+  const query = queryString.stringify(params);
+
+  return fetch(`${apiServers.main}/api/topics?${query}`)
+    .then(response => resolve(response.json()))
+    .catch(e => reject(e))
+});
+
