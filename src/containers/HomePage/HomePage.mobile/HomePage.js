@@ -5,15 +5,15 @@ import styled from 'styled-components';
 import fp from 'lodash/fp';
 import cn from 'classnames';
 
-import { Icon, Image } from '../../components/core';
-import SongCard from '../../containers/SongCard';
-import withPlayerActions from '../../HOC/withPlayerActions';
-import Navbar from '../../layouts.mobile/Navbar';
-import GlobalMusicPlayer from '../GlobalMusicPlayer.mobile';
+import getInitialProps from '../utils/getInitialProps';
+import mapStateToProps from '../utils/mapStateToProps';
+import mapDispatchToProps from '../utils/mapDispatchToProps';
 
-import musicsFormater from '../../selectors/utils/musicsFormater';
-import playlistsFormater from '../../selectors/utils/playlistsFormater';
-import * as actionCreators from './actions';
+import { Icon } from '../../../components/core';
+import SongCard from '../../../containers/SongCard';
+import withPlayerActions from '../../../HOC/withPlayerActions';
+import Navbar from '../../../layouts.mobile/Navbar';
+import GlobalMusicPlayer from '../../GlobalMusicPlayer.mobile';
 
 const HomePageWrapper = styled.div`
   &.home-page {
@@ -133,32 +133,13 @@ const HomePage = ({ trendingPlaylists, trendingSongs, trendingSingers, playerAct
 };
 
 const HomePageEnhancer = compose(
-  connect(state => ({
-    trendingPlaylists: playlistsFormater(state.homePageReducer.trendingPlaylists),
-    trendingSongs: musicsFormater(state.homePageReducer.trendingSongs),
-    trendingSingers: state.homePageReducer.trendingSingers,
-    loaders: {
-      isTrendingPlaylistsFetching: state.homePageReducer.isTrendingPlaylistsFetching,
-      isTrendingSongsFetching: state.homePageReducer.isTrendingSongsFetching,
-      isTrendingSingersFetching: state.homePageReducer.isTrendingSingersFetching,
-    },
-  })),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
   withPlayerActions,
 )(HomePage);
 
-HomePageEnhancer.getInitialProps = async ({ query, reduxStore: store, isServer }) => {
-  const callApiStack = [
-    store.dispatch(actionCreators.getTrendingPlaylists()),
-    store.dispatch(actionCreators.getTrendingSongs()),
-    store.dispatch(actionCreators.getTrendingSingers()),
-  ];
-
-  // in client-side await will be stop render
-  if (isServer) {
-    await Promise.all(callApiStack);
-  }
-
-  return {};
-}
+HomePageEnhancer.getInitialProps = getInitialProps;
 
 export default HomePageEnhancer;

@@ -1,10 +1,12 @@
 import React from 'react';
-import { compose, bindActionCreators } from 'redux';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import fp from 'lodash/fp';
 
-import * as actionCreators from '../actions';
+import getInitialProps from '../utils/getInitialProps';
+import mapStateToProps from '../utils/mapStateToProps';
+import mapDispatchToProps from '../utils/mapDispatchToProps';
 
 import withPlayerActions from '../../../HOC/withPlayerActions';
 import withLayout from '../../../HOC/withLayout';
@@ -13,11 +15,8 @@ import PlaylistCard from '../../../containers/PlaylistCard';
 import SongCard from '../../../containers/SongCard';
 import SingerCard from '../../../components/SingerCard';
 import TopSongs from '../../../components/TopSongs';
-import { Icon, Divider, Carousel, Panel } from '../../../components/core';
+import { Divider, Carousel, Panel } from '../../../components/core';
 import Topics from './Topics';
-import musicsFormater from '../../../selectors/utils/musicsFormater';
-import playlistsFormater from '../../../selectors/utils/playlistsFormater';
-import tailwindColors from '../../../utils/tailwindColors';
 
 const HomePageWrapper = styled.div`
   &.home-page {
@@ -99,23 +98,6 @@ const HomePage = ({ trendingPlaylists, trendingSongs, trendingSingers, loaders, 
   );
 };
 
-const mapStateToProps = state => ({
-  trendingPlaylists: playlistsFormater(state.homePageReducer.trendingPlaylists),
-  trendingSongs: musicsFormater(state.homePageReducer.trendingSongs),
-  trendingSingers: state.homePageReducer.trendingSingers,
-  topics: state.homePageReducer.topics,
-  topicMusics: musicsFormater(state.homePageReducer.topicMusics),
-  loaders: {
-    isTrendingPlaylistsFetching: state.homePageReducer.isTrendingPlaylistsFetching,
-    isTrendingSongsFetching: state.homePageReducer.isTrendingSongsFetching,
-    isTrendingSingersFetching: state.homePageReducer.isTrendingSingersFetching,
-  },
-});
-
-const mapDispatchToProps = dispatch => ({
-  getTopicMusics: id => dispatch(actionCreators.getTopicMusics(id)),
-});
-
 const HomePageEnhancer = compose(
   connect(
     mapStateToProps,
@@ -125,31 +107,6 @@ const HomePageEnhancer = compose(
   withLayout,
 )(HomePage);
 
-HomePageEnhancer.getInitialProps = async ({ query, reduxStore: store, isServer }) => {
-  const callApiStack = [
-    store.dispatch(actionCreators.getTrendingPlaylists()),
-    store.dispatch(actionCreators.getTrendingSongs()),
-    store.dispatch(actionCreators.getTrendingSingers()),
-  ];
-
-  await store.dispatch(actionCreators.getTopics());
-
-  let callTopicMusicsApi = Promise.resolve({});
-  const topics = store.getState().homePageReducer.topics;
-
-  if (topics && topics[0]) {
-    callTopicMusicsApi = store.dispatch(actionCreators.getTopicMusics(topics[0].id));
-  }
-
-  // in client-side await will be stop render
-  if (isServer) {
-    await Promise.all([
-      ...callApiStack,
-      callTopicMusicsApi,
-    ]);
-  }
-
-  return {};
-}
+HomePageEnhancer.getInitialProps = getInitialProps;
 
 export default HomePageEnhancer;
