@@ -48,16 +48,10 @@ const HomePage = ({ trendingPlaylists, trendingSongs, trendingSingers, loaders, 
       </div>
       <Divider className="my-10" />
       <div className="flex w-full flex-col">
-        <Topics
-          topicMusics={topicMusics}
-          getTopicMusics={getTopicMusics}
-          topics={topics}
-        />
-        <Divider className="mb-5 mt-2" />
         <div className="w-full flex">
           <div className="w-8/12 flex flex-col">
             <Panel className="w-full" title="Hôm Nay Nghe Gì" icon="music-note">
-              {!loaders.isTrendingSongsFetching && fp.take(8, trendingSongs).map(song => (
+              {!loaders.isTrendingSongsFetching && fp.take(12, trendingSongs).map(song => (
                 <div className="w-1/3 xl:w-1/4 lg:w-1/4 md:w-1/4 p-1/2" key={song.id}>
                   <SongCard
                     className="w-full --song-image-h32"
@@ -77,22 +71,29 @@ const HomePage = ({ trendingPlaylists, trendingSongs, trendingSingers, loaders, 
                 </div>
               ))}
             </Panel>
-            <Divider className="mb-5 mt-2" />
-            <Panel className="w-full" title="Ca sĩ đang hot" icon="music-note">
-              {!loaders.isTrendingSingersFetching && fp.take(4, trendingSingers).map(singer => (
-                <div className="w-1/3 xl:w-1/4 lg:w-1/4 md:w-1/4 p-1/2" key={singer.id}>
-                  <SingerCard
-                    className="w-full"
-                    {...singer}
-                  />
-                </div>
-              ))}
-            </Panel>
           </div>
-          <div className="w-4/12 flex flex-col ml-1">
+          <div className="w-4/12 flex flex-col ml-2">
             <TopSongs className="w-full" musics={trendingSongs} />
           </div>
         </div>
+        <Divider className="mb-5 mt-2" />
+        <Panel className="w-full" title="Ca sĩ đang hot" icon="music-note">
+          {!loaders.isTrendingSingersFetching && fp.take(6, trendingSingers).map(singer => (
+            <div className="w-1/3 xl:w-1/6 lg:w-1/6 md:w-1/6 p-1/2" key={singer.id}>
+              <SingerCard
+                className="w-full"
+                {...singer}
+              />
+            </div>
+          ))}
+        </Panel>
+        <Divider className="mb-5 mt-2" />
+        <Topics
+          topicMusics={topicMusics}
+          getTopicMusics={getTopicMusics}
+          topics={topics}
+        />
+        <Divider className="mb-5 mt-2" />
       </div>
     </HomePageWrapper>
   );

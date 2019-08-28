@@ -23,7 +23,7 @@ const TopSongs = ({ className, musics }) => {
             <Button className="w-1/3 text-indigo-500" color="gray-200">Tháng</Button>
             <Button className="w-1/3 text-indigo-500" color="gray-200">Quý</Button>
           </div>
-          {fp.take(20, musics).map((music, idx) => (
+          {fp.take(15, musics).map((music, idx) => (
             <div key={music.id} className="p-1/2 w-full">
               <SongItem {...music} rank={idx + 1} onClick={() => playMusic(music)} />
               <Divider />

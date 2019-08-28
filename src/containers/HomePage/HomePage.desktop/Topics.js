@@ -44,11 +44,15 @@ const Topics = ({ className, topicMusics, topics, getTopicMusics }) => {
           ))}
         </Panel>
       </div>
-      <div className="w-4/12 flex flex-col ml-1">
+      <div className="w-4/12 flex flex-col ml-2">
         <Panel className="w-full" title="Chủ Đề" icon="music-note">
           <div className="w-full flex flex-col mt-1/2">
             {topics.map(topic => (
-              <Topic color={`${topic.color} mb-1`} key={topic.id} onClick={() => setActiveTopic(topic.id)}>
+              <Topic
+                color={`${topic.color} mb-1`}
+                active={activeTopic === topic.id}
+                key={topic.id} onClick={() => setActiveTopic(topic.id)}
+              >
                 <div className="text-white text-xl">{topic.name}</div>
               </Topic>
             ))}
