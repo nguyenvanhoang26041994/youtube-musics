@@ -26,6 +26,7 @@ router.get('/music/:id', async (req, res) => {
 router.get('/profiles', async (req, res) => {
   const { rank, role, pageSize, pageNumber } = req.query;
   const singers = await Singer.find({}, null, {
+    sort: { createdAt: 'desc' },
     skip: 0,
     limit: pageNumber || 10,
   });
@@ -35,7 +36,7 @@ router.get('/profiles', async (req, res) => {
 
 router.get('/topics', async (req, res) => {
   const { rank, role, pageSize, pageNumber } = req.query;
-  const topics = await Topic.find({}, null , { skip: 0, limit: 5 });
+  const topics = await Topic.find({}, null , { sort: { createdAt: 'desc' }, skip: 0, limit: 5 });
 
   return res.json(topics);
 });
@@ -49,7 +50,7 @@ router.get('/topic/:id/musics', async (req, res) => {
 router.get('/musics', async (req, res) => {
   const { belongTo, rank, pageSize, pageNumber } = req.query;
   const singerId = belongTo;
-  const musics = await Music.find({}, null, { skip: 0, limit: 20 });
+  const musics = await Music.find({}, null, { sort: { createdAt: 'desc' }, skip: 0, limit: 20 });
 
   return res.json(musics);
 });
@@ -57,7 +58,7 @@ router.get('/musics', async (req, res) => {
 
 router.get('/playlists', async (req, res) => {
   const { rank, pageSize, pageNumber } = req.query;
-  const playlists = await Playlist.find({}, null, { skip: 0, limit: 20 });
+  const playlists = await Playlist.find({}, null, { sort: { createdAt: 'desc' }, skip: 0, limit: 20 });
 
   return res.json(playlists);
 });

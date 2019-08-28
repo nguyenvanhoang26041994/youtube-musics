@@ -14,7 +14,7 @@ const ssrCache = new LRUCache({
   length: function (n, key) {
     return n.length
   },
-  maxAge: 60 * 1000,
+  maxAge: 15 * 1000,
 });
 
 const asking = {
