@@ -32,7 +32,7 @@ const CircleIcon = props => {
   );
 };
 
-const MiniPlayer = ({ className, toggleExpanded }) => {
+const MiniPlayer = ({ className, toggleExpanded, miniPlayerRef }) => {
   const [playingMusic] = usePlayingMusic();
   const [node, duration, currentTime] = usePlayingMusicNode();
   const [playingList, playingListActions] = usePlayingList();
@@ -42,7 +42,7 @@ const MiniPlayer = ({ className, toggleExpanded }) => {
   const durationFormat = useMemo(() => calcTime(duration), [duration]);
 
   return (
-    <Wrapper className={cn('flex items-center h-16 w-full', className)}>
+    <Wrapper className={cn('flex items-center h-16 w-full', className)} ref={miniPlayerRef}>
       <ControlWrapper className="flex justify-between items-center w-2/12">
         <Icon name="step-backward" color="white" onClick={goPrevSong} />
         {!playingMusic.isPlaying && <CircleIcon name="play" color="indigo-400" onClick={() => node.play()} />}
@@ -54,9 +54,10 @@ const MiniPlayer = ({ className, toggleExpanded }) => {
         <Image className="h-12 w-12 mr-3" src={playingMusic.img} />
         <div className="flex flex-col justify-center flex-1">
           <div className="flex items-center justify-between">
-            <div className="flex items-center text-sm">
-              <div className="text-white">{playingMusic.name}</div>
-              <span className="mx-1 text-gray-500"> - {playingMusic.singersName}</span>
+            <div className="flex items-center">
+              <div className="text-white text-sm">{playingMusic.name}</div>
+              <span className="mx-2 text-gray-500 text-xs">–</span>
+              <div className="text-gray-500 text-xs">{playingMusic.singersName}</div>
             </div>
             <div className="font-mono text-2xs flex items-center">
               <span className="text-white ">{currentTimeFormat}</span>
@@ -66,15 +67,15 @@ const MiniPlayer = ({ className, toggleExpanded }) => {
           <Slider className="w-full" percent={currentTime/duration} onChange={(e, { value }) => { node.currentTime = value * duration; }}/>
         </div>
       </InforWrapper>
-      <OtherControlWrapper className="flex w-2/12 items-center justify-between">
+      <OtherControlWrapper className="flex w-1/12 items-center justify-between">
         <Icon name="volume" color="white" />
         <Icon name="heart" color="white" />
-        <Icon name="download" color="white" />
         <Icon name="ellipsis-h" color="white" />
       </OtherControlWrapper>
-      <ExtendWrapper className="flex w-2/12 items-center justify-center">
-        <Button color="indigo-500" className="rounded-lg text-white" onClick={toggleExpanded}>
-          <Icon name="list-alt" />
+      <ExtendWrapper className="flex w-3/12 items-center justify-end">
+        <Button color="indigo-500" className="rounded-sm text-white" onClick={toggleExpanded}>
+          <Icon name="list-alt" className="mr-2" />
+          <span className="text-sm">Danh sách phát</span>
         </Button>
       </ExtendWrapper>
     </Wrapper>

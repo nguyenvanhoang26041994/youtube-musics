@@ -1,1 +1,1 @@
-export { default } from './GlobalMusicPlayer.new';
+export { default } from './GlobalMusicPlayer';

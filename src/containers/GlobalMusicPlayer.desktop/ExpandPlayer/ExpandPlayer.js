@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import cn from 'classnames';
 import styled from 'styled-components';
-import { Image } from '../../../components/core';
+import { Image, Divider, Icon } from '../../../components/core';
 import ListMusic from './ListMusic';
 import CurrentMusic from './CurrentMusic';
 
@@ -10,14 +10,11 @@ import useClickOutside from '../../../hooks/useClickOutside';
 
 const Wrapper = styled.div``;
 
-const ExpandPlayer = ({ className, style }) => {
+const ExpandPlayer = ({ className, style, expandDown, expandPlayerRef }) => {
   const [playingMusic] = usePlayingMusic();
-  const wrapperRef = useRef();
-
-  // useClickOutside(wrapperRef, );
 
   return (
-    <Wrapper className={cn('expand-player flex overflow-hidden', className)} style={style} ref={wrapperRef}>
+    <Wrapper className={cn('expand-player flex overflow-hidden', className)} style={style} ref={expandPlayerRef}>
       <ListMusic className="w-6/12"></ListMusic>
       <CurrentMusic className="w-6/12"></CurrentMusic>
       <Image
@@ -28,6 +25,7 @@ const ExpandPlayer = ({ className, style }) => {
           transform: 'scale(1.5)',
         }}
       />
+      <Icon name="chevron-arrow-down" color="white" size="sm" className="absolute right-0 top-0 m-2" onClick={expandDown} />
     </Wrapper>
   );
 };

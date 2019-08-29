@@ -15,25 +15,20 @@ const CurrentMusic = ({ className }) => {
 
   return (
     <Wrapper className={cn('flex flex-col', className)}>
-      <div className="h-20" />
+      <div className="h-10" />
       <InforWrapper className="flex flex-col items-center">
         <Image src={playingMusic.img} className="h-64 w-64 rounded-full" />
         <div className="flex items-center h-10">
           <Icon name="heart" color="white" className="mx-2" />
           <Icon name="ellipsis-h" color="white" className="mx-2" />
         </div>
-        <div>
-          <div className="flex text-white font-bold text-sm">
-            <div className="text-gray-500 mr-3 w-16">Bài hát:</div>
-            <span>{playingMusic.name}</span>
-          </div>
-          <div className="flex text-white font-bold text-sm">
-            <div className="text-gray-500 mr-3 w-16">Ca sĩ:</div>
-            <span>{playingMusic.singersName}</span>
-          </div>
+        <div className="flex items-center justify-center">
+          <div className="tetx-sm text-white">{playingMusic.name}</div>
+          <span className="mx-2 text-gray-500">–</span>
+          <div className="text-sm text-gray-500">{playingMusic.singersName}</div>
         </div>
       </InforWrapper>
-      <Lyrics />
+      <Lyrics className="flex-1 w-full" />
     </Wrapper>
   );
 };

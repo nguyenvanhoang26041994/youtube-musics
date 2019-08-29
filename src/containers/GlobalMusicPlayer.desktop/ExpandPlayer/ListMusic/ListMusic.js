@@ -9,16 +9,21 @@ import usePlayingList from '../../../../hooks/usePlayingList';
 
 const Wrapper = styled.div``;
 const TopHandlerWrapper = styled.div``;
-const MainListWrapper = styled.div``;
+const MainListWrapper = styled.div`
+  .--music-item:hover,
+  .--music-item:nth-child(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+`;
 
 const ListMusic = ({ className }) => {
   const [playingList] = usePlayingList();
 
   return (
     <Wrapper className={cn('flex flex-col', className)}>
-      <div className="h-20" />
       <div className="flex flex-col">
-        <TopHandlerWrapper className="flex items-center justify-between px-2 h-16">
+        <div className="h-10" />
+        <TopHandlerWrapper className="flex items-center justify-between px-2 py-5">
           <div className="text-white text-sm">DANH SÁCH PHÁT</div>
           <div className="flex items-center">
             <Icon name="search" color="white" />
@@ -27,7 +32,10 @@ const ListMusic = ({ className }) => {
       </div>
       <MainListWrapper className="flex flex-col">
         {playingList.musics.map((music, idx) => (
-          <MusicItem className="px-2" key={music.id} {...music} orderText={idx + 1} />
+          <MusicItem
+            className="px-2 --music-item" key={music.id}
+            {...music} orderText={idx + 1}
+          />
         ))}
       </MainListWrapper>
     </Wrapper>
