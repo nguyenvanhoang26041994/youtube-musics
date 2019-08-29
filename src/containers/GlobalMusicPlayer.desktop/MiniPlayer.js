@@ -73,10 +73,12 @@ const MiniPlayer = ({ className, toggleExpanded, miniPlayerRef }) => {
         <Icon name="ellipsis-h" color="white" />
       </OtherControlWrapper>
       <ExtendWrapper className="flex w-3/12 items-center justify-end">
-        <Button color="indigo-500" className="rounded-sm text-white" onClick={toggleExpanded}>
-          <Icon name="list-alt" className="mr-2" />
-          <span className="text-sm">Danh sách phát</span>
-        </Button>
+        {!!playingList.musics.length && (
+          <Button color="transparent" className="border border-white rounded-sm text-white" onClick={toggleExpanded}>
+            <Icon name="list-alt" className="mr-2" />
+            <span className="text-sm">Danh sách phát</span>
+          </Button>
+        )}
       </ExtendWrapper>
     </Wrapper>
   );

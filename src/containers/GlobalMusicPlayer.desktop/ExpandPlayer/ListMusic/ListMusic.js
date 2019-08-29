@@ -30,14 +30,19 @@ const ListMusic = ({ className }) => {
           </div>
         </TopHandlerWrapper>
       </div>
-      <MainListWrapper className="flex flex-col">
-        {playingList.musics.map((music, idx) => (
-          <MusicItem
-            className="px-2 --music-item" key={music.id}
-            {...music} orderText={idx + 1}
-          />
-        ))}
-      </MainListWrapper>
+      <div className="w-full flex-1">
+        <MainListWrapper className="flex flex-col h-full overflow-scroll">
+          {playingList.musics.map((music, idx) => (
+            <MusicItem
+              className="px-2 --music-item" key={music.id}
+              {...music} orderText={idx + 1}
+            />
+          ))}
+        </MainListWrapper>
+      </div>
+      <div className="h-48 w-full">
+        
+      </div>
     </Wrapper>
   );
 };

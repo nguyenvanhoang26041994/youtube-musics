@@ -23,6 +23,7 @@ const icons = {
   'youtube': require('./youtube').default,
   'close': require('./close').default,
   'bars': require('./bars').default,
+  'lyrics': require('./player/lyrics').default,
 
   //FA
   'home': require('./home').default,
@@ -40,6 +41,7 @@ const icons = {
   'list-alt': require('./player/list-alt').default,
   'repeat-1-alt': require('./player/repeat-1-alt').default,
   'repeat-alt': require('./player/repeat-alt').default,
+  'compact-disc': require('./player/compact-disc').default,
 };
 
 export default icons;

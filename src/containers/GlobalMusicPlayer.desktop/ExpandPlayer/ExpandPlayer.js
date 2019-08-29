@@ -15,13 +15,13 @@ const ExpandPlayer = ({ className, style, expandDown, expandPlayerRef }) => {
 
   return (
     <Wrapper className={cn('expand-player flex overflow-hidden', className)} style={style} ref={expandPlayerRef}>
-      <ListMusic className="w-6/12"></ListMusic>
-      <CurrentMusic className="w-6/12"></CurrentMusic>
+      <ListMusic className="w-5/12"></ListMusic>
+      <CurrentMusic className="w-7/12"></CurrentMusic>
       <Image
         className="absolute w-full h-full top-0 left-0 z-m1"
         src={playingMusic.img}
         style={{
-          filter: 'blur(35px) brightness(0.65) grayscale(0.6)',
+          filter: 'blur(35px) brightness(0.5) grayscale(0.6)',
           transform: 'scale(1.5)',
         }}
       />

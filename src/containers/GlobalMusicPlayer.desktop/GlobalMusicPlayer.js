@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import cn from 'classnames';
 import styled from 'styled-components';
 
@@ -13,24 +13,18 @@ const Wrapper = styled.div``;
 
 const GlobalMusicPlayer = ({ className }) => {
   const [expanded, setExpanded] = useState(false);
-  const [playingMusic, playingMusicActions] = usePlayingMusic();
   const expandPlayerRef = useRef();
   const miniPlayerRef = useRef();
+  const [playingMusic] = usePlayingMusic();
 
-  const onClickExpandPlayerOutSide = e => {
+  const onClickExpandPlayerOutSide = useMemo(() => e => {
     if (miniPlayerRef.current.contains(e.target)) {
       return;
     }
     setExpanded(false);
-  };
+  }, [miniPlayerRef.current]);
 
   useClickOutside(expandPlayerRef, onClickExpandPlayerOutSide);
-
-  useEffect(() => {
-    if (playingMusic.id) {
-      playingMusicActions.getMusicWithLyrics(playingMusic.id);
-    }
-  }, [playingMusic.id]);
 
   return (
     <Wrapper className={cn('global-music-player-container fixed bottom-0 left-0 w-screen bg-lizard transition-fast', { 'opacity-0': !playingMusic.src }, className)}>
@@ -43,7 +37,7 @@ const GlobalMusicPlayer = ({ className }) => {
           className="absolute w-full bottom-full z-m1"
           style={{
             height: expanded ? 'calc(100vh - 4rem)' : '0px',
-            transition: 'height 0.2s ease-in-out 0.1s',
+            transition: 'height 0.5s',
           }}
           expandPlayerRef={expandPlayerRef}
           expandDown={() => setExpanded(false)}

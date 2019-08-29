@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import cn from 'classnames';
 import styled from 'styled-components';
 
@@ -11,14 +11,21 @@ const Wrapper = styled.div``;
 const InforWrapper = styled.div``;
 
 const CurrentMusic = ({ className }) => {
-  const [playingMusic] = usePlayingMusic();
+  const [playingMusic, playingMusicActions] = usePlayingMusic();
+
+  useEffect(() => {
+    if (playingMusic.id) {
+      playingMusicActions.getMusicWithLyrics(playingMusic.id);
+    }
+  }, [playingMusic.id]);
 
   return (
     <Wrapper className={cn('flex flex-col', className)}>
       <div className="h-10" />
       <InforWrapper className="flex flex-col items-center">
-        <Image src={playingMusic.img} className="h-64 w-64 rounded-full" />
+        <Image src={playingMusic.img} className={cn('h-64 w-64 rounded-full', { 'animated linear slower spin infinite': playingMusic.isPlaying })} />
         <div className="flex items-center h-10">
+          <Icon name="lyrics" color="yellow-500" className="mx-2" />
           <Icon name="heart" color="white" className="mx-2" />
           <Icon name="ellipsis-h" color="white" className="mx-2" />
         </div>
