@@ -3,7 +3,8 @@ import { playlist, mode } from '../constants/playing-list';
 const nextMode = Object.freeze({
   [mode.LOOP]: mode.SHUFFLE,
   [mode.SHUFFLE]: mode.REPEAT,
-  [mode.REPEAT]: mode.LOOP,
+  [mode.REPEAT]: mode.ONCE,
+  [mode.ONCE]: mode.LOOP,
 });
 
 

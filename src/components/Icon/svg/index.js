@@ -36,6 +36,10 @@ const icons = {
   'list': require('./list').default,
   'repeat': require('./repeat').default,
   'share-square': require('./share-square').default,
+  'random': require('./player/random').default,
+  'list-alt': require('./player/list-alt').default,
+  'repeat-1-alt': require('./player/repeat-1-alt').default,
+  'repeat-alt': require('./player/repeat-alt').default,
 };
 
 export default icons;

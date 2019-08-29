@@ -72,7 +72,7 @@ export const playPlaylist = payload => dispatch => {
   dispatch(changePlayingList(payload));
   if (payload && payload.musics && payload.musics[0]) {
     dispatch(changeMusic(payload.musics[0]));
-    dispatch(changeMode(mode.LOOP));
+    dispatch(changeMode(mode.SHUFFLE));
   }
 };
 

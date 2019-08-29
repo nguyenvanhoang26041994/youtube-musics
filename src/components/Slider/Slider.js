@@ -6,7 +6,7 @@ import getPageX from '../../utils/getPageX';
 
 const SliderWrapper = styled.div`
   &.h-tiny {
-    height: 0.15rem;
+    height: 0.125rem;
   }
 
   &.ui-slider {
