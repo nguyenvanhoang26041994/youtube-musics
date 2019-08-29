@@ -17,8 +17,8 @@ const SongSmallCardStyled = styled(SongSmallCard)`
 `;
 
 const Topics = ({ className, topicMusics, topics, getTopicMusics }) => {
-  const defaultTopic = topics[0] ? topics[0].id : '';
-  const [activeTopic, setActiveTopic] = useState(defaultTopic);
+  const initialTopic = useMemo(() => topics[0] ? topics[0].id : '', []);
+  const [activeTopic, setActiveTopic] = useState(initialTopic);
 
   const customColor = useMemo(
     () => fp.find(topic => topic.id === activeTopic, topics).color,
@@ -26,7 +26,9 @@ const Topics = ({ className, topicMusics, topics, getTopicMusics }) => {
   );
 
   useEffect(() => {
-    getTopicMusics(activeTopic);
+    if (initialTopic !== activeTopic || !topicMusics.length) {
+      getTopicMusics(activeTopic);
+    }
   }, [activeTopic]);
 
   return (

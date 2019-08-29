@@ -88,9 +88,9 @@ class GlobalMusicPlayer extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.playingList.id && this.props.playingList.id !== prevProps.playingList.id && this.props.router.pathname !== '/playlist') {
-      this.handleShowBiggerPlayer();
-    }
+    // if (this.props.playingList.id && this.props.playingList.id !== prevProps.playingList.id && this.props.router.pathname !== '/playlist') {
+    //   this.handleShowBiggerPlayer();
+    // }
   }
 
   componentWillUnmount() {
@@ -141,7 +141,7 @@ class GlobalMusicPlayer extends React.Component {
       >
         <div
           className="global-music-player__biger-player relative w-full z-10 overflow-hidden transition-fast"
-          style={{ height: shouldShowOff && isShowBiggerPlayer ? 'calc(100vh - 4rem)' : 0 }}
+          style={{ height: isShowBiggerPlayer ? 'calc(100vh - 4rem)' : 0 }}
         >
           <PlaylistModal
             bgImg={playingMusic.img}
@@ -185,7 +185,7 @@ class GlobalMusicPlayer extends React.Component {
               <div className="flex items-center justify-center rounded-full bg-white h-8 w-8">
                 {playingMusic.isPlaying
                   ? <Icon name="pause" size="xs" color="indigo-400" onClick={this.pauseMusic} />
-                  : <Icon name="play" size="xs" color="indigo-400" onClick={this.playMusic} />
+                  : <Icon name="play" size="xs" color="indigo-400" className="ml-1/2" onClick={this.playMusic} />
                 }
               </div>
               <Icon name="step-forward" size="xs" color="white" className="ml-4" onClick={this.onPlayNext} />

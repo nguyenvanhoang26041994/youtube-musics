@@ -16,11 +16,10 @@ export default async ({ query, reduxStore: store, isServer }) => {
     callTopicMusicsApi = store.dispatch(actionCreators.getTopicMusics(topics[0].id));
   }
 
-  // in client-side await will be stop render
   if (isServer) {
     await Promise.all([
       ...callApiStack,
-      callTopicMusicsApi,
+      callTopicMusicsApi
     ]);
   }
 

@@ -2,9 +2,10 @@ import React from 'react';
 import { clearAllCaches, mergeCacheStorage, getAllCaches } from './redux-cache';
 import isServer from '../utils/isServer';
 
-function getOrCreateCacheStorage (initialCacheStorage) {
-  // Always make a new store if server, otherwise state is shared between requests
+function getOrCreateCacheStorage(initialCacheStorage) {
+  // Always make a new cache if server, otherwise cache is shared between requests
   if (isServer) {
+    clearAllCaches();
     return {};
   }
 
@@ -18,10 +19,6 @@ function getOrCreateCacheStorage (initialCacheStorage) {
 export default App => {
   return class AppWithCache extends React.Component {
     static async getInitialProps (appContext) {
-      if (isServer) {
-        clearAllCaches();
-      }
-
       let appProps = {};
       if (typeof App.getInitialProps === 'function') {
         appProps = await App.getInitialProps(appContext);
@@ -29,17 +26,16 @@ export default App => {
 
       return {
         ...appProps,
-        initialCacheStorage: getAllCaches(),
+        initialCacheStorage: getOrCreateCacheStorage(getAllCaches()),
       }
     }
 
     constructor (props) {
       super(props);
-      this.cacheStorage = getOrCreateCacheStorage(props.initialCacheStorage);
     }
 
     render () {
-      return <App {...this.props} cacheStorage={this.cacheStorage} />
+      return <App {...this.props} />
     }
   }
 }

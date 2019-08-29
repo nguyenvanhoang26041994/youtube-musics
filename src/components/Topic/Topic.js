@@ -7,14 +7,16 @@ const Wrapper = styled.div`
   &.ui-topic--active {
     &:before {
       content: " ";
-      height: 2.5rem;
-      width: 2.5rem;
+      height: 1.25rem;
+      width: 1.25rem;
       position: absolute;
-      border-radius: 100rem;
+      overflow: hidden;
+      z-index: 1;
+      border-width: 1.25rem;
       top: 50%;
-      left: 0;
-      background-color: ${tailwindColors['gray-100']};
-      transform: translate(-50%, -50%);
+      left: 0%;
+      border-color: transparent transparent transparent${tailwindColors['gray-100']};
+      transform: translate(0, -50%);
     }
   }
 `;
