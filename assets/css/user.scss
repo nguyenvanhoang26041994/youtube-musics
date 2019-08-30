@@ -66,6 +66,10 @@
   animation-timing-function: linear;
 }
 
+.animated.very-slow {
+  animation-duration: 20s;
+}
+
 .top-haft {
   top: 50%;
 }
