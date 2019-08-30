@@ -32,7 +32,7 @@ const Lyrics = ({ className }) => {
       }
     };
 
-    const timer = setInterval(scrollToActiveLyric, 1000);
+    const timer = setInterval(scrollToActiveLyric, 5678);
 
     () => clearInterval(timer);
   }, [playingMusic.id]);

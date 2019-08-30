@@ -29,10 +29,10 @@ const MusicItem = ({ className, orderText, ...music}) => {
 
   return (
     <Wrapper
-      className={cn('music-item h-10 flex items-center cursor-pointer relative', color, className)}
+      className={cn('music-item h-8 flex items-center cursor-pointer relative', color, className)}
       onClick={() => playMusic(music)}
     >
-      <div className="w-10 text-sm flex items-center justify-center">
+      <div className="w-8 text-sm flex items-center justify-center">
         {isActive ? <Icon name="compact-disc" className={cn({ 'animated spin linear infinite': isPlaying })} size="lg" /> : orderText}
       </div>
       <div className="flex-1 text-sm truncate">{music.name}</div>

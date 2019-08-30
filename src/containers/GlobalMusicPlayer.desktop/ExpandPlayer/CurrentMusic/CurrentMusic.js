@@ -23,7 +23,7 @@ const CurrentMusic = ({ className }) => {
     <Wrapper className={cn('flex flex-col', className)}>
       <div className="h-10" />
       <InforWrapper className="flex flex-col items-center">
-        <Image src={playingMusic.img} className={cn('h-64 w-64 rounded-full', { 'animated linear slower spin infinite': playingMusic.isPlaying })} />
+        <Image src={playingMusic.img} className={cn('h-64 w-64 rounded-full')} />
         <div className="flex items-center h-10">
           <Icon name="lyrics" color="yellow-500" className="mx-2" />
           <Icon name="heart" color="white" className="mx-2" />

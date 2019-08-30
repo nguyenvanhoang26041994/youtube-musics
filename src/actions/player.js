@@ -77,9 +77,14 @@ export const playPlaylist = payload => dispatch => {
 };
 
 // Just play one song
-export const playMusic = payload => (dispatch) => {
+export const playMusicRepeat = payload => (dispatch) => {
   dispatch(changeMusic(payload));
   dispatch(changeMode(mode.REPEAT));
+};
+
+// Play song but not change mode
+export const playMusic = payload => (dispatch) => {
+  dispatch(changeMusic(payload));
 };
 
 // Just play one song but also reset playinglist

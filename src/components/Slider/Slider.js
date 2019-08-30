@@ -34,7 +34,7 @@ const Slider = ({ className, percent, onChange, ...otherProps }) => {
     <SliderWrapper className={cn('ui-slider h-tiny cursor-pointer relative', className)} {...otherProps} onClick={onClick} ref={sliderRef}>
       <div className="ui-slider__rail absolute w-full h-full bg-gray-100 rounded-full" />
       <div
-        className="ui-slider__track bg-indigo-400 absolute h-full rounded-full --transition"
+        className="ui-slider__track bg-blue-500 absolute h-full rounded-full --transition"
         style={{ width: `${percent * 100}%` }}
       />
       <div

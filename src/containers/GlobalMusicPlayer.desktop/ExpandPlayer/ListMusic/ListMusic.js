@@ -12,7 +12,7 @@ const TopHandlerWrapper = styled.div``;
 const MainListWrapper = styled.div`
   .--music-item:hover,
   .--music-item:nth-child(odd) {
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: rgba(0, 0, 0, 0.025);
   }
 `;
 
@@ -23,11 +23,8 @@ const ListMusic = ({ className }) => {
     <Wrapper className={cn('flex flex-col', className)}>
       <div className="flex flex-col">
         <div className="h-10" />
-        <TopHandlerWrapper className="flex items-center justify-between px-2 py-5">
+        <TopHandlerWrapper className="flex items-center justify-start px-2 py-5">
           <div className="text-white text-sm">DANH SÁCH PHÁT</div>
-          <div className="flex items-center">
-            <Icon name="search" color="white" />
-          </div>
         </TopHandlerWrapper>
       </div>
       <div className="w-full flex-1">
