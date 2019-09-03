@@ -70,6 +70,7 @@ MusicPage.displayName = 'MusicPage';
 MusicPageEnhancer.displayName = 'MusicPageEnhancer';
 
 MusicPageEnhancer.getInitialProps = async ({ query, reduxStore: store, isServer }) => {
+  console.log('query', query)
   const callApiStack = [
     store.dispatch(actionCreators.getMusic(query.id)),
   ];

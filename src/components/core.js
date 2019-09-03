@@ -10,3 +10,5 @@ export { default as Image } from './Image';
 export { default as Quote } from './Quote';
 export { default as Panel } from './Panel';
 export { default as Carousel } from './Carousel';
+export { default as Modal } from './Modal';
+export { default as Input } from './Input';

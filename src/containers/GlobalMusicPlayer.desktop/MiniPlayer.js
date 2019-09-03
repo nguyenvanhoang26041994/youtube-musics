@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import cn from 'classnames';
 import styled from 'styled-components';
+import Link from 'next/link';
 import { Icon, Image, Slider, Button } from '../../components/core';
 
 import usePlayingMusic from '../../hooks/usePlayingMusic';
@@ -55,7 +56,7 @@ const MiniPlayer = ({ className, toggleExpanded, miniPlayerRef }) => {
         <div className="flex flex-col justify-center flex-1">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
-              <div className="text-white text-sm">{playingMusic.name}</div>
+              <Link href={`/desktop/music?id=${playingMusic.id}`} as={`/music/${playingMusic.id}`}><a className="text-white text-sm">{playingMusic.name}</a></Link>
               <span className="mx-2 text-gray-500 text-xs">–</span>
               <div className="text-gray-500 text-xs">{playingMusic.singersName}</div>
             </div>

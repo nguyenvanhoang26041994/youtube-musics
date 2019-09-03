@@ -15,7 +15,7 @@ import PlaylistCard from '../../../containers/PlaylistCard';
 import SongCard from '../../../containers/SongCard';
 import SingerCard from '../../../components/SingerCard';
 import TopSongs from '../../../components/TopSongs';
-import { Divider, Carousel, Panel } from '../../../components/core';
+import { Divider, Carousel, Panel, Modal } from '../../../components/core';
 import Topics from './Topics';
 
 const HomePageWrapper = styled.div`
@@ -37,8 +37,6 @@ const HomePageWrapper = styled.div`
 `;
 
 const HomePage = ({ trendingPlaylists, trendingSongs, trendingSingers, loaders, topics, topicMusics, getTopicMusics }) => {
-  const { playMusic } = usePlayer();
-
   return (
     <HomePageWrapper id="home-page" className="home-page container-custom container mx-auto flex flex-col animated fadeIn">
       <div className="h-96 w-full flex bg-gray-200">
@@ -104,7 +102,6 @@ const HomePageEnhancer = compose(
     mapStateToProps,
     mapDispatchToProps,
   ),
-  withPlayerActions,
   withLayout,
 )(HomePage);
 

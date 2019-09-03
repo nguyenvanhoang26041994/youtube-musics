@@ -1,12 +1,13 @@
+import React, { useState, useMemo } from 'react';
 import cn from 'classnames';
 import styled from 'styled-components';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 
-import { Logo, Switch } from '../../components/core';
+import { Logo, Switch, Modal, Icon } from '../../components/core';
+import LoginForm from '../../components/LoginForm';
 
-const NavbarWrapper = styled.nav`
-`;
+const NavbarWrapper = styled.nav``;
 
 const onFullScreen = e => {
   const documentElement = document.documentElement;
@@ -42,26 +43,35 @@ const onFullScreen = e => {
   }
 };
 
-const Navbar = ({ className }) => (
-  <NavbarWrapper className={cn('ui-navbar relative overflow-hidden flex justify-center bg-gray-100 text-white w-full h-16', className)}>
-    <div className="container-custom container flex items-center px-1">
-      <div className="flex items-center flex-1">
-        <div className="w-72">
-          <Link href="/">
-            <a><Logo className="w-8 h-8" /></a>
-          </Link>
+const Navbar = ({ className }) => {
+  const [isShowLoginForm, setShowLoginForm] = useState(false);
+  const onToggleShowLoginForm = () => setShowLoginForm(prevValue => !prevValue);
+
+  return (
+    <NavbarWrapper className={cn('ui-navbar relative overflow-hidden flex justify-center text-white w-full h-16', className)}>
+      <div className="container-custom container flex items-center px-1">
+        <div className="flex items-center flex-1">
+          <div className="w-72">
+            <Link href="/">
+              <a><Logo className="w-8 h-8" /></a>
+            </Link>
+          </div>
+        </div>
+        <div className="flex items-center">
+          <div className="flex items-center text-indigo-500 mx-2 text-sm">
+            <Modal isOpen={isShowLoginForm} onClose={() => setShowLoginForm(false)} position="top">
+              <LoginForm style={{ minWidth: '25rem' }} />
+            </Modal>
+            <div className="cursor-pointer select-none" onClick={onToggleShowLoginForm}>Đăng nhập</div>
+            <span className="mx-1">/</span>
+            <div className="cursor-pointer select-none" onClick={onToggleShowLoginForm}>Đăng ký</div>
+          </div>
+          <Icon name="search" color="indigo-500" className="ml-5" />
         </div>
       </div>
-      <div>
-        <Switch
-          color="indigo-400"
-          size="sm"
-          onChange={onFullScreen}
-        />
-      </div>
-    </div>
-  </NavbarWrapper>
-);
+    </NavbarWrapper>
+  );
+}
 
 Navbar.displayName = 'Navbar';
 Navbar.propTypes = {
