@@ -1,6 +1,6 @@
 import '../../assets/css/tailwind.scss';
 import '../../assets/css/user.scss';
-import App from 'next/app';
+import App, { Container } from 'next/app';
 import { Provider } from 'react-redux';
 import fp from 'lodash/fp';
 import MobileDetect from 'mobile-detect';
@@ -70,10 +70,12 @@ class RootApp extends App {
     const { Component, pageProps, reduxStore, mobile } = this.props;
 
     return (
-      <Provider store={reduxStore}>
-        <Component {...pageProps} mobile={mobile} />
-        <GlobalAudio />
-      </Provider>
+      <Container>
+        <Provider store={reduxStore}>
+          <Component {...pageProps} mobile={mobile} />
+          <GlobalAudio />
+        </Provider>
+      </Container>
     );
   }
 }

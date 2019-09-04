@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development node server",
     "build": "next build",
+    "export": "next export",
     "start": "cross-env NODE_ENV=production node server $PORT",
     "desktop": "cross-env NODE_ENV=production electron ./src/main.desktop.js",
     "dev-desktop": "cross-env NODE_ENV=development electron ./src/main.desktop.js",
