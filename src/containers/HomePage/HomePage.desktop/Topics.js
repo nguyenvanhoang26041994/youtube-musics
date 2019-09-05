@@ -21,7 +21,7 @@ const Topics = ({ className, topicMusics, topics, getTopicMusics }) => {
   const [activeTopic, setActiveTopic] = useState(initialTopic);
 
   const customColor = useMemo(
-    () => fp.find(topic => topic.id === activeTopic, topics).color,
+    () => (fp.find(topic => topic.id === activeTopic, topics) || {}).color,
     [activeTopic]
   );
 

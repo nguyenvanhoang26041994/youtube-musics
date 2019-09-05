@@ -42,7 +42,7 @@ function getOrCreateMobileVariable (initialVaule) {
 
 class RootApp extends App {
   static getInitialProps = async ({ Component, ctx }) => {
-    const md = new MobileDetect(ctx.req ? ctx.req.headers['user-agent'] : navigator.userAgent);
+    const md = new MobileDetect(isServer ? ctx.req.headers['user-agent'] : navigator.userAgent);
     const mobile = md.mobile();
 
     ctx.isServer = isServer;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
@@ -11,6 +11,7 @@ import mapDispatchToProps from '../utils/mapDispatchToProps';
 import withPlayerActions from '../../../HOC/withPlayerActions';
 import withLayout from '../../../HOC/withLayout';
 import usePlayer from '../../../hooks/usePlayer';
+import useSPAMode from '../../../hooks/useSPAMode';
 import PlaylistCard from '../../../containers/PlaylistCard';
 import SongCard from '../../../containers/SongCard';
 import SingerCard from '../../../components/SingerCard';
@@ -36,7 +37,8 @@ const HomePageWrapper = styled.div`
   }
 `;
 
-const HomePage = ({ trendingPlaylists, trendingSongs, trendingSingers, loaders, topics, topicMusics, getTopicMusics }) => {
+const HomePage = ({ gotInitialProps, trendingPlaylists, trendingSongs, trendingSingers, loaders, topics, topicMusics, getTopicMusics }) => {
+  useSPAMode(gotInitialProps, getInitialProps);
   return (
     <HomePageWrapper id="home-page" className="home-page container-custom container mx-auto flex flex-col animated fadeIn">
       <div className="h-96 w-full flex bg-gray-200">

@@ -3,6 +3,7 @@ const next = require('next');
 const compression = require('compression');
 const LRUCache = require('lru-cache');
 const MobileDetect = require('mobile-detect');
+const cors = require('cors')
 
 const { connect } = require('./mongodb');
 const api = require('./api');
@@ -73,6 +74,7 @@ app
   .then(() => {
     const server = express();
 
+    server.use(cors())
     server.use(compression());
     server.use('/', express.static('.next'));
     server.use(express.static('static'));

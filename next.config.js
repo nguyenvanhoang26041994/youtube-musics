@@ -17,6 +17,11 @@ module.exports = fp.compose(
   withSass,
 )({
   // target: 'serverless',
+  exportPathMap: function() {
+    return {
+      '/': { page: '/desktop' }
+    };
+  },
   webpack: webpackConfig,
   workboxOpts: {
     runtimeCaching: [
