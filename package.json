@@ -12,6 +12,7 @@
     "dev-spa": "cross-env APP_MODE=SPA yarn dev",
     "build": "next build",
     "build-spa": "cross-env APP_MODE=SPA yarn build && cross-env APP_MODE=SPA yarn export",
+    "serve-spa": "yarn build-spa && serve ./out -p 8080",
     "export": "next export",
     "start": "cross-env NODE_ENV=production node server $PORT",
     "desktop": "cross-env NODE_ENV=production electron ./src/main.desktop.js",

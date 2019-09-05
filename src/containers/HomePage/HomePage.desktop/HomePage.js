@@ -10,6 +10,7 @@ import mapDispatchToProps from '../utils/mapDispatchToProps';
 
 import withPlayerActions from '../../../HOC/withPlayerActions';
 import withLayout from '../../../HOC/withLayout';
+import withSPA from '../../../HOC/withSPA';
 import usePlayer from '../../../hooks/usePlayer';
 import useSPAMode from '../../../hooks/useSPAMode';
 import PlaylistCard from '../../../containers/PlaylistCard';
@@ -37,9 +38,7 @@ const HomePageWrapper = styled.div`
   }
 `;
 
-const HomePage = ({ gotInitialProps, trendingPlaylists, trendingSongs, trendingSingers, loaders, topics, topicMusics, getTopicMusics }) => {
-  useSPAMode(gotInitialProps, getInitialProps);
-
+const HomePage = ({ trendingPlaylists, trendingSongs, trendingSingers, loaders, topics, topicMusics, getTopicMusics }) => {
   return (
     <HomePageWrapper id="home-page" className="home-page container-custom container mx-auto flex flex-col animated fadeIn">
       <div className="h-96 w-full flex bg-gray-200">
@@ -110,4 +109,4 @@ const HomePageEnhancer = compose(
 
 HomePageEnhancer.getInitialProps = getInitialProps;
 
-export default HomePageEnhancer;
+export default withSPA(HomePageEnhancer);

@@ -23,7 +23,5 @@ export default async ({ query, reduxStore: store, isServer }) => {
     ]);
   }
 
-  return {
-    gotInitialProps: true,
-  };
+  return {};
 }
