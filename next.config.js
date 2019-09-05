@@ -6,7 +6,7 @@ const webpack = require('webpack');
 const webpackConfig = config => {
   config.plugins.push(
     new webpack.EnvironmentPlugin({
-      API_SERVER_ORIGIN: 'http://localhost:3000',
+      API_SERVER_ORIGIN: 'https://youtube-musics.herokuapp.com',
       NODE_ENV: process.env.NODE_ENV,
       APP_MODE: process.env.APP_MODE,
     })
