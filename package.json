@@ -20,7 +20,7 @@
     "now-build": "yarn build-spa",
     "heroku-postbuild": "yarn build",
     "deploy-hosting": "yarn build-spa && firebase deploy --only hosting",
-    "serve-functions": "firebase serve --only functions,hosting"
+    "serve-functions": "yarn build && firebase serve --only functions,hosting"
   },
   "author": "",
   "license": "ISC",
