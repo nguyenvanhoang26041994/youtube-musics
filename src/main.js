@@ -1,13 +1,10 @@
 import dynamic from 'next/dynamic';
 import AppSSR from './App';
 
-let App;
-const mode = process.env.APP_MODE;
+let App = AppSSR;
 
-if (mode === 'SPA') {
+if (process.env.APP_MODE === 'SPA') {
   App = dynamic(() => import('./App'), { ssr: false });
-} else {
-  App = AppSSR;
 }
 
 export default App;
