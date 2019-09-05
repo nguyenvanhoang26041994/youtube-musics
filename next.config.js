@@ -18,8 +18,6 @@ module.exports = fp.compose(
   withOffline,
   withSass,
 )({
-  // target: 'serverless',
-  distDir: './functions/next',
   exportPathMap: function() {
     return {
       '/': { page: '/desktop' }
