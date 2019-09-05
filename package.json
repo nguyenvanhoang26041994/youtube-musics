@@ -2,19 +2,22 @@
   "name": "next-boilerplate",
   "version": "1.0.0",
   "engines": {
-    "node": "10.15.3"
+    "node": ">=10.15.3",
+    "yarn": ">=1.16.0"
   },
   "description": "NextJS Boilerplate",
   "main": "index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development node server",
+    "dev-spa": "cross-env APP_MODE=SPA yarn dev",
     "build": "next build",
+    "build-spa": "cross-env APP_MODE=SPA yarn build && cross-env APP_MODE=SPA yarn export",
     "export": "next export",
     "start": "cross-env NODE_ENV=production node server $PORT",
     "desktop": "cross-env NODE_ENV=production electron ./src/main.desktop.js",
     "dev-desktop": "cross-env NODE_ENV=development electron ./src/main.desktop.js",
-    "now-build": "next build",
-    "heroku-postbuild": "npm run build"
+    "now-build": "yarn build-spa",
+    "heroku-postbuild": "yarn build"
   },
   "author": "",
   "license": "ISC",

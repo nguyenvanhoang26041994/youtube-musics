@@ -39,6 +39,7 @@ const HomePageWrapper = styled.div`
 
 const HomePage = ({ gotInitialProps, trendingPlaylists, trendingSongs, trendingSingers, loaders, topics, topicMusics, getTopicMusics }) => {
   useSPAMode(gotInitialProps, getInitialProps);
+
   return (
     <HomePageWrapper id="home-page" className="home-page container-custom container mx-auto flex flex-col animated fadeIn">
       <div className="h-96 w-full flex bg-gray-200">

@@ -56,7 +56,7 @@ class RootApp extends App {
     }
 
     return {
-      ...props,
+      pageProps: props,
       mobile: ctx.mobile,
     };
   }
