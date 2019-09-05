@@ -58,12 +58,21 @@ class RootApp extends App {
     return {
       pageProps: props,
       mobile: ctx.mobile,
+      gotInitialPropsApp: true,
     };
   }
 
   constructor (props) {
     super(props);
     this.mobile = getOrCreateMobileVariable(props.mobile);
+  }
+
+  componentDidMount() {
+    if (!this.props.gotInitialPropsApp) {
+      const md = new MobileDetect(navigator.userAgent);
+      const mobile = md.mobile();
+      getOrCreateMobileVariable(mobile);
+    }
   }
 
   render() {
