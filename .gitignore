@@ -5,4 +5,5 @@ static/sw.js
 yarn.lock
 static/musics
 out
+dist
 secret.js

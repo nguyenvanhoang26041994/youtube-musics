@@ -18,7 +18,9 @@
     "desktop": "cross-env NODE_ENV=production electron ./src/main.desktop.js",
     "dev-desktop": "cross-env NODE_ENV=development electron ./src/main.desktop.js",
     "now-build": "yarn build-spa",
-    "heroku-postbuild": "yarn build"
+    "heroku-postbuild": "yarn build",
+    "deploy-hosting": "yarn build-spa && firebase deploy --only hosting",
+    "serve-functions": "firebase serve --only functions,hosting"
   },
   "author": "",
   "license": "ISC",
