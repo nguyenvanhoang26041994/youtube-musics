@@ -18,6 +18,7 @@ module.exports = fp.compose(
   withOffline,
   withSass,
 )({
+  // target: "severless",
   exportPathMap: function() {
     return {
       '/': { page: '/desktop' }

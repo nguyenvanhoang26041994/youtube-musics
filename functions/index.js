@@ -1,7 +1,7 @@
 const functions = require('firebase-functions');
 const next = require('next');
 
-const app = next({ dev: false, conf: { distDir: '../.next' } });
+const app = next({ dev: false, conf: { distDir: '.next' } });
 const handle = app.getRequestHandler();
 
 let isPrepared = false;

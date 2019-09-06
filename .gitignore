@@ -2,6 +2,7 @@ node_modules/
 static/sw.js
 .next
 *-error.log
+firebase-debug.log
 yarn.lock
 static/musics
 out

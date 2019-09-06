@@ -1,24 +1,68 @@
 {
-  "name": "functions",
-  "description": "Cloud Functions for Firebase",
-  "scripts": {
-    "serve": "firebase serve --only functions",
-    "shell": "firebase functions:shell",
-    "start": "npm run shell",
-    "deploy": "firebase deploy --only functions",
-    "logs": "firebase functions:log"
-  },
+  "name": "next-boilerplate",
+  "version": "1.0.0",
   "engines": {
-    "node": ">=10.15.3"
+    "node": "10",
+    "yarn": ">=1.16.0"
   },
+  "description": "NextJS Boilerplate",
+  "main": "index.js",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development node server",
+    "dev-spa": "cross-env APP_MODE=SPA yarn dev",
+    "build": "next build",
+    "heroku-postbuild": "yarn build",
+    "build-spa": "cross-env APP_MODE=SPA yarn build && cross-env APP_MODE=SPA yarn export",
+    "serve-spa": "yarn build-spa && serve ./out -p 8080",
+    "export": "next export",
+    "start": "cross-env NODE_ENV=production node server $PORT",
+    "desktop": "cross-env NODE_ENV=production electron ./src/main.desktop.js",
+    "dev-desktop": "cross-env NODE_ENV=development electron ./src/main.desktop.js",
+    "deploy-ssr": "rimraf \".next\" && yarn build && rimraf \"functions/.next\" && cpx \".next/**\" \"functions/.next\" && cpx \"*{package.json,yarn.lock}\" \"functions\" && cd \"functions\" && yarn install && firebase deploy --only functions:next,hosting && cd \"../\"",
+    "serve-ssr": "rimraf \".next\" && yarn build && rimraf \"functions/.next\" && cpx \".next/**\" \"functions/.next\" && firebase serve --only functions:next,hosting"
+  },
+  "author": "",
+  "license": "ISC",
   "dependencies": {
+    "classnames": "^2.2.6",
+    "compression": "^1.7.4",
+    "core-js": "3.2.1",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
-    "firebase-admin": "^8.0.0",
-    "firebase-functions": "^3.1.0",
-    "next": "^9.0.5"
+    "firebase": "^6.5.0",
+    "firebase-admin": "^8.4.0",
+    "firebase-functions": "^3.2.0",
+    "isomorphic-fetch": "^2.2.1",
+    "lodash": "^4.17.11",
+    "lru-cache": "^5.1.1",
+    "mobile-detect": "^1.4.3",
+    "mongodb": "^3.3.1",
+    "mongoose": "^5.6.11",
+    "next": "^8.1.0",
+    "path": "^0.12.7",
+    "prop-types": "^15.7.2",
+    "query-string": "^6.8.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-redux": "^7.1.0",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
+    "reselect": "^4.0.0",
+    "styled-components": "^4.3.2",
+    "tailwindcss": "^1.0.4",
+    "webpack": "^4.39.2",
+    "firebase-functions-test": "^0.1.6",
+    "next-offline": "^4.0.2",
+    "node-sass": "^4.12.0",
+    "postcss": "^7.0.17",
+    "postcss-preset-env": "^6.6.0",
+    "redux-devtools-extension": "^2.13.8",
+    "@zeit/next-sass": "^1.0.1"
   },
   "devDependencies": {
-    "firebase-functions-test": "^0.1.6"
-  },
-  "private": true
+    "cpx": "^1.5.0",
+    "cross-env": "^5.2.0",
+    "electron": "^6.0.4",
+    "rimraf": "^3.0.0"
+  }
 }
