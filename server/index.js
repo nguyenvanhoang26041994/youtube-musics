@@ -15,7 +15,7 @@ const ssrCache = new LRUCache({
   length: function (n, key) {
     return n.length
   },
-  maxAge: 15 * 1000,
+  maxAge: 15000 * 1000,
 });
 
 const asking = {
@@ -110,7 +110,10 @@ app
           ? app.render(req, res, '/mobile')
           : renderAndCache(req, res, '/mobile');
       }
-      return handle(req, res);
+
+      return dev
+        ? app.render(req, res, '/desktop')
+        : renderAndCache(req, res, '/desktop');
     });
 
     server.get('*', (req, res) => {

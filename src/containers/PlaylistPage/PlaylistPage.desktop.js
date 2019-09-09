@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 
 import Playlist from '../../containers/Playlist';
 import withLayout from '../../HOC/withLayout';
+import withSPA from '../../HOC/withSPA';
 import * as actionCreators from './actions';
 import playlistFormater from '../../selectors/utils/playlistFormater';
 
@@ -50,4 +51,4 @@ PlaylistPageEnhancer.getInitialProps = async ({ query, reduxStore: store, isServ
   return {};
 }
 
-export default PlaylistPageEnhancer;
+export default withSPA(PlaylistPageEnhancer);

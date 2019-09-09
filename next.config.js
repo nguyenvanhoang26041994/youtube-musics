@@ -21,7 +21,13 @@ module.exports = fp.compose(
   // target: "severless",
   exportPathMap: function() {
     return {
-      '/': { page: '/desktop' }
+      '/': { page: '/desktop' },
+      '/profile': { page: '/desktop/profile' },
+      '/profile/:id': { page: '/desktop/profile/[id]' },
+      '/music': { page: '/desktop/music' },
+      '/music/:id': { page: '/desktop/music/[id]' },
+      '/playlist': { page: '/desktop/playlist' },
+      '/playlist/:id': { page: '/desktop/playlist/[id]' },
     };
   },
   webpack: webpackConfig,

@@ -15,6 +15,7 @@ import * as actionCreators from '../actions';
 import withPlayerActions from '../../../HOC/withPlayerActions';
 import withPlayingMusic from '../../../HOC/withPlayingMusic';
 import withLayout from '../../../HOC/withLayout';
+import withSPA from '../../../HOC/withSPA';
 
 const MusicPageWrapper = styled.div``;
 
@@ -83,4 +84,4 @@ MusicPageEnhancer.getInitialProps = async ({ query, reduxStore: store, isServer 
   return {};
 };
 
-export default MusicPageEnhancer;
+export default withSPA(MusicPageEnhancer);

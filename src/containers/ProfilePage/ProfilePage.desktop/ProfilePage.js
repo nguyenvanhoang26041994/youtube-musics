@@ -12,6 +12,7 @@ import SongSmallCard from '../../../containers/SongSmallCard';
 import SongCard from '../../../containers/SongCard';
 import musicsFormater from '../../../selectors/utils/musicsFormater';
 import withLayout from '../../../HOC/withLayout';
+import withSPA from '../../../HOC/withSPA';
 import * as actionCreators from '../actions';
 
 const ProfilePageWrapper = styled.div``;
@@ -81,4 +82,4 @@ ProfilePageEnhancer.getInitialProps = async ({ query, reduxStore: store, isServe
   return {};
 }
 
-export default ProfilePageEnhancer;
+export default withSPA(ProfilePageEnhancer);

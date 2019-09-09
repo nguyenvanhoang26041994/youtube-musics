@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
+import { useRouter } from 'next/router';
+import queryString from 'query-string';
 import useStore from '../hooks/useStore';
 
 const withSPA = (WrappedComponent) => {
@@ -8,9 +10,13 @@ const withSPA = (WrappedComponent) => {
 
   const ReturnComponent = props => {
     const reduxStore = useStore();
-
+    const router = useRouter();
     useEffect(() => {
-      WrappedComponent.getInitialProps({ reduxStore });
+      WrappedComponent.getInitialProps({
+        reduxStore,
+        isServer: false,
+        query: router.query,
+      });
     }, []);
 
     return <WrappedComponent {...props} />
